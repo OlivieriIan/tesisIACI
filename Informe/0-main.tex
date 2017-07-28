@@ -1,0 +1,250 @@
+
+\documentclass[12pt,spanish]{report}
+
+%include spanish accents and tilde
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% ------------------- Colors --------------------------------------------------------------------------- %
+%color package
+\usepackage{xcolor}
+% ==== hyper references colors ==== %
+\definecolor{myLinkColor}{rgb}{0.6, 0.4, 0.1}
+\definecolor{myUrlColor}{rgb}{0.1, 0.1, 0.7}
+
+% ==== document control colors ==== %
+% Each color specifies what is to be done with the text coloured with it
+% command: \textcolor{color}{text paragraph}
+\definecolor{commentary}{rgb}{0.5, 0.5, 0.5} %invisible mode: \iffalse ... \fi
+\definecolor{FIXME}{rgb}{0.9, 0.1, 0.1} %changes have to be made here
+\definecolor{TODO}{rgb}{0.2, 0.8, 0.4} %replace this with something else. probably an image
+
+%Aplicar un color a un bloque de texto: \textcolor{FIXME}{ALGO}
+
+% ==== other colors ==== %
+\definecolor{colorUNQ}{RGB}{132, 0, 16}
+
+% ------------------- margins control ------------------------------------------------------------------ %
+%document margins control package
+\usepackage{geometry}
+%https://en.wikibooks.org/wiki/LaTeX/Page_Layout
+\textheight = 620pt %Change the space occupied by the text. Default = 592pt, so text will occupy more space now
+\textwidth  = 450pt %Change the space occupied by the text. Default = 390pt, so text will occupy more space now
+\marginparwidth = 1pt % Default 35pt
+\hoffset = 1pt
+
+% ------------------- Footers and headers -------------------------------------------------------------- %
+%total number of pages package 
+\usepackage{lastpage} %\pageref{LastPage} to get the last page (* to remove reference)
+
+%headers and footers package
+\usepackage{fancyhdr} %\thispagestyle{fancy} to revert 'plain' page style from \chapter to fancy
+\fancypagestyle{fancy_normalPage}
+{
+    \fancyhf{} % clear all header and footer fields
+    %\fancyhead[L]{\rightmark}%\chaptername\ \thechapter}
+    \fancyhead[R]{Página \thepage\ de \pageref*{LastPage}} %the * removes the reference
+    \renewcommand\headrule %change header properties
+    {
+      \color{colorUNQ}
+      \vspace{5pt}
+      \hrule height 0.1mm width\headwidth
+    }
+    \renewcommand{\footrulewidth}{0mm} %erase footer line
+}
+% ------------------- Chapter related ------------------------------------------------------------------ %
+%\renewcommand{\chaptername}{Capítulo} %Rename chapter name 
+\usepackage{titlesec} %chapter names
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\centering}{}{0cm}{\Huge} %Delete the "Chapter n" header for each chapter
+  \titlespacing*{\chapter}{0cm}{-2cm}{1cm} %resize title space {right}{above}{below}
+
+% ------------------- Images --------------------------------------------------------------------------- %
+%images package
+\usepackage{graphicx}
+%\graphicspath{ {resources/} }
+\renewcommand{\figurename}{Figura} %name of the Figures
+
+\iffalse %HOW TO USE FIGURES:
+    \begin{figure}[!ht]
+      \centering
+        \includegraphics[width=\textwidth]{figname.png}
+        \caption{description} %Caption appears below the image. place this line before \includegraphics to make it appear above it
+        \label{fig:\thefigure}  %or \label{fig:aNumber}
+    \end{figure}
+    
+    %referencing a figure
+    \ref{fig:number} %if \thefigure is 1.1, then number = 1.1. if you used aNumber, number = aNumber
+    \autoref{fig:number} %for the complete name hyperref (Figure: \thefigure)
+\fi
+
+% ------------------- Math package --------------------------------------------------------------------- %
+
+\usepackage{amsmath}
+
+\iffalse %EQUATIONS EXAMPLES
+    %Normal equation
+    \begin{equation}\label{eq:\theequation} %or \label{eq:aNumber} 
+    \mbox{\Large\( % Change size of the containing box. Normal size: \normalsize
+    \begin{split} %Align equations with & and separate with \\
+        y_1 & = \sum_{i=0}^{\infty} a_i x^i \\ %\notag para sacar el label
+        y_2 & = \sum_{i=\sigma}^{\Phi} a_i x^i
+    \end{split}
+    \)} %
+    \end{equation}
+    
+    %referencing an equation
+    \eqref{eq:number} %equation hyperref with parenthesis. available with \usepackage{hyperref}
+    \ref{eq:number} %reference to the equation, without parenthesis
+    \autoref{eq:number} %for the complete name hyperref (Equation:\theequation)
+    
+    %Aligned equation (with &)
+    \begin{align}\label{eq:2}
+        e^{i\pi} & = \cos(\pi) + i\sin(\pi) \notag \\  %To remove tag and move to the next line (\\)
+            & = -1 .
+    \end{align}
+    
+    %Piecewise equation
+    \[
+     fe(t) =
+      \begin{cases} 
+    
+           1    &  0 \leq t \leq 5
+           0    & e.o.c. \notag \\
+      \end{cases}
+    \]
+    
+    %Equations formatting: https://en.wikipedia.org/wiki/Help:Displaying_a_formula
+    %Online equations editor: https://www.codecogs.com/latex/eqneditor.php
+\fi
+
+% ------------------- Tables example ------------------------------------------------------------------- %
+\iffalse %This section does not include a user package. It's just an example
+%https://en.wikibooks.org/wiki/LaTeX/Tables
+\begin{table}[!ht]
+  \begin{center}
+    \begin{tabular}{| l c r |}
+    \hline
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9 \\
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{A simple table}
+\end{table}
+\fi
+
+% ------------------- Hyperreferences ------------------------------------------------------------------ %
+%Hyperref packages
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=green,
+    filecolor=black,
+    linkcolor=colorUNQ,
+    urlcolor=myUrlColor
+}
+%\urlstyle{same}
+
+% ------------------- adding code/scripts -------------------------------------------------------------- %
+
+\usepackage{listings}
+
+\definecolor{matlabComment}{RGB}{34, 139, 34} 
+\definecolor{matlabString}{RGB}{160, 32, 240} 
+\definecolor{matlabNumber}{RGB}{255, 128, 102} 
+\definecolor{matlabKeyword}{RGB}{0, 0, 255} 
+
+\lstset{frame=tb,
+  language=Matlab,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  %basicstyle=, %change the properties of the text
+  identifierstyle=\color{black},
+  numberstyle=\color{matlabNumber},
+  keywordstyle=\color{matlabKeyword},
+  commentstyle=\color{matlabComment},
+  stringstyle=\color{matlabString},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+% to inclode block of code: \lstinputlisting[language=language]{resources/sourceName.languageType}
+% to encapsulate code: \begin{lstlisting}[frame=single] code... \end{lstlisting}
+
+% ------------------- subscripts and superscripts fix -------------------------------------------------- %
+%\usepackage{fixltx2e}
+%subscript: x\textsubscript{y} or \(x_y\)
+%superscript: x\textsuperscrip{y} or \(x_y\)
+%Fix in headings: \texorpdfstring (from \usepackage{hyperref})
+
+% ------------------- Apply stylization ---------------------------------------------------------------- %
+%Remove paragraph indentation
+\setlength{\parindent}{0pt}
+\pagestyle{fancy_normalPage} %set pagestyle to my pagestyle (fancy_normalPage)
+%Stylize new paragraphs. To use it explicitely: " \par " 
+\setlength{\parindent}{0.3cm} % Paragraph indentation 
+\setlength{\parskip}{0.3cm} % Space between paragraphs
+
+% ------------------- Table of contents ---------------------------------------------------------------- %
+\renewcommand{\contentsname}{Contenidos}
+
+
+
+% ------------------- Title ---------------------------------------------------------------------------- %
+\begin{document}
+\begin{titlepage}
+%https://en.wikibooks.org/wiki/LaTeX/Title_Creation
+\includegraphics[width=\textwidth]{resources/0-UNQlogo.jpg}\\[1.5cm] %University logo
+
+\begin{center}
+\textsc{\LARGE Trabajo Final de Carrera}\\[1cm] % 
+\textsc{\LARGE Control automático del equipo Updown}\\[1cm] 
+\end{center}
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Director:}\\[0cm]
+Pernia, Eric
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Codirector:} \\[0cm]
+...
+\end{flushright}
+\end{minipage}\\[2cm]
+
+\begin{flushleft} \large
+\textsc{\large Director: Pernia, Eric}\\[1cm] % Authors
+\textsc{\large Autor: Olivieri, Ian Paulo}\\[2cm] % Authors
+\end{flushleft}
+%\rule{\linewidth}{0.1mm} %Separation line
+\begin{flushright} \large
+\textsc{\large 10 de Septiembre, 2017}\\[0.5cm] %date
+\end{flushright} 
+
+\end{titlepage}
+
+% ------------------- Document ------------------------------------------------------------------------- %
+
+% ==== table of contents ==== %
+\tableofcontents
+
+
+% ==== modularized includes ==== %
+\input{1-Intro.tex}
+\input{2-Metodologia.tex}
+\input{3-Desarrollo.tex}
+\input{4-Desarrollo2.tex}
+\input{5-Resultados.tex}
+\input{6-Conclusiones.tex}
+
+
+\end{document}
