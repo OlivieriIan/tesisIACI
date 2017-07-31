@@ -192,59 +192,26 @@
 \setlength{\parskip}{0.3cm} % Space between paragraphs
 
 % ------------------- Table of contents ---------------------------------------------------------------- %
-\renewcommand{\contentsname}{Contenidos}
+\renewcommand{\contentsname}{Índice de contenidos}
 
+\renewcommand{\listfigurename}{Índice de figuras}
 
-
-% ------------------- Title ---------------------------------------------------------------------------- %
-\begin{document}
-\begin{titlepage}
-%https://en.wikibooks.org/wiki/LaTeX/Title_Creation
-\includegraphics[width=\textwidth]{resources/0-UNQlogo.jpg}\\[1.5cm] %University logo
-
-\begin{center}
-\textsc{\LARGE Trabajo Final de Carrera}\\[1cm] % 
-\textsc{\LARGE Control automático del equipo Updown}\\[1cm] 
-\end{center}
-
-\begin{minipage}{0.4\textwidth}
-\begin{flushleft} \large
-\emph{Director:}\\[0cm]
-Pernia, Eric
-\end{flushleft}
-\end{minipage}
-~
-\begin{minipage}{0.4\textwidth}
-\begin{flushright} \large
-\emph{Codirector:} \\[0cm]
-...
-\end{flushright}
-\end{minipage}\\[2cm]
-
-\begin{flushleft} \large
-\textsc{\large Director: Pernia, Eric}\\[1cm] % Authors
-\textsc{\large Autor: Olivieri, Ian Paulo}\\[2cm] % Authors
-\end{flushleft}
-%\rule{\linewidth}{0.1mm} %Separation line
-\begin{flushright} \large
-\textsc{\large 10 de Septiembre, 2017}\\[0.5cm] %date
-\end{flushright} 
-
-\end{titlepage}
 
 % ------------------- Document ------------------------------------------------------------------------- %
 
-% ==== table of contents ==== %
-\tableofcontents
 
+\begin{document}
 
-% ==== modularized includes ==== %
-\input{1-Intro.tex}
-\input{2-Metodologia.tex}
-\input{3-Desarrollo.tex}
-\input{4-Desarrollo2.tex}
-\input{5-Resultados.tex}
-\input{6-Conclusiones.tex}
+\input{1-Caratula.tex}
 
+\input{2-Resumen.tex}
+
+\input{3-Contenidos.tex}
+
+\input{4-Introduccion.tex}
+\input{5-Diseno.tex}
+\input{6-Desarrollo.tex}
+\input{7-Implementacion.tex}
+\input{8-Conclusiones.tex}
 
 \end{document}
