@@ -1,10 +1,55 @@
 \chapter{Introducción}
 \thispagestyle{empty}
 
-\section{i1}
 
-\subsection{i11}
+\section{Marco temático: esculturas cinéticas}
+\subsection{Definición}
+Las esculturas cinéticas (kinetic sculpture en inglés) son estructuras tridimensionales en donde el movimiento es una parte fundamental del conjunto. Para lograr el efecto de movimiento en el espacio estos sistemas se construyen con partes móviles que pueden cambiar de posición ya sea naturalmente, mediante viento por ejemplo, o de manera forzada, mediante motores o por el observador.\\
+% https://www.youtube.com/watch?v=D2HF-1xjpP8
+\subsection{Aplicaciones y estado actual del arte}
+Al ser obras que caen dentro del campo artístico suelen presentarse en museos y utilizarse para fines decorativos ya sea en parques o eventos. Sin embargo, el nivel de ingeniería y diseño que algunas de ellas requieren las tornan un interesante desafío intelectual y creativo.\\[0.5cm]
+
+\textcolor{FIXME}{PONER FOTOS DE ALGUNAS APLICACIONES}
+
+
+Las aplicaciones puntuales de estructuras cinéticas a las que se hará foco en este informe, debido a la naturaleza del proyecto final, son aquellas en donde el efecto espacial se logra a través del movimiento en el eje vertical de objetos esféricos mediante motores. \\
+
+
+Un ejemplo de aplicación es \href{https://www.youtube.com/watch?v=HVhVClFMg6Y}{la escultura} presentada en el Museo de BMW, en Munich, Alemania, en donde 714 esféras metálicas son coordinadas para formas figuras como olas, gotas, y hasta la silueta de un auto \\
+\textcolor{FIXME}{Foto de la figura del auto}
+
+Otro ejemplo de aplicación se puede ver en \href{https://www.youtube.com/watch?v=ICixCazf6-k}{una obra presentada} por la empresa Build Up en un centro comercial en Fukuoka, Japón, en donde 1000 luminarias esféricas RGB dispuestas en una matriz de 25x40 generan efectos tridimensionales al moverse cada una a diferentes posiciones y velocidades. Cada esfera es manejada independientemente mediante un equipo que posee un motor cuya posición y velocidad es controlada automáticamente y los setpoints de estas variables son indicadas a través del protocolo \textbf{DMX}.\\
+\textcolor{FIXME}{Foto de alguna figura 3d tipo parábola o algo asi, con luces}
+
+\section{DMX}
+DMX es un protocolo comúnmente utilizado para el manejo de luminarias que emplea el estándar EIA-485 como capa física y paquetes de largo variable para la comunicación entre maestro y esclavo (que suele ser unidireccional).\\
+
+\textcolor{FIXME}{Aca tenes que desarrollar MUCHO: tipo de señal, canal físico (podes referirte a OSI), canales, equipos que utilizan DMX, etc}
+
+\section{Updown}
+\subsection{Definición}
+
+
+\subsection{Blackout}
+Black-out es una empresa productora y proveedora de tecnología, cuyo objetivo es generar contenido audiovisual para grandes eventos. Para cumplir con este objetivo la empresa dedica recursos al desarrollo de productos tecnológicos innovadores, como es el caso de los equipos destinados a generar las llamadas Esculturas cinéticas (Kinetic sculpture en inglés).\\
+
+\subsection{Productos que compiten en el mercado}
+El equipos más conocido para estas aplicaciones es el \href{http://www.eastsunlite.com/p31.html}{OrbisFly}, de \href{https://www.kinetic-lights.com/}{Kinetic Lights}. Estos dispositivos de origen Chino trabajan con una esfera RGB de peso estándar de 1Kg, aunque soporta un peso máximo de 2Kg, que puede descender hasta 9 metros. Dispone de un display LCD y botoneras para el testeo y configuración el equipo\\
+
+
 
 
 \newpage
-\subsection{i12}
+\section{Justificación del proyecto}
+La empresa Black-out se encargó de comenzar el desarrollo de los Up-down; los equipos necesarios para crear los efectos de esculturas cinéticas. El inconveniente es que solo fue armada la parte mecánica del mismo, ya que a efectos prácticos el firmware que se utilizaba para manejar el conjunto era pobre.\\
+Ante la necesidad que se tiene que el equipo controle la posición y velocidad de la carga, y que además verifique errores de hardware durante su uso para evitar accidentes, surgió la necesidad de buscar a alguien capacitado para mejorar la programación y terminar el proyecto.
+Es entonces que se presentó la oportunidad de realizar un trabajo en la empresa con el objetivo de completar lo que falta del proyecto, hacer que este cumpla ciertas especificaciones técnicas, y crear documentación sobre el firmware y software de prueba de hardware para que más equipos de las mismas características puedan ser producidos. De esta manera, para completar el objetivo se debe:
+\begin{itemize}
+	\item Implementar un control automático de posición y velocidad de la carga movida por el equipo para lograr los efectos deseados.
+	\item Permitir el cambio de los setpoints de posición y velocidad mediante comandos DMX enviados al equipo por una consola de luces, como puede ser una \href{https://www2.highend.com/products/controllers/Hog4Console.asp}{consola HOG4}
+	\item Manejar errores y excepciones de hardware para lograr que el producto sea seguro, siendo que será instalado en eventos con un alto nivel de concurrencia.
+\end{itemize}
+
+
+
+
