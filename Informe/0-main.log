@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  1 AUG 2017 23:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  2 AUG 2017 23:51
 entering extended mode
 **./0-main.tex
 (0-main.tex
@@ -791,7 +791,7 @@ LaTeX Info: Redefining \nameref on input line 207.
 
 \c@lstlisting=\count129
  (1-Caratula.tex
-<resources/0-UNQlogo.jpg, id=99, 688.974pt x 271.7352pt>
+<resources/0-UNQlogo.jpg, id=115, 688.974pt x 271.7352pt>
 File: resources/0-UNQlogo.jpg Graphic file (type jpg)
 
 <use resources/0-UNQlogo.jpg>
@@ -831,13 +831,13 @@ nation with the same identifier (name{page.1}) has been already used, duplicate
 <to be read again> 
                    \relax 
 l.2 \tableofcontents
-                     [1] (0-main.toc)
+                     [1] (0-main.toc [2
+
+])
 \tf@toc=\write4
 \openout4 = `0-main.toc'.
 
- [2
 
-]
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 19.78452pt.
@@ -857,57 +857,71 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--9
 
  []
 
+<resources/4-kinSculp1.png, id=184, 731.73375pt x 686.565pt>
+File: resources/4-kinSculp1.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 10--11
+<use resources/4-kinSculp1.png>
+Package pdftex.def Info: resources/4-kinSculp1.png used on input line 12.
+(pdftex.def)             Requested size: 731.73196pt x 686.56332pt.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--16
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
 
  []
 
 [5
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 25--26
+ <./resources/4-kinSculp1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
 
  []
 
+<resources/4-kinSculp2.png, id=196, 864.22874pt x 355.3275pt>
+File: resources/4-kinSculp2.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--35
+<use resources/4-kinSculp2.png>
+Package pdftex.def Info: resources/4-kinSculp2.png used on input line 27.
+(pdftex.def)             Requested size: 864.22662pt x 355.32661pt.
+
+<resources/4-kinSculp3.png, id=199, 1444.64719pt x 417.05812pt>
+File: resources/4-kinSculp3.png Graphic file (type png)
+
+<use resources/4-kinSculp3.png>
+Package pdftex.def Info: resources/4-kinSculp3.png used on input line 35.
+(pdftex.def)             Requested size: 1444.64368pt x 417.0571pt.
+ [6 <./resources/4-kinSculp2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 37--38
+[7 <./resources/4-kinSculp3.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
 
  []
 
-[6]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 48.
+[8]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 73.
  ("C:\Users\ian_m\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 48.
-) (5-Diseno.tex [7]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
+) (5-Diseno.tex [9]
 Chapter 2.
-[8
-
-]) (6-Desarrollo.tex [9]
-Chapter 3.
 [10
 
-]) (7-Implementacion.tex [11]
-Chapter 4.
+]) (6-Desarrollo.tex [11]
+Chapter 3.
 [12
 
-]) (8-Conclusiones.tex [13]
+]) (7-Implementacion.tex [13]
+Chapter 4.
+[14
+
+]) (8-Conclusiones.tex [15]
 Chapter 5.
 ) 
 AED: lastpage setting LastPage
-[14
+[16
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 221.
@@ -916,17 +930,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 221.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 221.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 221.
 Package rerunfilecheck Info: File `0-main.out' has not changed.
-(rerunfilecheck)             Checksum: A57FA15358219C80C2680365B9DAA680;1441.
+(rerunfilecheck)             Checksum: 90C8582BA46CAB348374216C990CB20D;1738.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
  ) 
 Here is how much of TeX's memory you used:
- 8974 strings out of 493323
- 126908 string characters out of 3130015
+ 9007 strings out of 493323
+ 127532 string characters out of 3130015
  263286 words of memory out of 3000000
- 12332 multiletter control sequences out of 15000+200000
+ 12352 multiletter control sequences out of 15000+200000
  13804 words of font info for 35 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,12n,43p,637b,360s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 28i,12n,43p,625b,360s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\ian_m\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
 ecbx1728.pk> <C:\Users\ian_m\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
 ec\dpi600\ecbx2488.pk> <C:\Users\ian_m\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
@@ -937,9 +951,9 @@ cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc2074.pk> <C:\Users\ian_m\
 AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk><C:/Use
 rs/ian_m/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb>
-Output written on 0-main.pdf (15 pages, 567480 bytes).
+Output written on 0-main.pdf (17 pages, 4440802 bytes).
 PDF statistics:
- 473 PDF objects out of 1000 (max. 8388607)
- 41 named destinations out of 1000 (max. 500000)
- 198 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 534 PDF objects out of 1000 (max. 8388607)
+ 50 named destinations out of 1000 (max. 500000)
+ 245 words of extra memory for PDF output out of 10000 (max. 10000000)
 
