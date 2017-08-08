@@ -2,67 +2,103 @@
 \thispagestyle{empty}
 
 
-\section{Marco temático: esculturas cinéticas}
-\subsection{Definición}
+\section{Marco temático}
+\subsection{Esculturas cinéticas}
+\subsubsection{Definición}
 Las esculturas cinéticas (kinetic sculpture en inglés) son estructuras tridimensionales en donde el movimiento es una parte fundamental del conjunto. Para lograr el efecto de movimiento en el espacio estos sistemas se construyen con partes móviles que pueden cambiar de posición ya sea naturalmente por acción del viento, como se ve en la figura \ref{fig:1.1}, o de manera forzada. \\
 % https://www.youtube.com/watch?v=D2HF-1xjpP8
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=12cm,scale=1]{resources/4-kinSculp1.png}
+	\includegraphics[width=10cm,scale=1]{resources/1_1-kinSculp.png}
 	\caption{ Ejemplo de escultura cinética movida por aire, por Anthony Howe. \href{https://www.youtube.com/watch?v=N-1LpikCSR4}{LINK al video} }
 	\label{fig:\thefigure}
 \end{figure}
 
-\subsection{Aplicaciones y estado actual del arte}
+\newpage
+\subsubsection{Aplicaciones y estado actual del arte}
 Al ser obras que caen dentro del campo artístico suelen presentarse en museos y utilizarse para fines decorativos ya sea en parques o eventos. Sin embargo, el nivel de ingeniería y diseño que algunas de ellas requieren las tornan un interesante desafío intelectual y creativo.\\
 
 
 Las aplicaciones puntuales de estructuras cinéticas a las que se hará foco en este informe, debido a la naturaleza del proyecto final, son aquellas en donde el efecto espacial se logra a través del movimiento en el eje vertical de objetos esféricos mediante motores. \\
 
-
 Un ejemplo de aplicación de estas características se puede ver en la figura \ref{fig:1.2}. Allí se muestra una escultura presentada en el Museo de BMW, en Munich, Alemania, en donde 714 esféras metálicas son coordinadas para formas figuras como olas, gotas, y hasta la silueta de un auto \\
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=15cm,scale=1]{resources/4-kinSculp2.png}
+	\includegraphics[width=15cm,scale=1]{resources/1_2-kinSculp.png}
 	\caption{ Escultura cinética en el museo BMW. \href{https://www.youtube.com/watch?v=HVhVClFMg6Y}{LINK al video} }
 	\label{fig:\thefigure}
 \end{figure}
 
-Otro ejemplo de aplicación se puede ver en la figura \ref{fig:1.3}, en una obra presentada por la empresa Build Up en un centro comercial en Fukuoka, Japón. Allí se instalaron 1000 luminarias esféricas RGB dispuestas en una matriz de 25x40 para generar figuras tridimensionales como planos y gausseanas, entre otras. \\
+Otro ejemplo de aplicación se puede ver en la figura \ref{fig:1.3}, en una obra presentada por la empresa Build Up en un centro comercial en Fukuoka, Japón. Allí se instalaron 1000 luminarias esféricas RGB dispuestas en una matriz de 25x40 para generar figuras tridimensionales como planos y gausseanas, entre otras. En este caso los efectos espaciales se logran coordinando el movimiento de cada esfera independientemente, cada una manejada por un equipo motorizado.
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=15cm,scale=1]{resources/4-kinSculp3.png}
+	\includegraphics[width=15cm,scale=1]{resources/1_3-kinSculp.png}
 	\caption{ Escultura cinética por parte de Build Up. \href{https://www.youtube.com/watch?v=ICixCazf6-k}{LINK al video} }
 	\label{fig:\thefigure}
 \end{figure}
 
-\newpage
-En el caso del último ejemplo presentado los efectos espaciales se logran coordinando el movimiento de cada esfera independientemente, cada una manejada por un equipo motorizado. Para esto un profesional capacitado indica, cual director de orquesta, la posición, velocidad y colores de cada esfera en un programa que es ejecutado por una consola de control de iluminación, como pueden ser las consolas hog 4 de \href{https://www.highend.com/}{High End Systems}. La comunicación entre dicha consola y los equipos se realiza a través del protocolo \textbf{DMX}.
+%\newpage
+
+
+\subsection{Sistemas de iluminación}
+\subsubsection{Equipos de luces}
+En cualquier espectáculo o evento la iluminación es una parte vital del show, y a medida que estos fueron evolucionando también lo hicieron los equipos de luces. Partiendo de aparatos fijos en donde solo se podía variar la intensidad de luz, se pueden conseguir hoy en día dispositivos complejos con decenas de parámetros controlables.\\
+Un notable ejemplo es el \href{http://preworks.at/index.php/en/products/led-automated-luminairies/shapeshifter}{Shapeshifter}, figura \ref{fig:1.4}, que cuenta con 7 módulos leds que pueden ser manejados independientemente.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=7cm,scale=1]{resources/1_4-shapeshifter.jpg}
+	\caption{Shapeshifter, de High End Systems. \href{https://www.youtube.com/watch?v=LIIE3zZscYY}{LINK al video} }
+	\label{fig:\thefigure}
+\end{figure}
+
+En el caso del sistema visto en la figura \ref{fig:1.3}, los parámetros controlables de los equipos son la posición, velocidad y colores de cada esfera.
+
+\subsubsection{Consolas de control de luminaria}
+Para controlar los sistemas de luces es necesario utilizar unas consolas especiales. Estas se comunican con las luminarias utilizando el estándar \textbf{DMX} y le indican a cada equipo el valor de sus parámetros en todo momento. \\
+
+La manera más común para generar un efectos es indicando la progresión de uno o más parámetros desde un tiempo inicial a uno final. Al cambio de los parámetros entre 2 instantes de tiempo se las llama \textit{cues}, o entradas, y cuyo conjunto forma los efectos. \\
+Dentro de las consolas que hay en el mercado para este tipo de control de equipos se pueden destacar las \href{https://www.highend.com/products/consoles}{consolas hog 4} de High End Systems, como la que se muestra en la figura \ref{fig:1.5}\\
+
+Otra manera generarlos es a partir de equipos y softwares, como el \href{https://www.madrix.com/}{Madrix}, que tienen la capacidad de convertir videos a variaciones de parámetros, lo cual lo hace especialmente útil cuando se quieren crear \href{https://www.youtube.com/watch?v=mdbl5ks7Nu0}{efectos lumínicos complejos}.
+
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=10cm,scale=1]{resources/1_5-consolaHOG.png}
+	\caption{Consola Hog4, de High End Systems}
+	\label{fig:\thefigure}
+\end{figure}
+
+ 
 
 \section{DMX}
 \subsection{definición}
-DMX es un protocolo comúnmente utilizado para el manejo de luminarias que emplea el estándar EIA-485 como capa física y paquetes de largo variable para la comunicación entre maestro y esclavo (que suele ser unidireccional).
+DMX, de \textit{Digital MultipleX} y abreviatura de DMX512, es un estándar de comunicación digital ámpliamente utilizado para el control de sistemas de iluminación. 
+
+Estos equipos suelen tener la capacidad de manejar  R, G y B para el color de las luces, di
+
+ que emplea el estándar EIA-485 como capa física y paquetes de largo variable para la comunicación entre maestro y esclavo (que suele ser unidireccional).
 \subsection{Capa física}
 tipo de señal, canal físico
 
 \subsection{Capa de enlace de datos}
 canales, addressamiento
-\subsection{Equipos que implementan DMX}
+
+\subsection{RDM}
+
+
 
 
 \section{Updown}
 \subsection{Definición}
 
-
 \subsection{Blackout}
 Black-out es una empresa productora y proveedora de tecnología, cuyo objetivo es generar contenido audiovisual para grandes eventos. Para cumplir con este objetivo la empresa dedica recursos al desarrollo de productos tecnológicos innovadores, como es el caso de los equipos destinados a generar las llamadas Esculturas cinéticas (Kinetic sculpture en inglés).\\
 
 \subsection{Productos que compiten en el mercado}
-El equipos más conocido para estas aplicaciones es el \href{http://www.eastsunlite.com/p31.html}{OrbisFly}, de \href{https://www.kinetic-lights.com/}{Kinetic Lights}. Estos dispositivos de origen Chino trabajan con una esfera RGB de peso estándar de 1Kg, aunque soporta un peso máximo de 2Kg, que puede descender hasta 9 metros. Dispone de un display LCD y botoneras para el testeo y configuración el equipo\\
-
-
-
+El equipos más conocido empleado para estas aplicaciones es el \href{http://www.eastsunlite.com/p31.html}{OrbisFly}, de \href{https://www.kinetic-lights.com/}{Kinetic Lights}. Estos dispositivos de orígen Chino trabajan con una esfera RGB de peso estándar de 1Kg, aunque soporta un peso máximo de 2Kg, que puede descender hasta 9 metros. Dispone de un display LCD y botoneras para el testeo y configuración el equipo\\
 
 \newpage
 \section{Justificación del proyecto}
