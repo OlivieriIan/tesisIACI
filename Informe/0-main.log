@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  8 AUG 2017 00:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  12 AUG 2017 12:23
 entering extended mode
 **./0-main.tex
 (0-main.tex
@@ -791,7 +791,7 @@ LaTeX Info: Redefining \nameref on input line 207.
 
 \c@lstlisting=\count129
  (1-Caratula.tex
-<resources/0-UNQlogo.jpg, id=131, 688.974pt x 271.7352pt>
+<resources/0-UNQlogo.jpg, id=143, 688.974pt x 271.7352pt>
 File: resources/0-UNQlogo.jpg Graphic file (type jpg)
 
 <use resources/0-UNQlogo.jpg>
@@ -857,7 +857,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-<resources/1_1-kinSculp.png, id=209, 731.73375pt x 686.565pt>
+<resources/1_1-kinSculp.png, id=228, 731.73375pt x 686.565pt>
 File: resources/1_1-kinSculp.png Graphic file (type png)
 
 <use resources/1_1-kinSculp.png>
@@ -875,21 +875,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--24
 
  []
 
-<resources/1_2-kinSculp.png, id=221, 864.22874pt x 355.3275pt>
+<resources/1_2-kinSculp.png, id=239, 864.22874pt x 355.3275pt>
 File: resources/1_2-kinSculp.png Graphic file (type png)
 
 <use resources/1_2-kinSculp.png>
 Package pdftex.def Info: resources/1_2-kinSculp.png used on input line 28.
 (pdftex.def)             Requested size: 864.22662pt x 355.32661pt.
 
-<resources/1_3-kinSculp.png, id=224, 1444.64719pt x 417.05812pt>
+<resources/1_3-kinSculp.png, id=242, 1444.64719pt x 417.05812pt>
 File: resources/1_3-kinSculp.png Graphic file (type png)
 
 <use resources/1_3-kinSculp.png>
 Package pdftex.def Info: resources/1_3-kinSculp.png used on input line 36.
 (pdftex.def)             Requested size: 1444.64368pt x 417.0571pt.
  [6 <./resources/1_2-kinSculp.png>]
-<resources/1_4-shapeshifter.jpg, id=234, 1284.8pt x 1284.8pt>
+<resources/1_4-shapeshifter.jpg, id=252, 1284.8pt x 1284.8pt>
 File: resources/1_4-shapeshifter.jpg Graphic file (type jpg)
 
 <use resources/1_4-shapeshifter.jpg>
@@ -905,49 +905,65 @@ Underfull \hbox (badness 10000) in paragraph at lines 61--63
 
  []
 
-<resources/1_5-consolaHOG.png, id=246, 246.6816pt x 180.4341pt>
+<resources/1_5-consolaHOG.png, id=264, 246.6816pt x 180.4341pt>
 File: resources/1_5-consolaHOG.png Graphic file (type png)
 
 <use resources/1_5-consolaHOG.png>
 Package pdftex.def Info: resources/1_5-consolaHOG.png used on input line 69.
 (pdftex.def)             Requested size: 246.68098pt x 180.43364pt.
  [8 <./resources/1_5-consolaHOG.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 98--99
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
 
  []
 
+<resources/1_6-cableDMX.jpg, id=273, 1927.2pt x 1441.385pt>
+File: resources/1_6-cableDMX.jpg Graphic file (type jpg)
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--102
+<use resources/1_6-cableDMX.jpg>
+Package pdftex.def Info: resources/1_6-cableDMX.jpg used on input line 89.
+(pdftex.def)             Requested size: 1927.19533pt x 1441.38148pt.
+ [9 <./resources/1_6-cableDMX.jpg>]
+<resources/1_7-topologiaDMX.png, id=279, 1126.2075pt x 222.8325pt>
+File: resources/1_7-topologiaDMX.png Graphic file (type png)
+
+<use resources/1_7-topologiaDMX.png>
+Package pdftex.def Info: resources/1_7-topologiaDMX.png used on input line 99.
+(pdftex.def)             Requested size: 1126.20477pt x 222.83195pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
 
  []
 
-[9] [10]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 109.
+[10 <./resources/1_7-topologiaDMX.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
 
+ []
 
-("C:\Users\ian_m\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+[11]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 132.
+
+ ("C:\Users\ian_m\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 109.
-)
-(5-Diseno.tex [11]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 132.
+) (5-Diseno.tex [12]
 Chapter 2.
-[12
+[13
 
-]) (6-Desarrollo.tex [13]
+]) (6-Desarrollo.tex [14]
 Chapter 3.
-[14
+[15
 
-]) (7-Implementacion.tex [15]
+]) (7-Implementacion.tex [16]
 Chapter 4.
-[16
+[17
 
-]) (8-Conclusiones.tex [17]
+]) (8-Conclusiones.tex [18]
 Chapter 5.
 ) 
 AED: lastpage setting LastPage
-[18
+[19
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 221.
@@ -956,17 +972,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 221.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 221.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 221.
 Package rerunfilecheck Info: File `0-main.out' has not changed.
-(rerunfilecheck)             Checksum: E87C91FA695F249C6EBF5C093B55EDA3;2046.
+(rerunfilecheck)             Checksum: ED747D693FB6FB0C5EDF88C472DA1DA4;2293.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
  ) 
 Here is how much of TeX's memory you used:
- 9039 strings out of 493323
- 128223 string characters out of 3130015
- 263286 words of memory out of 3000000
- 12373 multiletter control sequences out of 15000+200000
+ 9060 strings out of 493323
+ 128698 string characters out of 3130015
+ 264286 words of memory out of 3000000
+ 12386 multiletter control sequences out of 15000+200000
  14488 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,13n,43p,532b,360s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 28i,13n,43p,808b,360s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\ian_m\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
 ecti1200.pk> <C:\Users\ian_m\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
 ec\dpi600\ecbx1728.pk> <C:\Users\ian_m\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
@@ -978,9 +994,9 @@ AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc2074.pk> <C:\Us
 ers\ian_m\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.
 pk><C:/Users/ian_m/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb>
-Output written on 0-main.pdf (19 pages, 5756110 bytes).
+Output written on 0-main.pdf (20 pages, 6397586 bytes).
 PDF statistics:
- 600 PDF objects out of 1000 (max. 8388607)
- 58 named destinations out of 1000 (max. 500000)
- 287 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 655 PDF objects out of 1000 (max. 8388607)
+ 64 named destinations out of 1000 (max. 500000)
+ 321 words of extra memory for PDF output out of 10000 (max. 10000000)
 

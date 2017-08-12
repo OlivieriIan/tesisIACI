@@ -11,7 +11,7 @@ Las esculturas cinéticas (kinetic sculpture en inglés) son estructuras tridime
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=10cm,scale=1]{resources/1_1-kinSculp.png}
-	\caption{ Ejemplo de escultura cinética movida por aire, por Anthony Howe. \href{https://www.youtube.com/watch?v=N-1LpikCSR4}{LINK al video} }
+	\caption{ Ejemplo de escultura cinética movida por aire, por Anthony Howe. Fuente:  \href{https://www.youtube.com/watch?v=N-1LpikCSR4}{LINK al video} }
 	\label{fig:\thefigure}
 \end{figure}
 
@@ -26,7 +26,7 @@ Un ejemplo de aplicación de estas características se puede ver en la figura \r
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=15cm,scale=1]{resources/1_2-kinSculp.png}
-	\caption{ Escultura cinética en el museo BMW. \href{https://www.youtube.com/watch?v=HVhVClFMg6Y}{LINK al video} }
+	\caption{ Escultura cinética en el museo BMW. Fuente: \href{https://www.youtube.com/watch?v=HVhVClFMg6Y}{LINK al video} }
 	\label{fig:\thefigure}
 \end{figure}
 
@@ -34,7 +34,7 @@ Otro ejemplo de aplicación se puede ver en la figura \ref{fig:1.3}, en una obra
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=15cm,scale=1]{resources/1_3-kinSculp.png}
-	\caption{ Escultura cinética por parte de Build Up. \href{https://www.youtube.com/watch?v=ICixCazf6-k}{LINK al video} }
+	\caption{ Escultura cinética por parte de Build Up. Fuente: \href{https://www.youtube.com/watch?v=ICixCazf6-k}{LINK al video} }
 	\label{fig:\thefigure}
 \end{figure}
 
@@ -49,7 +49,7 @@ Un notable ejemplo es el \href{http://preworks.at/index.php/en/products/led-auto
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=7cm,scale=1]{resources/1_4-shapeshifter.jpg}
-	\caption{Shapeshifter, de High End Systems. \href{https://www.youtube.com/watch?v=LIIE3zZscYY}{LINK al video} }
+	\caption{Shapeshifter, de High End Systems. Fuente: \href{https://www.youtube.com/watch?v=LIIE3zZscYY}{LINK al video} }
 	\label{fig:\thefigure}
 \end{figure}
 
@@ -67,24 +67,47 @@ Otra manera generarlos es a partir de equipos y softwares, como el \href{https:/
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=10cm,scale=1]{resources/1_5-consolaHOG.png}
-	\caption{Consola Hog4, de High End Systems}
+	\caption{Consola Hog4, de High End Systems. Fuente: \href{https://www.highend.com/products/consoles}{LINK a la imágen}}
 	\label{fig:\thefigure}
 \end{figure}
 
  
 
 \section{DMX}
-\subsection{definición}
-DMX, de \textit{Digital MultipleX} y abreviatura de DMX512, es un estándar de comunicación digital ámpliamente utilizado para el control de sistemas de iluminación. 
+\subsection{definición e historia}
+DMX, de \textit{Digital MultipleX}, es un estándar de comunicación digital ámpliamente utilizado para el control de sistemas de iluminación. 
 
-Estos equipos suelen tener la capacidad de manejar  R, G y B para el color de las luces, di
+El estándar DMX512, donde 512 significa que se envían 512 piezas de información, fue creado por la \textit{United States Institute for Theatre Technology} (USITT) en 1986 y transformado en DMX512/1990 tras una revisión de la USITT. En 1998 la \textit{Entertainment Services and Technology Association} (ESTA) cuadró DMX dentro de los estándares ANSI, modificación que fue aprovada por el instituto (ANSI) en 2004. Finalmente, en 2008 DMX tuvo una nueva revisión y se llegó a la versión actual llamada "E1.11 – 2008, USITT DMX512-A", o simplemente DMX512-A. A pesar de esto, el nombre comúnmente conocido del estándar es simplemente DMX, aunque no es indistinto ya que hay diferencia de compatibilidad entre las diferentes versiones.
 
- que emplea el estándar EIA-485 como capa física y paquetes de largo variable para la comunicación entre maestro y esclavo (que suele ser unidireccional).
+
 \subsection{Capa física}
-tipo de señal, canal físico
+\subsubsection{Cableado y conectores}
+DMX empléa el estándar EIA-485 como capa física, por lo que emplea por lo menos 3 lineas; A, B y C, en donde A y B es por los datos son transmidos, y C es masa. Los conectores utilizados son los XLR, tanto de 5 como de 3 pines. Un ejemplo del cable se puede ver en la figura \ref{fig:1.6} \\
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=8cm,scale=1]{resources/1_6-cableDMX.jpg}
+	\caption{Cable DMX con conector XLR5. Fuente: wikipedia}
+	\label{fig:\thefigure}
+\end{figure}
+
+\subsubsection{Topología}
+La red de DMX consiste en un maestro y varios esclavos, conectados con una topología de bus multidrop (MDB) con nodos conectados entre sí, lo que normalmente se denomina como topología \textit{daisy chain}. En otras palabras, todos los equipos a controlar tienen una entrada y una salida conectadas entre sí, de manera tal de que se puede conectar un equipo y apartir de este equipo conectar el siguiente, y así sucesivente, como se ve en la figura \ref{fig:1.7}. Esto permite que el conexionado sea simple y que la red pueda ser fácilmente extendida.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/1_7-topologiaDMX.png}
+	\caption{Conexionado en una red DMX. Fuente: wikipedia}
+	\label{fig:\thefigure}
+\end{figure}
+
+\subsubsection{Señal}
+Al emplear el estándar EIA-485 la señal es de tipo diferencial, de una frecuencia de 250KHz.
+
 
 \subsection{Capa de enlace de datos}
-canales, addressamiento
+\textcolor{FIXME}{canales, addressamiento, forma de paquete paquetes, direccionalidad (uni)}\\
+y paquetes de largo variable para la comunicación entre maestro y esclavo (que suele ser unidireccional).
 
 \subsection{RDM}
 
