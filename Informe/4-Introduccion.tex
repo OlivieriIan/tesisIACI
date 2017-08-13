@@ -102,37 +102,84 @@ La red de DMX consiste en un maestro y varios esclavos, conectados con una topol
 \end{figure}
 
 \subsubsection{Señal}
-Al emplear el estándar EIA-485 la señal es de tipo diferencial, de una frecuencia de 250KHz.
+La señal de DMX es de tipo diferencial, como es indicado en EIA-485, de 5 Volts de pico, y los datos se envían asincrónicamente de manera serie con una tasa de transmisión de 250Kbits por segundo que equivale a una duración de bit de 4\(\mu \)s.
 
 
 \subsection{Capa de enlace de datos}
-\textcolor{FIXME}{canales, addressamiento, forma de paquete paquetes, direccionalidad (uni)}\\
-y paquetes de largo variable para la comunicación entre maestro y esclavo (que suele ser unidireccional).
+\subsubsection{Subcapa de control de enlace lógico}
+La trama DMX, visible en la figura \ref{fig:1.8} consta de las siguientes partes:
+%Fuentes: Fhttp://www.dmx512-online.com/packt.html 
 
-\subsection{RDM}
-
-
-
-
-\section{Updown}
-\subsection{Definición}
-
-\subsection{Blackout}
-Black-out es una empresa productora y proveedora de tecnología, cuyo objetivo es generar contenido audiovisual para grandes eventos. Para cumplir con este objetivo la empresa dedica recursos al desarrollo de productos tecnológicos innovadores, como es el caso de los equipos destinados a generar las llamadas Esculturas cinéticas (Kinetic sculpture en inglés).\\
-
-\subsection{Productos que compiten en el mercado}
-El equipos más conocido empleado para estas aplicaciones es el \href{http://www.eastsunlite.com/p31.html}{OrbisFly}, de \href{https://www.kinetic-lights.com/}{Kinetic Lights}. Estos dispositivos de orígen Chino trabajan con una esfera RGB de peso estándar de 1Kg, aunque soporta un peso máximo de 2Kg, que puede descender hasta 9 metros. Dispone de un display LCD y botoneras para el testeo y configuración el equipo\\
-
-\newpage
-\section{Justificación del proyecto}
-La empresa Black-out se encargó de comenzar el desarrollo de los Up-down; los equipos necesarios para crear los efectos de esculturas cinéticas. El inconveniente es que solo fue armada la parte mecánica del mismo, ya que a efectos prácticos el firmware que se utilizaba para manejar el conjunto era pobre.\\
-Ante la necesidad que se tiene que el equipo controle la posición y velocidad de la carga, y que además verifique errores de hardware durante su uso para evitar accidentes, surgió la necesidad de buscar a alguien capacitado para mejorar la programación y terminar el proyecto.
-Es entonces que se presentó la oportunidad de realizar un trabajo en la empresa con el objetivo de completar lo que falta del proyecto, hacer que este cumpla ciertas especificaciones técnicas, y crear documentación sobre el firmware y software de prueba de hardware para que más equipos de las mismas características puedan ser producidos. De esta manera, para completar el objetivo se debe:
 \begin{itemize}
-	\item Implementar un control automático de posición y velocidad de la carga movida por el equipo para lograr los efectos deseados.
-	\item Permitir el cambio de los setpoints de posición y velocidad mediante comandos DMX enviados al equipo por una consola de luces, como puede ser una \href{https://www2.highend.com/products/controllers/Hog4Console.asp}{consola HOG4}
-	\item Manejar errores y excepciones de hardware para lograr que el producto sea seguro, siendo que será instalado en eventos con un alto nivel de concurrencia.
+	\item \textbf{Idle} y \textbf{MTBP} (Mark Time Between Packets): estado de HIGH en la linea que indica la ausencia de señal de DMX. En caso de que se supere el tiempo máximo de 1 segundo sin datos, se considera que hubo una pérdida en la conexión.
+	\item \textbf{Break}: estado de LOW en la línea utilizado para separar las tramas entre sí.
+	\item \textbf{MAB} (Mark After Break): estado en HIGH enviado luego de un Break. Este estado suele traer problemas de compatibilidad ya que fue cambiado de una duración de 4\(\mu \)s a 8\(\mu \)s en la versión de DMX512 de 1990.
+	\item \textbf{Slots}: son datos con formato 8N2 (un bit de start (LOW), 8 bits de datos, 2 bits de stop (HIGH) y sin paridad), y pueden ser:
+	\begin{itemize}
+		\item \textbf{SC} (Start Code): es el Slot 0, enviado luego de un MAB, para indicar el principio del payload. Todos los bits de datos equivalen a LOW en este estado.
+		\item \textbf{Channels}: contienen la información que quiere ser enviada a los equipos de DMX. El conjunto de los 8 bits de datos pueden tomar un valor de 0 a 255. En total pueden haber un máximo de 512 canales enviados.
+	\end{itemize}
+	\item \textbf{MTBF} (Mark Time Between Frames): estado opcional de HIGH en la linea que puede agregarse antes del bit de start de cada canal.
 \end{itemize}
+
+
+\begin{table}[!ht]
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Señal} & \textbf{Mínima} & \textbf{Máxima} & \textbf{Típica} \\
+			\hline \hline
+			Idle/MTBP & 0 & 1 seg & No especificada \\
+			Break & 88\(\mu \)s & 1seg & 88\(\mu \)s\\
+			MAB & - & - & 8\(\mu \)s \\
+			Bit & - & - & 1/250KHz = 4\(\mu \)s \\
+			Slot (11 bits) & - & - & 44\(\mu \)s \\
+			MTBF & 0 & 1 seg & No especificada \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Duración de las señales que componen la trama de DMX}
+	\label{table:\thetable}
+\end{table}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/1_8-tramaDMX.png}
+	\caption{Formato de la trama DMX. Fuente: \href{http://www.dmx512-online.com/packt.html}{LINK}}
+	\label{fig:\thefigure}
+\end{figure}
+
+A cada trama con 512 canales se la llama "universo de DMX". Si se necesitan enviar más de 512 canales se utilizan más universos.
+
+\subsubsection{Subcapa de control de acceso al medio}
+DMX no implemente ningún mecanismo de control de acceso al medio debido a que el único transmisor es la red es el maestro y todos los esclavos reciben la misma información.
+
+\section{Justificación del proyecto}
+\textbf{Blackout}, una empresa productora y proveedora de tecnología cuyo objetivo es generar contenido audiovisual para grandes eventos, tomó interés en esculturas cinéticas como la de la figura \ref{fig:1.3} por lo que decidió crear su propio producto, el \textbf{Updown}, que se puede ver en la figura \ref{fig:1.9}. \\
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/1_9-updown.jpg}
+	\caption{Imágen del Updown, desarrollado por la empresa Blackout}
+	\label{fig:\thefigure}
+\end{figure}
+
+Durante el armado de este dispositivo se dieron cuenta que con los recursos que contaban, tiempo en particular, no podían alcanzar las especificaciones que buscaban que el updown tuviera, por lo que se vieron en la necesidad de buscar a alguien externo a la empresa para darle fin al proyecto.\\
+
+Es entonces que se presentó la oportunidad de realizar el trabajo de concluir el desarrollo del equipo, que es en lo que este trabajo final se basa.
+
+\section{Objetivos}
+Para dar conclusión al proyecto se deben alcanzar los siguientes objetivos:
+\begin{itemize}
+	\item Para que los updowns puedan crear efectos en el espacio que sean visualmente creibles las cargas manejadas por los equipos deben bajen parejas y a la velocidad, y que lleguen a una posición dada. Estas referencias de posición y velocidad serán dadas por una consola DMX.
+	\item Manejar errores y excepciones de hardware para lograr que el producto sea seguro, siendo que será instalado en eventos con un alto nivel de concurrencia.
+	\item Generar documentación y programas de prueba para que facilitar el armado en cantidad de los updown.
+\end{itemize}
+
+
+%\subsection{Productos que compiten en el mercado}
+%El equipos más conocido empleado para estas aplicaciones es el \href{http://www.eastsunlite.com/p31.html}{OrbisFly}, de \href{https://www.kinetic-lights.com/}{Kinetic Lights}. Estos dispositivos de orígen Chino trabajan con una esfera RGB de peso estándar de 1Kg, aunque soporta un peso máximo de 2Kg, que puede descender hasta 9 metros. Dispone de un display LCD y botoneras para el testeo y configuración el equipo\\
+
 
 
 
