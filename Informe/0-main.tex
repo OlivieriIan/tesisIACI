@@ -143,7 +143,7 @@
     citecolor=green,
     filecolor=black,
     linkcolor=colorUNQ,
-    urlcolor=myUrlColor
+    urlcolor=colorUNQ
 }
 %\urlstyle{same}
 
@@ -195,6 +195,10 @@
 \renewcommand{\contentsname}{Índice de contenidos}
 
 \renewcommand{\listfigurename}{Índice de figuras}
+
+% ------------------- Contadores de subsecciones ---------------------------------------------------------------- %
+\setcounter{secnumdepth}{4} % seting level of numbering (default for "report" is 3). With ''-1'' you have non number also for chapters
+\setcounter{tocdepth}{4} % if you want all the levels in your table of contents
 
 
 % ------------------- Document ------------------------------------------------------------------------- %
