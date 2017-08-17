@@ -74,7 +74,7 @@ Otra manera generarlos es a partir de equipos y softwares, como el \href{https:/
  
 
 \section{DMX}
-\subsection{definición e historia}
+\subsection{Definición e historia}
 DMX, de \textit{Digital MultipleX}, es un estándar de comunicación digital ámpliamente utilizado para el control de sistemas de iluminación. 
 
 El estándar DMX512, donde 512 significa que se envían 512 piezas de información, fue creado por la \textit{United States Institute for Theatre Technology} (USITT) en 1986 y transformado en DMX512/1990 tras una revisión de la USITT. En 1998 la \textit{Entertainment Services and Technology Association} (ESTA) cuadró DMX dentro de los estándares ANSI, modificación que fue aprovada por el instituto (ANSI) en 2004. Finalmente, en 2008 DMX tuvo una nueva revisión y se llegó a la versión actual llamada "E1.11 – 2008, USITT DMX512-A", o simplemente DMX512-A. A pesar de esto, el nombre comúnmente conocido del estándar es simplemente DMX, aunque no es indistinto ya que hay diferencia de compatibilidad entre las diferentes versiones.
@@ -154,8 +154,11 @@ A cada trama con 512 canales se la llama "universo de DMX". Si se necesitan envi
 \subsubsection{Subcapa de control de acceso al medio}
 DMX no implemente ningún mecanismo de control de acceso al medio debido a que el único transmisor es la red es el maestro y todos los esclavos reciben la misma información.
 
-\section{Justificación del proyecto}
-\textbf{Blackout}, una empresa productora y proveedora de tecnología cuyo objetivo es generar contenido audiovisual para grandes eventos, tomó interés en esculturas cinéticas como la de la figura \ref{fig:1.3} por lo que decidió crear su propio producto, el \textbf{Updown}, que se puede ver en la figura \ref{fig:1.9}. \\
+\section{Updown}
+\subsection{Definición}
+El \textbf{Updown}, que se puede ver en la figura \ref{fig:1.9}, es básicamente una grúa que sube y baja una carga conforme a comandos recibidos por una equipo que utilice el protocolo DMX, como puede ser una consola de control de luminaria.\\
+
+Este producto fue concebido en \textbf{Blackout}, una empresa productora y proveedora de tecnología cuyo objetivo es generar contenido audiovisual para grandes eventos. Blackout tomó interés en esculturas cinéticas como la de la figura \ref{fig:1.3} pero se encontró con el problema que el costo de importación de los equipos utilizados para tales fines, sumado a su precio unitario, era muy elevado. Por este motivo, decidió comenzar el desarrollo de un producto propio y nacional para alcanzar su objetivo.\\
 
 \begin{figure}[!ht]
 	\centering
@@ -163,18 +166,74 @@ DMX no implemente ningún mecanismo de control de acceso al medio debido a que e
 	\caption{Imágen del Updown, desarrollado por la empresa Blackout}
 	\label{fig:\thefigure}
 \end{figure}
+\newpage
+\subsection{Descripción del sistema}
 
-Durante el armado de este dispositivo se dieron cuenta que con los recursos que contaban, tiempo en particular, no podían alcanzar las especificaciones que buscaban que el updown tuviera, por lo que se vieron en la necesidad de buscar a alguien externo a la empresa para darle fin al proyecto.\\
+En la figura \ref{fig:1.10} se presenta el diagrama general del equipo updown. Allí se pueden identificar todos los elementos electrónicos y mecánicos que conforman el sistema, los elementos externos del sistema, y la comunicación entre ellos.
 
-Es entonces que se presentó la oportunidad de realizar el trabajo de concluir el desarrollo del equipo, que es en lo que este trabajo final se basa.
+\textcolor{FIXME}{Arreglá lineas y colores (quizas) del gráfico}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/1_10-diagramaBasicoUpdown.png}
+	\caption{Diagrama conceptual del equipo Updown}
+	\label{fig:\thefigure}
+\end{figure}
+
+\subsubsection{Fuente de alimentación}
+
+\subsubsection{DMX In/Out}
+Para cumplir con la topología DMX la entrada del equipo tiene hecho un puente para que exista una salida con la misma señal hacia otro equipo en la cadena.\\
+La señal de DMX puede provenir del master DMX, otro Updown, o cualquier otro equipo esclavo dentro del mismo universo DMX. Su función es indicarle la referencia de posición y velocidad al updown, y los parámetros que correspondan a la carga
+
+\subsubsection{Dip-switch}
+Su función es seleccionar el canal inicial de DMX con el que el equipo trabajará. Cuenta con 10 switchs: 9 para la selección del canal (0 a 512) y uno para futuras ampliaciones. Pendiente a desarrollo.
+
+\subsubsection{Freno}
+Su función es detener la carga al frenar el disco que contiene la polea. El freno abre (se permite el movimiento) mediante la activación de una bobina, y la bobina está desactivada por defecto, por lo que el freno estará normalmente cerrado (no se permite el movimiento).
+
+\subsubsection{Fin de carrera}
+Su función es detectar que la polea que sostiene a la carga está completamente enrollada.
+
+\subsubsection{Sistema motor}
+\textcolor{FIXME}{Hacé un diagrama de esto}
+
+\subsubsection{Placa de control}
+\textcolor{FIXME}{Hacé un diagrama de esto}
+
+
+\subsection{Resumen de entradas y salidas del sistema}
+\subsubsection{Entradas}
+\begin{itemize}
+	\item Señal de DMX
+	\item Fin de carrera
+	\item Dip-switch
+	\item Encoder de disco
+	\item Encoder de motor
+\end{itemize}
+
+\subsubsection{Salidas}
+\begin{itemize}
+	\item Freno
+	\item Motor
+	\item Leds indicadores
+	%\item Canal de debug (Software UART)
+\end{itemize}
+
+
+\section{Justificación del proyecto}
+Durante el desarrollo del updown la empresa se dió cuenta que con los recursos que contaban, tiempo en particular, no podían alcanzar las especificaciones que buscaban que el updown tuviera, por lo que se vió en la necesidad de buscar a alguien externo para darle fin al proyecto.\\
+
+Es entonces que se presentó la oportunidad de realizar el trabajo de concluir el desarrollo del equipo, que es en lo que este proyecto final se basa.
+
 
 \newpage
 \section{Objetivos}
-Para dar conclusión al proyecto se deben alcanzar los siguientes objetivos:
+Para dar conclusión al proyecto se deben cumplir con las requerimientos no cumplidos del proyecto. Esto incluye:
 \begin{itemize}
-	\item Hacer que las cargas manejadas por los equipos se muevan parejas a la misma velocidad y lleguen a una posición dada, con el objetivo de que los efectos espaciales creados sean visualmente creibles. Estas referencias de posición y velocidad serán dadas por una consola DMX.
+	\item Lograr que las cargas manejadas por los equipos se muevan parejas a la misma velocidad y lleguen a una posición dada, con el objetivo de que los efectos espaciales creados sean visualmente creibles. Estas referencias de posición y velocidad serán dadas por una consola DMX.
 	\item Manejar errores y excepciones de hardware para lograr que el producto sea seguro, siendo que será instalado en eventos con un alto nivel de concurrencia.
-	\item Realizar los cambios mecánicos y electrónicos necesarios en el equipo para que este alcance los requerimientos buscados.
+	\item Realizar los cambios mecánicos y electrónicos necesarios en el equipo para que tenga las funcionalidades deseadas. Esto incluye desarrollo del dipswitch, y modificaciones 
 	\item Generar documentación y programas de prueba para que facilitar el armado en cantidad de los updown.
 	
 \end{itemize}
