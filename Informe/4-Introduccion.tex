@@ -171,7 +171,7 @@ Este producto fue concebido en \textbf{Blackout}, una empresa productora y prove
 
 En la figura \ref{fig:1.10} se presenta el diagrama general del equipo updown. Allí se pueden identificar todos los elementos electrónicos y mecánicos que conforman el sistema, los elementos externos del sistema, y la comunicación entre ellos.
 
-\textcolor{FIXME}{Arreglá lineas y colores (quizas) del gráfico}
+\textcolor{FIXME}{Arreglá lineas (ALT + flechas en openoffice) y colores (quizas) del gráfico}
 
 \begin{figure}[!ht]
 	\centering
@@ -181,13 +181,15 @@ En la figura \ref{fig:1.10} se presenta el diagrama general del equipo updown. A
 \end{figure}
 
 \subsubsection{Fuente de alimentación}
+La fuente de alimentación es la encargada de proveer la potencia necesaria para el funcionamiento del sistema motor, y de placa de control junto con sus periféricos. Esto lo logra convirtiendo la tensión de red de 220Vac a una señal continua de 24Vcc, entregando 4.5A máximo.
 
 \subsubsection{DMX In/Out}
-Para cumplir con la topología DMX la entrada del equipo tiene hecho un puente para que exista una salida con la misma señal hacia otro equipo en la cadena.\\
-La señal de DMX puede provenir del master DMX, otro Updown, o cualquier otro equipo esclavo dentro del mismo universo DMX. Su función es indicarle la referencia de posición y velocidad al updown, y los parámetros que correspondan a la carga
+La señal DMX proveniente del master de la red, otro Updown, o cualquier otro equipo esclavo dentro del mismo universo DMX ingresa al sistema para ser procesada por la placa de control. Su función es indicarle al equipo la referencia de posición y velocidad, y los parámetros que correspondan a la carga.\\
+Además, para cumplir con el estándar DMX, la señal de entrada se replica mediante un puente a una salida para que otro equipo pueda ser conectado a la red.
 
 \subsubsection{Dip-switch}
-Su función es seleccionar el canal inicial de DMX con el que el equipo trabajará. Cuenta con 10 switchs: 9 para la selección del canal (0 a 512) y uno para futuras ampliaciones. Pendiente a desarrollo.
+Su función es seleccionar el canal inicial de DMX con el que el equipo trabajará. Cuenta con 10 switchs: 9 para la selección del canal (0 a 512) y uno para futuras ampliaciones. \\
+Esta pieza es una de las que está pendiente a desarrollo.
 
 \subsubsection{Freno}
 Su función es detener la carga al frenar el disco que contiene la polea. El freno abre (se permite el movimiento) mediante la activación de una bobina, y la bobina está desactivada por defecto, por lo que el freno estará normalmente cerrado (no se permite el movimiento).
@@ -196,7 +198,12 @@ Su función es detener la carga al frenar el disco que contiene la polea. El fre
 Su función es detectar que la polea que sostiene a la carga está completamente enrollada.
 
 \subsubsection{Sistema motor}
-\textcolor{FIXME}{Hacé un diagrama de esto}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/1_11-diagramaSistemaMotor.png}
+	\caption{Diagrama del sistema motor}
+	\label{fig:\thefigure}
+\end{figure}
 
 \subsubsection{Placa de control}
 \textcolor{FIXME}{Hacé un diagrama de esto}

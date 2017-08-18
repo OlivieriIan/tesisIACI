@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  16 AUG 2017 22:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  17 AUG 2017 23:05
 entering extended mode
 **./0-main.tex
 (0-main.tex
@@ -857,7 +857,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-<resources/1_1-kinSculp.png, id=290, 731.73375pt x 686.565pt>
+<resources/1_1-kinSculp.png, id=292, 731.73375pt x 686.565pt>
 File: resources/1_1-kinSculp.png Graphic file (type png)
 
 <use resources/1_1-kinSculp.png>
@@ -875,21 +875,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--24
 
  []
 
-<resources/1_2-kinSculp.png, id=301, 864.22874pt x 355.3275pt>
+<resources/1_2-kinSculp.png, id=303, 864.22874pt x 355.3275pt>
 File: resources/1_2-kinSculp.png Graphic file (type png)
 
 <use resources/1_2-kinSculp.png>
 Package pdftex.def Info: resources/1_2-kinSculp.png used on input line 28.
 (pdftex.def)             Requested size: 864.22662pt x 355.32661pt.
 
-<resources/1_3-kinSculp.png, id=304, 1444.64719pt x 417.05812pt>
+<resources/1_3-kinSculp.png, id=306, 1444.64719pt x 417.05812pt>
 File: resources/1_3-kinSculp.png Graphic file (type png)
 
 <use resources/1_3-kinSculp.png>
 Package pdftex.def Info: resources/1_3-kinSculp.png used on input line 36.
 (pdftex.def)             Requested size: 1444.64368pt x 417.0571pt.
  [6 <./resources/1_2-kinSculp.png>]
-<resources/1_4-shapeshifter.jpg, id=314, 1284.8pt x 1284.8pt>
+<resources/1_4-shapeshifter.jpg, id=316, 1284.8pt x 1284.8pt>
 File: resources/1_4-shapeshifter.jpg Graphic file (type jpg)
 
 <use resources/1_4-shapeshifter.jpg>
@@ -905,7 +905,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 61--63
 
  []
 
-<resources/1_5-consolaHOG.png, id=326, 246.6816pt x 180.4341pt>
+<resources/1_5-consolaHOG.png, id=328, 246.6816pt x 180.4341pt>
 File: resources/1_5-consolaHOG.png Graphic file (type png)
 
 <use resources/1_5-consolaHOG.png>
@@ -916,14 +916,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 85--86
 
  []
 
-<resources/1_6-cableDMX.jpg, id=335, 1927.2pt x 1441.385pt>
+<resources/1_6-cableDMX.jpg, id=337, 1927.2pt x 1441.385pt>
 File: resources/1_6-cableDMX.jpg Graphic file (type jpg)
 
 <use resources/1_6-cableDMX.jpg>
 Package pdftex.def Info: resources/1_6-cableDMX.jpg used on input line 89.
 (pdftex.def)             Requested size: 1927.19533pt x 1441.38148pt.
  [9 <./resources/1_6-cableDMX.jpg>]
-<resources/1_7-topologiaDMX.png, id=341, 1126.2075pt x 222.8325pt>
+<resources/1_7-topologiaDMX.png, id=343, 1126.2075pt x 222.8325pt>
 File: resources/1_7-topologiaDMX.png Graphic file (type png)
 
 <use resources/1_7-topologiaDMX.png>
@@ -939,7 +939,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 114.
 
 [10 <./resources/1_7-topologiaDMX.png>]
-<resources/1_8-tramaDMX.png, id=350, 427.5975pt x 198.7425pt>
+<resources/1_8-tramaDMX.png, id=352, 427.5975pt x 198.7425pt>
 File: resources/1_8-tramaDMX.png Graphic file (type png)
 
 <use resources/1_8-tramaDMX.png>
@@ -955,22 +955,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 161--162
 
  []
 
-<resources/1_9-updown.jpg, id=360, 2987.16pt x 971.63pt>
+<resources/1_9-updown.jpg, id=362, 2987.16pt x 971.63pt>
 File: resources/1_9-updown.jpg Graphic file (type jpg)
 
 <use resources/1_9-updown.jpg>
 Package pdftex.def Info: resources/1_9-updown.jpg used on input line 165.
 (pdftex.def)             Requested size: 2987.15274pt x 971.62764pt.
  [12 <./resources/1_9-updown.jpg>]
-<resources/1_10-diagramaBasicoUpdown.png, id=367, 674.52pt x 380.92313pt>
+<resources/1_10-diagramaBasicoUpdown.png, id=369, 674.52pt x 380.92313pt>
 File: resources/1_10-diagramaBasicoUpdown.png Graphic file (type png)
 
 <use resources/1_10-diagramaBasicoUpdown.png>
 Package pdftex.def Info: resources/1_10-diagramaBasicoUpdown.png used on input 
 line 178.
 (pdftex.def)             Requested size: 674.51836pt x 380.92218pt.
- [13 <./resources/1_10-diagramaBasicoUpdown.png>] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 225--226
+ [13 <./resources/1_10-diagramaBasicoUpdown.png>]
+<resources/1_11-diagramaSistemaMotor.png, id=375, 721.19438pt x 317.68687pt>
+File: resources/1_11-diagramaSistemaMotor.png Graphic file (type png)
+
+<use resources/1_11-diagramaSistemaMotor.png>
+Package pdftex.def Info: resources/1_11-diagramaSistemaMotor.png used on input 
+line 203.
+(pdftex.def)             Requested size: 721.19263pt x 317.68608pt.
+ [14 <./resources/1_11-diagramaSistemaMotor.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 232--233
 
  []
 
@@ -1003,10 +1011,10 @@ Package rerunfilecheck Info: File `0-main.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
  ) 
 Here is how much of TeX's memory you used:
- 9108 strings out of 493323
- 129724 string characters out of 3130015
+ 9115 strings out of 493323
+ 129949 string characters out of 3130015
  264286 words of memory out of 3000000
- 12413 multiletter control sequences out of 15000+200000
+ 12418 multiletter control sequences out of 15000+200000
  14488 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  28i,13n,43p,808b,445s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1022,9 +1030,9 @@ ers\ian_m\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.
 pk><C:/Users/ian_m/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmmi12.pfb><C:/Users/ian_m/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmsy10.pfb>
-Output written on 0-main.pdf (23 pages, 7104638 bytes).
+Output written on 0-main.pdf (23 pages, 7114906 bytes).
 PDF statistics:
- 763 PDF objects out of 1000 (max. 8388607)
- 82 named destinations out of 1000 (max. 500000)
- 424 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 770 PDF objects out of 1000 (max. 8388607)
+ 83 named destinations out of 1000 (max. 500000)
+ 429 words of extra memory for PDF output out of 10000 (max. 10000000)
 
