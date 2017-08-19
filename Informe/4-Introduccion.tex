@@ -169,9 +169,7 @@ Este producto fue concebido en \textbf{Blackout}, una empresa productora y prove
 \newpage
 \subsection{Descripción del sistema}
 
-En la figura \ref{fig:1.10} se presenta el diagrama general del equipo updown. Allí se pueden identificar todos los elementos electrónicos y mecánicos que conforman el sistema, los elementos externos del sistema, y la comunicación entre ellos.
-
-\textcolor{FIXME}{Arreglá lineas (ALT + flechas en openoffice) y colores (quizas) del gráfico}
+En la figura \ref{fig:1.10} se presenta el diagrama general del equipo updown. Allí se pueden identificar todos elementos electrónicos y mecánicos que conforman el sistema, los agentes externos del sistema, y la comunicación entre ellos.
 
 \begin{figure}[!ht]
 	\centering
@@ -183,21 +181,22 @@ En la figura \ref{fig:1.10} se presenta el diagrama general del equipo updown. A
 \subsubsection{Fuente de alimentación}
 La fuente de alimentación es la encargada de proveer la potencia necesaria para el funcionamiento del sistema motor, y de placa de control junto con sus periféricos. Esto lo logra convirtiendo la tensión de red de 220Vac a una señal continua de 24Vcc, entregando 4.5A máximo.
 
-\subsubsection{DMX In/Out}
+\subsubsection{Entrada y salida DMX}
 La señal DMX proveniente del master de la red, otro Updown, o cualquier otro equipo esclavo dentro del mismo universo DMX ingresa al sistema para ser procesada por la placa de control. Su función es indicarle al equipo la referencia de posición y velocidad, y los parámetros que correspondan a la carga.\\
 Además, para cumplir con el estándar DMX, la señal de entrada se replica mediante un puente a una salida para que otro equipo pueda ser conectado a la red.
 
 \subsubsection{Dip-switch}
-Su función es seleccionar el canal inicial de DMX con el que el equipo trabajará. Cuenta con 10 switchs: 9 para la selección del canal (0 a 512) y uno para futuras ampliaciones. \\
-Esta pieza es una de las que está pendiente a desarrollo.
+El dipswitch consta con varios divisores resistivos, 10 switchs y un led indicador. Su función es seleccionar el canal inicial de DMX con el que el equipo trabajará.
 
 \subsubsection{Freno}
-Su función es detener la carga al frenar el disco que contiene la polea. El freno abre (se permite el movimiento) mediante la activación de una bobina, y la bobina está desactivada por defecto, por lo que el freno estará normalmente cerrado (no se permite el movimiento).
+El freno consta de una bobina, desactivada por defecto, que mueve una varilla metálica que traba el carrete que contiene la polea. Al activar la bobina la varilla libera al carrete, permitiendo el libre movimiento de la carga.
 
 \subsubsection{Fin de carrera}
-Su función es detectar que la polea que sostiene a la carga está completamente enrollada.
+El fin de carrera consta de un par de pulsadores en la base del equipo. Eventos como enrollar completamente la polea activa alguno de los pulsadores, dandole aviso a la placa de control.
 
 \subsubsection{Sistema motor}
+El elemento principal del sistema motor es un motor de continua de 24V con un encoder AB en su eje. Este motor mueve un carrete en donde se enrolla la polea que sostiene la carga. El carrete, llamado disco, tiene unas marcas que son sensadas por un encoder en la placa de control para tener una segunda referencia de posición.
+
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=15cm,scale=1]{resources/1_11-diagramaSistemaMotor.png}
@@ -206,42 +205,33 @@ Su función es detectar que la polea que sostiene a la carga está completamente
 \end{figure}
 
 \subsubsection{Placa de control}
-\textcolor{FIXME}{Hacé un diagrama de esto}
+La placa de control contiene electrónica para el manejo de las entradas y salidas del sistema, y un controlador para manejar todos los periféricos siguiendo la lógica deseada.\\
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/1_12-diagramaPlacaControl.png}
+	\caption{Diagrama del sistema motor}
+	\label{fig:\thefigure}
+\end{figure}
 
 
 \subsection{Resumen de entradas y salidas del sistema}
-\subsubsection{Entradas}
-\begin{itemize}
-	\item Señal de DMX
-	\item Fin de carrera
-	\item Dip-switch
-	\item Encoder de disco
-	\item Encoder de motor
-\end{itemize}
-
-\subsubsection{Salidas}
-\begin{itemize}
-	\item Freno
-	\item Motor
-	\item Leds indicadores
-	%\item Canal de debug (Software UART)
-\end{itemize}
-
-
-\section{Justificación del proyecto}
-Durante el desarrollo del updown la empresa se dió cuenta que con los recursos que contaban, tiempo en particular, no podían alcanzar las especificaciones que buscaban que el updown tuviera, por lo que se vió en la necesidad de buscar a alguien externo para darle fin al proyecto.\\
-
-Es entonces que se presentó la oportunidad de realizar el trabajo de concluir el desarrollo del equipo, que es en lo que este proyecto final se basa.
-
+\underline{\textbf{Entradas}}: Señal de DMX, Fin de carrera, Dip-switch, Encoder de disco, Encoder de motor.\\
+\underline{\textbf{Salidas}}: Freno, Motor, Led interno (led indicador de la Placa de control), Led externo (led indicador del Dipswitch).
 
 \newpage
+\section{Justificación del proyecto}
+Durante el desarrollo del updown la empresa se dió cuenta que con los recursos que contaban, tiempo en particular, no podían concretar los requerimientos que buscaban que el updown tuviera. Estos requerimientos incluyen: desarrollo de un dipswitch para el direccionamiento de DMX, programación del microcontrolador para manejar todo el sistema, modificaciones mecánicas necesarias para mejorar el desempeño del equipo y software de prueba para la calibración de los equipos, entre otros.\\
+
+Por este motivo, Blackout se vió en la necesidad de buscar a alguien externo a la empresa para darle fin al proyecto, y eentonces que se presentó la oportunidad de realizar el trabajo de concluir el desarrollo del equipo, que es en lo que este proyecto final se basa.
+
 \section{Objetivos}
 Para dar conclusión al proyecto se deben cumplir con las requerimientos no cumplidos del proyecto. Esto incluye:
 \begin{itemize}
-	\item Lograr que las cargas manejadas por los equipos se muevan parejas a la misma velocidad y lleguen a una posición dada, con el objetivo de que los efectos espaciales creados sean visualmente creibles. Estas referencias de posición y velocidad serán dadas por una consola DMX.
+	\item Lograr que las cargas manejadas por los equipos se muevan a la velocidad y posición indicadas, con el objetivo de que los efectos espaciales creados sean visualmente creibles. Estas referencias de posición y velocidad serán dadas por una consola DMX.
 	\item Manejar errores y excepciones de hardware para lograr que el producto sea seguro, siendo que será instalado en eventos con un alto nivel de concurrencia.
-	\item Realizar los cambios mecánicos y electrónicos necesarios en el equipo para que tenga las funcionalidades deseadas. Esto incluye desarrollo del dipswitch, y modificaciones 
-	\item Generar documentación y programas de prueba para que facilitar el armado en cantidad de los updown.
+	\item Realizar los cambios mecánicos y electrónicos necesarios en el equipo para que tenga las funcionalidades deseadas. Esto incluye desarrollo del dipswitch, y modificaciones de hardware que se necesiten.
+	\item Generar documentación y programas de prueba para que facilitar la calibración y el armado en cantidad de los updown.
 	
 \end{itemize}
 
