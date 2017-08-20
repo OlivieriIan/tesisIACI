@@ -1,9 +1,30 @@
 \chapter{Diseño}
 \thispagestyle{empty}
+\section{Análisis de los requerimientos a resolver}
+A continuación se analizan los requerimientos presentados en la sección \ref{sec:1.5} con el objetivo de determinar qué se planea hacer para cumplirlos.
+
+\subsection{REQ-01}
+\subsubsection{Análisis}
+El microcontrolador utilizado en la placa de control es el Atmega328p. Este tiene capacidad de manejar todas las entradas y salidas del sistema ya que cuenta con periféricos de entradas y salidas digitales, entradas analógicas, comunicación serie (UART) y timers para temporización y generación de PWM. El único inconveniente que presenta es que es un microcontrolador de 8 bits sin optimizaciones para operaciones de punto flotante, lo que puede resultar un problema para ciertas partes del proyecto. \\
+Verificado que el microcontrolador es viable para el proyecto se pasa a analizar cómo se manejarán los periféricos del mismo. Aquí las opciones son: utilizar librerías ya hechas o generar unas propias. \\
+Dentro de las hechas la más recomendable es la de arduino, ya que cuenta con librerías para este microcontrolador y estas están altamente testeadas ya que son utilizadas por miles de personas y mantenidas por una enorme comunidad de desarrolladores de software. La contra de arduino es que ciertas librerías están mal optimizadas al utilizar operaciones de punto flotante, o tendrán que ser modificadas para que sean útiles para este proyecto en particular. Además, para garantizar el correcto funcionamiento del firmware lo óptimo sería verificar que todas las librerías utilizadas no empleen delays bloqueantes, que no realicen operaciones innecesarias, que no derrochen recursos, etc.\\
+Debido a que el tiempo de desarrollo no es un factor limitante no es imperativo utilizar librerías ya hechas, por lo que se opta por crear librerías propias para manejar los periféricos.
+
+\subsubsection{Diagráma de módulos}
+El diagrama propuesto para el manejo de periféricos es:
+
+\textcolor{FIXME}{PONER DIAGRAMA}
 
 
+\subsection{REQ-02}
+Para hacer que las cargas sigan una referencia de posición y velocidad 
+\subsection{REQ-03}
+\subsection{REQ-04}
+\subsection{REQ-05}
 
 \section{Hardware}
+
+
 dipsw, relación encoder-distancia, velocidad maxima (para distintos pesos), relacion encoder motor/encoder disco.
 
 \section{Firmware}
