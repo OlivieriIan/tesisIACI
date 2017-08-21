@@ -1,14 +1,20 @@
 \chapter{Diseño}
 \thispagestyle{empty}
 
-\section{Descripción del capítulo}
+\section{Descripción del capítulo} \label{sec:\thesection}
 En este capítulo se desarrollarán y analizarán los requerimientos presentados en la sección \ref{sec:1.5} del capítulo 1 con el objetivo de determinar qué se planea hacer para cumplirlos.
 
 \section{REQ-01} \label{sec:\thesection}
-Para cumplir este requerimiento se debe contar con firmware que permita el manejo de: freno y leds indicadores (salidas digitales), fin de carrera (entrada digital), dipswitch (entrada analógica), encoders AB (interrupciones por cambio de estado de un pin), motor (generación de señal PWM) y DMX (comunicación serie). Además, como la placa de control no cuenta con un puerto de debug es necesario tener algún canal de comunicación alternativo, como un puerto serie por software. También será necesario temporizar ciertas partes del programa, por lo que se deberá poder manejar un timer.\\
-El microcontrolador utilizado en la placa de control es el Atmega328p, que tiene capacidad de manejar todos los periféricos mencionados. El único inconveniente que presenta es que es un microcontrolador de 8 bits con relativamente baja memoria y sin optimizaciones para operaciones de punto flotante. 
+Para cumplir este requerimiento se debe contar con herramientas de software que permita el manejo de: freno, leds indicadores, fin de carrera, dipswitch, encoders AB de disco y motor, motor y DMX. Además, como la placa de control no cuenta con un puerto de debug es necesario tener algún canal de comunicación alternativo, como un puerto serie por software. También será necesario temporizar ciertas partes del programa, por lo que se deberá poder manejar un timer.\\
+El microcontrolador utilizado en la placa de control es el Atmega328p, y cuenta con periféricos para manejar todas las entradas y salidas del sistema por lo que es una buena elección para el proyecto. El único inconveniente que presenta es que es un microcontrolador de 8 bits con relativamente baja memoria y sin optimizaciones para operaciones de punto flotante. 
 
-Ahora, las opciones para manejar los periféricos del microcontrolador son: utilizar librerías ya hechas , siendo la de arduino la más recomendable, o generar unas propias. En la tabla \ref{table:2.1} se presenta una comparación entre ambas opciones.
+En sistemas embebidos, la manera de manejar el hardware del microcontrolador, entre otras cosas, es a través de librerías. Estas son un conjunto de funciones o procedimientos externos a la aplicación a desarrollar que le permiten al usuario manejar ciertos aspectos del sistema de forma más fácil.\\
+Una opción sería utilizar librerías ya desarrolladas, entre las cuales se destacan las de Arduino. Arduino, una plataforma de programación de sistemas embebidos muy popular, utiliza en sus placas microcontroladores de marca Atmel. En particular, el \textit{Arduino UNO} utiliza el Atmega328p, por lo que existen funciones provistas por Arduino para el manejo de los periféricos del microcontrolador que se utiliza en el proyecto. \\
+La otra opción sería hacer librerías a medida para el proyecto, desarrollando las funciones necesarias para el manejo de los periféricos que se necesiten para que se comporten exactamente como uno desea.\\
+En la tabla \ref{table:2.1} se presenta una comparación entre ambas opciones.
+
+El mayor problema con las librerías de Arduino es que para que cuadren en proyectos grandes como estos requieren modificaciones, y las funciones provistas deben ser analizadas para verificar que no se usen elementos como delays bloqueantes ni operaciones de punto flotante indiscriminadamente, ya que deterioran el rendimiento. \\
+Como el objetivo es hacer que el sistema sea lo más confiable posible, y teniendo en cuenta que el tiempo de desarrollo no es un factor crítico, \textbf{se desarrollarán librerías propias para manejar los periféricos}.\\
 
 \begin{table}[!ht]
 	\begin{center}
@@ -17,9 +23,9 @@ Ahora, las opciones para manejar los periféricos del microcontrolador son: util
 			\textbf{} & \textbf{Arduino} & \textbf{Propia} \\
 			\hline \hline
 			Pros & - Listas para usar & - Bajo uso de recursos \\
-			 & - Altamente testeadas  & - Confiabilidad \\
-			 & - Mantenidas por una comunidad & - Predictibilidad \\
-			 \hline
+			& - Altamente testeadas  & - Confiabilidad \\
+			& - Mantenidas por una comunidad & - Predictibilidad \\
+			\hline
 			Cons & - Genéricas (poco optimizadas) & - Tiempo de desarrollo alto por defecto \\
 			& - Necesitan modificaciones para ser útiles & - Investigación y estudio \\
 			& - Requieren análisis &   \\
@@ -29,9 +35,6 @@ Ahora, las opciones para manejar los periféricos del microcontrolador son: util
 	\caption{Comparación entre el uso de librerías de Arduino vs el desarrollo de unas propias}
 	\label{table:\thetable}
 \end{table}
-
-El mayor problema con las librerías de Arduino es que para que cuadren en proyectos grandes como estos requieren modificaciones, y cada módulo debe ser analizado para verificar que no se usen elementos como delays bloqueantes ni operaciones de punto flotante. \\
-Como el objetivo es hacer que el sistema sea lo más confiable posible, y teniendo en cuenta que el tiempo de desarrollo no es un factor crítico, \textbf{se desarrollarán librerías propias para manejar los periféricos}.\\
 
 \section{REQ-02} \label{sec:\thesection}
 \subsection{Esquema de control}
@@ -94,14 +97,42 @@ Para hayar estos 5 valores se simulará el divisor de tensión en Matlab, proban
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=8cm,scale=1]{resources/2_2-dipswitch.png}
+	\includegraphics[width=12cm,scale=1]{resources/2_2-dipswitch.png}
 	\caption{Diagrama de uno de los 3 divisores del dipswitch}
 	\label{fig:\thefigure}
 \end{figure}
 
 
-\section{Diagrama de módulos del firmware}
-Para que el firmware del sistema sea escalable y mantenible se separarán los distintos programas del proyecto en módulos. El diagrama de módulos a implementar se muestra en la figura \ref{fig:2.3}\\
+\section{Firmware del updown} \label{sec:\thesection}
+\subsection{Librerías de bajo nivel}
+Como se mencionó en la sección \ref{sec:2.2}, se desarrollarán librerías para manejar los periféricos del Atmega328p y asi poder controlar el hardware del sistema.\\
+Asociadas a las librerías viene de la mano el concepto de módulo, que tiene que ver con agrupar funciones similares en un mismo paquete para desacoplar dependencias y separar al sistema en varios subsistemas que sean lo más independientes que se pueda. Esto ayuda a que el programa sea escalable y mantenible, por lo que todo el software desarrollado se hará de manera modular.
+
+Entonces, para manejar los periféricos se creará una librería de bajo nivel que constará de los siguientes módulos:
+\begin{itemize}
+	\item \textbf{Entradas} y salidas digitales, para leer el estado del fin de carrera y comandar el freno y los leds indicadores interno y externo.
+	\item \textbf{Entradas analógicas}, para leer las 3 salidas analógicas del dipswitch y poder determinar la posición de los selectores.
+	\item \textbf{Interrupciones externas} por cambio de estado de un pin, para llevar cuenta de los cambios de estado de los encoders AB y así saber la posición relativa.
+	\item \textbf{PWM}, para el manejo del motor de continua.
+	\item \textbf{UART}, para la lectura de la señal DMX.
+	\item \textbf{SUART}, una UART serie utilizada para el debuggeo de la placa.
+	\item \textbf{Tick}, un timer utilizado para la temporización tareas y eventos.
+\end{itemize}
+
+\subsection{Librerías de alto nivel}
+Hay que tener en cuenta que no es lo mismo obtener un valor analógico leyendo un registro del microcontrolador, que determinar qué conmutadores del dipswitch están activados leyendo 3 valores analógicos. Por lo tanto, se necesita una librería que sea más abstracata que la del manejo de periféricos para poder utilizar el hardware de esta aplicación en particular.\\
+Entonces, se creará una librería propia de la aplicación que constará de los siguientes módulos:
+\begin{itemize}
+	\item \textbf{Dipswitch}, que incluye la lectura de las llaves del dipswitch, y la escritura del led indicador externo.
+	\item \textbf{Grua}, que incluye el manejo del motor, del led interno, del freno y del fin de carrera.
+	\item \textbf{DMX}, para la recepción de datos de la consola DMX.
+	\item \textbf{Encoder}, para el manejo de los encoders AB del disco y del motor.
+	\item \textbf{Controlador}, para la implementación del sistema de control
+\end{itemize}
+
+\newpage
+\subsection{Diagrama de módulos}
+De estas 2 librerías se obtiene el diagrama de módulos presentado en la figura \ref{fig:2.3}, el cual muestra cómo se relacionan todos los módulos descriptos anteriormente. 
 
 \begin{figure}[!ht]
 	\centering

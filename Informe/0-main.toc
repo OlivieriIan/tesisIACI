@@ -42,17 +42,23 @@
 \contentsline {subsection}{\numberline {2.3.1}Esquema de control}{20}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Procedimiento para el dise\IeC {\~n}o de control}{21}{subsection.2.3.2}
 \contentsline {subsection}{\numberline {2.3.3}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{21}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}Velocidad m\IeC {\'a}xima}{21}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.4}Velocidad m\IeC {\'a}xima}{22}{subsection.2.3.4}
 \contentsline {section}{\numberline {2.4}REQ-03}{22}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}Corte de correa}{22}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Fin de carrera}{22}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.2}Fin de carrera}{23}{subsection.2.4.2}
 \contentsline {subsection}{\numberline {2.4.3}P\IeC {\'e}rdida de DMX}{23}{subsection.2.4.3}
 \contentsline {section}{\numberline {2.5}REQ-04}{23}{section.2.5}
-\contentsline {section}{\numberline {2.6}Diagrama de m\IeC {\'o}dulos del firmware}{24}{section.2.6}
-\contentsline {chapter}{\numberline {3}Desarrollo}{26}{chapter.3}
-\contentsline {section}{\numberline {3.1}d1}{26}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}d11}{26}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}d12}{27}{subsection.3.1.2}
+\contentsline {section}{\numberline {2.6}Firmware del updown}{24}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Librer\IeC {\'\i }as de bajo nivel}{24}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Librer\IeC {\'\i }as de alto nivel}{25}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Diagrama de m\IeC {\'o}dulos}{26}{subsection.2.6.3}
+\contentsline {chapter}{\numberline {3}Desarrollo}{27}{chapter.3}
+\contentsline {section}{\numberline {3.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{27}{section.3.1}
+\contentsline {section}{\numberline {3.2}Controlador del updown}{27}{section.3.2}
+\contentsline {section}{\numberline {3.3}Firmware del updown}{27}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Librer\IeC {\'\i }as de bajo nivel}{27}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Librer\IeC {\'\i }as de alto nivel}{27}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Funcion principal}{27}{subsection.3.3.3}
 \contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{28}{chapter.4}
 \contentsline {section}{\numberline {4.1}i1}{28}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}i11}{28}{subsection.4.1.1}
