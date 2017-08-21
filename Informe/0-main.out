@@ -7,7 +7,7 @@
 \BOOKMARK [3][-]{subsubsection.1.1.2.1}{Equipos de luces}{subsection.1.1.2}% 7
 \BOOKMARK [3][-]{subsubsection.1.1.2.2}{Consolas de control de luminaria}{subsection.1.1.2}% 8
 \BOOKMARK [1][-]{section.1.2}{DMX}{chapter.1}% 9
-\BOOKMARK [2][-]{subsection.1.2.1}{definici\363n e historia}{section.1.2}% 10
+\BOOKMARK [2][-]{subsection.1.2.1}{Definici\363n e historia}{section.1.2}% 10
 \BOOKMARK [2][-]{subsection.1.2.2}{Capa f\355sica}{section.1.2}% 11
 \BOOKMARK [3][-]{subsubsection.1.2.2.1}{Cableado y conectores}{subsection.1.2.2}% 12
 \BOOKMARK [3][-]{subsubsection.1.2.2.2}{Topolog\355a}{subsection.1.2.2}% 13
@@ -15,19 +15,53 @@
 \BOOKMARK [2][-]{subsection.1.2.3}{Capa de enlace de datos}{section.1.2}% 15
 \BOOKMARK [3][-]{subsubsection.1.2.3.1}{Subcapa de control de enlace l\363gico}{subsection.1.2.3}% 16
 \BOOKMARK [3][-]{subsubsection.1.2.3.2}{Subcapa de control de acceso al medio}{subsection.1.2.3}% 17
-\BOOKMARK [1][-]{section.1.3}{Justificaci\363n del proyecto}{chapter.1}% 18
-\BOOKMARK [1][-]{section.1.4}{Objetivos}{chapter.1}% 19
-\BOOKMARK [0][-]{chapter.2}{Dise\361o}{}% 20
-\BOOKMARK [1][-]{section.2.1}{d1}{chapter.2}% 21
-\BOOKMARK [2][-]{subsection.2.1.1}{d11}{section.2.1}% 22
-\BOOKMARK [2][-]{subsection.2.1.2}{d12}{section.2.1}% 23
-\BOOKMARK [0][-]{chapter.3}{Desarrollo}{}% 24
-\BOOKMARK [1][-]{section.3.1}{d1}{chapter.3}% 25
-\BOOKMARK [2][-]{subsection.3.1.1}{d11}{section.3.1}% 26
-\BOOKMARK [2][-]{subsection.3.1.2}{d12}{section.3.1}% 27
-\BOOKMARK [0][-]{chapter.4}{Implementaci\363n}{}% 28
-\BOOKMARK [1][-]{section.4.1}{i1}{chapter.4}% 29
-\BOOKMARK [2][-]{subsection.4.1.1}{i11}{section.4.1}% 30
-\BOOKMARK [2][-]{subsection.4.1.2}{i12}{section.4.1}% 31
-\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 32
-\BOOKMARK [1][-]{section.5.1}{c1}{chapter.5}% 33
+\BOOKMARK [1][-]{section.1.3}{Updown}{chapter.1}% 18
+\BOOKMARK [2][-]{subsection.1.3.1}{Definici\363n}{section.1.3}% 19
+\BOOKMARK [2][-]{subsection.1.3.2}{Descripci\363n del sistema}{section.1.3}% 20
+\BOOKMARK [3][-]{subsubsection.1.3.2.1}{Fuente de alimentaci\363n}{subsection.1.3.2}% 21
+\BOOKMARK [3][-]{subsubsection.1.3.2.2}{Entrada y salida DMX}{subsection.1.3.2}% 22
+\BOOKMARK [3][-]{subsubsection.1.3.2.3}{Dip-switch}{subsection.1.3.2}% 23
+\BOOKMARK [3][-]{subsubsection.1.3.2.4}{Freno}{subsection.1.3.2}% 24
+\BOOKMARK [3][-]{subsubsection.1.3.2.5}{Fin de carrera}{subsection.1.3.2}% 25
+\BOOKMARK [3][-]{subsubsection.1.3.2.6}{Sistema motor}{subsection.1.3.2}% 26
+\BOOKMARK [3][-]{subsubsection.1.3.2.7}{Placa de control}{subsection.1.3.2}% 27
+\BOOKMARK [2][-]{subsection.1.3.3}{Resumen de entradas y salidas del sistema}{section.1.3}% 28
+\BOOKMARK [3][-]{subsubsection.1.3.3.1}{Entradas}{subsection.1.3.3}% 29
+\BOOKMARK [3][-]{subsubsection.1.3.3.2}{Salidas}{subsection.1.3.3}% 30
+\BOOKMARK [1][-]{section.1.4}{Justificaci\363n del proyecto}{chapter.1}% 31
+\BOOKMARK [1][-]{section.1.5}{Objetivos}{chapter.1}% 32
+\BOOKMARK [2][-]{subsection.1.5.1}{REQ-01}{section.1.5}% 33
+\BOOKMARK [2][-]{subsection.1.5.2}{REQ-02}{section.1.5}% 34
+\BOOKMARK [2][-]{subsection.1.5.3}{REQ-03}{section.1.5}% 35
+\BOOKMARK [2][-]{subsection.1.5.4}{REQ-04}{section.1.5}% 36
+\BOOKMARK [2][-]{subsection.1.5.5}{Otros}{section.1.5}% 37
+\BOOKMARK [0][-]{chapter.2}{Dise\361o}{}% 38
+\BOOKMARK [1][-]{section.2.1}{Descripci\363n del cap\355tulo}{chapter.2}% 39
+\BOOKMARK [1][-]{section.2.2}{REQ-01}{chapter.2}% 40
+\BOOKMARK [1][-]{section.2.3}{REQ-02}{chapter.2}% 41
+\BOOKMARK [2][-]{subsection.2.3.1}{Esquema de control}{section.2.3}% 42
+\BOOKMARK [2][-]{subsection.2.3.2}{Procedimiento para el dise\361o de control}{section.2.3}% 43
+\BOOKMARK [2][-]{subsection.2.3.3}{Relaci\363n entre cuentas de encoder y distancia}{section.2.3}% 44
+\BOOKMARK [2][-]{subsection.2.3.4}{Velocidad m\341xima}{section.2.3}% 45
+\BOOKMARK [1][-]{section.2.4}{REQ-03}{chapter.2}% 46
+\BOOKMARK [2][-]{subsection.2.4.1}{Corte de correa}{section.2.4}% 47
+\BOOKMARK [2][-]{subsection.2.4.2}{Fin de carrera}{section.2.4}% 48
+\BOOKMARK [2][-]{subsection.2.4.3}{P\351rdida de DMX}{section.2.4}% 49
+\BOOKMARK [1][-]{section.2.5}{REQ-04}{chapter.2}% 50
+\BOOKMARK [1][-]{section.2.6}{Firmware del updown}{chapter.2}% 51
+\BOOKMARK [2][-]{subsection.2.6.1}{Librer\355as de bajo nivel}{section.2.6}% 52
+\BOOKMARK [2][-]{subsection.2.6.2}{Librer\355as de alto nivel}{section.2.6}% 53
+\BOOKMARK [2][-]{subsection.2.6.3}{Diagrama de m\363dulos}{section.2.6}% 54
+\BOOKMARK [0][-]{chapter.3}{Desarrollo}{}% 55
+\BOOKMARK [1][-]{section.3.1}{Descripci\363n del cap\355tulo}{chapter.3}% 56
+\BOOKMARK [1][-]{section.3.2}{Controlador del updown}{chapter.3}% 57
+\BOOKMARK [1][-]{section.3.3}{Firmware del updown}{chapter.3}% 58
+\BOOKMARK [2][-]{subsection.3.3.1}{Librer\355as de bajo nivel}{section.3.3}% 59
+\BOOKMARK [2][-]{subsection.3.3.2}{Librer\355as de alto nivel}{section.3.3}% 60
+\BOOKMARK [2][-]{subsection.3.3.3}{Funcion principal}{section.3.3}% 61
+\BOOKMARK [0][-]{chapter.4}{Implementaci\363n}{}% 62
+\BOOKMARK [1][-]{section.4.1}{i1}{chapter.4}% 63
+\BOOKMARK [2][-]{subsection.4.1.1}{i11}{section.4.1}% 64
+\BOOKMARK [2][-]{subsection.4.1.2}{i12}{section.4.1}% 65
+\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 66
+\BOOKMARK [1][-]{section.5.1}{c1}{chapter.5}% 67
