@@ -2,16 +2,43 @@
 \thispagestyle{empty}
 
 \section{Descripción del capítulo} \label{sec:\thesection}
-
-
-\section{Controlador} \label{sec:\thesection}
-
-\section{Dipswitch} \label{sec:\thesection}
+En este capitulo se desarrollarán las soluciones propuestas en el capítulo de diseño. Esto implica detallar el proceso realizado, describir los cambios que se debieron hacer en caso de que el planteo inicial no haya funcionado, análisis de resultados, etc.
 
 \section{Firmware del updown} \label{sec:\thesection}
+\subsection{Convenciones}
+Con el objetivo de maximizar el encapsulamiento, las funciones dentro de los módulos se dividirán en internas y externas. Las internas podrán ser accedidas únicamente por otras funciones dentro del módulo, mientras que las externas podrán ser accedidas por funciones externas.\\
+En cuanto a variables, solo se utilizarán variables internas al módulo. En caso de poder ser accedidas externamente se hará a través de setters (devuelve el valor de la variable) y getters (escribe un valor en la variable).\\
+Las funciones tendrán su nombre en formato \textit{camelCase} (priméra letra minúscula y el resto de las primeras letras de las palabras utilizadas en el nombre en mayúscula) y los Define en \textit{MAYUSCULA}.\\
+Finalmente, todas las funciones y definiciones que pueden ser accedidas desde afuera de un módulo llevarán como prefijo el nombre del módulo seguido de un guión bajo. 
+
+Además, debido a políticas de Blackout, todo el software desarrollado debe ser entendible por todo el equipo de trabajo. Esto quiere decir que una de las metas para las funciones de las librerías a crear es que permitan un flujo entendible, y que los nombres de las funciones sean parecidas a las de Arduino ya que lo que se acostumbraba a utilizar en la empresa para la programación de sistemas embebidos.\\
+Para lograr este objetivo todas los módulos desarrollados tendrán una función de inicialización llamada "init", y de lectura y escritura, según corresponda, llamadas "read" y "write", respectivamente.
+
+\textcolor{FIXME}{PONER IMAGEN DE CÓMO SERÍA UN MÓDULO}
 
 \subsection{Librerías de bajo nivel}
 
 \subsection{Librerías de alto nivel}
 
 \subsection{Funcion principal}
+
+\section{Controlador} \label{sec:\thesection}
+
+\subsection{Relación entre cuentas de encoder y distancia}
+Como se mencionó en la sección \ref{sec:2.3}, subsección 3, 
+
+\subsection{Determinación de la velocidad máxima}
+
+\subsection{Obtención del período de muestreo}
+Como se mencionó en la sección \ref{sec:2.3}, subsección 3, 
+
+\subsection{Obtención del modelo de la planta}
+
+\subsection{Obtención del controlador}
+
+\subsection{Ajuste del controlador}
+
+
+\section{Dipswitch} \label{sec:\thesection}
+
+

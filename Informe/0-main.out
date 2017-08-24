@@ -54,14 +54,22 @@
 \BOOKMARK [2][-]{subsection.2.6.3}{Diagrama de m\363dulos}{section.2.6}% 54
 \BOOKMARK [0][-]{chapter.3}{Desarrollo}{}% 55
 \BOOKMARK [1][-]{section.3.1}{Descripci\363n del cap\355tulo}{chapter.3}% 56
-\BOOKMARK [1][-]{section.3.2}{Controlador del updown}{chapter.3}% 57
-\BOOKMARK [1][-]{section.3.3}{Firmware del updown}{chapter.3}% 58
-\BOOKMARK [2][-]{subsection.3.3.1}{Librer\355as de bajo nivel}{section.3.3}% 59
-\BOOKMARK [2][-]{subsection.3.3.2}{Librer\355as de alto nivel}{section.3.3}% 60
-\BOOKMARK [2][-]{subsection.3.3.3}{Funcion principal}{section.3.3}% 61
-\BOOKMARK [0][-]{chapter.4}{Implementaci\363n}{}% 62
-\BOOKMARK [1][-]{section.4.1}{i1}{chapter.4}% 63
-\BOOKMARK [2][-]{subsection.4.1.1}{i11}{section.4.1}% 64
-\BOOKMARK [2][-]{subsection.4.1.2}{i12}{section.4.1}% 65
-\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 66
-\BOOKMARK [1][-]{section.5.1}{c1}{chapter.5}% 67
+\BOOKMARK [1][-]{section.3.2}{Firmware del updown}{chapter.3}% 57
+\BOOKMARK [2][-]{subsection.3.2.1}{Convenciones}{section.3.2}% 58
+\BOOKMARK [2][-]{subsection.3.2.2}{Librer\355as de bajo nivel}{section.3.2}% 59
+\BOOKMARK [2][-]{subsection.3.2.3}{Librer\355as de alto nivel}{section.3.2}% 60
+\BOOKMARK [2][-]{subsection.3.2.4}{Funcion principal}{section.3.2}% 61
+\BOOKMARK [1][-]{section.3.3}{Controlador}{chapter.3}% 62
+\BOOKMARK [2][-]{subsection.3.3.1}{Relaci\363n entre cuentas de encoder y distancia}{section.3.3}% 63
+\BOOKMARK [2][-]{subsection.3.3.2}{Determinaci\363n de la velocidad m\341xima}{section.3.3}% 64
+\BOOKMARK [2][-]{subsection.3.3.3}{Obtenci\363n del per\355odo de muestreo}{section.3.3}% 65
+\BOOKMARK [2][-]{subsection.3.3.4}{Obtenci\363n del modelo de la planta}{section.3.3}% 66
+\BOOKMARK [2][-]{subsection.3.3.5}{Obtenci\363n del controlador}{section.3.3}% 67
+\BOOKMARK [2][-]{subsection.3.3.6}{Ajuste del controlador}{section.3.3}% 68
+\BOOKMARK [1][-]{section.3.4}{Dipswitch}{chapter.3}% 69
+\BOOKMARK [0][-]{chapter.4}{Implementaci\363n}{}% 70
+\BOOKMARK [1][-]{section.4.1}{Descripci\363n del cap\355tulo}{chapter.4}% 71
+\BOOKMARK [1][-]{section.4.2}{Configuraci\363n de la HOG}{chapter.4}% 72
+\BOOKMARK [1][-]{section.4.3}{Validaci\363n}{chapter.4}% 73
+\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 74
+\BOOKMARK [1][-]{section.5.1}{c1}{chapter.5}% 75

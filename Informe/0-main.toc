@@ -54,14 +54,22 @@
 \contentsline {subsection}{\numberline {2.6.3}Diagrama de m\IeC {\'o}dulos}{26}{subsection.2.6.3}
 \contentsline {chapter}{\numberline {3}Desarrollo}{27}{chapter.3}
 \contentsline {section}{\numberline {3.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{27}{section.3.1}
-\contentsline {section}{\numberline {3.2}Controlador del updown}{27}{section.3.2}
-\contentsline {section}{\numberline {3.3}Firmware del updown}{27}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Librer\IeC {\'\i }as de bajo nivel}{27}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Librer\IeC {\'\i }as de alto nivel}{27}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Funcion principal}{27}{subsection.3.3.3}
-\contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{28}{chapter.4}
-\contentsline {section}{\numberline {4.1}i1}{28}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}i11}{28}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}i12}{29}{subsection.4.1.2}
+\contentsline {section}{\numberline {3.2}Firmware del updown}{27}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Convenciones}{27}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Librer\IeC {\'\i }as de bajo nivel}{28}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Librer\IeC {\'\i }as de alto nivel}{28}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Funcion principal}{28}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}Controlador}{28}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{28}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Determinaci\IeC {\'o}n de la velocidad m\IeC {\'a}xima}{28}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Obtenci\IeC {\'o}n del per\IeC {\'\i }odo de muestreo}{28}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Obtenci\IeC {\'o}n del modelo de la planta}{28}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Obtenci\IeC {\'o}n del controlador}{28}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Ajuste del controlador}{28}{subsection.3.3.6}
+\contentsline {section}{\numberline {3.4}Dipswitch}{28}{section.3.4}
+\contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{29}{chapter.4}
+\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{29}{section.4.1}
+\contentsline {section}{\numberline {4.2}Configuraci\IeC {\'o}n de la HOG}{29}{section.4.2}
+\contentsline {section}{\numberline {4.3}Validaci\IeC {\'o}n}{29}{section.4.3}
 \contentsline {chapter}{\numberline {5}Conclusiones}{30}{chapter.5}
 \contentsline {section}{\numberline {5.1}c1}{30}{section.5.1}
