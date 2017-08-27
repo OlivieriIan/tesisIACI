@@ -116,22 +116,24 @@ Para hayar estos 5 valores se simulará el divisor de tensión en Matlab, proban
 	\label{fig:\thefigure}
 \end{figure}
 
-
 \section{Firmware del updown} \label{sec:\thesection}
+\subsection{Aviso de confidencialidad}
+Debido a políticas de confidencialidad de la empresa Blackout, el código fuente del firmware desarrollado para este proyecto no puede ser distribuido libremente. Es por este motivo que únicamente se describirá cómo se solucionaron los problemas, sin analizar el código puntualmente.
+
 \subsection{Convenciones}
-Con el objetivo de maximizar el encapsulamiento, las funciones dentro de los módulos se dividirán en internas y externas. Las internas podrán ser accedidas únicamente por otras funciones dentro del módulo, mientras que las externas también podrán ser accedidas por funciones de otros módulos.\\
-En cuanto a variables, solo se utilizarán variables internas al módulo. En caso de poder ser accedidas externamente se hará a través de setters (devuelve el valor de la variable) y getters (escribe un valor en la variable).\\
+Con el objetivo de maximizar el encapsulamiento, las funciones dentro de los módulos se dividirán en internas y externas. Las internas podrán ser accedidas únicamente por otras funciones dentro del módulo, mientras que las externas también podrán ser accedidas por funciones de otros módulos. Para implementar esto se hará uso del sistema de separación de información en archivos .c (código) y .h (headers). Los .h tendrán las declaraciones de funciones externas y definiciones para que, al ser incluido por otros módulos, tengan acceso a las mismas.\\
+En cuanto a variables, solo se utilizarán variables internas al módulo. En caso de que tengan que poder ser accedidas externamente se implementarán setters (para escribir un valor en la variable) y getters (para escribir el valor de la variable) según corresponda.\\
 Las funciones tendrán su nombre en formato \textit{camelCase} (priméra letra minúscula y el resto de las primeras letras de las palabras utilizadas en el nombre en mayúscula), los Define en \textit{MAYUSCULA}, y los módulos en formato PascalCase (como el camel case pero con la primera letra en mayúsucula).
 Finalmente, todas las funciones y definiciones que pueden ser accedidas desde afuera de un módulo llevarán como prefijo el nombre del módulo seguido de un guión bajo. 
 
 Además, debido a políticas de Blackout, todo el software desarrollado debe ser entendible por todo el equipo de trabajo. Esto quiere decir que una de las metas para las funciones de las librerías a crear es que permitan un flujo entendible, y que los nombres de las funciones sean parecidas a las de Arduino ya que lo que se acostumbraba a utilizar en la empresa para la programación de sistemas embebidos.\\
 Para lograr este objetivo todas los módulos desarrollados tendrán una función de inicialización llamada "init", y de lectura y escritura, según corresponda, llamadas "read" y "write", respectivamente. 
 
-A contunuación se presentan algunos ejemplos. Función de inicialización del módulo 1: Modulo1\_init(); Define del largo de un buffer genérido del modulo 3: Modulo3\_BUFFERGENERICO.
+A contunuación se presentan algunos ejemplos de las convenciones que se usarán. Función de inicialización del módulo 1: Modulo1\_init(); Define del largo de un buffer genérido del modulo 3: Modulo3\_BUFFERGENERICO.
 
 
 \subsection{Librerías de bajo nivel}
-Como se mencionó en la sección \ref{sec:2.2}, se desarrollarán librerías para manejar los periféricos del Atmega328p y asi poder controlar el hardware del sistema.\\
+Como se mencionó en la sección \ref{sec:2.2}, se desarrollarán librerías para manejar los periféricos del Atmega328p y asi poder controlar el hardware del sistema. Esto implica analizar la \href{http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf}{hoja de datos del Atmega328p} e interactuar con los registros, un lugar de memoria utilizado para guardar información, que correspondan.\\ 
 Asociadas a las librerías viene de la mano el concepto de módulo, que tiene que ver con agrupar funciones similares en un mismo paquete para desacoplar dependencias y separar al sistema en varios subsistemas que sean lo más independientes que se pueda. Esto ayuda a que el programa sea escalable y mantenible, por lo que todo el software desarrollado se hará de manera modular.
 
 Entonces, para manejar los periféricos se creará una librería de bajo nivel que constará de los siguientes módulos:
@@ -146,7 +148,7 @@ Entonces, para manejar los periféricos se creará una librería de bajo nivel q
 \end{itemize}
 
 \subsection{Librerías de alto nivel}
-Hay que tener en cuenta que no es lo mismo obtener un valor analógico leyendo un registro del microcontrolador, que determinar qué conmutadores del dipswitch están activados leyendo 3 valores analógicos. Por lo tanto, se necesita una librería que sea más abstracata que la del manejo de periféricos para poder utilizar el hardware de esta aplicación en particular.\\
+Hay que tener en cuenta que no es lo mismo obtener un valor analógico leyendo un \textit{registro} (lugar para el almacenamiento de datos) del microcontrolador, que determinar qué conmutadores del dipswitch están activados leyendo 3 valores analógicos. Por lo tanto, se necesita una librería que sea más abstracata que la del manejo de periféricos para poder utilizar el hardware de esta aplicación en particular.\\
 Entonces, se creará una librería propia de la aplicación que constará de los siguientes módulos:
 \begin{itemize}
 	\item \textbf{Dipswitch}, que incluye la lectura de las llaves del dipswitch, y la escritura del led indicador externo.
@@ -156,7 +158,6 @@ Entonces, se creará una librería propia de la aplicación que constará de los
 	\item \textbf{Controlador}, para la implementación del sistema de control
 \end{itemize}
 
-\newpage
 \subsection{Diagrama de módulos}
 De estas 2 librerías se obtiene el diagrama de módulos presentado en la figura \ref{fig:2.4}, el cual muestra su relación, dependencia y alcance. 
 
