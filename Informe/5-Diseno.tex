@@ -138,7 +138,7 @@ Asociadas a las librerías viene de la mano el concepto de módulo, que tiene qu
 
 Entonces, para manejar los periféricos se creará una librería de bajo nivel que constará de los siguientes módulos:
 \begin{itemize}
-	\item \textbf{Entradas y salidas digitales}, para leer el estado del fin de carrera y comandar el freno y los leds indicadores interno y externo. Este módulo se llamará \textit{DigitalIO}.
+	\item \textbf{Entradas y salidas digitales}, para leer el estado del fin de carrera y comandar el freno, los leds indicadores interno y externo, y el puente H. Este módulo se llamará \textit{DigitalIO}.
 	\item \textbf{Entradas analógicas}, para leer las 3 salidas analógicas del dipswitch y poder determinar la posición de los selectores. Este módulo se llamará \textit{ADC}, por \textit{Analog to Digital Converter}.
 	\item \textbf{Interrupciones externas} por cambio de estado de un pin, para llevar cuenta de los cambios de estado de los encoders AB y así saber la posición relativa. Este módulo se llamará \textit{EXINT}, por \textit{EXternal INTerrupts}.
 	\item \textbf{PWM}, para el manejo del motor de continua. Este módulo se llamará \textit{PWM}, por \textit{Pulse Width Modulation}.
