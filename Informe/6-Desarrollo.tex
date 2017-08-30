@@ -358,9 +358,16 @@ Para acceder al módulo se implementaron 2 funciones, una de inicialización y o
 \subsubsection{Análisis}
 La idea de una UART por software (SUART) es poder establecer una comunicación serie utilizando 2 pines cualesquiera del microcontrolador, sin hardware adicional como se tiene en el periférico UART. Hay muchas formas de lograr esto, desde polling periódico hasta el uso de múltiples interrupciones para lograr la comunicación con el menor consumo de CPU posible. 
 
-Este módulo implementará la SUART haciendo uso del timer 0, que es el único que queda disponible (El 1 genera PWM y el 2 la base de tiempo). La función del timer será generar interrupciones cada cierto tiempo y verificar el estado de los pines asociados a Rx (entrada) y Tx (salida). 
+Este módulo implementará la SUART haciendo uso del timer 0, que es el único que queda disponible (el 1 genera PWM y el 2 la base de tiempo). La función del timer será generar interrupciones cada cierto tiempo y verificar el estado de los pines asociados a Rx (entrada) y Tx (salida). 
 
-Un canal serie se encuentra en High por defecto, si no se envían datos. Luego se envía el bit de start (Low), los datos, el bit de paridad si lo hay, y el/los bit de stop (High). En nuestro caso el formato de trama es 8N1 por lo que un mensaje transmitido o recibido será un bit en 0, los 8 bits de datos, y un bit en 1.Teniendo en cuenta esto, se tiene que:
+Para saber cómo implementar la lógica de lectura y escritura de datos se analiza cómo funciona la comunicación serie. En la figura \ref{fig:3.8} se muestra cómo sería la forma de la señal en un bus serie si se envía el caracter 'a' con formato 8N1. Se ve que el canal se encuentra en estado High (1) por defecto hasta que se envía el bit de stop, que siempre es un estado Low (0). Luego se envían los datos, que en el caso de la 'a' sería 01100001 en binario, empezando por el bit menos significativo (LSB) hasta el más significativo (MSB) y finalmente el bit de stop, que siempre es un estado High (1). 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=16cm,scale=1]{resources/3_8-datoSerie.png}
+	\caption{Forma de la señal en el canal para una 'p' con formato 8N1}
+	\label{fig:\thefigure}
+\end{figure}
 
 Para la salida de datos simplemente se cambia el estado del pin de Tx según el formato de la trama y del dato a enviar. Por ejemplo, si se quiere enviar una 'a', que equivale a 01100001, con una trama 8N1, se enviará 0 (bit de start), luego del bit menos al más significativo del dato (empiezo con 1, luego envío el 0.. etc) y finalmente 1 (bit de stop).
 
@@ -371,6 +378,8 @@ Para la entrada de datos lo que se hace es muestrear el canal cada cierto tiempo
 La comunicación serie tendrá las siguientes características: formato de trama 8N1 (8 bit de datos, sin paridad, 1 bit de stop) y tasa de transmisión de 9600baudios. Se elije una tasa chica ya que las interrupciones del timer ocurrirán por lo menos 2 veces más rápido que esta tasa, y con interrupciones como la de DMX que tienen una frecuencia de 250Khz los recursos deben cuidarse.
 
 \subsubsection{Implementación}
+
+Explicá lo de que probaste con baud x2, x3 y x4. x2 perdía muchos datos (de 10000 datos más del 20porc perdidos), y en x3 y x4 no se perdían datos directamente (de 10000 datos 0 perdidos). como cuanto mas alto es el multiplicador mas pesa el tiempo que tardo en entrar y salir de la interrupcion (20 ciclos, que para 16MHz es 1.25useg), se eligió x3. => frec timer = 9600*3 = 28800
 
 
 
