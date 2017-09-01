@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  29 AUG 2017 23:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  1 SEP 2017 00:16
 entering extended mode
 **./0-main.tex
 (0-main.tex
@@ -840,15 +840,15 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 \tf@toc=\write4
 \openout4 = `0-main.toc'.
 
- [5] (0-main.lof)
+ [5] (0-main.lof [6
+
+])
 \tf@lof=\write5
 \openout5 = `0-main.lof'.
 
-) [6
-
-] (4-Introduccion.tex [7]
+) (4-Introduccion.tex [7]
 Chapter 1.
-<resources/1_1-kinSculp.png, id=611, 731.73375pt x 686.565pt>
+<resources/1_1-kinSculp.png, id=613, 731.73375pt x 686.565pt>
 File: resources/1_1-kinSculp.png Graphic file (type png)
 
 <use resources/1_1-kinSculp.png>
@@ -857,28 +857,28 @@ Package pdftex.def Info: resources/1_1-kinSculp.png used on input line 13.
  [8
 
  <./resources/1_1-kinSculp.png>]
-<resources/1_2-kinSculp.png, id=622, 864.22874pt x 355.3275pt>
+<resources/1_2-kinSculp.png, id=624, 864.22874pt x 355.3275pt>
 File: resources/1_2-kinSculp.png Graphic file (type png)
 
 <use resources/1_2-kinSculp.png>
 Package pdftex.def Info: resources/1_2-kinSculp.png used on input line 28.
 (pdftex.def)             Requested size: 864.22662pt x 355.32661pt.
 
-<resources/1_3-kinSculp.png, id=625, 1444.64719pt x 417.05812pt>
+<resources/1_3-kinSculp.png, id=627, 1444.64719pt x 417.05812pt>
 File: resources/1_3-kinSculp.png Graphic file (type png)
 
 <use resources/1_3-kinSculp.png>
 Package pdftex.def Info: resources/1_3-kinSculp.png used on input line 36.
 (pdftex.def)             Requested size: 1444.64368pt x 417.0571pt.
  [9 <./resources/1_2-kinSculp.png>]
-<resources/1_4-shapeshifter.jpg, id=634, 1284.8pt x 1284.8pt>
+<resources/1_4-shapeshifter.jpg, id=636, 1284.8pt x 1284.8pt>
 File: resources/1_4-shapeshifter.jpg Graphic file (type jpg)
 
 <use resources/1_4-shapeshifter.jpg>
 Package pdftex.def Info: resources/1_4-shapeshifter.jpg used on input line 51.
 (pdftex.def)             Requested size: 1284.79688pt x 1284.79688pt.
  [10 <./resources/1_3-kinSculp.png> <./resources/1_4-shapeshifter.jpg>]
-<resources/1_5-consolaHOG.png, id=646, 246.6816pt x 180.4341pt>
+<resources/1_5-consolaHOG.png, id=648, 246.6816pt x 180.4341pt>
 File: resources/1_5-consolaHOG.png Graphic file (type png)
 
 <use resources/1_5-consolaHOG.png>
@@ -889,14 +889,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 84--85
 
  []
 
-<resources/1_6-cableDMX.jpg, id=655, 1927.2pt x 1441.385pt>
+<resources/1_6-cableDMX.jpg, id=657, 1927.2pt x 1441.385pt>
 File: resources/1_6-cableDMX.jpg Graphic file (type jpg)
 
 <use resources/1_6-cableDMX.jpg>
 Package pdftex.def Info: resources/1_6-cableDMX.jpg used on input line 88.
 (pdftex.def)             Requested size: 1927.19533pt x 1441.38148pt.
  [12 <./resources/1_6-cableDMX.jpg>]
-<resources/1_7-topologiaDMX.png, id=662, 1126.2075pt x 222.8325pt>
+<resources/1_7-topologiaDMX.png, id=664, 1126.2075pt x 222.8325pt>
 File: resources/1_7-topologiaDMX.png Graphic file (type png)
 
 <use resources/1_7-topologiaDMX.png>
@@ -912,7 +912,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 113.
 
 [13 <./resources/1_7-topologiaDMX.png>]
-<resources/1_8-tramaDMX.png, id=671, 427.5975pt x 198.7425pt>
+<resources/1_8-tramaDMX.png, id=673, 427.5975pt x 198.7425pt>
 File: resources/1_8-tramaDMX.png Graphic file (type png)
 
 <use resources/1_8-tramaDMX.png>
@@ -923,14 +923,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 160--161
 
  []
 
-<resources/1_9-updown.jpg, id=681, 2987.16pt x 971.63pt>
+<resources/1_9-updown.jpg, id=683, 2987.16pt x 971.63pt>
 File: resources/1_9-updown.jpg Graphic file (type jpg)
 
 <use resources/1_9-updown.jpg>
 Package pdftex.def Info: resources/1_9-updown.jpg used on input line 164.
 (pdftex.def)             Requested size: 2987.15274pt x 971.62764pt.
  [15 <./resources/1_9-updown.jpg>]
-<resources/1_10-diagramaBasicoUpdown.png, id=687, 648.92438pt x 308.65312pt>
+<resources/1_10-diagramaBasicoUpdown.png, id=689, 648.92438pt x 308.65312pt>
 File: resources/1_10-diagramaBasicoUpdown.png Graphic file (type png)
 
 <use resources/1_10-diagramaBasicoUpdown.png>
@@ -938,7 +938,7 @@ Package pdftex.def Info: resources/1_10-diagramaBasicoUpdown.png used on input
 line 175.
 (pdftex.def)             Requested size: 648.92279pt x 308.65236pt.
  [16 <./resources/1_10-diagramaBasicoUpdown.png>]
-<resources/1_11-diagramaSistemaMotor.png, id=693, 767.11594pt x 263.48438pt>
+<resources/1_11-diagramaSistemaMotor.png, id=695, 767.11594pt x 263.48438pt>
 File: resources/1_11-diagramaSistemaMotor.png Graphic file (type png)
 
 <use resources/1_11-diagramaSistemaMotor.png>
@@ -951,7 +951,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 207--208
  []
 
 [17 <./resources/1_11-diagramaSistemaMotor.png>]
-<resources/1_12-diagramaPlacaControl.png, id=699, 745.28438pt x 412.54124pt>
+<resources/1_12-diagramaPlacaControl.png, id=701, 745.28438pt x 412.54124pt>
 File: resources/1_12-diagramaPlacaControl.png Graphic file (type png)
 
 <use resources/1_12-diagramaPlacaControl.png>
@@ -982,7 +982,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 41--42
 
  []
 
-<resources/2_1-diagramaControlador.png, id=722, 770.88pt x 332.74312pt>
+<resources/2_1-diagramaControlador.png, id=724, 770.88pt x 332.74312pt>
 File: resources/2_1-diagramaControlador.png Graphic file (type png)
 
 <use resources/2_1-diagramaControlador.png>
@@ -994,7 +994,7 @@ Overfull \hbox (5.23872pt too wide) in paragraph at lines 45--46
  [][] 
  []
 
-[22] <resources/2_2-modeloMecPlanta.png, id=728, 146.04562pt x 243.91125pt>
+[22] <resources/2_2-modeloMecPlanta.png, id=730, 146.04562pt x 243.91125pt>
 File: resources/2_2-modeloMecPlanta.png Graphic file (type png)
 
 <use resources/2_2-modeloMecPlanta.png>
@@ -1011,14 +1011,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
  []
 
-[25] [26] <resources/2_3-dipswitch.png, id=750, 287.57437pt x 146.79843pt>
+[25] [26] <resources/2_3-dipswitch.png, id=752, 287.57437pt x 146.79843pt>
 File: resources/2_3-dipswitch.png Graphic file (type png)
 
 <use resources/2_3-dipswitch.png>
 Package pdftex.def Info: resources/2_3-dipswitch.png used on input line 114.
 (pdftex.def)             Requested size: 287.57367pt x 146.79807pt.
  [27 <./resources/2_3-dipswitch.png>] [28]
-[29] <resources/2_4-diagramaDeModulos.png, id=769, 576.65437pt x 439.6425pt>
+[29] <resources/2_4-diagramaDeModulos.png, id=771, 576.65437pt x 439.6425pt>
 File: resources/2_4-diagramaDeModulos.png Graphic file (type png)
 
 <use resources/2_4-diagramaDeModulos.png>
@@ -1046,7 +1046,7 @@ File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
  [32]
-<resources/3_1-moduloDigitalIO.png, id=815, 219.06844pt x 186.6975pt>
+<resources/3_1-moduloDigitalIO.png, id=817, 219.06844pt x 186.6975pt>
 File: resources/3_1-moduloDigitalIO.png Graphic file (type png)
 
 <use resources/3_1-moduloDigitalIO.png>
@@ -1054,14 +1054,14 @@ Package pdftex.def Info: resources/3_1-moduloDigitalIO.png used on input line 8
 2.
 (pdftex.def)             Requested size: 219.06789pt x 186.69704pt.
  [33 <./resources/3_1-moduloDigitalIO.png>] <resources/3_2-moduloADC.png, id=83
-1, 219.82124pt x 109.91063pt>
+3, 219.82124pt x 109.91063pt>
 File: resources/3_2-moduloADC.png Graphic file (type png)
 
 <use resources/3_2-moduloADC.png>
 Package pdftex.def Info: resources/3_2-moduloADC.png used on input line 143.
 (pdftex.def)             Requested size: 219.8207pt x 109.91034pt.
  [34]
-<resources/3_3-generacionPWM.png, id=860, 382.42876pt x 210.7875pt>
+<resources/3_3-generacionPWM.png, id=862, 382.42876pt x 210.7875pt>
 File: resources/3_3-generacionPWM.png Graphic file (type png)
 
 <use resources/3_3-generacionPWM.png>
@@ -1070,7 +1070,7 @@ Package pdftex.def Info: resources/3_3-generacionPWM.png used on input line 165
 (pdftex.def)             Requested size: 382.42781pt x 210.78699pt.
  [35 <./resources/3_2-moduloADC.png>]
 [36 <./resources/3_3-generacionPWM.png>]
-<resources/3_4-moduloPWM.png, id=889, 227.34938pt x 108.405pt>
+<resources/3_4-moduloPWM.png, id=891, 227.34938pt x 108.405pt>
 File: resources/3_4-moduloPWM.png Graphic file (type png)
 
 <use resources/3_4-moduloPWM.png>
@@ -1082,7 +1082,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 231--233
  []
 
 [37 <./resources/3_4-moduloPWM.png>]
-<resources/3_5-moduloEXINT.png, id=910, 293.59688pt x 111.41624pt>
+<resources/3_5-moduloEXINT.png, id=912, 293.59688pt x 111.41624pt>
 File: resources/3_5-moduloEXINT.png Graphic file (type png)
 
 <use resources/3_5-moduloEXINT.png>
@@ -1093,40 +1093,51 @@ Package pdftex.def Info: resources/3_5-moduloEXINT.png used on input line 247.
 LaTeX Warning: Reference `eq:3,2' on page 38 undefined on input line 258.
 
 [38 <./resources/3_5-moduloEXINT.png>] [39]
-<resources/3_6-moduloUART.png, id=944, 292.84406pt x 109.91063pt>
+<resources/3_6-moduloUART.png, id=946, 292.84406pt x 109.91063pt>
 File: resources/3_6-moduloUART.png Graphic file (type png)
 
 <use resources/3_6-moduloUART.png>
 Package pdftex.def Info: resources/3_6-moduloUART.png used on input line 308.
 (pdftex.def)             Requested size: 292.84334pt x 109.91034pt.
  [40 <./resources/3_6-moduloUART.png>]
-<resources/3_7-moduloTick.png, id=959, 289.08pt x 109.1578pt>
+<resources/3_7-moduloTick.png, id=961, 289.08pt x 109.1578pt>
 File: resources/3_7-moduloTick.png Graphic file (type png)
 
 <use resources/3_7-moduloTick.png>
 Package pdftex.def Info: resources/3_7-moduloTick.png used on input line 351.
 (pdftex.def)             Requested size: 289.07928pt x 109.15753pt.
  [41 <./resources/3_7-moduloTick.png>]
-<resources/3_8-datoSerie.png, id=978, 536.75531pt x 114.4275pt>
+Underfull \hbox (badness 10000) in paragraph at lines 363--365
+
+ []
+
+<resources/3_8-datoSerie.png, id=980, 536.75531pt x 114.4275pt>
 File: resources/3_8-datoSerie.png Graphic file (type png)
 
 <use resources/3_8-datoSerie.png>
-Package pdftex.def Info: resources/3_8-datoSerie.png used on input line 367.
+Package pdftex.def Info: resources/3_8-datoSerie.png used on input line 368.
 (pdftex.def)             Requested size: 536.75398pt x 114.42722pt.
 
-Overfull \hbox (5.24495pt too wide) in paragraph at lines 367--368
+Overfull \hbox (5.24495pt too wide) in paragraph at lines 368--369
  [][] 
  []
 
-[42 <./resources/3_8-datoSerie.png>] [43]) (7-Implementacion.tex [44]
+[42 <./resources/3_8-datoSerie.png>]
+<resources/3_9-moduloSUART.png, id=988, 289.08pt x 107.65219pt>
+File: resources/3_9-moduloSUART.png Graphic file (type png)
+
+<use resources/3_9-moduloSUART.png>
+Package pdftex.def Info: resources/3_9-moduloSUART.png used on input line 390.
+(pdftex.def)             Requested size: 289.07928pt x 107.65192pt.
+ [43] [44 <./resources/3_9-moduloSUART.png>]) (7-Implementacion.tex [45]
 Chapter 4.
-) (8-Conclusiones.tex [45
+) (8-Conclusiones.tex [46
 
 ]
 Chapter 5.
 ) 
 AED: lastpage setting LastPage
-[46
+[47
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 231.
@@ -1143,10 +1154,10 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 231.
  ) 
 Here is how much of TeX's memory you used:
- 9991 strings out of 493323
- 141401 string characters out of 3130015
- 342898 words of memory out of 3000000
- 13054 multiletter control sequences out of 15000+200000
+ 9999 strings out of 493323
+ 141581 string characters out of 3130015
+ 342951 words of memory out of 3000000
+ 13059 multiletter control sequences out of 15000+200000
  16471 words of font info for 40 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  32i,13n,58p,842b,1897s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1168,9 +1179,9 @@ rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ian_m/App
 Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/User
 s/ian_m/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb>
-Output written on 0-main.pdf (47 pages, 7394229 bytes).
+Output written on 0-main.pdf (48 pages, 7398348 bytes).
 PDF statistics:
- 1568 PDF objects out of 1728 (max. 8388607)
- 306 named destinations out of 1000 (max. 500000)
- 942 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1576 PDF objects out of 1728 (max. 8388607)
+ 308 named destinations out of 1000 (max. 500000)
+ 947 words of extra memory for PDF output out of 10000 (max. 10000000)
 

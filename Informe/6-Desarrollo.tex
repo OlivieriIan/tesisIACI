@@ -360,7 +360,8 @@ La idea de una UART por software (SUART) es poder establecer una comunicación s
 
 Este módulo implementará la SUART haciendo uso del timer 0, que es el único que queda disponible (el 1 genera PWM y el 2 la base de tiempo). La función del timer será generar interrupciones cada cierto tiempo y verificar el estado de los pines asociados a Rx (entrada) y Tx (salida). 
 
-Para saber cómo implementar la lógica de lectura y escritura de datos se analiza cómo funciona la comunicación serie. En la figura \ref{fig:3.8} se muestra cómo sería la forma de la señal en un bus serie si se envía el caracter 'a' con formato 8N1. Se ve que el canal se encuentra en estado High (1) por defecto hasta que se envía el bit de stop, que siempre es un estado Low (0). Luego se envían los datos, que en el caso de la 'a' sería 01100001 en binario, empezando por el bit menos significativo (LSB) hasta el más significativo (MSB) y finalmente el bit de stop, que siempre es un estado High (1). 
+Para saber cómo implementar la lógica de lectura y escritura de datos se analiza la forma de la señal en un bus serie. Un ejemplo puede ser la señal del caracter 'a' con formato 8N1, como se ve en la figura  \ref{fig:3.8} . \\
+Durante una comunicación serie el canal se encuentra en estado High (1) por defecto, hasta que se envía el bit de stop, que siempre es un estado Low (0). Luego se envían los datos, que en el caso de la 'a' sería 01100001 en binario, empezando por el bit menos significativo (LSB) hasta el más significativo (MSB), y finalmente el bit de stop, que siempre es un estado High (1). \\
 
 \begin{figure}[!ht]
 	\centering
@@ -369,21 +370,27 @@ Para saber cómo implementar la lógica de lectura y escritura de datos se anali
 	\label{fig:\thefigure}
 \end{figure}
 
-Para la salida de datos simplemente se cambia el estado del pin de Tx según el formato de la trama y del dato a enviar. Por ejemplo, si se quiere enviar una 'a', que equivale a 01100001, con una trama 8N1, se enviará 0 (bit de start), luego del bit menos al más significativo del dato (empiezo con 1, luego envío el 0.. etc) y finalmente 1 (bit de stop).
 
-Para la entrada de datos lo que se hace es muestrear el canal cada cierto tiempo e ir reconstruyendo el dato. Por defecto el canal se encuentra en 1, por lo que empiezo a guardar bits cuando un 0 es recibido. Luego verifico que después del dato esté el bit de stop (si no hay paridad).
+En base a esto, para el envío de datos simplemente se cambia el estado del pin de Tx según el formato de la trama y del dato a enviar. Por ejemplo, si se quiere enviar una 'a', que equivale a 01100001, con una trama 8N1, se enviará 0 (bit de start), luego del bit menos al más significativo del dato (empiezo con 1, luego envío el 0.. etc) y finalmente 1 (bit de stop). Cada cambio de estado debe ocurrir a la tasa de símbolos (baudrate) deseada.
 
-\textcolor{FIXME}{FALTA DESARROLLAR Y REESTRUCTURAR BIEN TODO. TAMBIéN TENES QUE HACER UN DIAGRAMA DE FLUJO PARA TX Y PARA RX}
-
-La comunicación serie tendrá las siguientes características: formato de trama 8N1 (8 bit de datos, sin paridad, 1 bit de stop) y tasa de transmisión de 9600baudios. Se elije una tasa chica ya que las interrupciones del timer ocurrirán por lo menos 2 veces más rápido que esta tasa, y con interrupciones como la de DMX que tienen una frecuencia de 250Khz los recursos deben cuidarse.
+En cuanto a la entrada de datos lo que se hace es muestrear el pin de Rx cada cierto tiempo e ir reconstruyendo el dato. Este muestreo es conveniente realizarlo a la mitad del tiempo de bit, debido a que se podrían llegar a detectar datos inválidos si la interrupción no se llega a ejecutar a tiempo.\\
+Por defecto el canal se encuentra en 1, por lo que lo muestreo hasta detectar el bit de start (0). Luego de detectado este bit se suele volver a verificar el canal para asegurarse que sea un bit de start y no un error en la línea, error comunmente conocido como \textit{line glitch}. Luego de verificar que no hubo un error se muestrea el canal a la tasa de símbolos, y una vez recopilados los 8 bits de datos, se verifica que el último bit sea el de stop (1).
 
 \subsubsection{Implementación}
 
-Explicá lo de que probaste con baud x2, x3 y x4. x2 perdía muchos datos (de 10000 datos más del 20porc perdidos), y en x3 y x4 no se perdían datos directamente (de 10000 datos 0 perdidos). como cuanto mas alto es el multiplicador mas pesa el tiempo que tardo en entrar y salir de la interrupcion (20 ciclos, que para 16MHz es 1.25useg), se eligió x3. => frec timer = 9600*3 = 28800
+La comunicación serie tendrá las siguientes características: formato de trama 8N1 (8 bit de datos, sin paridad, 1 bit de stop) y tasa de símbolos de 9600baudios. Se elije una tasa chica ya que las interrupciones del timer ocurrirán por lo menos 2 veces más rápido que esta tasa, y con interrupciones como la de DMX que tienen una frecuencia de 250Khz los recursos deben cuidarse.\\
+Para la transmisión la tasa podría ser simplemente 9600 baudios, pero para la recepción se necesita una tasa de por lo menos el doble ya que se debe muestrear entre bits para detectar y evitar errores. Por lo tanto, se probó duplicando, triplicando y cuadruplicando la velocidad de muestreo. \\
+Para decidir cuál es la tasa óptima se probó enviandole a la placa de control por puerto serie el caracter 'a' y replicando lo recibido hacia el transmisor. Para 10000 datos enviados los resultados fueron que con la tasa duplicada hubo una alta cantidad de información mal recibida, mientras que para la triplicada y cuadruplicada se recibieron 0 datos erroneos. \\
+Para decidir qué multiplicador utilizar se evaluó que el Atmega328p consumen 20 ciclos de clock solo para entrar en y salir de la interrupción, que equivale a 1.25\(\mu\)s para una frecuencia de cpu de 16MHz. 9600 triplicado y cuadruplicado es 28800 y 38400, que equivalen a una interrupción cada 34\(\mu\)s y 26\(\mu\)s, respectivamente. O sea que cuanto mayor es el multiplicador más pesan los 20 ciclos comparativamente. Por lo tanto, como para ambos multiplicadores la cantidad de datos incorrectos recibidos es 0 de 10000, se eligió el multiplicador más chico, quedando la tasa de símbolos en 28800 baudios.
 
+Para acceder al módulo se implementaron 3 funciones, una de inicialización, otra de lectura y otra de lectura, como se muestra en la figura \ref{fig:3.9}. En la función de inicialización se indican los pines a utilizar como Rx y Tx, ya que la premisa es que estos pueden ser pines digitales cualesquiera.
 
-
-
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=8cm,scale=1]{resources/3_9-moduloSUART.png}
+	\caption{Diagrama del módulo SUART}
+	\label{fig:\thefigure}
+\end{figure}
 
 \subsection{Diagrama de módulos de la librería de bajo nivel}
 

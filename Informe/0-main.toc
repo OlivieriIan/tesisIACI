@@ -81,22 +81,22 @@
 \contentsline {subsection}{\numberline {3.2.7}SUART}{42}{subsection.3.2.7}
 \contentsline {subsubsection}{\numberline {3.2.7.1}An\IeC {\'a}lisis}{42}{subsubsection.3.2.7.1}
 \contentsline {subsubsection}{\numberline {3.2.7.2}Implementaci\IeC {\'o}n}{43}{subsubsection.3.2.7.2}
-\contentsline {subsection}{\numberline {3.2.8}Diagrama de m\IeC {\'o}dulos de la librer\IeC {\'\i }a de bajo nivel}{43}{subsection.3.2.8}
-\contentsline {section}{\numberline {3.3}Controlador}{43}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{43}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Determinaci\IeC {\'o}n de la velocidad m\IeC {\'a}xima}{43}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Obtenci\IeC {\'o}n del per\IeC {\'\i }odo de muestreo}{43}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Obtenci\IeC {\'o}n del modelo de la planta}{44}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Obtenci\IeC {\'o}n del controlador}{44}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {3.3.6}Ajuste del controlador}{44}{subsection.3.3.6}
-\contentsline {section}{\numberline {3.4}Dipswitch}{44}{section.3.4}
-\contentsline {section}{\numberline {3.5}Firmware del updown - Librer\IeC {\'\i }as de alto nivel}{44}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Encoder}{44}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Diagrama de m\IeC {\'o}dulos de la librer\IeC {\'\i }a de alto nivel}{44}{subsection.3.5.2}
-\contentsline {section}{\numberline {3.6}Firmware del updown - Funci\IeC {\'o}n principal}{44}{section.3.6}
-\contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{45}{chapter.4}
-\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{45}{section.4.1}
-\contentsline {section}{\numberline {4.2}Configuraci\IeC {\'o}n de la HOG}{45}{section.4.2}
-\contentsline {section}{\numberline {4.3}Validaci\IeC {\'o}n}{45}{section.4.3}
-\contentsline {chapter}{\numberline {5}Conclusiones}{46}{chapter.5}
-\contentsline {section}{\numberline {5.1}c1}{46}{section.5.1}
+\contentsline {subsection}{\numberline {3.2.8}Diagrama de m\IeC {\'o}dulos de la librer\IeC {\'\i }a de bajo nivel}{44}{subsection.3.2.8}
+\contentsline {section}{\numberline {3.3}Controlador}{44}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{44}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Determinaci\IeC {\'o}n de la velocidad m\IeC {\'a}xima}{44}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Obtenci\IeC {\'o}n del per\IeC {\'\i }odo de muestreo}{44}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Obtenci\IeC {\'o}n del modelo de la planta}{45}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Obtenci\IeC {\'o}n del controlador}{45}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Ajuste del controlador}{45}{subsection.3.3.6}
+\contentsline {section}{\numberline {3.4}Dipswitch}{45}{section.3.4}
+\contentsline {section}{\numberline {3.5}Firmware del updown - Librer\IeC {\'\i }as de alto nivel}{45}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Encoder}{45}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Diagrama de m\IeC {\'o}dulos de la librer\IeC {\'\i }a de alto nivel}{45}{subsection.3.5.2}
+\contentsline {section}{\numberline {3.6}Firmware del updown - Funci\IeC {\'o}n principal}{45}{section.3.6}
+\contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{46}{chapter.4}
+\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{46}{section.4.1}
+\contentsline {section}{\numberline {4.2}Configuraci\IeC {\'o}n de la HOG}{46}{section.4.2}
+\contentsline {section}{\numberline {4.3}Validaci\IeC {\'o}n}{46}{section.4.3}
+\contentsline {chapter}{\numberline {5}Conclusiones}{47}{chapter.5}
+\contentsline {section}{\numberline {5.1}c1}{47}{section.5.1}
