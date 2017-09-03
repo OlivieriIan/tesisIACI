@@ -84,19 +84,25 @@
 \BOOKMARK [2][-]{subsection.3.2.8}{Diagrama de m\363dulos de la librer\355a de bajo nivel}{section.3.2}% 84
 \BOOKMARK [1][-]{section.3.3}{Controlador}{chapter.3}% 85
 \BOOKMARK [2][-]{subsection.3.3.1}{Relaci\363n entre cuentas de encoder y distancia}{section.3.3}% 86
-\BOOKMARK [2][-]{subsection.3.3.2}{Determinaci\363n de la velocidad m\341xima}{section.3.3}% 87
-\BOOKMARK [2][-]{subsection.3.3.3}{Obtenci\363n del per\355odo de muestreo}{section.3.3}% 88
-\BOOKMARK [2][-]{subsection.3.3.4}{Obtenci\363n del modelo de la planta}{section.3.3}% 89
-\BOOKMARK [2][-]{subsection.3.3.5}{Obtenci\363n del controlador}{section.3.3}% 90
-\BOOKMARK [2][-]{subsection.3.3.6}{Ajuste del controlador}{section.3.3}% 91
-\BOOKMARK [1][-]{section.3.4}{Dipswitch}{chapter.3}% 92
-\BOOKMARK [1][-]{section.3.5}{Firmware del updown - Librer\355as de alto nivel}{chapter.3}% 93
-\BOOKMARK [2][-]{subsection.3.5.1}{Encoder}{section.3.5}% 94
-\BOOKMARK [2][-]{subsection.3.5.2}{Diagrama de m\363dulos de la librer\355a de alto nivel}{section.3.5}% 95
-\BOOKMARK [1][-]{section.3.6}{Firmware del updown - Funci\363n principal}{chapter.3}% 96
-\BOOKMARK [0][-]{chapter.4}{Implementaci\363n}{}% 97
-\BOOKMARK [1][-]{section.4.1}{Descripci\363n del cap\355tulo}{chapter.4}% 98
-\BOOKMARK [1][-]{section.4.2}{Configuraci\363n de la HOG}{chapter.4}% 99
-\BOOKMARK [1][-]{section.4.3}{Validaci\363n}{chapter.4}% 100
-\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 101
-\BOOKMARK [1][-]{section.5.1}{c1}{chapter.5}% 102
+\BOOKMARK [3][-]{subsubsection.3.3.1.1}{Pruebas y resultados}{subsection.3.3.1}% 87
+\BOOKMARK [3][-]{subsubsection.3.3.1.2}{Selecci\363n de la funci\363n de ajuste}{subsection.3.3.1}% 88
+\BOOKMARK [2][-]{subsection.3.3.2}{Determinaci\363n de la velocidad m\341xima}{section.3.3}% 89
+\BOOKMARK [2][-]{subsection.3.3.3}{Obtenci\363n del per\355odo de muestreo}{section.3.3}% 90
+\BOOKMARK [2][-]{subsection.3.3.4}{Obtenci\363n del modelo de la planta}{section.3.3}% 91
+\BOOKMARK [3][-]{subsubsection.3.3.4.1}{Toma de muestras}{subsection.3.3.4}% 92
+\BOOKMARK [3][-]{subsubsection.3.3.4.2}{Modelos propuestos}{subsection.3.3.4}% 93
+\BOOKMARK [3][-]{subsubsection.3.3.4.3}{Determinaci\363n de par\341metros}{subsection.3.3.4}% 94
+\BOOKMARK [3][-]{subsubsection.3.3.4.4}{Validaci\363n de los modelos}{subsection.3.3.4}% 95
+\BOOKMARK [2][-]{subsection.3.3.5}{Obtenci\363n del controlador}{section.3.3}% 96
+\BOOKMARK [2][-]{subsection.3.3.6}{Ajuste del controlador}{section.3.3}% 97
+\BOOKMARK [1][-]{section.3.4}{Dipswitch}{chapter.3}% 98
+\BOOKMARK [1][-]{section.3.5}{Firmware del updown - Librer\355as de alto nivel}{chapter.3}% 99
+\BOOKMARK [2][-]{subsection.3.5.1}{Encoder}{section.3.5}% 100
+\BOOKMARK [2][-]{subsection.3.5.2}{Diagrama de m\363dulos de la librer\355a de alto nivel}{section.3.5}% 101
+\BOOKMARK [1][-]{section.3.6}{Firmware del updown - Funci\363n principal}{chapter.3}% 102
+\BOOKMARK [0][-]{chapter.4}{Implementaci\363n}{}% 103
+\BOOKMARK [1][-]{section.4.1}{Descripci\363n del cap\355tulo}{chapter.4}% 104
+\BOOKMARK [1][-]{section.4.2}{Configuraci\363n de la HOG}{chapter.4}% 105
+\BOOKMARK [1][-]{section.4.3}{Validaci\363n}{chapter.4}% 106
+\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 107
+\BOOKMARK [1][-]{section.5.1}{c1}{chapter.5}% 108

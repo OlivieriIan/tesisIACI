@@ -45,6 +45,7 @@ Ahora, conocer el bit, puerto y nombres de los registros para cada pin a configu
 	\begin{center}
 		\begin{tabular}{|c|c|c|}
 			\hline
+			\rowcolor{OODlightblue}
 			\textbf{Puerto} & \textbf{Bit} & \textbf{Numero mapeado} \\
 			\hline \hline
 			D & 0, 1, 2, 3, 4, 5, 6, 7 & 0, 1, 2, 3, 4, 5, 6, 7 \\
@@ -398,14 +399,238 @@ Para acceder al módulo se implementaron 3 funciones, una de inicialización, ot
 \section{Controlador} \label{sec:\thesection}
 
 \subsection{Relación entre cuentas de encoder y distancia}
-Como se mencionó en la sección \ref{sec:2.3}, subsección 3, 
+\subsubsection{Pruebas y resultados}
+Como se mencionó en la sección \ref{sec:2.3}, subsección 3, la distancia lineal recorrida por la carga varía según cuán enrollado está el cable en el carrete. 
+
+Para determinar la relación entre ambos se marcó el cable que sostiene la carga cada 25cm, tomando como 0 el cable completamente enrollado. Luego, a medida que se desenrrollaba el cable se midió el valor de la cuenta de encoder del motor. Los resultados obtenidos se pueden encontrar en la tabla \ref{table:3.2}.
+
+\begin{table}[!ht]
+	\begin{center}
+		%\rowcolors{green}
+		\rowcolors{1}{OODlightblue}{white}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Distancia [cm] & 0 & 25 & 50 & 75 & 100 & 125 & 150 & 175 & 200  \\
+			\hline
+			Encoder & 0 & 1130 & 2250 & 3430 & 4630 & 5830 & 7130 & 8400 & 9730 \\
+			\hline \hline
+			Distancia [cm]  & 225 & 250 & 275 & 300 & 325 & 350 & 375 & 400 & \\
+			\hline
+			Encoder  & 11120 & 12530 & 14020 & 15530 & 17130 & 18770 & 20520 & 22330 & \\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Relación entre cuentas del encoder motor y distancia}
+	\label{table:\thetable}
+\end{table}
+
+\subsubsection{Selección de la función de ajuste}
+De la figura \ref{fig:3.10} se puede ver que la relación entre cuentas de encoder y distancia puede ser ajustada con un polinomio de grado 2 (función cuadrática). En dicha figura la función de ajuste cuadrática es \(cuentaEncoder = f(distancia) = 0.0356*dist^2 + 41.0180*dist + 101.2797\)\\.     
+El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisones. En la siguiente \href{http://www.atmel.com/Images/doc0936.pdf}{nota de aplicación de ATMEL} se puede ver que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_10-ajusteCuadratico.png}
+	\caption{Ajuste mediante función cuadrática}
+	\label{fig:\thefigure}
+\end{figure}
+
+La siguiente opción más simple es realizar la conversión mediante polinomios de grado 1. En este caso el costo computacional es mucho más bajo ya que la conversión implica únicamente la multiplicación con un escalar \\
+Los casos extremos serían hacer el ajuste mediante una única recta, como se ve en la figura \ref{fig:3.11}, o una recta cada 25cm, como se ve en la figura \ref{fig:3.12}. En el primer caso el error es muy alto al ser la aproximación muy grosera, y en el segundo se tiene que se ajustan tanto los datos que también se está ajustando el ruido. \\
+
+Una solución intermedia es ajustar los datos con una recta por cada 100cm (1 metro), como se ve en la figura \ref{fig:3.13}. Esta trae como ventaja: error comparable con el del ajuste cuadrático, bajo costo computacional, solo se necesitan 4 mediciónes por equipo (una por metro). Por estos motivos, \textbf{el ajuste de distancia a cuentas de encoder se realizará con 4 rectas}, una por metro.
+
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_11-ajusteRectasUnica.png}
+	\caption{Ajuste mediante una única recta}
+	\label{fig:\thefigure}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_12-ajusteRectas25cm.png}
+	\caption{Ajuste mediante una recta cada 25cm}
+	\label{fig:\thefigure}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_13-ajusteRectas100cm.png}
+	\caption{Ajuste mediante una recta cada 100cm}
+	\label{fig:\thefigure}
+\end{figure}
+
+\textcolor{FIXME}{Nota: todos los gráficos fueron obtenidos utilizando el script de Matlab \textit{relacionEncoderDistancia.m}, adjuntado con este informe.}
 
 \subsection{Determinación de la velocidad máxima}
+El método utilizado para determinar la velocidad máxima a la que el equipo puede funcionar es hacer subir la carga inyectándole al driver del  motor un PWM de ciclo de trabajo de 100\%. Es necesario que la prueba sea en subida y no en bajada ya que la máxima velocidad posible debe ser igual en ambos casos, y en bajada seguro necesito menos fuerza para alcanzar la máxima velocidad en subida, por lo que la limitante es la segunda. \\
+Luego, se mide cada cierto tiempo, que en este caso será de 50ms, cuantas cuentas del encoder del motor se tienen, y se calcula la velocidad como \(velocidad = \Delta posicion/\Delta tiempo \).
+
+Del experimento se obtuvo que cada 50ms se tienen 100cuentas, por lo que la velocidad máxima es \(vel = 2cuentas/ms\).
 
 \subsection{Obtención del período de muestreo}
-Como se mencionó en la sección \ref{sec:2.3}, subsección 3, 
+Para poder diseñar los controladores de posición y velocidad el primer paso es determinar el período de muestreo. \\
+Para esto se realizaron varias pruebas tomando como 0 de posición 2000 cuentas de encoder (aproximadamente 50cm según la tabla \ref{table:3.2}): 2 pruebas en bajada, en donde las cuentas aumentan ya que el positivo se define para abajo, y 2 pruebas en subida. La fuerza aplicada al motor es de 15 y 33\% del máximo de fuerza posible en bajada, y de 66 y 100\% en subida.
+
+
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_14-respuestaEnBajada.png}
+	\caption{Respuestas del sistema en bajada}
+	\label{fig:\thefigure}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_15-respuestaEnSubida.png}
+	\caption{Respuestas del sistema en subida}
+	\label{fig:\thefigure}
+\end{figure}
+
+Los resultados de estas pruebas se pueden ver en las figuras \ref{fig:3.14} y \ref{fig:3.15}. Allí se ve que durante la bajada la salida se estabiliza a los 250ms, mientras que para la subida lo hace a los 50ms. Esto genera un problema, ya que el período de muestreo suele tomarse de 5 a 10 veces más rápido que el tiempo de establecimiento del sistema, y aquí tenemos 2 tiempos distintos. \\
+
+Como la solución no es directa se probarán distintos períodos de muestreo durante la caracterización de la planta y diseño del controlador para determinar cuál es el indicado.
+
+\textcolor{FIXME}{Nota: todos los gráficos fueron obtenidos utilizando el script de Matlab \textit{graficos1entrada.m}, adjuntado con este informe.}
 
 \subsection{Obtención del modelo de la planta}
+\subsubsection{Toma de muestras}
+El modelo de la planta a obtener tiene que ser tal que su salida sea de velocidad para poder diseñar el lazo de control interno de velocidad del modelo propuesto en la figura \ref{fig:2.1}.\\
+Para obtener este modelo se le inyecta al equipo la entrada mostrada en la figura \ref{fig:3.16}, en donde la fuerza es positiva cuando el motor hace bajar la carga y negativa cuando la hace subir.\\
+De esta entrada se midió la velocidad de salida en 2 pruebas separadas con el fin de obtener un set de datos para identificación y otro para validación. Estas respuestas se muestran en la figura \ref{fig:3.17}.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=16cm,scale=1]{resources/3_16-entradaIdentPlanta.png}
+	\caption{Entrada del sistema para la identificación de parámetros}
+	\label{fig:\thefigure}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_17-respuestaIdentPlanta.png}
+	\caption{Salida de velocidad del sistema}
+	\label{fig:\thefigure}
+\end{figure}
+
+\subsubsection{Modelos propuestos}
+Para realizar la identificación de la planta se propusieron 12 modelos discretos de la forma \(v(k) = \theta . \phi(k)^T \):
+
+\begin{itemize}
+	\item Modelo 1: \( y(k) = -a1*y(k-1) + b1*u(k-1) = [-a1,b1] * [y(k-1),u(k-1)]^T = \theta . \phi(k)^T\)
+	\item Modelo 2: \( y(k) = -a1*y(k-1) + b1*u(k-1) + c \)
+	\item Modelo 3: \( y(k) = -a1*y(k-1) - a2*y(k-2) + b1*u(k-1) \)
+	\item Modelo 4: \( y(k) = -a1*y(k-1) - a2*y(k-2) + b1*u(k-1) + c \)
+	\item Modelo 5: \( y(k) = -a1*y(k-1) - a2*y(k-2) + b1*u(k-1) + b2*u(k-2) \)
+	\item Modelo 6: \( y(k) = -a1*y(k-1) - a2*y(k-2) + b1*u(k-1) + b2*u(k-2) + c \)
+	\item Modelo 7: \( y(k) = -a1*y(k-1) - a2*y(k-2) - a3*y(k-3) + b1*u(k-1) \)
+	\item Modelo 8: \( y(k) = -a1*y(k-1) - a2*y(k-2) - a3*y(k-3) + b1*u(k-1) + c \)
+	\item Modelo 9: \( y(k) = -a1*y(k-1) - a2*y(k-2) - a3*y(k-3) + b1*u(k-1) + b2*u(k-2) \)
+	\item Modelo 10: \( y(k) = -a1*y(k-1) - a2*y(k-2) - a3*y(k-3) + b1*u(k-1) + b2*u(k-2) + c \)
+	\item Modelo 11: \( y(k) = -a1*y(k-1) - a2*y(k-2) - a3*y(k-3) + b1*u(k-1) + b2*u(k-2) + b3*u(k-3) \)
+	\item Modelo 12: \( y(k) = -a1*y(k-1) - a2*y(k-2) - a3*y(k-3) + b1*u(k-1) + b2*u(k-2) + b3*u(k-3) + c \)
+\end{itemize}
+
+
+
+\subsubsection{Determinación de parámetros}
+La forma de determinar los parámetros es mediante un método de estimación de tipo offline basado en el principio de mínimos cuadrados tal que minimiza el funcional de error cuadrático \(J = (\|\varepsilon\|^2) \). La solución al problema de mínimos cuadrados que minimiza el funcional J es la ecuación \ref{eq:3.4}, en donde V y \(\Phi\) se construyen con las v(k) y \(\phi(k)\) de los modelos discretos propuestos. 
+
+\begin{equation} \label{eq:\theequation}
+\hat{\theta} = (\Phi^T \Phi)^{-1}.\Phi^T.V
+\end{equation}
+
+\[ V = [v(1),v(2),...,v(cantMuestras)]^T \]
+
+\[ \Phi = [\phi(1),\phi(2),...,\phi(cantMuestras)]^T \]
+
+Con esta ecuación se obtuvieron los siguientes resultados de la tabla \ref{table:3.3}
+
+\begin{table}[!ht]
+	\begin{center}
+		%\rowcolors{green}
+		
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{OODlightblue}
+			Modelo & a1 & a2 & a3 & b1 & b2 & b3 & c   \\
+			\hline \hline
+			1 & -0.9383 & 0 & 0 & 0.0028 & 0 & 0 & 0 \\
+			\hline
+			2 & -0.9183 & 0 & 0 & 0.0039 & 0 & 0 & 0.1643 \\
+			\hline
+			3 & -0.7233 & -0.2289 & 0 & 0.0021 & 0 & 0 & 0 \\
+			\hline
+			4 & -0.6938 & -0.2399 & 0 & 0.0032 & 0 & 0 & 0.1376 \\
+			\hline
+			5 & -0.6540 & -0.2980 & 0 & 0.0118 & -0.0094 & 0 & 0 \\
+			\hline
+			6 & -0.6201 & -0.3115 & 0 & 0.0120 & -0.0085 & 0 & 0.1520 \\
+			\hline
+			7 & -0.8079 & -0.3914 & 0.2296 & 0.0011 & 0 & 0 & 0 \\
+			\hline
+			8 & -0.7946 & -0.3851 & 0.2207 & 0.0017 & 0 & 0 & 0.0751 \\
+			\hline
+			9 & -0.7257 & -0.4101 & 0.1701 & 0.0069 & -0.0055 & 0 & 0 \\
+			\hline
+			10 & -0.7038 & -0.4031 & 0.1551 & 0.0073 & -0.0051 & 0 & 0.0964 \\
+			\hline
+			11 & -0.6485 & -0.4890 & 0.1710 & 0.0122 & -0.0043 & -0.0062 & 0 \\
+			\hline
+			12 & -0.6230 & -0.4819 & 0.1541 & 0.0123 & -0.0040 & -0.0057 & 0.1090 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Parámetros obtenidos para los 12 modelos propuestos}
+	\label{table:\thetable}
+\end{table}
+
+
+\subsubsection{Validación de los modelos}
+Para validar los modelos se utiliza el set de datos de validación (figura \ref{fig:3.17}). Simplemente se calcula iterando la salida del sistema utilizando los parámetros encontrados y se contrastan los resultados con este set de datos. Para medir el grado de relación entre los datos obtenidos con los modelos propuestos y los de validación se calculor el error RMSE para cada caso, resultados que se pueden ver en la tabla \ref{table:3.4}.
+
+\begin{table}[!ht]
+	\begin{center}
+		%\rowcolors{green}
+		
+		\begin{tabular}{|c|c|}
+			\hline
+			\rowcolor{OODlightblue}
+			Modelo & Error RMSE   \\
+			\hline \hline
+			1 & 3.6939 \\
+			\hline
+			2 & 2.945 \\
+			\hline
+			3 & 4.2602  \\
+			\hline
+			4 & 3.452  \\
+			\hline
+			5 & 4.0055 \\
+			\hline
+			6 & 3.1642 \\
+			\hline
+			7 & 4.461 \\
+			\hline
+			8 & 3.8115 \\
+			\hline
+			9 & 4.1403 \\
+			\hline
+			10 & 3.4381 \\
+			\hline
+			11 & 3.8415 \\
+			\hline
+			12 & 3.084 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Error RMSE para los 12 modelos propuestos}
+	\label{table:\thetable}
+\end{table}
+
 
 \subsection{Obtención del controlador}
 

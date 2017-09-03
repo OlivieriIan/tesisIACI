@@ -20,6 +20,7 @@ Como el objetivo es hacer que el sistema sea lo más confiable posible, y tenien
 	\begin{center}
 		\begin{tabular}{|c|l|l|}
 			\hline
+			\rowcolor{OODlightblue}
 			\textbf{} & \textbf{Arduino} & \textbf{Propia} \\
 			\hline \hline
 			Pros & - Listas para usar & - Bajo uso de recursos \\
@@ -38,7 +39,7 @@ Como el objetivo es hacer que el sistema sea lo más confiable posible, y tenien
 
 \section{REQ-02} \label{sec:\thesection}
 \subsection{Esquema de control}
-Para cumplir con este requerimiento la carga se debe mover en respuesta a una referencia de posición y otra de velocidad indicadas por una consola DMX. Para esto se utilizará el esquema de control mostrado en la figura \ref{fig:2.1}, siendo: p la posición, v la velocidad,  Cp el controlador de posición, Cv el de velocidad, \(\varepsilon\)p y \(\varepsilon\)v los errores de posición y velocidad, u la acción de control, G la planta, y rp\_dmx y rv\_dmx las referencias de posición y velocidad dadas por la consola DMX.   \\
+Para cumplir con este requerimiento la carga se debe mover en respuesta a una referencia de posición y otra de velocidad indicadas por una consola DMX. Para esto se utilizará el esquema de control mostrado en la figura \ref{fig:2.1}, siendo: p la posición, v la velocidad,  Cp el controlador de posición, Cv el de velocidad, \(\varepsilon\)p y \(\varepsilon\)v los errores de posición y velocidad, u la acción de control, G la planta, y rp\_dmx y rv\_dmx las referencias de posición y velocidad dadas por la consola DMX.
 
 \begin{figure}[!ht]
 	\centering
@@ -70,9 +71,8 @@ Luego se diseñarán los controladores de posición y velocidad en base al model
 Finlamente se validarán los controladores hayados haciendo pruebas directamente sobre el updown.
 
 \subsection{Relación entre cuentas de encoder y distancia}
-A medida que el motor gira desenrrolla el cable para subir o bajar la carga. El problema es que dependiendo cuán enrrollada está el cable en el disco un mismo número de cuentas de encoder se puede traducir en distintas distancias recorridas por la carga. Por ejemplo, si el cable está completamente enrollada el radio es mayor, por lo que si giro 360 grados el carrete el largo desenrrollado será uno, mientras que si el cable se encuentra parcialmente desenrrollada el radio es menor, por lo que la distancia descendida en un giro de 360 grados del carrete será otra (menor que la anterior).\\
-
-Para determinar esta relación se harán marcas cada un metro en el cable, tomando como 0 cuando esta está completamente enrrollada, y para cada una se anotará el valor del encoder del motor, que es el que más resolución tiene. Con estos datos se construirá una tabla, se encontrarán varios polinomios que fitteen los datos y se determinará cuál de ellos es el que se implementará en software.
+A medida que el motor gira desenrrolla el cable para subir o bajar la carga. El problema es que dependiendo cuán enrrollada está el cable en el disco un mismo número de cuentas de encoder se puede traducir en distintas distancias recorridas por la carga. Por ejemplo, si el cable está completamente enrollada cuando se gira 360 grados el carrete el largo desenrrollado será uno, mientras que si el cable se encuentra parcialmente desenrrollada la distancia descendida en un giro de 360 grados del carrete será menor que la anterior.\\
+Para determinar esta relación se harán marcas sobre en el cable y para cada una se anotará el valor de cuentas del encoder del motor, que es el que más resolución tiene. Con estos datos se construirá una tabla, se encontrarán varios polinomios que ajusten los datos y se determinará cuál de ellos es el que se implementará en software.
 
 \subsection{Velocidad máxima}
 Una tarea a resolver es determinar cuál es la velocidad máxima posible para una carga determinada.\\
