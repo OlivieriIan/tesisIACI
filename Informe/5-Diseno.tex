@@ -50,6 +50,8 @@ Para cumplir con este requerimiento la carga se debe mover en respuesta a una re
 
 La elección de este esquema fue debido a su simpleza: un controlador de velocidad se encarga de mantener la velocidad igual a la referencia, mientras que uno de posición le indica al de velocidad que debe frenar cuando la posición objetivo está por ser alcanzada. Para evitar que el controlador de posición le indique al de velocidad una referencia mayor a la permitida, se utiliza un limitador en al referencia de velocidad. Similarmente, como la acción de control será el ciclo de trabajo del pwm que mueve al motor, se utiliza un segundo limitador para evitar que el ciclo de trabajo supere el 100 \%.
 
+La simpleza en el controlador y su modelo son un factor muy importante en este proyecto, ya que el objetivo es controlar el equipo mediante una consola DMX, y los efectos enviados por consola tienen una dinámica que el equipo debe seguir lo más fielmente posible. Introducir mucha dinámica por parte del controlador, por más que haga al sistema más estable, es indeseado en este caso. 
+
 \subsection{Modelo de la planta}
 Para este proyecto la planta será considerada como el conjunto motor-transmisión-carga. Un esquema mecánico de la planta se muestra en la figura \ref{fig:2.2}. Su funcionamiento es el siguiente: parte de la potencia eléctrica que ingresa al motor se transforma a mecánica y se utiliza para mover el piñon que se encuentra conectado al eje del motor. El piñon, a través de una cadena ANSI 25, transfiere su energía a la corona, que hace girar un disco adosado a ella. Este disco, o carrete, contiene en su interior el cable que sostiene a la carga, enrrollandolo o desenrrollandolo para subirla o bajarla. Como la carga del updown puede necesitar ser alimentada y recibir señal de DMX, el cable utilizado contiene en su interior contiene 2 cables con ambas señales.
 
@@ -77,7 +79,7 @@ Para determinar esta relación se harán marcas sobre en el cable y para cada un
 \subsection{Velocidad máxima}
 Una tarea a resolver es determinar cuál es la velocidad máxima posible para una carga determinada.\\
 
-Para determinar este valor se medirá la velocidad para una carga de 3Kg en subida aplicando sobre el motor un pwm con ciclo de trabajo de 100\%.
+Para determinar este valor se medirá la velocidad para una carga de 3Kg en subida aplicando sobre el motor un PWM con ciclo de trabajo de 100\%.
 
 La posición máxima posible queda dada por condiciones de diseño: 4 metros
 
@@ -107,7 +109,7 @@ Para detectar la pérdida de señal de DMX se verificará constantemente que el 
 El propósito del dipswitch en el equipo es poder seleccionar el canal principal de DMX a partir del cual leer las referencias de posición y velocidad, dentro de los 512 canales que tiene un universo DMX. Para lograr esto cuenta con 10 switchs, 9 que determinan el canal de DMX (\( 2^9 = 512 \)) y uno extra para ampliaciones futuras. Estos conmutadores conectan o desconectan resistencias de unos divisores de tensión resistivos, variando el valor entregado por cada uno de ellos. Como el dipswitch cuenta con 3 divisores se tienen 3 salidas analógicas, que dan información de qué switchs están activados y cuales no. \\
 El esquéma de uno de los divisores se puede ver en la figura \ref{fig:2.3}. Para completar con el desarrollo del dipswitch se deben encontrar 5 valores de resistencias (R1,R2,R3,R4 y R).
 
-Para hayar estos 5 valores se simulará el divisor de tensión en Matlab, probando con distintas combinaciones de resistencias hasta que los valores analógicos de la salida para cada combinación de resistencia estén lo suficientemente separados.
+Para hallar estos 5 valores se simulará el divisor de tensión en Matlab, probando con distintas combinaciones de resistencias hasta que los valores analógicos de la salida para cada combinación de resistencia estén lo suficientemente separados.
 
 \begin{figure}[!ht]
 	\centering

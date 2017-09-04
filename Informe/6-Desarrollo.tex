@@ -3,7 +3,7 @@
 
 \section{Descripción del capítulo} \label{sec:\thesection}
 En este capitulo se desarrollarán las soluciones propuestas en el capítulo de diseño. Esto implica detallar el proceso realizado, describir los cambios que se debieron hacer en caso de que el planteo inicial no haya funcionado, análisis de resultados, etc. \\
-Cada sección será redactada en el orden que se hicieron, debido a que unas partes dependen de otras para poder desarrollarse.
+%Cada sección será redactada en el orden que se hicieron, debido a que unas partes dependen de otras para poder desarrollarse.
 
 \section{Firmware del updown - Librerías de bajo nivel} \label{sec:\thesection}
 
@@ -256,7 +256,7 @@ Este nuevo tipo de dato es simplemente un parámetro en las funciones de inciali
 \subsubsection{Manejo del periférico}
 El Atmega328p tiene un periférico de UART bastante estándar, en donde se puede configurar su tasa de transmisión (baudrate), modo de operación y formato de trama. Esto se logra por medio de los registros UBRR0, UCSR0A, UCSR0B y UCSR0C.
 
-UBRR0, que se separa en UBRR0H u UBRR0L, sus partes alta y baja respectivamente, de 8 bits cada una, se utiliza para configurar el baudrate. La ecuación \ref{eq:3,2} sirve para obtener el valor de UBRR0, en donde el 16 pasa a ser 8 si el bit U2X0 en el registro UCSR0A está seteado.
+UBRR0, que se separa en UBRR0H u UBRR0L, sus partes alta y baja respectivamente, de 8 bits cada una, se utiliza para configurar el baudrate. La ecuación \ref{eq:3.2} sirve para obtener el valor de UBRR0, en donde el 16 pasa a ser 8 si el bit U2X0 en el registro UCSR0A está seteado.
 
 \begin{equation} \label{eq:\theequation}
 	UBRR0 = \frac{f_{clk}}{(16.BAUD)} - 1
@@ -393,7 +393,7 @@ Para acceder al módulo se implementaron 3 funciones, una de inicialización, ot
 	\label{fig:\thefigure}
 \end{figure}
 
-\subsection{Diagrama de módulos de la librería de bajo nivel}
+%\subsection{Diagrama de módulos de la librería de bajo nivel}
 
 
 \section{Controlador} \label{sec:\thesection}
@@ -465,7 +465,7 @@ Una solución intermedia es ajustar los datos con una recta por cada 100cm (1 me
 \textcolor{FIXME}{Nota: todos los gráficos fueron obtenidos utilizando el script de Matlab \textit{relacionEncoderDistancia.m}, adjuntado con este informe.}
 
 \subsection{Determinación de la velocidad máxima}
-El método utilizado para determinar la velocidad máxima a la que el equipo puede funcionar es hacer subir la carga inyectándole al driver del  motor un PWM de ciclo de trabajo de 100\%. Es necesario que la prueba sea en subida y no en bajada ya que la máxima velocidad posible debe ser igual en ambos casos, y en bajada seguro necesito menos fuerza para alcanzar la máxima velocidad en subida, por lo que la limitante es la segunda. \\
+El método utilizado para determinar la velocidad máxima a la que el equipo puede funcionar es hacer subir una carga de 3Kg inyectándole al driver del  motor un PWM de ciclo de trabajo de 100\%. Es necesario que la prueba sea en subida y no en bajada ya que la máxima velocidad posible debe ser igual en ambos casos, y en bajada seguro necesito menos fuerza para alcanzar la máxima velocidad en subida, por lo que la limitante es la segunda. \\
 Luego, se mide cada cierto tiempo, que en este caso será de 50ms, cuantas cuentas del encoder del motor se tienen, y se calcula la velocidad como \(velocidad = \Delta posicion/\Delta tiempo \).
 
 Del experimento se obtuvo que cada 50ms se tienen 100cuentas, por lo que la velocidad máxima es \(vel = 2cuentas/ms\).
@@ -499,7 +499,7 @@ Como la solución no es directa se probarán distintos períodos de muestreo dur
 \subsection{Obtención del modelo de la planta}
 \subsubsection{Toma de muestras}
 El modelo de la planta a obtener tiene que ser tal que su salida sea de velocidad para poder diseñar el lazo de control interno de velocidad del modelo propuesto en la figura \ref{fig:2.1}.\\
-Para obtener este modelo se le inyecta al equipo la entrada mostrada en la figura \ref{fig:3.16}, en donde la fuerza es positiva cuando el motor hace bajar la carga y negativa cuando la hace subir.\\
+Para obtener este modelo se le inyecta al equipo la entrada mostrada en la figura \ref{fig:3.16}, en donde la fuerza es positiva cuando el motor hace bajar la carga y negativa cuando la hace subir. La carga del equipo es de 3Kg\\
 De esta entrada se midió la velocidad de salida en 2 pruebas separadas con el fin de obtener un set de datos para identificación y otro para validación. Estas respuestas se muestran en la figura \ref{fig:3.17}.
 
 \begin{figure}[!ht]
@@ -631,13 +631,126 @@ Para validar los modelos se utiliza el set de datos de validación (figura \ref{
 	\label{table:\thetable}
 \end{table}
 
+\subsubsection{Análisis de resultados}
+De los resultados se puede ver que el error RMSE es muy grande, ya que la sñal real del sistema toma amplitudes de como mucho 20, y el error es de por lo menos 3, un 15\% de error (aprox). Esto que indica que la identificación no fue buena, por lo que no es recomendable diseñar los controladores basandose en los datos obtenidos. \\
+Un ejemplo gráfico se puede ver en la figura \ref{fig:3.18} en donde se contrastan la salida predicha con los parámetros identificados para el modelo 2 (que es el que menor error RMSE tuvo), con los datos de validación.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_18-identVsValid.png}
+	\caption{Comparación entre datos predichos con el modelo 2 y los datos reales}
+	\label{fig:\thefigure}
+\end{figure}
+
 
 \subsection{Obtención del controlador}
+\subsubsection{Análisis}
+Como la planta identificada no se ajusta al modelo diseñar los controladores basado en ella no tiene mucho sentido. Como se mencionó en la sección \ref{sec:2.3}, subsección 1, el controlador debe ser lo más simple posible, asi que propondrán controladores estándar (PID) y se ajustarán empíricamente mediante prueba y error.
 
-\subsection{Ajuste del controlador}
+También es importante recordar que el Atmega328p no tiene optimizadas las operaciones de punto flotante, por lo que cualquier multiplicación por números no enteros tendrá que ser aproximada. En el caso de las divisiones se hará mediante la operación corrimiento (bit shift). Esto tiene como ventaja que se reduce mucho el uso del CPU, pero se pierde resolución y cambiar el código se hace complicado.
+
+En cuanto al período de muestreo, se comenzará con un valor de 50ms y se ajustará dependiendo los resultados que se vayan obteniendo.
+
+\subsubsection{Controlador de velocidad}
+Basándose en la figura \ref{fig:2.1}, el controlador de velocidad tiene como entrada el error de velocidad y como salida el ciclo de trabajo del pwm que irá al motor. Si bien el ciclo de trabajo no puede ser negativo, a terminos prácticos un valor negativo indicaría que el motor sube la carga y uno positivo que la baja.\\
+El rango de la variable de entrada es de \(\pm 20\), siendo +20 velocidad de descenso y -20 de ascenso, como se vió en la sección \ref{sec:3.3} subsección 2, en donde se determinó la velocidad máxima. Por otro lado, el valor de la salida puede ser cualquiera, no necesariamente \(\pm 100\% \) por ser un ciclo de trabajo, pero estará acotado por el limitador.
+
+Basándose en esta información y en el esquema de control planteado en la sección \ref{sec:2.3} subsección 1, se propone como controlador de velocidad inicial la siguiente ecuación en diferencias:
+
+\[u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1) - (ev[k] >> 2)\]
+
+Donde u[k] es la salida del controlador, ev[k] el error de velocidad, y "x >> n" es el operador corrimiento, que equivale a \(floor(x/2^n)\).
+
+\subsubsection{Controlador de posición}
+Basándose en la figura \ref{fig:2.1}, el controlador de posición tiene como entrada el error de posición y como salida la referencia de velocidad. \\
+El error de posición está relacionada con las cuentas del encoder del motor, por lo que su rango es de aproximadamente \(\pm 20000\) (basandose en la tabla \ref{table:3.2}). Por otro lado, el valor de la salida puede ser cualquiera, no necesariamente \(\pm 20\) por ser la velocidad máxima permitida, pero estará acotado por el limitador según lo que indique la referencia dada por DMX.
+
+Basándose en esta información y en el esquema de control planteado en la sección \ref{sec:2.3} subsección 1, se propone como controlador de posición inicial la siguiente ecuación en diferencias:
+
+\[rv\_Cp[k] = (ep[k] >> 4)\]
+
+Donde ¿(rv\_Cp[k]) es la salida del controlador, ep[k] el error de posición, y "x >> n" es el operador corrimiento, que equivale a \(floor(x/2^n)\).
+
+\subsection{Ajuste de los controladores}
+
+
+\subsubsection{Condiciones iniciales}
+Las condiciones iniciales para el sistema de control son un controlador de posición con la forma \(rv\_Cp[k] = ep[k] >> 4\), un controlador de velocidad con la forma \(u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1) - (ev[k] >> 2)\), y un período de muestreo T = 50ms.\\
+
+Como el objetivo es calibrar el controlador de velocidad, se mide su entrada (solamente la velocidad) y su salida (ciclo de trabajo del pwm después del limitador). \\
+Para obtener estos datos se setea manualmente la referencias de velocidad en 40\% = 40cuentas/50ms (100\% = 2cuentas/ms) y la de posición que alterne entre 0 y 1 metro, cambiando apenas se alcance una. La carga utilizada tiene un peso de 3Kg.
+
+Bajo estas condiciones se obtiene la respuesta de la figura \ref{fig:3.19}, en donde se ve que la velocidad de la carga nunca llega a estabilizarse. Esto sucede en parte porque el el período de muestreo no ayuda a estabilizar el sistema, por lo que .
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=16cm,scale=1]{resources/3_19-esquemaControl1.png}
+	\caption{Resultados para el controlador de velocidad inicial}
+	\label{fig:\thefigure}
+\end{figure}
+
+\subsubsection{Ajuste del controlador de velocidad}
+Luego de varios procesos de ajuste del período de muestreo y controlador de velocidad se alcanzó una combinación cuyo desempeño es aceptable: un período de muestreo de 20ms y un controlador de velocidad de la forma \(u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1)\).
+
+Para verificar esta nueva configuración se efectúa nuevamente la prueba con la referencia de velocidad al 40\% y la de posición que alterna entre 0 y 1 metro. En este caso, sin embargo, se realizó la prueba con 2 equipos distintos, ambos con una carga de 3Kg.\\
+La respuesta del equipo 1 y 2 se presentan en las figuras \ref{fig:3.20} y \ref{fig:3.21}, en donde se puede ver que ahora la referencia de velocidad se sigue exitosamente y de manera similar para ambos equipos, y que la salida del controlador no es tán errática.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_20-esquemaControl2E1.png}
+	\caption{Resultados del equipo 1 para el controlador de velocidad final}
+	\label{fig:\thefigure}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_21-esquemaControl2E2.png}
+	\caption{Resultados del equipo 2 para el controlador de velocidad final}
+	\label{fig:\thefigure}
+\end{figure}
+
+
+\subsubsection{Ajuste del controlador de posición}
+Una vez ajustado el controlador de velocidad se pasa a ajustar el de posición. Igual que en los casos anteriores se realiza una prueba con una referencia de velocidad del 40\%, y una de posición que alterna entre 0 y 1 metro (que equivale a aproximadamente 4600 cuentas según la tabla \ref{table:3.2}). La diferencia en este caso es que se pasa a analizar la entrada (posición únicamente) y salida (referencia de velocidad rv) del controlador de posición.
+
+Los resultados de esta prueba, conservando el controlador de posición inicial y utilizando el de velocidad y ciclo de trabajo ajustados, se pueden ver en la figura \ref{fig:3.22}. Allí se observa que el controlador necesita un poco menos de ganancia para eliminar el sobre error.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_22-esquemaControl3.png}
+	\caption{Resultados para el controlador de posición inicial}
+	\label{fig:\thefigure}
+\end{figure}
+
+Luego de varios procesos de ajuste del controlador se encontró que el siguiente controlador \(rv\_Cp[k] = (ep[k] >> 4) - (ep[k] >> 5)\) mejora el rendimiento del sistema, como se ve en la figura \ref{fig:3.23}
+
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_23-esquemaControl4.png}
+	\caption{Resultados para el controlador de posición final}
+	\label{fig:\thefigure}
+\end{figure}
+
+\subsubsection{Sistema de control final}
+
+En conclusión, el sistema de control consta de:
+\begin{itemize}
+	\item Período de muestreo: T = 20ms
+	\item Controlador de velocidad: \(u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1)\)
+	\item Controlador de posición: \(rv\_Cp[k] = (ep[k] >> 4) - (ep[k] >> 5)\)
+\end{itemize}
 
 
 \section{Dipswitch} \label{sec:\thesection}
+Como se mencionó en la sección \ref{sec:2.5}, la obtención de los valores del dipswitch se hace mediante una simulación en Matlab.\\
+El procedimiento para determinar una posible combinación de R1, R2, R3, R4 y R (ver figura \ref{fig:2.3}) es el siguiente: se propone un valor para cada resistencia y se calcula la caída de tensión en la resistencia R, que llamaremos Vo, para cada combinación de R1, R2, R3 y R4. Como son 4 resistencias hay 16 posibles combinaciones, por lo que se obtendrán 16 valores de Vo. 
+
+Ahora, lo importante es encontrar R1, R2, R3, R4 y R tales que los 16 valores de Vo encontrados sean distintas y estén lo más separados posibles\\
+Como el método propuesto es de prueba y error se establece una diferencia mínima que todas las Vo deben tener entre sí. Como el canal analógico del microcontrolador tiene una resolución de 10 bits (1024) y el rango de tensión de entrada va de 0 a 5V el paso más chico que puede medir el ADC es de \(5V/1024 \approx 5mV\). Entonces, se elige como diferencia mínima 10 unidades del ADC, que equivalen a aproximadamente 50mV.
+
+\textcolor{FIXME}{Utilizando el script de Matlab "calculoResistenciasDip.m", adjuntado junto a este documento,} se encontró que la combinación de resistencias R1=10K\(\Omega\), R2=4,7K\(\Omega\), R3=2,2K\(\Omega\), R4=1K\(\Omega\) y Rm=K\(\Omega\) la mímima diferencia entre todas las Vo es de 67mV, que supera el mínimo aceptable.
+
 
 \section{Firmware del updown - Librerías de alto nivel} \label{sec:\thesection}
 
@@ -645,7 +758,15 @@ Para validar los modelos se utiliza el set de datos de validación (figura \ref{
 
 Por como están conectado los componentes electrónicos en la placa de control, el encoder del motor está asociado a las EXINT y el encoder del disco a las PCINT.
 
-\subsection{Diagrama de módulos de la librería de alto nivel}
+\subsection{DMX}
+
+\subsection{Grua}
+
+\subsection{Controlador}
+
+\subsection{Dipswitch}
+
+%\subsection{Diagrama de módulos de la librería de alto nivel}
 
 \section{Firmware del updown - Función principal} \label{sec:\thesection}
 

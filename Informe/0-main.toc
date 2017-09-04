@@ -81,7 +81,6 @@
 \contentsline {subsection}{\numberline {3.2.7}SUART}{43}{subsection.3.2.7}
 \contentsline {subsubsection}{\numberline {3.2.7.1}An\IeC {\'a}lisis}{43}{subsubsection.3.2.7.1}
 \contentsline {subsubsection}{\numberline {3.2.7.2}Implementaci\IeC {\'o}n}{44}{subsubsection.3.2.7.2}
-\contentsline {subsection}{\numberline {3.2.8}Diagrama de m\IeC {\'o}dulos de la librer\IeC {\'\i }a de bajo nivel}{45}{subsection.3.2.8}
 \contentsline {section}{\numberline {3.3}Controlador}{45}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{45}{subsection.3.3.1}
 \contentsline {subsubsection}{\numberline {3.3.1.1}Pruebas y resultados}{45}{subsubsection.3.3.1.1}
@@ -93,16 +92,27 @@
 \contentsline {subsubsection}{\numberline {3.3.4.2}Modelos propuestos}{50}{subsubsection.3.3.4.2}
 \contentsline {subsubsection}{\numberline {3.3.4.3}Determinaci\IeC {\'o}n de par\IeC {\'a}metros}{52}{subsubsection.3.3.4.3}
 \contentsline {subsubsection}{\numberline {3.3.4.4}Validaci\IeC {\'o}n de los modelos}{53}{subsubsection.3.3.4.4}
+\contentsline {subsubsection}{\numberline {3.3.4.5}An\IeC {\'a}lisis de resultados}{54}{subsubsection.3.3.4.5}
 \contentsline {subsection}{\numberline {3.3.5}Obtenci\IeC {\'o}n del controlador}{54}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {3.3.6}Ajuste del controlador}{54}{subsection.3.3.6}
-\contentsline {section}{\numberline {3.4}Dipswitch}{54}{section.3.4}
-\contentsline {section}{\numberline {3.5}Firmware del updown - Librer\IeC {\'\i }as de alto nivel}{54}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Encoder}{54}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Diagrama de m\IeC {\'o}dulos de la librer\IeC {\'\i }a de alto nivel}{54}{subsection.3.5.2}
-\contentsline {section}{\numberline {3.6}Firmware del updown - Funci\IeC {\'o}n principal}{54}{section.3.6}
-\contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{55}{chapter.4}
-\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{55}{section.4.1}
-\contentsline {section}{\numberline {4.2}Configuraci\IeC {\'o}n de la HOG}{55}{section.4.2}
-\contentsline {section}{\numberline {4.3}Validaci\IeC {\'o}n}{55}{section.4.3}
-\contentsline {chapter}{\numberline {5}Conclusiones}{56}{chapter.5}
-\contentsline {section}{\numberline {5.1}c1}{56}{section.5.1}
+\contentsline {subsubsection}{\numberline {3.3.5.1}An\IeC {\'a}lisis}{54}{subsubsection.3.3.5.1}
+\contentsline {subsubsection}{\numberline {3.3.5.2}Controlador de velocidad}{55}{subsubsection.3.3.5.2}
+\contentsline {subsubsection}{\numberline {3.3.5.3}Controlador de posici\IeC {\'o}n}{56}{subsubsection.3.3.5.3}
+\contentsline {subsection}{\numberline {3.3.6}Ajuste de los controladores}{56}{subsection.3.3.6}
+\contentsline {subsubsection}{\numberline {3.3.6.1}Condiciones iniciales}{56}{subsubsection.3.3.6.1}
+\contentsline {subsubsection}{\numberline {3.3.6.2}Ajuste del controlador de velocidad}{57}{subsubsection.3.3.6.2}
+\contentsline {subsubsection}{\numberline {3.3.6.3}Ajuste del controlador de posici\IeC {\'o}n}{57}{subsubsection.3.3.6.3}
+\contentsline {subsubsection}{\numberline {3.3.6.4}Sistema de control final}{58}{subsubsection.3.3.6.4}
+\contentsline {section}{\numberline {3.4}Dipswitch}{59}{section.3.4}
+\contentsline {section}{\numberline {3.5}Firmware del updown - Librer\IeC {\'\i }as de alto nivel}{60}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Encoder}{60}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}DMX}{61}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Grua}{61}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}Controlador}{61}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.5}Dipswitch}{61}{subsection.3.5.5}
+\contentsline {section}{\numberline {3.6}Firmware del updown - Funci\IeC {\'o}n principal}{61}{section.3.6}
+\contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{62}{chapter.4}
+\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{62}{section.4.1}
+\contentsline {section}{\numberline {4.2}Configuraci\IeC {\'o}n de la HOG}{62}{section.4.2}
+\contentsline {section}{\numberline {4.3}Validaci\IeC {\'o}n}{62}{section.4.3}
+\contentsline {chapter}{\numberline {5}Conclusiones}{63}{chapter.5}
+\contentsline {section}{\numberline {5.1}c1}{63}{section.5.1}
