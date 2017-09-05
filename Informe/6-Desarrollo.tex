@@ -755,8 +755,30 @@ Como el método propuesto es de prueba y error se establece una diferencia míni
 \section{Firmware del updown - Librerías de alto nivel} \label{sec:\thesection}
 
 \subsection{Encoder}
+\subsubsection{Análisis}
+Para leer los encoders se utilizan las interrupciones del módulo de bajo nivel EXINT. Por como están conectado los componentes electrónicos en la placa de control, el encoder del motor está asociado a las EXINT y el encoder del disco a las PCINT.
 
-Por como están conectado los componentes electrónicos en la placa de control, el encoder del motor está asociado a las EXINT y el encoder del disco a las PCINT.
+Ambos 2 encoders, el de motor y el de disco, son incrementales de tipo AB. Estos cuentan con 2 canales (A y B) que son en esencia 2 entradas digitales que físicamente están separadas de tal manera que el tren de pulsos que generan se encuentran desfasadas en el tiempo. Si no hay movimiento los canales A y B mantienen su estado, mientras que si lo hay, dependiendo el sentido de giro el estado de los canales cambian de una manera u otra.
+
+Para entender el funcionamiento de los encoders incrementales AB se describe como funciona el del disco en la figura \ref{fig:3.24}. Allí se ve que el disco tiene marcas que los sensores A y B van detectando a medida que gira. Si el disco gira en sentido horario la marca primero activa el canal B, luego al A, luego desactiva al B, y finalmente desactiva al A. Si el disco gira en sentido antihorario sucede algo parecido pero activando al canal A primero.
+
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/3_24-encoderDiscoAB.png}
+	\caption{Ejemplo señales de los canales AB del encoder de disco}
+	\label{fig:\thefigure}
+\end{figure}
+
+\subsubsection{Implementación}
+ La lógica de cuenta utilizada para ambos encoders es la siguiente:
+\begin{enumerate}
+	\item Se asocia al canal A una interrupción por cambio en el estado de un pin.
+	\item Cuando el evento de cambio de pin ocurre y la interrupción se activa se verifica si el cambio del canal A fue de HIGH a LOW o viceversa. A: H->L o A: L->H
+	\item Miro B. Si A:H->L y B=L ó Si A:L->H y B=H => sentido horario. A:H->L y B=H ó Si A:L->H y B=L => sentido antihorario.
+\end{enumerate}
+
+\textcolor{FIXME}{DESARROLLAR}
 
 \subsection{DMX}
 

@@ -105,14 +105,16 @@
 \BOOKMARK [1][-]{section.3.4}{Dipswitch}{chapter.3}% 105
 \BOOKMARK [1][-]{section.3.5}{Firmware del updown - Librer\355as de alto nivel}{chapter.3}% 106
 \BOOKMARK [2][-]{subsection.3.5.1}{Encoder}{section.3.5}% 107
-\BOOKMARK [2][-]{subsection.3.5.2}{DMX}{section.3.5}% 108
-\BOOKMARK [2][-]{subsection.3.5.3}{Grua}{section.3.5}% 109
-\BOOKMARK [2][-]{subsection.3.5.4}{Controlador}{section.3.5}% 110
-\BOOKMARK [2][-]{subsection.3.5.5}{Dipswitch}{section.3.5}% 111
-\BOOKMARK [1][-]{section.3.6}{Firmware del updown - Funci\363n principal}{chapter.3}% 112
-\BOOKMARK [0][-]{chapter.4}{Implementaci\363n}{}% 113
-\BOOKMARK [1][-]{section.4.1}{Descripci\363n del cap\355tulo}{chapter.4}% 114
-\BOOKMARK [1][-]{section.4.2}{Configuraci\363n de la HOG}{chapter.4}% 115
-\BOOKMARK [1][-]{section.4.3}{Validaci\363n}{chapter.4}% 116
-\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 117
-\BOOKMARK [1][-]{section.5.1}{c1}{chapter.5}% 118
+\BOOKMARK [3][-]{subsubsection.3.5.1.1}{An\341lisis}{subsection.3.5.1}% 108
+\BOOKMARK [3][-]{subsubsection.3.5.1.2}{Implementaci\363n}{subsection.3.5.1}% 109
+\BOOKMARK [2][-]{subsection.3.5.2}{DMX}{section.3.5}% 110
+\BOOKMARK [2][-]{subsection.3.5.3}{Grua}{section.3.5}% 111
+\BOOKMARK [2][-]{subsection.3.5.4}{Controlador}{section.3.5}% 112
+\BOOKMARK [2][-]{subsection.3.5.5}{Dipswitch}{section.3.5}% 113
+\BOOKMARK [1][-]{section.3.6}{Firmware del updown - Funci\363n principal}{chapter.3}% 114
+\BOOKMARK [0][-]{chapter.4}{Implementaci\363n}{}% 115
+\BOOKMARK [1][-]{section.4.1}{Descripci\363n del cap\355tulo}{chapter.4}% 116
+\BOOKMARK [1][-]{section.4.2}{Configuraci\363n de la HOG}{chapter.4}% 117
+\BOOKMARK [1][-]{section.4.3}{Validaci\363n}{chapter.4}% 118
+\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 119
+\BOOKMARK [1][-]{section.5.1}{c1}{chapter.5}% 120
