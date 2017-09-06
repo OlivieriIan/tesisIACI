@@ -400,9 +400,9 @@ Para acceder al módulo se implementaron 3 funciones, una de inicialización, ot
 
 \subsection{Relación entre cuentas de encoder y distancia}
 \subsubsection{Pruebas y resultados}
-Como se mencionó en la sección \ref{sec:2.3}, subsección 3, la distancia lineal recorrida por la carga varía según cuán enrollado está el cable en el carrete. 
+Como se mencionó en la sección \ref{sec:2.3}, subsección 3, la distancia lineal recorrida por la carga varía según cuán enrollado está el cable en el carrete. La forma que se tiene de detectar que el cable se desenrrolla es a través del encoder del motor, que mide la posición angular de su eje, y por consiguiente del disco, que contiene el cable que sostiene la carga. Lo que hay que hacer entonces es determinar la relación entre posición angular y lineal.
 
-Para determinar la relación entre ambos se marcó el cable que sostiene la carga cada 25cm, tomando como 0 el cable completamente enrollado. Luego, a medida que se desenrrollaba el cable se midió el valor de la cuenta de encoder del motor. Los resultados obtenidos se pueden encontrar en la tabla \ref{table:3.2}.
+Para determinar la relación entre estas 2 variables se marcó el cable que sostiene la carga cada 25cm, tomando como 0 el cable completamente enrollado. Luego, a medida que se desenrrollaba el cable se midió el valor de la cuenta de encoder del motor. Los resultados obtenidos se pueden encontrar en la tabla \ref{table:3.2}.
 
 \begin{table}[!ht]
 	\begin{center}
@@ -758,35 +758,109 @@ Como el método propuesto es de prueba y error se establece una diferencia míni
 \subsubsection{Análisis}
 Para leer los encoders se utilizan las interrupciones del módulo de bajo nivel EXINT. Por como están conectado los componentes electrónicos en la placa de control, el encoder del motor está asociado a las EXINT y el encoder del disco a las PCINT.
 
-Ambos 2 encoders, el de motor y el de disco, son incrementales de tipo AB. Estos cuentan con 2 canales (A y B) que son en esencia 2 entradas digitales que físicamente están separadas de tal manera que el tren de pulsos que generan se encuentran desfasadas en el tiempo. Si no hay movimiento los canales A y B mantienen su estado, mientras que si lo hay, dependiendo el sentido de giro el estado de los canales cambian de una manera u otra.
+Ambos 2 encoders, el de motor y el de disco, son incrementales de tipo AB. Estos cuentan con 2 canales (A y B) que son en esencia 2 entradas digitales que físicamente están separadas de tal manera que el tren de pulsos que generan se encuentran desfasadas en el tiempo. 
 
-Para entender el funcionamiento de los encoders incrementales AB se describe como funciona el del disco en la figura \ref{fig:3.24}. Allí se ve que el disco tiene marcas que los sensores A y B van detectando a medida que gira. Si el disco gira en sentido horario la marca primero activa el canal B, luego al A, luego desactiva al B, y finalmente desactiva al A. Si el disco gira en sentido antihorario sucede algo parecido pero activando al canal A primero.
-
+Para entender el funcionamiento de los encoders incrementales AB se describe como funciona el del disco en la figura \ref{fig:3.24}. Allí se ve que el disco tiene marcas que los sensores A y B, asociados a los canales A y B, van detectando a medida que este gira. Estas marcas son lo suficientemente grandes como para que algún momento ambos sensores estén activados (válido para ambos encoders). Cuando un sensor detecta una marca el canal se pone en HIGH y cuando no, en LOW.
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=15cm,scale=1]{resources/3_24-encoderDiscoAB.png}
-	\caption{Ejemplo señales de los canales AB del encoder de disco}
+	\caption{Ejemplo estado de los canales AB del encoder de disco}
 	\label{fig:\thefigure}
 \end{figure}
 
 \subsubsection{Implementación}
- La lógica de cuenta utilizada para ambos encoders es la siguiente:
+Basandose en la imágen \ref{fig:3.24} se puede ver que el orden en que se activan los canales A y B depende del sentido de giro. Si el disco gira en sentido horario primero se activa el canal A y luego en B, mientras que lo contrario pasa en sentido antihorario.
+
+Siguiendo este patrón se implementó la siguiente lógica de cuenta para ambos encoders:
 \begin{enumerate}
 	\item Se asocia al canal A una interrupción por cambio en el estado de un pin.
-	\item Cuando el evento de cambio de pin ocurre y la interrupción se activa se verifica si el cambio del canal A fue de HIGH a LOW o viceversa. A: H->L o A: L->H
-	\item Miro B. Si A:H->L y B=L ó Si A:L->H y B=H => sentido horario. A:H->L y B=H ó Si A:L->H y B=L => sentido antihorario.
+	\item Cuando el evento de cambio de pin ocurre y la interrupción se activa se verifica si el cambio del canal A fue de HIGH a LOW o viceversa. 
+	\item Luego leo el estado del canal B para determinar si el sentido de giro es horario y anti horario. Las posibles combinaciones de estados se resumen en la tabla \ref{table:3.5}.
 \end{enumerate}
 
-\textcolor{FIXME}{DESARROLLAR}
+\begin{table}[!ht]
+	\begin{center}
+		%\rowcolors{green}
+		
+		\begin{tabular}{|c|c|c|}
+			\hline
+			 & Canal B en HIGH & Canal B en LOW   \\
+			\hline 
+			Canal A de HIGH a LOW & Sentido horario & Sentido antihorario\\
+			\hline 
+			Canal A de LOW a HIGH & Sentido antihorario & Sentido horario\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Error RMSE para los 12 modelos propuestos}
+	\label{table:\thetable}
+\end{table}
 
-\subsection{DMX}
+Físicamente si el disco gira en sentido horario la carga baja, mientras que cuando gira en sentido antihorario el cable se enrrolla. Como la posición crece cuando la caja baja en los casos en que se detecta un cambio que indique que el sentido de giro es horario las cuentas del encoder se incrementan, y se decrementan en caso contrario.\\
+Por lo tanto, la implementación en C de la lógica de cuentas sería:
+\begin{lstlisting}[style=CStyle]
+void funcionEjecutadaDuranteLaInterrupcionPorCambioDePin(void){
+	if( Canal_A == HIGH ){ //El canal A cambio de LOW a HIGH
+		if( Canal_B == LOW  ){ // Leo el canal B
+			cuentasEncoder++; // Canal B = LOW => Sentido horario (la carga baja)
+		} else {
+			cuentasEncoder--; // Canal B = HIGH => Sentido antihorario (la carga sube)
+		}
+	} else { //El canal A cambio de HIGH a LOW
+		if( Canal_B == LOW  ){ // Leo el canal B
+			cuentasEncoder--; // Canal B = LOW => Sentido antihorario (la carga sube)
+		} else {
+			cuentasEncoder++; // Canal B = HIGH => Sentido horario (la carga baja)
+		}
+	}
+}
+\end{lstlisting}
+
+
+Para acceder al módulo se implementaron 3 funciones, una de inicialización, otra de lectura y otra de lectura, como se muestra en la figura \ref{fig:3.25}. Como este módulo maneja ambos encoder motor y de disco las funciones de lecto escritura reciben como parámetro el encoder cuyas cuentas hay que leer/escribir, y cuenta con macros para este fin.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=8cm,scale=1]{resources/3_25-moduloEncoder.png}
+	\caption{Diagrama del módulo Encoder}
+	\label{fig:\thefigure}
+\end{figure}
+
 
 \subsection{Grua}
+El módulo Grua es simplemente paquete que agrupa el uso de elementos del equipo updown que no requieren mucha inteligencia. Entre estos se encuentran: 
+\begin{itemize}
+	\item Los leds internos y externo, que al ser salidas digitales solo necesitan una función de escritura cada uno.
+	\item El motor, del cual se puede controlar la velocidad mediante el PWM, y el sentido de giro.
+	\item El freno, que al ser una salida digital solo necesita una función de escritura.
+	\item El fin de carrera, que al ser una entrada digital solo necesita una función de lectura.
+\end{itemize} 
+
+Entonces, para acceder al módulo se implementaron 6 funciones, una de inicialización y una función de lectura o escritura para cada hardware manejado, como se muestra en la figura \ref{fig:3.26}.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=8cm,scale=1]{resources/3_26-moduloGrua.png}
+	\caption{Diagrama del módulo Grua}
+	\label{fig:\thefigure}
+\end{figure}
 
 \subsection{Controlador}
+\subsubsection{Análisis}
+El módulo de controlador tiene que encargarse de convertir comandos de DMX en referencias para los controladores y calcular los mismos para mover al motor, de tal manera que este cumpla con los comandos iniciales.
+
+Lo primero es convertir los comandos DMX en referencias. Se tienen 2 comandos, ambos de 8 bits, uno de posición y otro de velocidad.\\
+El comando DMX de posición indica la distancia lineal que tiene que recorrer la carga, de 0 a 4 metros, por lo que se debe hacer es convertir esta información a distancia angular, o sea, a cuentas de encoder. Para hacer esto se utilizarán 4 rectas que ajusten datos como los de la tabla \ref{table:3.2}.\\
+Luego se tiene el comando DMX de velocidad, que tiene que ser mapeado de 0 a la velocidad máxima del equipo. Ahora, la velocidad puede ser positiva o negativa, en donde positiva quiere decir que el equipo debe bajar y negativa que debe subir. El signo se determina comparando la posición actual y la de la referencia de posición. Si la referencia de posición es menor a la posición actual la carga debe subir, por lo que la velocidad será negativa.
+
+Lo segundo es la implementación de ambos controladores. La opción más simple es crear una función que cada vez que sea llamada actualice los valores del sistema y le pase al módulo grúa el ciclo de trabajo del pwm del motor.
+
+\subsubsection{Implementación}
 
 \subsection{Dipswitch}
+
+\subsection{DMX}
 
 %\subsection{Diagrama de módulos de la librería de alto nivel}
 

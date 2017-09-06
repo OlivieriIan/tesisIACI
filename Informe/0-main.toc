@@ -107,14 +107,14 @@
 \contentsline {subsection}{\numberline {3.5.1}Encoder}{60}{subsection.3.5.1}
 \contentsline {subsubsection}{\numberline {3.5.1.1}An\IeC {\'a}lisis}{60}{subsubsection.3.5.1.1}
 \contentsline {subsubsection}{\numberline {3.5.1.2}Implementaci\IeC {\'o}n}{61}{subsubsection.3.5.1.2}
-\contentsline {subsection}{\numberline {3.5.2}DMX}{63}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Grua}{63}{subsection.3.5.3}
-\contentsline {subsection}{\numberline {3.5.4}Controlador}{63}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}Dipswitch}{63}{subsection.3.5.5}
-\contentsline {section}{\numberline {3.6}Firmware del updown - Funci\IeC {\'o}n principal}{63}{section.3.6}
-\contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{64}{chapter.4}
-\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{64}{section.4.1}
-\contentsline {section}{\numberline {4.2}Configuraci\IeC {\'o}n de la HOG}{64}{section.4.2}
-\contentsline {section}{\numberline {4.3}Validaci\IeC {\'o}n}{64}{section.4.3}
-\contentsline {chapter}{\numberline {5}Conclusiones}{65}{chapter.5}
-\contentsline {section}{\numberline {5.1}c1}{65}{section.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Grua}{63}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Controlador}{65}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}Dipswitch}{65}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.5}DMX}{65}{subsection.3.5.5}
+\contentsline {section}{\numberline {3.6}Firmware del updown - Funci\IeC {\'o}n principal}{65}{section.3.6}
+\contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{66}{chapter.4}
+\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{66}{section.4.1}
+\contentsline {section}{\numberline {4.2}Configuraci\IeC {\'o}n de la HOG}{66}{section.4.2}
+\contentsline {section}{\numberline {4.3}Validaci\IeC {\'o}n}{66}{section.4.3}
+\contentsline {chapter}{\numberline {5}Conclusiones}{67}{chapter.5}
+\contentsline {section}{\numberline {5.1}c1}{67}{section.5.1}
