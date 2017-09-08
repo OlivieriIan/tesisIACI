@@ -407,13 +407,15 @@ Para determinar la relación entre estas 2 variables se marcó el cable que sost
 \begin{table}[!ht]
 	\begin{center}
 		%\rowcolors{green}
-		\rowcolors{1}{OODlightblue}{white}
+		
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 			\hline
+			\rowcolor{OODlightblue}
 			Distancia [cm] & 0 & 25 & 50 & 75 & 100 & 125 & 150 & 175 & 200  \\
 			\hline
 			Encoder & 0 & 1130 & 2250 & 3430 & 4630 & 5830 & 7130 & 8400 & 9730 \\
 			\hline \hline
+			\rowcolor{OODlightblue}
 			Distancia [cm]  & 225 & 250 & 275 & 300 & 325 & 350 & 375 & 400 & \\
 			\hline
 			Encoder  & 11120 & 12530 & 14020 & 15530 & 17130 & 18770 & 20520 & 22330 & \\ 
@@ -666,10 +668,9 @@ Basándose en la figura \ref{fig:2.1}, el controlador de posición tiene como en
 El error de posición está relacionada con las cuentas del encoder del motor, por lo que su rango es de aproximadamente \(\pm 20000\) (basandose en la tabla \ref{table:3.2}). Por otro lado, el valor de la salida puede ser cualquiera, no necesariamente \(\pm 20\) por ser la velocidad máxima permitida, pero estará acotado por el limitador según lo que indique la referencia dada por DMX.
 
 Basándose en esta información y en el esquema de control planteado en la sección \ref{sec:2.3} subsección 1, se propone como controlador de posición inicial la siguiente ecuación en diferencias:
-
 \[rv\_Cp[k] = (ep[k] >> 4)\]
 
-Donde ¿(rv\_Cp[k]) es la salida del controlador, ep[k] el error de posición, y "x >> n" es el operador corrimiento, que equivale a \(floor(x/2^n)\).
+Donde \(rv\_Cp[k]\) es la salida del controlador, ep[k] el error de posición, y "x >> n" es el operador corrimiento, que equivale a \(floor(x/2^n)\).
 
 \subsection{Ajuste de los controladores}
 
@@ -735,11 +736,13 @@ Luego de varios procesos de ajuste del controlador se encontró que el siguiente
 \subsubsection{Sistema de control final}
 
 En conclusión, el sistema de control consta de:
-\begin{itemize}
-	\item Período de muestreo: T = 20ms
-	\item Controlador de velocidad: \(u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1)\)
-	\item Controlador de posición: \(rv\_Cp[k] = (ep[k] >> 4) - (ep[k] >> 5)\)
-\end{itemize}
+ \[ \text{\textbf{Período de muestreo:} }  T = 20ms \]
+\begin{equation} \label{eq:\theequation}
+\text{\textbf{Controlador de velocidad:} } u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1)
+\end{equation}
+\begin{equation} \label{eq:\theequation}
+\text{\textbf{Controlador de posición:} } rv\_Cp[k] = (ep[k] >> 4) - (ep[k] >> 5)
+\end{equation}
 
 
 \section{Dipswitch} \label{sec:\thesection}
@@ -749,8 +752,33 @@ El procedimiento para determinar una posible combinación de R1, R2, R3, R4 y R 
 Ahora, lo importante es encontrar R1, R2, R3, R4 y R tales que los 16 valores de Vo encontrados sean distintas y estén lo más separados posibles\\
 Como el método propuesto es de prueba y error se establece una diferencia mínima que todas las Vo deben tener entre sí. Como el canal analógico del microcontrolador tiene una resolución de 10 bits (1024) y el rango de tensión de entrada va de 0 a 5V el paso más chico que puede medir el ADC es de \(5V/1024 \approx 5mV\). Entonces, se elige como diferencia mínima 10 unidades del ADC, que equivalen a aproximadamente 50mV.
 
-\textcolor{FIXME}{Utilizando el script de Matlab "calculoResistenciasDip.m", adjuntado junto a este documento,} se encontró que la combinación de resistencias R1=10K\(\Omega\), R2=4,7K\(\Omega\), R3=2,2K\(\Omega\), R4=1K\(\Omega\) y Rm=K\(\Omega\) la mímima diferencia entre todas las Vo es de 67mV, que supera el mínimo aceptable.
+Para determinar los valores se \textcolor{FIXME}{utilizó el script de Matlab "calculoResistenciasDip.m", adjuntado junto a este documento}, utilizando como Vcc de la figura \ref{fig:2.3} 5V, ya que es la tensión de trabajo de la placa de control. De varias pruebas se encontró que para la combinación de resistencias R1=10K\(\Omega\), R2=4,7K\(\Omega\), R3=2,2K\(\Omega\), R4=1K\(\Omega\) y R=1K\(\Omega\) la mímima diferencia entre todas las Vo es de 67mV.\\
+En la tabla \ref{table:3.5} se presentan los valores analógicos resultantes de todas las combinaciones posibles de las resistencias encontradas. La primera fila de dicha tabla muestra los bits, ordenados de mas significativo (msb) a menos significativo (lsb), que equivalen al estado de R4 (msb),R3,R2 y R1 (lsb). Por ejemplo, si el switch de R4 está activado el bit msb estará en 1. En la segunda fila se muestra el valor analógico calculado teóricamente con el script de Matlab.\\
+Con el objetivo de verificar que los valores analógicos obtenidos son lógicos se armó un dipswitch con estos valores de resistencia y se midió su salida haciendo uso del módulo ADC, datos que se ven en la fila 3 de la tabla.
 
+\begin{table}[!ht]
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{OODlightblue}
+			bits (R4,R3,R2,R1) & 0000 & 0001 & 0010 & 0011 & 0100 & 0101 & 0110 & 0111  \\
+			\hline
+			Valor analógico calculado & 0 & 93 & 179 & 243 & 320 & 365 & 409 & 444 \\
+			\hline
+			Valor analógico real  & 0 & 91 & 177 & 241 & 320 & 365 & 409 & 444 \\
+			\hline \hline
+			\rowcolor{OODlightblue}
+			bits (R4,R3,R2,R1) & 1000 & 1001 & 1010 & 1011 & 1100 & 1101 & 1110 & 1111  \\
+			\hline
+			Valor analógico calculado & 512  & 536  & 561  & 581  & 606  & 623  & 640  & 653  \\
+			\hline
+			Valor analógico real & 510  & 535  & 559  & 579  & 606  & 622  & 639  & 653 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Valores analógicos teóricos y reales para cada combinación de R4,R3,R2,R1}
+	\label{table:\thetable}
+\end{table}
 
 \section{Firmware del updown - Librerías de alto nivel} \label{sec:\thesection}
 
@@ -776,7 +804,7 @@ Siguiendo este patrón se implementó la siguiente lógica de cuenta para ambos 
 \begin{enumerate}
 	\item Se asocia al canal A una interrupción por cambio en el estado de un pin.
 	\item Cuando el evento de cambio de pin ocurre y la interrupción se activa se verifica si el cambio del canal A fue de HIGH a LOW o viceversa. 
-	\item Luego leo el estado del canal B para determinar si el sentido de giro es horario y anti horario. Las posibles combinaciones de estados se resumen en la tabla \ref{table:3.5}.
+	\item Luego leo el estado del canal B para determinar si el sentido de giro es horario y anti horario. Las posibles combinaciones de estados se resumen en la tabla \ref{table:3.6}.
 \end{enumerate}
 
 \begin{table}[!ht]
@@ -847,23 +875,143 @@ Entonces, para acceder al módulo se implementaron 6 funciones, una de inicializ
 \end{figure}
 
 \subsection{Controlador}
-\subsubsection{Análisis}
+\subsubsection{Seteo de referencias}
 El módulo de controlador tiene que encargarse de convertir comandos de DMX en referencias para los controladores y calcular los mismos para mover al motor, de tal manera que este cumpla con los comandos iniciales.
 
 Lo primero es convertir los comandos DMX en referencias. Se tienen 2 comandos, ambos de 8 bits, uno de posición y otro de velocidad.\\
-El comando DMX de posición indica la distancia lineal que tiene que recorrer la carga, de 0 a 4 metros, por lo que se debe hacer es convertir esta información a distancia angular, o sea, a cuentas de encoder. Para hacer esto se utilizarán 4 rectas que ajusten datos como los de la tabla \ref{table:3.2}.\\
-Luego se tiene el comando DMX de velocidad, que tiene que ser mapeado de 0 a la velocidad máxima del equipo. Ahora, la velocidad puede ser positiva o negativa, en donde positiva quiere decir que el equipo debe bajar y negativa que debe subir. El signo se determina comparando la posición actual y la de la referencia de posición. Si la referencia de posición es menor a la posición actual la carga debe subir, por lo que la velocidad será negativa.
+El comando DMX de posición indica la distancia lineal que tiene que recorrer la carga, de 0 a 4 metros, por lo que se debe hacer es convertir esta información a distancia angular, o sea, a cuentas de encoder. Para hacer esto se utilizarán 4 rectas que ajusten datos como los de la tabla \ref{table:3.2}. La implementación en psudocódigo de C sería:
+\begin{lstlisting}[style=CStyle]
+uint16_t conversionPosicionDMXaPosicionEncoder(uint8_t posicion_dmx){
+	uint16_t posicion_cm = 0, posicion_referencia = 0;
+	/* --- Convierto posicion DMX a posicion lineal --- */
+	posicion_cm = ((uint16_t)posicion_dmx)*400/255;
+	
+	/* --- Convierto posicion lineal a posicion angular --- */
+	if(0 < posicion_cm <= 100){
+		posicion_referencia = f1(posicion_cm); 
+		// f1 = recta de ajuste para las posiciones de 0 a 1metro
+	}
+	if(100 < posicion_cm <= 200){
+		posicion_referencia = f2(posicion_cm); 
+		// f2 = recta de ajuste para las posiciones de 1 a 2metros
+	}
+	if(200 < posicion_cm <= 300){
+		posicion_referencia = f3(posicion_cm); 
+		// f3 = recta de ajuste para las posiciones de 2 a 3metros
+	}
+	if(300 < posicion_cm <= 400){
+		posicion_referencia = f4(posicion_cm); 
+		// f4 = recta de ajuste para las posiciones de 3 a 4metros
+	}
+	return(posicion_encoder);
+}
+\end{lstlisting}
 
-Lo segundo es la implementación de ambos controladores. La opción más simple es crear una función que cada vez que sea llamada actualice los valores del sistema y le pase al módulo grúa el ciclo de trabajo del pwm del motor.
+Luego se tiene el comando DMX de velocidad, que tiene que ser mapeado de 0 a la velocidad máxima del equipo. Ahora, la velocidad puede ser positiva o negativa, en donde positiva quiere decir que el equipo debe bajar y negativa que debe subir. El signo se determina comparando la posición actual y la de la referencia de posición. Si la referencia de posición es menor a la posición actual la carga debe subir, por lo que la velocidad será negativa. La implementación en psudocódigo de C sería:
+\begin{lstlisting}[style=CStyle]
+int16_t conversionVelocidadDMXaVelocidadEncoder(uint8_t velocidad_dmx){
+	int16_t velocidad_referencia = 0;
+	
+	/* --- Convierto velocidad DMX a velocidad angular ---  */
+	referencia_velocidad = velocidad_dmx*VELOCIDAD_MAXIMA/255;
+	// Este resultado es siempre positivo
+	
+	/* --- Determino el signo de la velocidad ---  */
+	if(referenciaDePosicion - posicionActual > 0){
+		// La carga esta por debajo de la referencia:
+		// Entonces tengo que subir => la velocidad es negativa
+		referencia_velocidad = -referencia_velocidad;
+	} else {
+		// La carga esta por encima de la referencia:
+		// Entonces tengo que bajar => la velocidad es positiva
+		// La referencia ya es positiva, asi que no hago nada 
+	}
+	return(velocidad_referencia);
+}
+\end{lstlisting}
+
+\subsubsection{Cálculo de los controladores}
+El siguiente paso es implementar los controladores, que tienen que actualizar su estado cada T = período de muestreo. \\
+La manera más simple y modular de hacer esto es crear una funcion que actualice los valores de los controladores. Luego, esta función será llamada por otro módulo, el de aplicación, que se encargará de temporizar todas las tareas, desasociando el manejo de tiempo del módulo Controlador.
+
+La forma de los controladores de posición y velocidad se hallaron en la sección \ref{sec:3.1}, y se pueden ver en las ecuaciones \ref{eq:3.5} y \ref{eq:3.6}. La implementación en psudocódigo de C, siguiendo el esquema de la figura \ref{fig:2.1}, sería:
+
+\begin{lstlisting}[style=CStyle]
+void actualizacionControladores(void){
+
+	/* --- Calculo el controlador de posicion ---  */
+	posicion[k-1] = posicion[k]; // me guardo la posicion pasada
+	posicion[k] = Encoder_read(Encoder_MOTOR); // leo la posicion actual
+	ep[k] = posicion_referencia - posicion[k];// Calculo el error de posicion
+	rv_Cp[k] = (ep[k] >> 4) - (ep[k] >> 5); // Calculo el controlador de posicion
+	
+	/* --- Aplico el limitador de la salida del controlador de posicion --- */
+	if(rv_Cp[k] > referencia_velocidad_dmx){
+		rv = referencia_velocidad_dmx;
+	} else {
+		rv = rv_Cp[k];
+	}
+	
+	/* --- Calculo el controlador de velocidad ---  */
+	velocidad[k] = posicion[k] - posicion[k-1]; // Calculo velocidad actual
+	ev[k] = velocidad_referencia - velocidad[k]; // Calculo el error de velocidad
+	u_Cv[k] = u_Cv[k-1] + (ev[k] >> 1); // Calculo el controlador de velocidad
+	//u_Cv puede ser positiva o negativa
+	
+	/* --- Aplico el limitador de la salida del controlador de velocidad --- */
+	if( |u_Cv[k]| > limite_actuador){
+		u = signo(u_Cv[k])*limite_actuador;
+	} else {
+		u = u_Cv[k];
+	}
+	
+	/* --- Actuo sobre el motor --- */
+	// u puede ser positiva o negativa. 
+	// Si es positiva tengo que bajar la carga, y si es negativo subirla.
+	// Ademas, el ciclo de trabajo siempre es positivo
+	if(u < 0){
+		Grua_write_puenteH(Grua_CARGA_SUBIR);
+		Grua_write_pwm(-u);
+	} else {
+		Grua_write_puenteH(Grua_CARGA_BAJAR);
+		Grua_write_pwm(u);
+	}
+}
+\end{lstlisting}
 
 \subsubsection{Implementación}
 
+Para acceder al módulo se implementaron 3 funciones, una de inicialización, una de actualización de los controladores, y otra para el seteo de las referencias. Para que encargado de actualizar los controladores sepa cada cuanto debe ejecutar la tarea, se da acceso al período de muestreo a través de una definición.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=10cm,scale=1]{resources/3_27-moduloControlador.png}
+	\caption{Diagrama del módulo Controlador}
+	\label{fig:\thefigure}
+\end{figure}
+
 \subsection{Dipswitch}
+
+En la sección \ref{sec:3.4} se determinaron los valores de resistencias que se utilizarán. Ahora, cada combinación posible de estos valores de resistencia R1,R2,R3 y R4 tiene una salida analógica diferente. Como la idea es obtener la combinación a partir del valor analógico de salida lo primero es determinar la equivalencia entre ambas.\\
+
 
 \subsection{DMX}
 
 %\subsection{Diagrama de módulos de la librería de alto nivel}
 
 \section{Firmware del updown - Función principal} \label{sec:\thesection}
+
+\subsection{Maquina de estados}
+
+\subsubsection{Estado homing}
+
+\subsubsection{Estado de error}
+
+\subsubsection{Estado normal}
+
+\subsection{Operaciones en tiempo real}
+Planificador y despachador
+
+
 
 
