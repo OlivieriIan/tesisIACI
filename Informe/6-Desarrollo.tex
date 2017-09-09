@@ -981,7 +981,7 @@ void actualizacionControladores(void){
 
 \subsubsection{Implementación}
 
-Para acceder al módulo se implementaron 3 funciones, una de inicialización, una de actualización de los controladores, y otra para el seteo de las referencias. Para que encargado de actualizar los controladores sepa cada cuanto debe ejecutar la tarea, se da acceso al período de muestreo a través de una definición.
+Para acceder al módulo se implementaron 3 funciones, una de inicialización, una de actualización de los controladores, y otra para el seteo de las referencias, como se muestra en la figura \ref{fig:3.27}. Para que encargado de actualizar los controladores sepa cada cuanto debe ejecutar la tarea, se da acceso al período de muestreo a través de una definición.
 
 \begin{figure}[!ht]
 	\centering
@@ -991,11 +991,47 @@ Para acceder al módulo se implementaron 3 funciones, una de inicialización, un
 \end{figure}
 
 \subsection{Dipswitch}
+La función de este módulo es inferir qué llaves del dip-switch están activados a partir de su salida de tensión, que se traduce a valores analógicos en la placa. 
 
-En la sección \ref{sec:3.4} se determinaron los valores de resistencias que se utilizarán. Ahora, cada combinación posible de estos valores de resistencia R1,R2,R3 y R4 tiene una salida analógica diferente. Como la idea es obtener la combinación a partir del valor analógico de salida lo primero es determinar la equivalencia entre ambas.\\
+Para lograr esto simplemente se lee el valor analógico del dipswitch y utilizando la tabla \ref{table:3.5} se determina qué resistencias están activadas, equivalente a la posición de los switchs. \\
+Como estos valores tienen, como cualquier señal, un nivel de ruido de \(\pm\)3 unidades (aproximadamente 15mV) se considera válida una combinación de valores de resistencias dentro de un rango de valores analógicos. Por ejemplo, se considerará que la combinación es 0001 si el valor analógico leído está dentro del rango \(round([(91-0)/2,(177-91)/2])\). Estos valores no son arbitrarios, si no que es el promedio entre el valor analógico asociado a una combinación dada y los valores superior e inferior a este. Para el caso de 0001, el valor analógico asociado es 91, y el inferior y superior son 0 y 177, asociados a las combinaciones 0000 y 0010, respectivamente.\\
+De esta manera se implementa una función de lectura simplemente mirando en qué rango cae el valor analógico leido. La implementación en psudocódigo de C sería:
+\begin{lstlisting}[style=CStyle]
+if( 0 <= valor_analogico_dipswitch < (91-0)/2 ){
+	combinacion_dipswitch = 0000;
+}
+if( (91-0)/2 <= valor_analogico_dipswitch < (177-91)/2 ){
+	combinacion_dipswitch = 0001;
+}
+...
+if( (91-0)/2 <= valor_analogico_dipswitch < (177-91)/2 ){
+combinacion_dipswitch = 0001;
+}
+if( (640-623)/2 <= valor_analogico_dipswitch < (653-640)/2 ){
+	combinacion_dipswitch = 1110;
+}
+if( (653-640)/2 <= valor_analogico_dipswitch <= 1023 ){
+	combinacion_dipswitch = 1111;
+}
+\end{lstlisting}
 
+Para acceder al módulo se implementaron 3 funciones, una de inicialización y otra de lectura, como se muestra en la figura \ref{fig:3.28}.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=8cm,scale=1]{resources/3_28-moduloDipswitch.png}
+	\caption{Diagrama del módulo Dipswitch}
+	\label{fig:\thefigure}
+\end{figure}
 
 \subsection{DMX}
+
+El objetivo de este módulo es leer y decodificar los datos DMX que se reciben de un equipo DMX externo. Para esto se debe implementar un decodificador del formato de la trama de DMX presentado en la figura\ref{fig:1.8} de la sección \ref{sec:1.3}, subsección 3 (capa de enlace de datos).\\
+De esto vemos que el canal DMX se encuentra en el estado Idle por defecto (HIGH). Luego pasa al estado Break (Low) que indica que nuevos datos serán recibidos. Luego lo sigue el Start Code, que es un mensaje con formato 8N1, en donde los 8 bits de datos son 0, y finalmente los datos de los canales DMX.
+
+La forma de hacer esto es mediante una función que se ejecute durante la interrupción por recepción de la UART. Como el módulo UART se inicializa con un baudrate de 250KHz y formato de trama 8N2 se cumple con la especificación del estándar DMX. \\
+En esta función lo que se hace es:
+ 
 
 %\subsection{Diagrama de módulos de la librería de alto nivel}
 
