@@ -94,7 +94,7 @@ Para poder detectar estos errores lo primero que se hará es determinar la relac
 
 \subsection{Fin de carrera}
 La función principal del fin de carrera, un par de pulsadores en la base del equipo, es indicar cuándo el cable que sostiene la carga está completamente enrrollada para determinar la posición 0 o "home" del equipo, dado que este puede estar en cualquier posición al ser encendido.\\
-La función secundaria del fin de carrera es detectar posibles eventos indeseados. Por ejemplo, en su punto más bajo la carga se encontrará a 4 metros por debajo del 0 del updown, por lo que podría comenzar a oscilar debido a fuertes vientos o personas que muevan la carga. Por cómo está construido el fin de carrera si la carga oscila más alla de un ángulo de aproximadamente 30 grados el fin de carrera se accionará dando aviso de esto.
+La función secundaria del fin de carrera es detectar posibles eventos indeseados. Por ejemplo, en su punto más bajo la carga se encontrará a 4 metros por debajo del 0 del updown, por lo que podría comenzar a oscilar debido a fuertes vientos o personas que muevan la carga. Por cómo está construido el fin de carrera si la carga oscila más alla de un ángulo de aproximadamente 15 grados el fin de carrera se accionará dando aviso de esto.
 
 Para poder detectar estos errores se verificará que el fin de carrea no sea presionado fuera de la rutina de calibración de (homing). En caso de que sea presionado en estas condiciones se detendrá el equipo, se esperará un tiempo a que la oscilación baje, y intentarán reanudar las operaciones normales. En caso de que el fin de carrera siga presionado se accionará el freno, se detendrá el equipo completamente y se indicará sobre la existencia del error mediante el led de la placa de control (led interno).
 
@@ -131,7 +131,7 @@ Finalmente, todas las funciones y definiciones que pueden ser accedidas desde af
 Además, debido a políticas de Blackout, todo el software desarrollado debe ser entendible por todo el equipo de trabajo. Esto quiere decir que una de las metas para las funciones de las librerías a crear es que permitan un flujo entendible, y que los nombres de las funciones sean parecidas a las de Arduino ya que lo que se acostumbraba a utilizar en la empresa para la programación de sistemas embebidos.\\
 Para lograr este objetivo todas los módulos desarrollados tendrán una función de inicialización llamada "init", y de lectura y escritura, según corresponda, llamadas "read" y "write", respectivamente. 
 
-A contunuación se presentan algunos ejemplos de las convenciones que se usarán. Función de inicialización del módulo 1: Modulo1\_init(); Define del largo de un buffer genérido del modulo 3: Modulo3\_BUFFERGENERICO.
+A contunuación se presentan algunos ejemplos de las convenciones que se usarán. Función de inicialización del módulo 1: Modulo1\_init(); Define del largo de un buffer genérico del modulo 3: Modulo3\_BUFFERGENERICO.
 
 
 \subsection{Librerías de bajo nivel}
@@ -150,8 +150,8 @@ Entonces, para manejar los periféricos se creará una librería de bajo nivel q
 \end{itemize}
 
 \subsection{Librerías de alto nivel}
-Hay que tener en cuenta que no es lo mismo obtener un valor analógico leyendo un \textit{registro} (lugar para el almacenamiento de datos) del microcontrolador, que determinar qué conmutadores del dipswitch están activados leyendo 3 valores analógicos. Por lo tanto, se necesita una librería que sea más abstracata que la del manejo de periféricos para poder utilizar el hardware de esta aplicación en particular.\\
-Entonces, se creará una librería propia de la aplicación que constará de los siguientes módulos:
+Si bien la librería de bajo nivel permite acceder a las entradas y salidas del equipo, se necesita otra librería, de alto nivel, que utilice sus módulos para manejar el hardware como se espera. Por ejemplo, no es lo mismo obtener un valor analógico leyendo un \textit{registro} (lugar para el almacenamiento de datos) del microcontrolador, que determinar qué conmutadores del dipswitch están activados leyendo 3 valores analógicos, aunque ambas acciones involucren leer una entrada analógica.\\
+Entonces, se creará una librería más acorde a la aplicación y no tan genérica como la de bajo nivel, que constará de los siguientes módulos:
 \begin{itemize}
 	\item \textbf{Dipswitch}, que incluye la lectura de las llaves del dipswitch, y la escritura del led indicador externo.
 	\item \textbf{Grua}, que incluye el manejo del motor, del led interno, del freno y del fin de carrera.
@@ -161,7 +161,7 @@ Entonces, se creará una librería propia de la aplicación que constará de los
 \end{itemize}
 
 \subsection{Diagrama de módulos}
-De estas 2 librerías se obtiene el diagrama de módulos presentado en la figura \ref{fig:2.4}, el cual muestra su relación, dependencia y alcance. 
+De estas 2 librerías se obtiene el diagrama de módulos presentado en la figura \ref{fig:2.4}, el cual muestra su relación, dependencia y alcance. Por encima de ellas se encuentra la capa de aplicación, que hará uso de estas librerías, relacionandolas con el objetivo de que el Updown funcione como debe.
 
 \begin{figure}[!ht]
 	\centering
