@@ -7,7 +7,8 @@
 
 % ------------------- Colors --------------------------------------------------------------------------- %
 %color package
-\usepackage{xcolor}
+%\usepackage{xcolor}
+\usepackage[table]{xcolor}
 % ==== hyper references colors ==== %
 \definecolor{myLinkColor}{rgb}{0.6, 0.4, 0.1}
 \definecolor{myUrlColor}{rgb}{0.1, 0.1, 0.7}
@@ -18,6 +19,12 @@
 \definecolor{commentary}{rgb}{0.5, 0.5, 0.5} %invisible mode: \iffalse ... \fi
 \definecolor{FIXME}{rgb}{0.9, 0.1, 0.1} %changes have to be made here
 \definecolor{TODO}{rgb}{0.2, 0.8, 0.4} %replace this with something else. probably an image
+
+% ==== OpenOffice Draw colors ====
+\definecolor{OODlightblue}{RGB}{207, 231, 245}
+\definecolor{OODskyblue10}{RGB}{153, 204, 255}
+\definecolor{OODskyblue09}{RGB}{102, 153, 204}
+\definecolor{OODskyblue08}{RGB}{51, 102, 153}
 
 %Aplicar un color a un bloque de texto: \textcolor{FIXME}{ALGO}
 
@@ -158,24 +165,32 @@
 \definecolor{matlabNumber}{RGB}{255, 128, 102} 
 \definecolor{matlabKeyword}{RGB}{0, 0, 255} 
 
-\lstset{frame=tb,
-  language=Matlab,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  %basicstyle=, %change the properties of the text
-  identifierstyle=\color{black},
-  numberstyle=\color{matlabNumber},
-  keywordstyle=\color{matlabKeyword},
-  commentstyle=\color{matlabComment},
-  stringstyle=\color{matlabString},
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=3
+\definecolor{cComment}{RGB}{0, 128, 0} 
+\definecolor{cString}{RGB}{160, 32, 240} 
+\definecolor{cNumber}{RGB}{255, 128, 0} 
+\definecolor{cKeyword}{RGB}{128, 0, 255} 
+\definecolor{backgroundColour}{RGB}{227,231,245}
+
+\lstdefinestyle{CStyle}{
+	backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{cComment},
+	keywordstyle=\color{cKeyword},
+	numberstyle=\tiny\color{cNumber},
+	stringstyle=\color{cString},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C
 }
+
 % to inclode block of code: \lstinputlisting[language=language]{resources/sourceName.languageType}
 % to encapsulate code: \begin{lstlisting}[frame=single] code... \end{lstlisting}
 
@@ -217,7 +232,7 @@
 \input{4-Introduccion.tex}
 \input{5-Diseno.tex}
 \input{6-Desarrollo.tex}
-\input{7-Implementacion.tex}
+\input{7-Validacion.tex}
 \input{8-Conclusiones.tex}
 
 \end{document}

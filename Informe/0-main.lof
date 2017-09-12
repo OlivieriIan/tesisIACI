@@ -1,20 +1,52 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Ejemplo de escultura cin\IeC {\'e}tica movida por aire, por Anthony Howe. Fuente: \href {https://www.youtube.com/watch?v=N-1LpikCSR4}{LINK al video} }}{6}{figure.1.1}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Escultura cin\IeC {\'e}tica en el museo BMW. Fuente: \href {https://www.youtube.com/watch?v=HVhVClFMg6Y}{LINK al video} }}{7}{figure.1.2}
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Escultura cin\IeC {\'e}tica por parte de Build Up. Fuente: \href {https://www.youtube.com/watch?v=ICixCazf6-k}{LINK al video} }}{8}{figure.1.3}
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Shapeshifter, de High End Systems. Fuente: \href {https://www.youtube.com/watch?v=LIIE3zZscYY}{LINK al video} }}{8}{figure.1.4}
-\contentsline {figure}{\numberline {1.5}{\ignorespaces Consola Hog4, de High End Systems. Fuente: \href {https://www.highend.com/products/consoles}{LINK a la im\IeC {\'a}gen}}}{9}{figure.1.5}
-\contentsline {figure}{\numberline {1.6}{\ignorespaces Cable DMX con conector XLR5. Fuente: wikipedia}}{10}{figure.1.6}
-\contentsline {figure}{\numberline {1.7}{\ignorespaces Conexionado en una red DMX. Fuente: wikipedia}}{11}{figure.1.7}
-\contentsline {figure}{\numberline {1.8}{\ignorespaces Formato de la trama DMX. Fuente: \href {http://www.dmx512-online.com/packt.html}{LINK}}}{12}{figure.1.8}
-\contentsline {figure}{\numberline {1.9}{\ignorespaces Im\IeC {\'a}gen del Updown, desarrollado por la empresa Blackout}}{13}{figure.1.9}
-\contentsline {figure}{\numberline {1.10}{\ignorespaces Diagrama conceptual del equipo Updown}}{14}{figure.1.10}
-\contentsline {figure}{\numberline {1.11}{\ignorespaces Diagrama del sistema motor}}{15}{figure.1.11}
-\contentsline {figure}{\numberline {1.12}{\ignorespaces Diagrama del sistema motor}}{16}{figure.1.12}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Ejemplo de escultura cin\IeC {\'e}tica movida por aire, por Anthony Howe. Fuente: \href {https://www.youtube.com/watch?v=N-1LpikCSR4}{LINK al video} }}{10}{figure.1.1}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Escultura cin\IeC {\'e}tica en el museo BMW. Fuente: \href {https://www.youtube.com/watch?v=HVhVClFMg6Y}{LINK al video} }}{11}{figure.1.2}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Escultura cin\IeC {\'e}tica por parte de Build Up. Fuente: \href {https://www.youtube.com/watch?v=ICixCazf6-k}{LINK al video} }}{12}{figure.1.3}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Shapeshifter, de High End Systems. Fuente: \href {https://www.youtube.com/watch?v=LIIE3zZscYY}{LINK al video} }}{12}{figure.1.4}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Consola Hog4, de High End Systems. Fuente: \href {https://www.highend.com/products/consoles}{LINK a la im\IeC {\'a}gen}}}{13}{figure.1.5}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Cable DMX con conector XLR5. Fuente: wikipedia}}{14}{figure.1.6}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Conexionado en una red DMX. Fuente: wikipedia}}{15}{figure.1.7}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Formato de la trama DMX. Fuente: \href {http://www.dmx512-online.com/packt.html}{LINK}}}{16}{figure.1.8}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Im\IeC {\'a}gen del Updown, desarrollado por la empresa Blackout}}{17}{figure.1.9}
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Diagrama conceptual del equipo Updown}}{18}{figure.1.10}
+\contentsline {figure}{\numberline {1.11}{\ignorespaces Diagrama del sistema motor}}{19}{figure.1.11}
+\contentsline {figure}{\numberline {1.12}{\ignorespaces Diagrama del sistema motor}}{20}{figure.1.12}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Esquema de control a implementar}}{21}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Diagrama de uno de los 3 divisores del dipswitch}}{24}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Diagrama de m\IeC {\'o}dulos del firmware}}{26}{figure.2.3}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Esquema de control a implementar}}{25}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Modelo mec\IeC {\'a}nico de la planta}}{26}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Diagrama de uno de los 3 divisores del dipswitch}}{29}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Diagrama de m\IeC {\'o}dulos del firmware}}{32}{figure.2.4}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama del m\IeC {\'o}dulo DigitalIO}}{35}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Diagrama del m\IeC {\'o}dulo ADC}}{37}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Ejemplo variaci\IeC {\'o}n ciclo de trabajo al cambiar ICR1}}{39}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Diagrama del m\IeC {\'o}dulo PWM}}{40}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Diagrama del m\IeC {\'o}dulo EXINT}}{42}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Diagrama del m\IeC {\'o}dulo UART}}{43}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Diagrama del m\IeC {\'o}dulo Tick}}{45}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Forma de la se\IeC {\~n}al en el canal para una 'p' con formato 8N1}}{46}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Diagrama del m\IeC {\'o}dulo SUART}}{47}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Ajuste mediante funci\IeC {\'o}n cuadr\IeC {\'a}tica}}{49}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Ajuste mediante una \IeC {\'u}nica recta}}{50}{figure.3.11}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Ajuste mediante una recta cada 25cm}}{51}{figure.3.12}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Ajuste mediante una recta cada 100cm}}{52}{figure.3.13}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Respuestas del sistema en bajada}}{53}{figure.3.14}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Respuestas del sistema en subida}}{54}{figure.3.15}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Entrada del sistema para la identificaci\IeC {\'o}n de par\IeC {\'a}metros}}{54}{figure.3.16}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Salida de velocidad del sistema}}{55}{figure.3.17}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Comparaci\IeC {\'o}n entre datos predichos con el modelo 2 y los datos reales}}{57}{figure.3.18}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Resultados para el controlador de velocidad inicial}}{60}{figure.3.19}
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Resultados del equipo 1 para el controlador de velocidad final}}{61}{figure.3.20}
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Resultados del equipo 2 para el controlador de velocidad final}}{62}{figure.3.21}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Resultados para el controlador de posici\IeC {\'o}n inicial}}{63}{figure.3.22}
+\contentsline {figure}{\numberline {3.23}{\ignorespaces Resultados para el controlador de posici\IeC {\'o}n final}}{64}{figure.3.23}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces Ejemplo estado de los canales AB del encoder de disco}}{66}{figure.3.24}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces Diagrama del m\IeC {\'o}dulo Encoder}}{67}{figure.3.25}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces Diagrama del m\IeC {\'o}dulo Grua}}{68}{figure.3.26}
+\contentsline {figure}{\numberline {3.27}{\ignorespaces Diagrama del m\IeC {\'o}dulo Controlador}}{72}{figure.3.27}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces Diagrama del m\IeC {\'o}dulo Dipswitch}}{73}{figure.3.28}
+\contentsline {figure}{\numberline {3.29}{\ignorespaces Maquina de estados ejecutada en cada interrupci\IeC {\'o}n de la UART}}{74}{figure.3.29}
+\contentsline {figure}{\numberline {3.30}{\ignorespaces Diagrama del m\IeC {\'o}dulo DMX}}{75}{figure.3.30}
+\contentsline {figure}{\numberline {3.31}{\ignorespaces M\IeC {\'a}quina de estados ejecutada en el bucle principal de la aplicaci\IeC {\'o}n}}{79}{figure.3.31}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
