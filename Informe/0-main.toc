@@ -90,7 +90,7 @@
 \contentsline {subsubsection}{\numberline {3.3.1.1}Pruebas y resultados}{48}{subsubsection.3.3.1.1}
 \contentsline {subsubsection}{\numberline {3.3.1.2}Selecci\IeC {\'o}n de la funci\IeC {\'o}n de ajuste}{48}{subsubsection.3.3.1.2}
 \contentsline {subsection}{\numberline {3.3.2}Determinaci\IeC {\'o}n de la velocidad m\IeC {\'a}xima}{50}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Obtenci\IeC {\'o}n del per\IeC {\'\i }odo de muestreo}{50}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.3}Obtenci\IeC {\'o}n del per\IeC {\'\i }odo de muestreo}{51}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Obtenci\IeC {\'o}n del modelo de la planta}{52}{subsection.3.3.4}
 \contentsline {subsubsection}{\numberline {3.3.4.1}Toma de muestras}{52}{subsubsection.3.3.4.1}
 \contentsline {subsubsection}{\numberline {3.3.4.2}Modelos propuestos}{52}{subsubsection.3.3.4.2}
@@ -126,17 +126,15 @@
 \contentsline {subsubsection}{\numberline {3.5.5.1}Objetivo}{73}{subsubsection.3.5.5.1}
 \contentsline {subsubsection}{\numberline {3.5.5.2}Desarrollo}{73}{subsubsection.3.5.5.2}
 \contentsline {subsubsection}{\numberline {3.5.5.3}Acceso}{75}{subsubsection.3.5.5.3}
-\contentsline {section}{\numberline {3.6}Firmware del updown - Capa de Aplicaci\IeC {\'o}n}{75}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Objetivo}{75}{subsection.3.6.1}
+\contentsline {section}{\numberline {3.6}Firmware del updown - Capa de Aplicaci\IeC {\'o}n}{76}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Objetivo}{76}{subsection.3.6.1}
 \contentsline {subsection}{\numberline {3.6.2}Desarrollo}{76}{subsection.3.6.2}
 \contentsline {subsubsection}{\numberline {3.6.2.1}Inicializaci\IeC {\'o}n del sistema}{76}{subsubsection.3.6.2.1}
-\contentsline {subsubsection}{\numberline {3.6.2.2}Bucle principal}{76}{subsubsection.3.6.2.2}
-\contentsline {subsubsection}{\numberline {3.6.2.3}Planificador}{77}{subsubsection.3.6.2.3}
-\contentsline {chapter}{\numberline {4}Implementaci\IeC {\'o}n}{78}{chapter.4}
-\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o}n del cap\IeC {\'\i }tulo}{78}{section.4.1}
-\contentsline {section}{\numberline {4.2}Configuraci\IeC {\'o}n de la HOG}{78}{section.4.2}
-\contentsline {section}{\numberline {4.3}Validaci\IeC {\'o}n}{78}{section.4.3}
-\contentsline {chapter}{\numberline {5}Conclusiones}{79}{chapter.5}
-\contentsline {section}{\numberline {5.1}Conclusiones}{79}{section.5.1}
-\contentsline {section}{\numberline {5.2}Mejoras a futuro}{79}{section.5.2}
-\contentsline {section}{\numberline {5.3}Referencias utilizadas}{79}{section.5.3}
+\contentsline {subsubsection}{\numberline {3.6.2.2}Planificador y despachador de tareas}{76}{subsubsection.3.6.2.2}
+\contentsline {subsubsection}{\numberline {3.6.2.3}Bucle principal}{78}{subsubsection.3.6.2.3}
+\contentsline {chapter}{\numberline {4}Validaci\IeC {\'o}n}{81}{chapter.4}
+\contentsline {section}{\numberline {4.1}Completar}{81}{section.4.1}
+\contentsline {chapter}{\numberline {5}Conclusiones}{82}{chapter.5}
+\contentsline {section}{\numberline {5.1}Conclusiones}{82}{section.5.1}
+\contentsline {section}{\numberline {5.2}Mejoras a futuro}{82}{section.5.2}
+\contentsline {section}{\numberline {5.3}Referencias utilizadas}{82}{section.5.3}

@@ -445,7 +445,7 @@ El acceso al módulo se realiza a través 2 funciones, como se muestra en la fig
 \subsubsection{Pruebas y resultados}
 Como se mencionó en la sección \ref{sec:2.3}, subsección 3, la distancia lineal recorrida por la carga varía según cuán enrollado está el cable en el carrete. La forma que se tiene de detectar que el cable se desenrrolla es a través del encoder del motor, que mide la posición angular de su eje, y por consiguiente del disco, que contiene el cable que sostiene la carga. Lo que hay que hacer entonces es determinar la relación entre posición angular y lineal.
 
-Para determinar la relación entre estas 2 variables se marcó el cable que sostiene la carga cada 25cm, tomando como 0 el cable completamente enrollado. Luego, a medida que se desenrrollaba el cable se midió el valor de la cuenta de encoder del motor. Los resultados obtenidos se pueden encontrar en la tabla \ref{table:3.2}.
+Para determinar la relación entre estas 2 variables se marcó el cable que sostiene la carga cada 25cm, tomando como 0 el cable completamente enrollado. Luego, a medida que se desenrrollaba el cable se midió el valor de la cuenta de encoder del motor y de disco. Los resultados obtenidos se pueden encontrar en la tabla \ref{table:3.2}.
 
 \begin{table}[!ht]
 	\begin{center}
@@ -456,12 +456,16 @@ Para determinar la relación entre estas 2 variables se marcó el cable que sost
 			\rowcolor{OODlightblue}
 			Distancia [cm] & 0 & 25 & 50 & 75 & 100 & 125 & 150 & 175 & 200  \\
 			\hline
-			Encoder & 0 & 1130 & 2250 & 3430 & 4630 & 5830 & 7130 & 8400 & 9730 \\
+			Encoder mot. & 0 & 1130 & 2250 & 3430 & 4630 & 5830 & 7130 & 8400 & 9730 \\
+			\hline
+			Encoder disc. & 0 & 8 & 17 & 26 & 35 & 44 & 54 & 64 & 74 \\ 
 			\hline \hline
 			\rowcolor{OODlightblue}
 			Distancia [cm]  & 225 & 250 & 275 & 300 & 325 & 350 & 375 & 400 & \\
 			\hline
-			Encoder  & 11120 & 12530 & 14020 & 15530 & 17130 & 18770 & 20520 & 22330 & \\ 
+			Encoder mot. & 11120 & 12530 & 14020 & 15530 & 17130 & 18770 & 20520 & 22330 & \\
+			\hline 
+			Encoder disc. & 85 & 96 & 106 & 118 & 131 & 143 & 157 & 170 & \\ 
 			\hline
 		\end{tabular}
 	\end{center}
@@ -469,8 +473,10 @@ Para determinar la relación entre estas 2 variables se marcó el cable que sost
 	\label{table:\thetable}
 \end{table}
 
+De estos resultados se puede ver que la relación entre las cuentas de motor y de disco es de aproximadamente 131 a 1. Cualquier gran desviación de esta relación significa que ocurrió algún problema o con las cuentas del motor o con la del disco. Esto puede incluir situaciones como: que un sensor del encoder de disco dejó de funcionar, que un cable se haya cortado, o la más importante, que la correa se corte. Si esto último sucede las cuentas del motor incrementarán a una tasa mucho mayor que las del disco, generando una gran diferencia entre la relación normal de ambas cuentas.
+
 \subsubsection{Selección de la función de ajuste}
-De la figura \ref{fig:3.10} se puede ver que la relación entre cuentas de encoder y distancia puede ser ajustada con un polinomio de grado 2 (función cuadrática). En dicha figura la función de ajuste cuadrática es \(cuentaEncoder = f(distancia) = 0.0356*dist^2 + 41.0180*dist + 101.2797\)\\.     
+De la figura \ref{fig:3.10} se puede ver que la relación entre cuentas de encoder y distancia puede ser ajustada con un polinomio de grado 2 (función cuadrática). En dicha figura la función de ajuste cuadrática es \(cuentaEncoder = f(distancia) = 0.0356*dist^2 + 41.0180*dist + 101.2797\).\\     
 El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisones. En la siguiente \href{http://www.atmel.com/Images/doc0936.pdf}{nota de aplicación de ATMEL} se puede ver que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
 
 \begin{figure}[!ht]
@@ -507,7 +513,6 @@ Una solución intermedia es ajustar los datos con una recta por cada 100cm (1 me
 	\label{fig:\thefigure}
 \end{figure}
 
-\textcolor{FIXME}{Nota: todos los gráficos fueron obtenidos utilizando el script de Matlab \textit{relacionEncoderDistancia.m}, adjuntado con este informe.}
 
 \subsection{Determinación de la velocidad máxima}
 El método utilizado para determinar la velocidad máxima a la que el equipo puede funcionar es hacer subir una carga de 3Kg inyectándole al driver del  motor un PWM de ciclo de trabajo de 100\%. Es necesario que la prueba sea en subida y no en bajada ya que la máxima velocidad posible debe ser igual en ambos casos, y en bajada seguro necesito menos fuerza para alcanzar la máxima velocidad en subida, por lo que la limitante es la segunda. \\
@@ -538,8 +543,6 @@ Para esto se realizaron varias pruebas tomando como 0 de posición 2000 cuentas 
 Los resultados de estas pruebas se pueden ver en las figuras \ref{fig:3.14} y \ref{fig:3.15}. Allí se ve que durante la bajada la salida se estabiliza a los 250ms, mientras que para la subida lo hace a los 50ms. Esto genera un problema, ya que el período de muestreo suele tomarse de 5 a 10 veces más rápido que el tiempo de establecimiento del sistema, y aquí tenemos 2 tiempos distintos. \\
 
 Como la solución no es directa se probarán distintos períodos de muestreo durante la caracterización de la planta y diseño del controlador para determinar cuál es el indicado.
-
-\textcolor{FIXME}{Nota: todos los gráficos fueron obtenidos utilizando el script de Matlab \textit{graficos1entrada.m}, adjuntado con este informe.}
 
 \subsection{Obtención del modelo de la planta}
 \subsubsection{Toma de muestras}
@@ -795,7 +798,7 @@ El procedimiento para determinar una posible combinación de R1, R2, R3, R4 y R 
 Ahora, lo importante es encontrar R1, R2, R3, R4 y R tales que los 16 valores de Vo encontrados sean distintas y estén lo más separados posibles\\
 Como el método propuesto es de prueba y error se establece una diferencia mínima que todas las Vo deben tener entre sí. Como el canal analógico del microcontrolador tiene una resolución de 10 bits (1024) y el rango de tensión de entrada va de 0 a 5V el paso más chico que puede medir el ADC es de \(5V/1024 \approx 5mV\). Entonces, se elige como diferencia mínima 10 unidades del ADC, que equivalen a aproximadamente 50mV.
 
-Para determinar los valores se \textcolor{FIXME}{utilizó el script de Matlab "calculoResistenciasDip.m", adjuntado junto a este documento}, utilizando como Vcc de la figura \ref{fig:2.3} 5V, ya que es la tensión de trabajo de la placa de control. De varias pruebas se encontró que para la combinación de resistencias R1=10K\(\Omega\), R2=4,7K\(\Omega\), R3=2,2K\(\Omega\), R4=1K\(\Omega\) y R=1K\(\Omega\) la mímima diferencia entre todas las Vo es de 67mV.\\
+Para determinar los valores se usó como tensión de alimentación Vcc (referirse a la figura \ref{fig:2.3}) 5V, ya que es la tensión de trabajo de la placa de control, y de varios intentos de prueba y error se encontró que para la combinación de resistencias R1=10K\(\Omega\), R2=4,7K\(\Omega\), R3=2,2K\(\Omega\), R4=1K\(\Omega\) y R=1K\(\Omega\) la mímima diferencia entre todas las Vo es de 67mV.\\
 En la tabla \ref{table:3.5} se presentan los valores analógicos resultantes de todas las combinaciones posibles de las resistencias encontradas. La primera fila de dicha tabla muestra los bits, ordenados de mas significativo (msb) a menos significativo (lsb), que equivalen al estado de R4 (msb),R3,R2 y R1 (lsb). Por ejemplo, si el switch de R4 está activado el bit msb estará en 1. En la segunda fila se muestra el valor analógico calculado teóricamente con el script de Matlab.\\
 Con el objetivo de verificar que los valores analógicos obtenidos son lógicos se armó un dipswitch con estos valores de resistencia y se midió su salida haciendo uso del módulo ADC, datos que se ven en la fila 3 de la tabla.
 
@@ -1128,6 +1131,7 @@ En conclusión, el acceso al módulo se realiza a través 3 funciones, como se m
 	\item \textbf{DMX\_init()}, que inicializa el periférico UART con la función que actualiza la máquina de estados de la figura \ref{fig:3.29} y que pone por defecto el canal inicial en 1.
 	\item \textbf{DMX\_read(canal)}, para recuperar los datos de posición y velocidad, accesibles a través de los macros DMX\_CANAL\_POSICION y DMX\_CANAL\_VELOCIDAD.
 	\item \textbf{DMX\_write(canalInicial)}, para seleccionar el canal inicial
+	\item \textbf{DMX\_estaActivo()}, que indica mediante un LOW si transcurrió más de un segundo desde la última vez que datos válidos fueron recibidos, y HIGH en caso contrario. Con esto se puede detectar la pérdida de DMX.
 \end{itemize}
 
 \begin{figure}[!ht]
@@ -1146,28 +1150,92 @@ En conclusión, el acceso al módulo se realiza a través 3 funciones, como se m
 La función de la capa de aplicación, la capa más alta de la figura \ref{fig:2.4} es hacer uso de las librerías desarrolladas para hacer que el Updown se comporte como es deseado, o sea, que cumpla con los objetivos presentados en la sección \ref{sec:1.5}.
 
 \subsection{Desarrollo}
-La capa de aplicación es la que tiene la función principal del programa, la función \textit{main}. Dentro de ella, como en cualquier firmware para sistemas embebidos, hay 2 grandes secciones: la sección de inicialización o setup y la del bucle principal, o "super loop". Adicionalmente, como hay tareas que necesitan ejecutarse cada cierto tiempo se hace uso de un esquema planificador-despachador, en donde el despachador se ejecuta en el bucle principal mientras que el planificador lo hace en la interrupción de Tick.
+La capa de aplicación es la que tiene la función principal del programa, la función \textit{main}. Dentro de ella, como en cualquier firmware para sistemas embebidos, hay 2 grandes secciones: la sección de inicialización o setup y la del bucle principal, o "super loop". Adicionalmente, como hay acciones que deben suceder cada un tiempo definido se hace uso de un esquema planificador-despachador, siguiendo la arquitectura \textit{time-triggered cooperativa}.
 
 \subsubsection{Inicialización del sistema}
 
-Dentro de la sección de inicialización simplemente se habilitan todos los módulos que el sistema necesite para funcionar con su configuración correspondiente. Esto incluye los módulos: Encoder, Grua, Tick, Dipswitch y DMX, que además se configura para tener el address indicado por el dipswitch. Adicionalmente, se asocia al módulo Tick la función planificadora, sobre la cual se desarrollará más adelante.
+Dentro de la sección de inicialización simplemente se habilitan todos los módulos que el sistema necesite para funcionar con su configuración correspondiente. Esto incluye los módulos: Encoder, Grua, Tick, Dipswitch y DMX, que además se configura para tener el address indicado por el dipswitch. Adicionalmente, se asocia al módulo Tick el planificador de tareas, sobre la cual se desarrollará más adelante.
 
 El módulo SUART, por otro lado, solo se utilizó para la etapa de pruebas y debbug. En el firmware final del equipo no se inicializa ya que no hay nada que depurar y solo deterioraría el rendimiento del sistema a causa de los recursos que consume. 
+
+\subsubsection{Planificador y despachador de tareas}
+En este proyecto hay varias tareas que tienen que ser ejecutadas periódicamente, como por ejemplo la actualización del controlador, que se hace cada 20ms. Para resolver esto se implementa el esquema de planificador-despachador, en donde el planificador determina el momento en el que ciertas tareas están listas para ejecutarse y el despachador las ejecuta cuando ese momento.
+
+En esta aplicación al planificador se lo ejecuta durante cada interrupción del Tick. Como cada tick ocurre cada 1 milisegundo, sencillamente se cuentan los ticks y se habilita la ejecución de las tareas que correspondan cuando se alcance el tiempo de ejecución asociada a ellas. Por ejemplo, la actualización del controlador se activa una vez cada 20 ticks (que equivalen a 20ms).\\
+Para evitar el solapamiento de tareas se hace uso de un retardo que se activa únicamente en la primera ejecución de la tarea, desfasandolas de forma tal que nunca se pisen. \\
+Las tareas que el planificador habilita para que se ejecuten en este proyecto son:
+\begin{itemize}
+	\item Actualización del controlador, ejecutada cada 20 ticks (20ms) con un retardo inicial de 0 ticks.
+	\item Actualización del canal inicial de DMX, cada 1000 ticks (1 segundo) con un retardo inicial de 1 tick.
+	\item Comparación de los valores del encoder de motor y de disco, cada 100 ticks (100ms) con un retardo inicial de 2 ticks.
+	\item Cambiar el estado del led externo si hay señal de DMX presente, cada 250 ticks (250ms) con un retardo inicial de 3 ticks.
+\end{itemize}
+Un ejemplo de planificador en psuedocódico de C sería:
+\begin{lstlisting}[style=CStyle]
+void planificador(void){
+	// funcion ejecutada en cada interrupcion del Tick
+	static int16_t tarea1_contador = tarea1_retardo;
+	static int16_t tarea2_contador = tarea2_retardo;
+	
+	// Todas las cuentas se miden en multiplos de la base de tiempo
+	if(++tarea1_contador == tarea1_tiempo_ejecucion){
+		tarea1_contador = 0;
+		gTarea1_ejecutar = TRUE; // Variable global, visible por el despachador
+	}
+	if(++tarea2_contador == tarea2_tiempo_ejecucion){
+		tarea2_contador = 0;
+		gTarea2_ejecutar = TRUE; // Variable global, visible por el despachador
+	}
+}
+\end{lstlisting}
+
+El despachador en este proyecto simplemente ejecuta las tareas que el planificador habilita, sin utilizar un método de priorización complejo debido a que, como se mencionó antes, cada tarea tiene asociado un retardo de tiempo para evitar que se solapen.\\
+A continaación se detalla qué hacen las 4 despachar y el orden en que aparecen en la rutina despachador:
+\begin{enumerate}
+	\item Actualización del controlador: se llama a la función \textit{Controlador\_update()}.
+	\item Actualización del canal inicial de DMX: se asocia el valor del dipswitch con el canal inicial de DMX haciendo uso de las funciones en C \textit{DMX\_write(Dipswitch\_read() + 1)}. El +1 es debido a que la salida de Dipswitch\_read va de 0 a 511, y los canales DMX van de 1 a 512.
+	\item Comparación de los valores del encoder de motor y de disco: se verifica que la relación hallada en la sección \ref{sec:3.3}, subsección 1, a través de la tabla \ref{fig:3.2} (que 1 cuenta de encoder de disco equivale a aproximadamente 131 del de motor), se mantenga. Como no es una relación que se cumple estrictamente para todo el rango se permite una tolerancia de +-500 cuentas de encoder de motor, haciendo que la comparación sea: \( cuentas\_encoder\_motor = cuentas\_encoder\_disco*131 \pm TOLERANCIA \).
+	\item Cambiar el estado del led externo si hay señal de DMX presente: simplemente se alterna el estado del led externo, acción muy común para indicar que la señal llega correctamente en esclavos DMX.
+\end{enumerate}
+Un ejemplo de despachador en psuedocódico de C sería:
+\begin{lstlisting}[style=CStyle]
+void despachador(void){
+	if(gTarea1_ejecutar){
+		gTarea1_ejecutar = FALSE;
+		tarea1();
+	}
+	if(gTarea2_ejecutar){
+		gTarea2_ejecutar = FALSE;
+		tarea2();
+	}
+}
+\end{lstlisting}
+
 
 \subsubsection{Bucle principal}
 En el bucle principal del programa se ejecuta la máquina de estados que se muestra en la figura \ref{fig:3.31}. 
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=8cm,scale=1]{resources/3_31-mefBuclePrincipal.png}
+	\includegraphics[width=16cm,scale=1]{resources/3_31-mefBuclePrincipal.png}
 	\caption{Máquina de estados ejecutada en el bucle principal de la aplicación}
 	\label{fig:\thefigure}
 \end{figure}
 
-\textcolor{FIXME}{FALTA DESARROLLAR ACA}
+A continuación se detalla el funcionamiento de la MEF:
+\begin{itemize}
+	\item El estado inicial, luego de configurar todos los módulos, es el Modo de calibración. En este módo la carga sube muy lentamente hasta tocar el fin de carrera (FDC). Cuando este es alcanzado se bajan 10cm e inicializa las cuentas de los encoders en 0, haciendo que este sea el 0 del sistema. En caso que la carga no toque el fin de carrera dentro de los 2 minutos, o que no baje los 10 cm dentro de 10 segundos, se considerará que hubo un error de calibración y se pasa al modo error. En caso contrario, el sistema pasa al Modo de funcionamiento normal.
+	\item El estado en el cual el sistema se encontrará la mayoría del tiempo, siempre que todo funcione correctamente, es el Modo normal. En este modo se: . 
+	\begin{itemize}
+		\item Ejecuta el despachador de tareas. Como se mencionó anteriormente esto incluye la actualización del controlador, cambiar de estado el led externo si hay señal de DMX presente, verificar que el fin de carrera no haya sido presionado incorrectamente, y que la relación de cuentas se mantenga dentro de una tolerancia. En caso que se pierda la relación entre los encoders se pasa al Modo error.
+		\item Comprueba continuamente el fin de carrera para verificar que haya habido una activación indebida del mismo. En caso de que esto suceda se parará el sistema por 6 segundos y se volverá al estado de calibración. Esto suprime las oscilaciones en la carga, que es la causa más probable de la activación indebida del fin de carrera. En caso de que el FDC se mantenga más de 1 minuto activado se pasa al Modo error.
+		\item Verifica que el DMX esté activado. En caso de estarlo se lee la información de posición y velocidad del módulo DMX y se la pasa al módulo controlador haciendo uso de las funciones en C \textit{ Controlador\_write(posicionDMX, velocidadDMX)}, siendo estos 2 parámetros \textit{DMX\_read(DMX\_CANAL\_POSICION)} y \textit{DMX\_read(DMX\_CANAL\_VELOCIDAD))}, respectivamente. Si no está activo se sube la carga lentamente hasta el 0 de posición y se mantiene allí hasta recuperar la señal.
+	\end{itemize}
+	\item Ante cualquier falla el equipo entra a un modo de error, en donde se acciona el freno y se deshabilita el motor. No hay forma de volver de este modo, por lo que el equipo debe ser por lo menos reiniciado para que pueda seguir. Según el error causante de que este estado haya sido accedido se hace parpadear al led interno a una determinada frecuencia: por error en la calibración el led interno parpadea a una frecuencia de 10 veces por segundo, si es por error de encoders 2 veces por segundo, y si es por fin de carrera 1 vez cada 2 segundos.
+\end{itemize}
 
 
-\subsubsection{Planificador}
+
 
 
 
