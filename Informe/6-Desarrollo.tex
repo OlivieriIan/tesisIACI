@@ -869,7 +869,7 @@ Siguiendo este patrón se implementó la siguiente lógica de cuenta para ambos 
 			\hline
 		\end{tabular}
 	\end{center}
-	\caption{Error RMSE para los 12 modelos propuestos}
+	\caption{Sentido según el estado del canal B durante las transiciones del canal A}
 	\label{table:\thetable}
 \end{table}
 
@@ -1223,16 +1223,17 @@ En el bucle principal del programa se ejecuta la máquina de estados que se mues
 \end{figure}
 
 A continuación se detalla el funcionamiento de la MEF:
+
+El estado inicial, luego de configurar todos los módulos, es el Modo de calibración. En este módo se desactiva el freno (se permite que la carga pueda bajar) y se sube la carga muy lentamente hasta tocar el fin de carrera (FDC). Cuando esto ocurre se bajan 10cm e inicializa las cuentas de los encoders en 0, haciendo que este sea el 0 del sistema. En caso que la carga no toque el fin de carrera dentro de los 2 minutos, o que no baje los 10 cm dentro de 10 segundos, se considerará que hubo un error de calibración y se pasa al modo error. En caso contrario, el sistema pasa al Modo de funcionamiento normal. El freno queda desactivado de aquí en adelante para permitir el libre movimiento de la carga.
+
+El estado en el cual el sistema se encontrará la mayoría del tiempo, siempre que todo funcione correctamente, es el Modo normal. En este modo se:
 \begin{itemize}
-	\item El estado inicial, luego de configurar todos los módulos, es el Modo de calibración. En este módo la carga sube muy lentamente hasta tocar el fin de carrera (FDC). Cuando este es alcanzado se bajan 10cm e inicializa las cuentas de los encoders en 0, haciendo que este sea el 0 del sistema. En caso que la carga no toque el fin de carrera dentro de los 2 minutos, o que no baje los 10 cm dentro de 10 segundos, se considerará que hubo un error de calibración y se pasa al modo error. En caso contrario, el sistema pasa al Modo de funcionamiento normal.
-	\item El estado en el cual el sistema se encontrará la mayoría del tiempo, siempre que todo funcione correctamente, es el Modo normal. En este modo se: . 
-	\begin{itemize}
-		\item Ejecuta el despachador de tareas. Como se mencionó anteriormente esto incluye la actualización del controlador, cambiar de estado el led externo si hay señal de DMX presente, verificar que el fin de carrera no haya sido presionado incorrectamente, y que la relación de cuentas se mantenga dentro de una tolerancia. En caso que se pierda la relación entre los encoders se pasa al Modo error.
-		\item Comprueba continuamente el fin de carrera para verificar que haya habido una activación indebida del mismo. En caso de que esto suceda se parará el sistema por 6 segundos y se volverá al estado de calibración. Esto suprime las oscilaciones en la carga, que es la causa más probable de la activación indebida del fin de carrera. En caso de que el FDC se mantenga más de 1 minuto activado se pasa al Modo error.
-		\item Verifica que el DMX esté activado. En caso de estarlo se lee la información de posición y velocidad del módulo DMX y se la pasa al módulo controlador haciendo uso de las funciones en C \textit{ Controlador\_write(posicionDMX, velocidadDMX)}, siendo estos 2 parámetros \textit{DMX\_read(DMX\_CANAL\_POSICION)} y \textit{DMX\_read(DMX\_CANAL\_VELOCIDAD))}, respectivamente. Si no está activo se sube la carga lentamente hasta el 0 de posición y se mantiene allí hasta recuperar la señal.
-	\end{itemize}
-	\item Ante cualquier falla el equipo entra a un modo de error, en donde se acciona el freno y se deshabilita el motor. No hay forma de volver de este modo, por lo que el equipo debe ser por lo menos reiniciado para que pueda seguir. Según el error causante de que este estado haya sido accedido se hace parpadear al led interno a una determinada frecuencia: por error en la calibración el led interno parpadea a una frecuencia de 10 veces por segundo, si es por error de encoders 2 veces por segundo, y si es por fin de carrera 1 vez cada 2 segundos.
+	\item Ejecuta el despachador de tareas. Como se mencionó anteriormente esto incluye la actualización del controlador, cambiar de estado el led externo si hay señal de DMX presente, verificar que el fin de carrera no haya sido presionado incorrectamente, y que la relación de cuentas se mantenga dentro de una tolerancia. En caso que se pierda la relación entre los encoders se pasa al Modo error.
+	\item Comprueba continuamente el fin de carrera para verificar que haya habido una activación indebida del mismo. En caso de que esto suceda se parará el sistema por 6 segundos y se volverá al estado de calibración. Esto suprime las oscilaciones en la carga, que es la causa más probable de la activación indebida del fin de carrera. En caso de que el FDC se mantenga más de 1 minuto activado se pasa al Modo error.
+	\item Verifica que el DMX esté activado. En caso de estarlo se lee la información de posición y velocidad del módulo DMX y se la pasa al módulo controlador haciendo uso de las funciones en C \textit{ Controlador\_write(posicionDMX, velocidadDMX)}, siendo estos 2 parámetros \textit{DMX\_read(DMX\_CANAL\_POSICION)} y \\ \textit{DMX\_read(DMX\_CANAL\_VELOCIDAD))}, respectivamente. Si no está activo se sube la carga lentamente hasta el 0 de posición y se mantiene allí hasta recuperar la señal.
 \end{itemize}
+
+Ante cualquier falla el equipo entra a un modo de error, en donde se acciona (se evita que la carga baje) el freno y se deshabilita el motor. No hay forma de volver de este modo, por lo que el equipo debe ser por lo menos reiniciado para que pueda seguir. Según el error causante de que este estado haya sido accedido se hace parpadear al led interno a una determinada frecuencia: por error en la calibración el led interno parpadea a una frecuencia de 10 veces por segundo, si es por error de encoders 2 veces por segundo, y si es por fin de carrera 1 vez cada 2 segundos.
 
 
 

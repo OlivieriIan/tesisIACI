@@ -10,11 +10,11 @@
 \contentsline {figure}{\numberline {1.9}{\ignorespaces Im\IeC {\'a}gen del Updown, desarrollado por la empresa Blackout}}{17}{figure.1.9}
 \contentsline {figure}{\numberline {1.10}{\ignorespaces Diagrama conceptual del equipo Updown}}{18}{figure.1.10}
 \contentsline {figure}{\numberline {1.11}{\ignorespaces Diagrama del sistema motor}}{19}{figure.1.11}
-\contentsline {figure}{\numberline {1.12}{\ignorespaces Diagrama del sistema motor}}{20}{figure.1.12}
+\contentsline {figure}{\numberline {1.12}{\ignorespaces Diagrama de la placa de control y su interacci\IeC {\'o}n con el hardware externo}}{20}{figure.1.12}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Esquema de control a implementar}}{25}{figure.2.1}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Modelo mec\IeC {\'a}nico de la planta}}{26}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Diagrama de uno de los 3 divisores del dipswitch}}{29}{figure.2.3}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Diagrama de uno de los 3 divisores de tensi\IeC {\'o}n del dipswitch}}{29}{figure.2.3}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Diagrama de m\IeC {\'o}dulos del firmware}}{32}{figure.2.4}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama del m\IeC {\'o}dulo DigitalIO}}{35}{figure.3.1}
@@ -49,4 +49,5 @@
 \contentsline {figure}{\numberline {3.30}{\ignorespaces Diagrama del m\IeC {\'o}dulo DMX}}{75}{figure.3.30}
 \contentsline {figure}{\numberline {3.31}{\ignorespaces M\IeC {\'a}quina de estados ejecutada en el bucle principal de la aplicaci\IeC {\'o}n}}{79}{figure.3.31}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama del sistema motor}}{82}{figure.4.1}
 \addvspace {10\p@ }

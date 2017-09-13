@@ -133,8 +133,9 @@
 \contentsline {subsubsection}{\numberline {3.6.2.2}Planificador y despachador de tareas}{76}{subsubsection.3.6.2.2}
 \contentsline {subsubsection}{\numberline {3.6.2.3}Bucle principal}{78}{subsubsection.3.6.2.3}
 \contentsline {chapter}{\numberline {4}Validaci\IeC {\'o}n}{81}{chapter.4}
-\contentsline {section}{\numberline {4.1}Completar}{81}{section.4.1}
-\contentsline {chapter}{\numberline {5}Conclusiones}{82}{chapter.5}
-\contentsline {section}{\numberline {5.1}Conclusiones}{82}{section.5.1}
-\contentsline {section}{\numberline {5.2}Mejoras a futuro}{82}{section.5.2}
-\contentsline {section}{\numberline {5.3}Referencias utilizadas}{82}{section.5.3}
+\contentsline {section}{\numberline {4.1}Procedimiento}{81}{section.4.1}
+\contentsline {section}{\numberline {4.2}Procedimiento}{81}{section.4.2}
+\contentsline {chapter}{\numberline {5}Conclusiones}{83}{chapter.5}
+\contentsline {section}{\numberline {5.1}Conclusiones}{83}{section.5.1}
+\contentsline {section}{\numberline {5.2}Mejoras a futuro}{83}{section.5.2}
+\contentsline {section}{\numberline {5.3}Referencias utilizadas}{83}{section.5.3}
