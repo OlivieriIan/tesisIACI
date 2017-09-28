@@ -55,19 +55,40 @@ La prueba se realiza con 4 equipos updown dispuestos en forma de matriz de 2x2, 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=15cm,scale=1]{resources/4_1-disposicionUpdowns.png}
-	\caption{Diagrama del sistema motor}
+	\caption{Disposición de los equipos Updown}
 	\label{fig:\thefigure}
 \end{figure}
 
 Para manejar los equipos se utiliza la consola \href{http://www.lighttrader.com/images/HI61020007_L.JPG}{HedgeHog 4}, de HighEnd Systems. En ella se programan 2 rutinas:
 \begin{itemize}
-	\item \textbf{Rutina 1}: los 4 equipos se mueven juntos, a velocidad máxima, a las posiciones 0, 1, 2, 3 y 4 metros, en subida y en bajada, esperando un tiempo entre una transición y otra.
-	\item \textbf{Rutina 2}: cada equipo sigue referencias de posición y velocidad distinta (apelando al direccionamiento por dip switch) que varían en el tiempo y sin esperas intermedias, lo cual evita que lleguen a la posición objetivo.
+	\item \textbf{Rutina 1}: los 4 equipos se mueven juntos, a velocidad máxima, a las posiciones 0, 1, 2, 3 y 4 metros, en subida y en bajada.
+	\item \textbf{Rutina 2}: los 4 equipos se mueven a posiciones distintas (apelando al direccionamiento por dip switch) y la velocidad varía con el tiempo.
 \end{itemize}
 
-\textcolor{FIXME}{Explicá: masomenos qué hiciste con la consola, q movimiento configuraste, y poné imágenes comparativas del movimiento en la consola y de los equipos}
+\subsection{Direccionamiento de los equipos}
+Cada updown recibe 2 canales DMX, uno de posición y otro de velocidad, mientras que las cargas, que se configuran independientemente, reciben 3 canales (R, G y B). Además, en las instalaciones de equipos DMX por convención los equipos se direccionan de atras para adelante, de izquierda a derecha.
+
+Esto quiere decir que, referido a la figura \ref{fig:4.1}, el updown A tendrá la dirección 1, el B la dirección 3, el C la 5 y el D la 7. Para lograr esto se configuran los dipswitch como corresponde. Por ejemplo, el dipswitch del equipo C tendrá la llave 2 y 3 activadas, lo cual se traduce a address 5 en el programa.\\
+Por otro lado, las cargas se las configura en la dirección 10. Esto se hace manualmente desde un display digital que las luminarias traen. 
+
+En la figura \ref{fig:4.2} se muestra cómo se vizualizan los canales en la consola HOG, y a qué estará asociado cada uno. 
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/4_2-direccionamiento.png}
+	\caption{Canales DMX asociados a los updown y las cargas}
+	\label{fig:\thefigure}
+\end{figure}
 
 \subsection{Rutina 1}
+Se programa en la consola la \textit{cuelist} (secuencia de entradas) mostrada en la figura \ref{fig:4.3}. Como se ve en la figura el patrón que siguen todas las car
+	
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=15cm,scale=1]{resources/4_3-cuelist1.png}
+	\caption{Cuelist 1}
+	\label{fig:\thefigure}
+\end{figure}
 
 \subsection{Rutina 2}
 
