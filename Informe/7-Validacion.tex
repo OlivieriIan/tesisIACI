@@ -54,8 +54,8 @@ La prueba se realiza con 4 equipos updown dispuestos en forma de matriz de 2x2, 
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=15cm,scale=1]{resources/4_1-disposicionUpdowns.png}
-	\caption{Disposición de los equipos Updown}
+	\includegraphics[width=10cm,scale=1]{resources/4_1-disposicionUpdowns.png}
+	\caption{Disposición de los equipos Updown, vista frontal}
 	\label{fig:\thefigure}
 \end{figure}
 
@@ -68,8 +68,8 @@ Para manejar los equipos se utiliza la consola \href{http://www.lighttrader.com/
 \subsection{Direccionamiento de los equipos}
 Cada updown recibe 2 canales DMX, uno de posición y otro de velocidad, mientras que las cargas, que se configuran independientemente, reciben 3 canales (R, G y B). Además, en las instalaciones de equipos DMX por convención los equipos se direccionan de atras para adelante, de izquierda a derecha.
 
-Esto quiere decir que, referido a la figura \ref{fig:4.1}, el updown A tendrá la dirección 1, el B la dirección 3, el C la 5 y el D la 7. Para lograr esto se configuran los dipswitch como corresponde. Por ejemplo, el dipswitch del equipo C tendrá la llave 2 y 3 activadas, lo cual se traduce a address 5 en el programa.\\
-Por otro lado, las cargas se las configura en la dirección 10. Esto se hace manualmente desde un display digital que las luminarias traen. 
+Esto quiere decir que, refiriendose a la figura \ref{fig:4.1}, el updown A tendrá la dirección 1, el B la dirección 3, el C la 5 y el D la 7. Para lograr esto se configuran los dipswitch como corresponde. Por ejemplo, el dipswitch del equipo C tendrá la llave 2 y 3 activadas, lo cual se traduce a address 5 en el programa.\\
+Por otro lado, las cargas (L en la figura) se las configura en la dirección 10. Esto se hace manualmente desde un display digital que las luminarias traen. 
 
 En la figura \ref{fig:4.2} se muestra cómo se vizualizan los canales en la consola HOG, y a qué estará asociado cada uno. 
 
@@ -81,12 +81,32 @@ En la figura \ref{fig:4.2} se muestra cómo se vizualizan los canales en la cons
 \end{figure}
 
 \subsection{Rutina 1}
-Se programa en la consola la \textit{cuelist} (secuencia de entradas) mostrada en la figura \ref{fig:4.3}. Como se ve en la figura el patrón que siguen todas las car
+Se programa en la consola rutina mostrada en la figura \ref{fig:4.3}, en donde los equipos cambian de posición constantemente, en ascenso y descenso, de 0 a 4 metros. \\
+Adicionalmente se cambian los colores de la luminaria del equipo C a medida que esta se mueve. La secuencia es: rojo para 0 metros, verde para 1 metro, azul para 2 metros, amarillo para 3 metros y blanco para 4 metros.\\
+Para permitir que las posiciones sean alcanzadas antes de pasar a la siguiente se le agrega a cada instrucción un delay de 7 segundos, motivo por el cual las 8 instrucciones llevan el texto "Follow + 7s". El follow simplemente significa que luego de terminada la instrucción en curso y transcurridos los 7 segundos, se ejecuta automáticamente la próxima.
 	
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=15cm,scale=1]{resources/4_3-cuelist1.png}
-	\caption{Cuelist 1}
+	\includegraphics[width=12cm,scale=1]{resources/4_3-cuelist1.png}
+	\caption{Rutina programada en la consola}
+	\label{fig:\thefigure}
+\end{figure}
+
+Los resultados obtenidos de la prueba se pueden ver en la figura \ref{fig:4.4}. Se puede ver que a medida que bajan las cargas la del equipo D (la del frente a la derecha) queda cada vez más arriba.Si bien no se nota claramente en la imágen, el cable que sostiene la carga se encuentra bastante torcido aproximadamente 2.5 metros por encima de la carga, lo cual puede, entre otras cosas, ser el causante de esta diferencia de posición.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=16cm,scale=1]{resources/4_4-cuelist1_resultados.jpg}
+	\caption{Resultados para la rutina 1}
+	\label{fig:\thefigure}
+\end{figure}
+
+En la figura \ref{fig:4.5} se muestra cómo quedan los canales para, por ejemplo, la instrucción "Pos 3m, Vel 100\%" (las instrucciones número 2 y 8 de la figura \ref{fig:4.3}). Los valores 192 en los canales DMX 1, 3, 5 y 7 corresponden a la posición de las cargas, que es 3 metros siendo 255 4 metros, mientras que los valores 255 en los canales 2, 4, 6 y 8 corresponden a la velocidad del 100\%. Por otro lado, los canales 10 y 11, los cuales contienen las intensidades R y G de las luminarias, tienen un valor de 255, por lo que la intensidad en esos 2 colores es máxima (notese que se distinguen los colores de la luminaria a pleno día).
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=16cm,scale=1]{resources/4_5-cuelist1_cue2.png}
+	\caption{Valores de los canales para la instrucción "Pos 3m, Vel 100\%"}
 	\label{fig:\thefigure}
 \end{figure}
 

@@ -141,8 +141,8 @@
 \contentsline {section}{\numberline {4.3}Validaci\IeC {\'o}n de los requerimientos REQ-01, 02 y 04}{84}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Direccionamiento de los equipos}{84}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Rutina 1}{85}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Rutina 2}{86}{subsection.4.3.3}
-\contentsline {chapter}{\numberline {5}Conclusiones}{88}{chapter.5}
-\contentsline {section}{\numberline {5.1}Conclusiones}{88}{section.5.1}
-\contentsline {section}{\numberline {5.2}Mejoras a futuro}{88}{section.5.2}
-\contentsline {section}{\numberline {5.3}Referencias utilizadas}{88}{section.5.3}
+\contentsline {subsection}{\numberline {4.3.3}Rutina 2}{88}{subsection.4.3.3}
+\contentsline {chapter}{\numberline {5}Conclusiones}{89}{chapter.5}
+\contentsline {section}{\numberline {5.1}Conclusiones}{89}{section.5.1}
+\contentsline {section}{\numberline {5.2}Mejoras a futuro}{89}{section.5.2}
+\contentsline {section}{\numberline {5.3}Referencias utilizadas}{89}{section.5.3}
