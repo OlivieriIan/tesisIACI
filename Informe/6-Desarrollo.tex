@@ -6,6 +6,7 @@ En este capitulo se desarrollarán las soluciones propuestas en el capítulo de 
 %Cada sección será redactada en el orden que se hicieron, debido a que unas partes dependen de otras para poder desarrollarse.
 
 \section{Firmware del updown - Librerías de bajo nivel} \label{sec:\thesection}
+El desarrollo de todas las librerías de bajo nivel está basado en el \href{http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf}{el datasheet del ATmega328}.
 
 \subsection{DigitalIO}
 %El desarrollo del módulo de entradas y salidas digitales (DigitalIO) está basado en el capítulo 18 de la hoja de datos del Atmega328p. 
@@ -477,7 +478,7 @@ De estos resultados se puede ver que la relación entre las cuentas de motor y d
 
 \subsubsection{Selección de la función de ajuste}
 De la figura \ref{fig:3.10} se puede ver que la relación entre cuentas de encoder y distancia puede ser ajustada con un polinomio de grado 2 (función cuadrática). En dicha figura la función de ajuste cuadrática es \(cuentaEncoder = f(distancia) = 0.0356*dist^2 + 41.0180*dist + 101.2797\).\\     
-El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisones. En la siguiente \href{http://www.atmel.com/Images/doc0936.pdf}{nota de aplicación de ATMEL} se puede ver que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
+El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisones. En la \href{http://www.atmel.com/Images/doc0936.pdf}{nota de aplicación de ATMEL \textit{AVR200}} se puede ver que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
 
 \begin{figure}[!ht]
 	\centering

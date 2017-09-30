@@ -61,76 +61,76 @@
 \contentsline {subsubsection}{\numberline {3.2.1.1}Objetivo}{34}{subsubsection.3.2.1.1}
 \contentsline {subsubsection}{\numberline {3.2.1.2}Desarrollo}{34}{subsubsection.3.2.1.2}
 \contentsline {subsubsection}{\numberline {3.2.1.3}Acceso}{35}{subsubsection.3.2.1.3}
-\contentsline {subsection}{\numberline {3.2.2}ADC}{36}{subsection.3.2.2}
-\contentsline {subsubsection}{\numberline {3.2.2.1}Objetivo}{36}{subsubsection.3.2.2.1}
+\contentsline {subsection}{\numberline {3.2.2}ADC}{37}{subsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.2.1}Objetivo}{37}{subsubsection.3.2.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2.2}Desarrollo}{37}{subsubsection.3.2.2.2}
 \contentsline {subsubsection}{\numberline {3.2.2.3}Acceso}{38}{subsubsection.3.2.2.3}
 \contentsline {subsection}{\numberline {3.2.3}PWM}{39}{subsection.3.2.3}
 \contentsline {subsubsection}{\numberline {3.2.3.1}Objetivo}{39}{subsubsection.3.2.3.1}
 \contentsline {subsubsection}{\numberline {3.2.3.2}Desarrollo}{39}{subsubsection.3.2.3.2}
 \contentsline {subsubsection}{\numberline {3.2.3.3}Acceso}{41}{subsubsection.3.2.3.3}
-\contentsline {subsection}{\numberline {3.2.4}EXINT}{41}{subsection.3.2.4}
-\contentsline {subsubsection}{\numberline {3.2.4.1}Objetivo}{41}{subsubsection.3.2.4.1}
+\contentsline {subsection}{\numberline {3.2.4}EXINT}{42}{subsection.3.2.4}
+\contentsline {subsubsection}{\numberline {3.2.4.1}Objetivo}{42}{subsubsection.3.2.4.1}
 \contentsline {subsubsection}{\numberline {3.2.4.2}Desarrollo}{42}{subsubsection.3.2.4.2}
 \contentsline {subsubsection}{\numberline {3.2.4.3}Acceso}{42}{subsubsection.3.2.4.3}
-\contentsline {subsection}{\numberline {3.2.5}UART}{42}{subsection.3.2.5}
-\contentsline {subsubsection}{\numberline {3.2.5.1}Objetivo}{42}{subsubsection.3.2.5.1}
+\contentsline {subsection}{\numberline {3.2.5}UART}{43}{subsection.3.2.5}
+\contentsline {subsubsection}{\numberline {3.2.5.1}Objetivo}{43}{subsubsection.3.2.5.1}
 \contentsline {subsubsection}{\numberline {3.2.5.2}Desarrollo}{43}{subsubsection.3.2.5.2}
 \contentsline {subsubsection}{\numberline {3.2.5.3}Acceso}{44}{subsubsection.3.2.5.3}
 \contentsline {subsection}{\numberline {3.2.6}Tick}{45}{subsection.3.2.6}
 \contentsline {subsubsection}{\numberline {3.2.6.1}Objetivo}{45}{subsubsection.3.2.6.1}
 \contentsline {subsubsection}{\numberline {3.2.6.2}Desarrollo}{45}{subsubsection.3.2.6.2}
 \contentsline {subsubsection}{\numberline {3.2.6.3}Acceso}{46}{subsubsection.3.2.6.3}
-\contentsline {subsection}{\numberline {3.2.7}SUART}{46}{subsection.3.2.7}
-\contentsline {subsubsection}{\numberline {3.2.7.1}Objetivo}{46}{subsubsection.3.2.7.1}
+\contentsline {subsection}{\numberline {3.2.7}SUART}{47}{subsection.3.2.7}
+\contentsline {subsubsection}{\numberline {3.2.7.1}Objetivo}{47}{subsubsection.3.2.7.1}
 \contentsline {subsubsection}{\numberline {3.2.7.2}Desarrollo}{47}{subsubsection.3.2.7.2}
 \contentsline {subsubsection}{\numberline {3.2.7.3}Acceso}{48}{subsubsection.3.2.7.3}
 \contentsline {section}{\numberline {3.3}Controlador}{49}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{49}{subsection.3.3.1}
 \contentsline {subsubsection}{\numberline {3.3.1.1}Pruebas y resultados}{49}{subsubsection.3.3.1.1}
-\contentsline {subsubsection}{\numberline {3.3.1.2}Selecci\IeC {\'o}n de la funci\IeC {\'o}n de ajuste}{49}{subsubsection.3.3.1.2}
+\contentsline {subsubsection}{\numberline {3.3.1.2}Selecci\IeC {\'o}n de la funci\IeC {\'o}n de ajuste}{50}{subsubsection.3.3.1.2}
 \contentsline {subsection}{\numberline {3.3.2}Determinaci\IeC {\'o}n de la velocidad m\IeC {\'a}xima}{51}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Obtenci\IeC {\'o}n del per\IeC {\'\i }odo de muestreo}{52}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Obtenci\IeC {\'o}n del modelo de la planta}{53}{subsection.3.3.4}
 \contentsline {subsubsection}{\numberline {3.3.4.1}Toma de muestras}{53}{subsubsection.3.3.4.1}
-\contentsline {subsubsection}{\numberline {3.3.4.2}Modelos propuestos}{53}{subsubsection.3.3.4.2}
-\contentsline {subsubsection}{\numberline {3.3.4.3}Determinaci\IeC {\'o}n de par\IeC {\'a}metros}{56}{subsubsection.3.3.4.3}
+\contentsline {subsubsection}{\numberline {3.3.4.2}Modelos propuestos}{54}{subsubsection.3.3.4.2}
+\contentsline {subsubsection}{\numberline {3.3.4.3}Determinaci\IeC {\'o}n de par\IeC {\'a}metros}{57}{subsubsection.3.3.4.3}
 \contentsline {subsubsection}{\numberline {3.3.4.4}Validaci\IeC {\'o}n de los modelos}{57}{subsubsection.3.3.4.4}
-\contentsline {subsubsection}{\numberline {3.3.4.5}An\IeC {\'a}lisis de resultados}{57}{subsubsection.3.3.4.5}
-\contentsline {subsection}{\numberline {3.3.5}Obtenci\IeC {\'o}n del controlador}{59}{subsection.3.3.5}
-\contentsline {subsubsection}{\numberline {3.3.5.1}An\IeC {\'a}lisis}{59}{subsubsection.3.3.5.1}
+\contentsline {subsubsection}{\numberline {3.3.4.5}An\IeC {\'a}lisis de resultados}{58}{subsubsection.3.3.4.5}
+\contentsline {subsection}{\numberline {3.3.5}Obtenci\IeC {\'o}n del controlador}{58}{subsection.3.3.5}
+\contentsline {subsubsection}{\numberline {3.3.5.1}An\IeC {\'a}lisis}{58}{subsubsection.3.3.5.1}
 \contentsline {subsubsection}{\numberline {3.3.5.2}Controlador de velocidad}{59}{subsubsection.3.3.5.2}
 \contentsline {subsubsection}{\numberline {3.3.5.3}Controlador de posici\IeC {\'o}n}{60}{subsubsection.3.3.5.3}
 \contentsline {subsection}{\numberline {3.3.6}Ajuste de los controladores}{60}{subsection.3.3.6}
 \contentsline {subsubsection}{\numberline {3.3.6.1}Condiciones iniciales}{60}{subsubsection.3.3.6.1}
-\contentsline {subsubsection}{\numberline {3.3.6.2}Ajuste del controlador de velocidad}{60}{subsubsection.3.3.6.2}
+\contentsline {subsubsection}{\numberline {3.3.6.2}Ajuste del controlador de velocidad}{61}{subsubsection.3.3.6.2}
 \contentsline {subsubsection}{\numberline {3.3.6.3}Ajuste del controlador de posici\IeC {\'o}n}{61}{subsubsection.3.3.6.3}
 \contentsline {subsubsection}{\numberline {3.3.6.4}Sistema de control final}{62}{subsubsection.3.3.6.4}
-\contentsline {section}{\numberline {3.4}Dipswitch}{62}{section.3.4}
+\contentsline {section}{\numberline {3.4}Dipswitch}{63}{section.3.4}
 \contentsline {section}{\numberline {3.5}Firmware del updown - Librer\IeC {\'\i }as de alto nivel}{65}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Encoder}{65}{subsection.3.5.1}
 \contentsline {subsubsection}{\numberline {3.5.1.1}Objetivo}{65}{subsubsection.3.5.1.1}
-\contentsline {subsubsection}{\numberline {3.5.1.2}Desarrollo}{65}{subsubsection.3.5.1.2}
+\contentsline {subsubsection}{\numberline {3.5.1.2}Desarrollo}{66}{subsubsection.3.5.1.2}
 \contentsline {subsubsection}{\numberline {3.5.1.3}Acceso}{68}{subsubsection.3.5.1.3}
-\contentsline {subsection}{\numberline {3.5.2}Grua}{68}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.2}Grua}{69}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}Controlador}{69}{subsection.3.5.3}
 \contentsline {subsubsection}{\numberline {3.5.3.1}Objetivo}{69}{subsubsection.3.5.3.1}
 \contentsline {subsubsection}{\numberline {3.5.3.2}Seteo de referencias}{70}{subsubsection.3.5.3.2}
 \contentsline {subsubsection}{\numberline {3.5.3.3}C\IeC {\'a}lculo de los controladores}{71}{subsubsection.3.5.3.3}
 \contentsline {subsubsection}{\numberline {3.5.3.4}Acceso}{72}{subsubsection.3.5.3.4}
-\contentsline {subsection}{\numberline {3.5.4}Dipswitch}{72}{subsection.3.5.4}
-\contentsline {subsubsection}{\numberline {3.5.4.1}Objetivo}{72}{subsubsection.3.5.4.1}
+\contentsline {subsection}{\numberline {3.5.4}Dipswitch}{73}{subsection.3.5.4}
+\contentsline {subsubsection}{\numberline {3.5.4.1}Objetivo}{73}{subsubsection.3.5.4.1}
 \contentsline {subsubsection}{\numberline {3.5.4.2}Desarrollo}{73}{subsubsection.3.5.4.2}
 \contentsline {subsubsection}{\numberline {3.5.4.3}Acceso}{74}{subsubsection.3.5.4.3}
 \contentsline {subsection}{\numberline {3.5.5}DMX}{74}{subsection.3.5.5}
 \contentsline {subsubsection}{\numberline {3.5.5.1}Objetivo}{74}{subsubsection.3.5.5.1}
-\contentsline {subsubsection}{\numberline {3.5.5.2}Desarrollo}{74}{subsubsection.3.5.5.2}
+\contentsline {subsubsection}{\numberline {3.5.5.2}Desarrollo}{75}{subsubsection.3.5.5.2}
 \contentsline {subsubsection}{\numberline {3.5.5.3}Acceso}{76}{subsubsection.3.5.5.3}
-\contentsline {section}{\numberline {3.6}Firmware del updown - Capa de Aplicaci\IeC {\'o}n}{77}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Objetivo}{77}{subsection.3.6.1}
+\contentsline {section}{\numberline {3.6}Firmware del updown - Capa de Aplicaci\IeC {\'o}n}{76}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Objetivo}{76}{subsection.3.6.1}
 \contentsline {subsection}{\numberline {3.6.2}Desarrollo}{77}{subsection.3.6.2}
 \contentsline {subsubsection}{\numberline {3.6.2.1}Inicializaci\IeC {\'o}n del sistema}{77}{subsubsection.3.6.2.1}
-\contentsline {subsubsection}{\numberline {3.6.2.2}Planificador y despachador de tareas}{77}{subsubsection.3.6.2.2}
+\contentsline {subsubsection}{\numberline {3.6.2.2}Planificador y despachador de tareas}{78}{subsubsection.3.6.2.2}
 \contentsline {subsubsection}{\numberline {3.6.2.3}Bucle principal}{79}{subsubsection.3.6.2.3}
 \contentsline {chapter}{\numberline {4}Validaci\IeC {\'o}n}{82}{chapter.4}
 \contentsline {section}{\numberline {4.1}An\IeC {\'a}lisis}{82}{section.4.1}
@@ -142,7 +142,7 @@
 \contentsline {subsection}{\numberline {4.3.1}Direccionamiento de los equipos}{84}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Rutina 1}{85}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}Rutina 2}{88}{subsection.4.3.3}
-\contentsline {chapter}{\numberline {5}Conclusiones}{89}{chapter.5}
-\contentsline {section}{\numberline {5.1}Conclusiones}{89}{section.5.1}
-\contentsline {section}{\numberline {5.2}Mejoras a futuro}{89}{section.5.2}
-\contentsline {section}{\numberline {5.3}Referencias utilizadas}{89}{section.5.3}
+\contentsline {chapter}{\numberline {5}Conclusiones}{90}{chapter.5}
+\contentsline {section}{\numberline {5.1}Conclusiones}{90}{section.5.1}
+\contentsline {section}{\numberline {5.2}Mejoras a futuro}{91}{section.5.2}
+\contentsline {section}{\numberline {5.3}Referencia bibliogr\IeC {\'a}fica}{92}{section.5.3}

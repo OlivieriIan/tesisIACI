@@ -88,16 +88,17 @@ Para permitir que las posiciones sean alcanzadas antes de pasar a la siguiente s
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=12cm,scale=1]{resources/4_3-cuelist1.png}
-	\caption{Rutina programada en la consola}
+	\caption{Rutina 1, programada en la consola}
 	\label{fig:\thefigure}
 \end{figure}
 
-Los resultados obtenidos de la prueba se pueden ver en la figura \ref{fig:4.4}. Se puede ver que a medida que bajan las cargas la del equipo D (la del frente a la derecha) queda cada vez más arriba.Si bien no se nota claramente en la imágen, el cable que sostiene la carga se encuentra bastante torcido aproximadamente 2.5 metros por encima de la carga, lo cual puede, entre otras cosas, ser el causante de esta diferencia de posición.
+Las posiciones obtenidas de la prueba se pueden ver en la figura \ref{fig:4.4}. Para cada una se midió el error de posición cuando las cargas llegan al objetivo para verificar la presición del equipo. De estas mediciones se obtuvo que los errores de los equipos se encuentran siempre dentro de las \( \pm 120 \) cuentas. De la tabla \ref{table:3.2} se ve que 25cm son 1130 cuentas del encoder del motor, por lo que 120 cuentas son aproximadamente 2.5cm.\\
+Si bien estos son los resultados de error para los 4 equipos, se puede ver en la figura \ref{fig:4.4} que el error del equipo D (el del frente a la derecha). Si bien no se nota claramente en la imágen, el cable del equipo se encuentra bastante torcido aproximadamente 2.5 metros por encima de la carga, lo cual puede, entre otras cosas, ser el causante de esta diferencia de posición, error que la placa de control no contempla.
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=16cm,scale=1]{resources/4_4-cuelist1_resultados.jpg}
-	\caption{Resultados para la rutina 1}
+	\caption{Muestra de posiciones para la rutina 1}
 	\label{fig:\thefigure}
 \end{figure}
 
@@ -110,8 +111,41 @@ En la figura \ref{fig:4.5} se muestra cómo quedan los canales para, por ejemplo
 	\label{fig:\thefigure}
 \end{figure}
 
-\subsection{Rutina 2}
+Para constatar que la velocidad de los equipos es la correcta se midió la de los 4 equipos durante la prueba. Tanto para el ascenso como para el descenso la velocidad en régimen permanente de los 4 equipos es de \(40 \pm 1\) cuentas cada 20 milisegundos, lo cual concuerda con lo encontrado en la sección \ref{sec:3.3}, subsección 2, en donde se halló que la velocidad máxima posible es de 2 cuentas por milisegundo.
 
+\subsection{Rutina 2}
+En este caso se programa en la consola la secuencia mostrada en la tabla \ref{table:4.1}, en donde las cargas cambian de posicion y velocidad con cada nueva instrucción. En la figura \ref{fig:4.6} se muestran algunas de las posiciones alcanzadas durante esta prueba. \\
+Al igual que en la rutina 1 el tiempo que se tarda de pasar de una instrucción a otra es de 7 segundos, por lo que en este caso las posiciones finales no llegan a ser alcanzadas para velocidades distintas a 100\% (el caso de la instrucción 1).
+
+\begin{table}[!ht]
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{OODlightblue}
+			Equipo & Pos. 1 & Vel. 1 & Pos. 2 & Vel. 2 & Pos. 3 & Vel. 3\\
+			
+			A & 1 m & 100\% & 2 m &  25\% & 3 m &  50\% \\
+			
+			B & 2 m &  & 1 m &  & 2 m &   \\
+			
+			C & 2 m &  & 3 m &  & 2 m &   \\
+			
+			D & 3 m &  & 2 m &  & 1 m &   \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Rutina 2. Cada par posición,velocidad representa una instrucción}
+	\label{table:\thetable}
+\end{table}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=14cm,scale=1]{resources/4_6-cuelist2_resultados.jpg}
+	\caption{Muestra de posiciones para la rutina 2}
+	\label{fig:\thefigure}
+\end{figure}
+
+Nuevamente se constataron las velocidades de los 4 equipos para cada instrucción. Para la instrucción 1 (velocidad de 100\%) la velocidad obtenida es de \(40 \pm 1\) muestras cada 20 ms, para la 3 (velocidad de 50\%) es de \(20\) muestras cada 20 ms y para la 2 (velocidad de 25\%) es de 10 muestras cada 20 ms, lo cual concuerda con lo esperado.
 
 
 
