@@ -96,7 +96,7 @@ Para poder detectar estos errores lo primero que se hará es determinar la relac
 La función principal del fin de carrera, un par de pulsadores en la base del equipo, es indicar cuándo el cable que sostiene la carga está completamente enrrollada para determinar la posición 0 o "home" del equipo, dado que este puede estar en cualquier posición al ser encendido.\\
 La función secundaria del fin de carrera es detectar posibles eventos indeseados. Por ejemplo, en su punto más bajo la carga se encontrará a 4 metros por debajo del 0 del updown, por lo que podría comenzar a oscilar debido a fuertes vientos o personas que muevan la carga. Por cómo está construido el fin de carrera si la carga oscila más alla de un ángulo de aproximadamente 15 grados el fin de carrera se accionará dando aviso de esto.
 
-Para poder detectar estos errores se verificará que el fin de carrea no sea presionado fuera de la rutina de calibración de (homing). En caso de que sea presionado en estas condiciones se detendrá el equipo, se esperará un tiempo a que la oscilación baje, y intentarán reanudar las operaciones normales. En caso de que el fin de carrera siga presionado se accionará el freno, se detendrá el equipo completamente y se indicará sobre la existencia del error mediante el led de la placa de control (led interno).
+Para poder detectar estos errores se verificará que el fin de carrera no sea presionado fuera de la rutina de calibración. En caso de que sea presionado en estas condiciones se detendrá el equipo, se esperará un tiempo a que la oscilación baje, y intentarán reanudar las operaciones normales. En caso de que el fin de carrera siga presionado se accionará el freno, se detendrá el equipo completamente y se indicará sobre la existencia del error mediante el led de la placa de control (led interno).
 
 
 \subsection{Pérdida de DMX}
@@ -114,7 +114,7 @@ Para hallar estos 5 valores se simulará el divisor de tensión en Matlab, proba
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=12cm,scale=1]{resources/2_3-dipswitch.png}
-	\caption{Diagrama de uno de los 3 divisores del dipswitch}
+	\caption{Diagrama de uno de los 3 divisores de tensión del dipswitch}
 	\label{fig:\thefigure}
 \end{figure}
 

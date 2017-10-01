@@ -6,6 +6,7 @@ En este capitulo se desarrollarán las soluciones propuestas en el capítulo de 
 %Cada sección será redactada en el orden que se hicieron, debido a que unas partes dependen de otras para poder desarrollarse.
 
 \section{Firmware del updown - Librerías de bajo nivel} \label{sec:\thesection}
+El desarrollo de todas las librerías de bajo nivel está basado en el \href{http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf}{el datasheet del ATmega328}.
 
 \subsection{DigitalIO}
 %El desarrollo del módulo de entradas y salidas digitales (DigitalIO) está basado en el capítulo 18 de la hoja de datos del Atmega328p. 
@@ -477,7 +478,7 @@ De estos resultados se puede ver que la relación entre las cuentas de motor y d
 
 \subsubsection{Selección de la función de ajuste}
 De la figura \ref{fig:3.10} se puede ver que la relación entre cuentas de encoder y distancia puede ser ajustada con un polinomio de grado 2 (función cuadrática). En dicha figura la función de ajuste cuadrática es \(cuentaEncoder = f(distancia) = 0.0356*dist^2 + 41.0180*dist + 101.2797\).\\     
-El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisones. En la siguiente \href{http://www.atmel.com/Images/doc0936.pdf}{nota de aplicación de ATMEL} se puede ver que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
+El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisones. En la \href{http://www.atmel.com/Images/doc0936.pdf}{nota de aplicación de ATMEL \textit{AVR200}} se puede ver que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
 
 \begin{figure}[!ht]
 	\centering
@@ -869,7 +870,7 @@ Siguiendo este patrón se implementó la siguiente lógica de cuenta para ambos 
 			\hline
 		\end{tabular}
 	\end{center}
-	\caption{Error RMSE para los 12 modelos propuestos}
+	\caption{Sentido según el estado del canal B durante las transiciones del canal A}
 	\label{table:\thetable}
 \end{table}
 
@@ -1192,10 +1193,10 @@ void planificador(void){
 El despachador en este proyecto simplemente ejecuta las tareas que el planificador habilita, sin utilizar un método de priorización complejo debido a que, como se mencionó antes, cada tarea tiene asociado un retardo de tiempo para evitar que se solapen.\\
 A continaación se detalla qué hacen las 4 despachar y el orden en que aparecen en la rutina despachador:
 \begin{enumerate}
-	\item Actualización del controlador: se llama a la función \textit{Controlador\_update()}.
-	\item Actualización del canal inicial de DMX: se asocia el valor del dipswitch con el canal inicial de DMX haciendo uso de las funciones en C \textit{DMX\_write(Dipswitch\_read() + 1)}. El +1 es debido a que la salida de Dipswitch\_read va de 0 a 511, y los canales DMX van de 1 a 512.
-	\item Comparación de los valores del encoder de motor y de disco: se verifica que la relación hallada en la sección \ref{sec:3.3}, subsección 1, a través de la tabla \ref{fig:3.2} (que 1 cuenta de encoder de disco equivale a aproximadamente 131 del de motor), se mantenga. Como no es una relación que se cumple estrictamente para todo el rango se permite una tolerancia de +-500 cuentas de encoder de motor, haciendo que la comparación sea: \( cuentas\_encoder\_motor = cuentas\_encoder\_disco*131 \pm TOLERANCIA \).
-	\item Cambiar el estado del led externo si hay señal de DMX presente: simplemente se alterna el estado del led externo, acción muy común para indicar que la señal llega correctamente en esclavos DMX.
+	\item \textbf{Actualización del controlador}. Se llama a la función \textit{Controlador\_update()}.
+	\item \textbf{Actualización del canal inicial de DMX}. Se asocia el valor del dipswitch con el canal inicial de DMX haciendo uso de las funciones en C \textit{DMX\_write(Dipswitch\_read() + 1)}. El +1 es debido a que la salida de Dipswitch\_read va de 0 a 511, y los canales DMX van de 1 a 512.
+	\item \textbf{Comparación de los valores del encoder de motor y de disco}. Se verifica que la relación hallada en la sección \ref{sec:3.3}, subsección 1, a través de la tabla \ref{fig:3.2} (que 1 cuenta de encoder de disco equivale a aproximadamente 131 del de motor), se mantenga. Como no es una relación que se cumple estrictamente para todo el rango se permite una tolerancia de +-500 cuentas de encoder de motor, haciendo que la comparación sea: \( cuentas\_encoder\_motor = cuentas\_encoder\_disco*131 \pm 500 \).
+	\item \textbf{Aviso de DMX activo}. Se alterna el estado del led externo, a razón de 10 veces por segundo, si hay señal de DMX presente. Si pasó más de un segundo desde la última vez que la señal fue recibida, el led externo mantiene su estado.
 \end{enumerate}
 Un ejemplo de despachador en psuedocódico de C sería:
 \begin{lstlisting}[style=CStyle]
@@ -1223,16 +1224,17 @@ En el bucle principal del programa se ejecuta la máquina de estados que se mues
 \end{figure}
 
 A continuación se detalla el funcionamiento de la MEF:
+
+El estado inicial, luego de configurar todos los módulos, es el \textbf{Modo de calibración}. En este módo se desactiva el freno (se permite que la carga pueda bajar) y se sube la carga muy lentamente hasta tocar el fin de carrera (FDC). Cuando esto ocurre se bajan 10cm e inicializa las cuentas de los encoders en 0, haciendo que este sea el 0 del sistema. En caso que la carga no toque el fin de carrera dentro de los 2 minutos, o que no baje los 10 cm dentro de 10 segundos, se considerará que hubo un error de calibración y se pasa al modo error. En caso contrario, el sistema pasa al Modo de funcionamiento normal. El freno queda desactivado de aquí en adelante para permitir el libre movimiento de la carga.
+
+El estado en el cual el sistema se encontrará la mayoría del tiempo, siempre que todo funcione correctamente, es el \textbf{Modo normal}. En este modo se:
 \begin{itemize}
-	\item El estado inicial, luego de configurar todos los módulos, es el Modo de calibración. En este módo la carga sube muy lentamente hasta tocar el fin de carrera (FDC). Cuando este es alcanzado se bajan 10cm e inicializa las cuentas de los encoders en 0, haciendo que este sea el 0 del sistema. En caso que la carga no toque el fin de carrera dentro de los 2 minutos, o que no baje los 10 cm dentro de 10 segundos, se considerará que hubo un error de calibración y se pasa al modo error. En caso contrario, el sistema pasa al Modo de funcionamiento normal.
-	\item El estado en el cual el sistema se encontrará la mayoría del tiempo, siempre que todo funcione correctamente, es el Modo normal. En este modo se: . 
-	\begin{itemize}
-		\item Ejecuta el despachador de tareas. Como se mencionó anteriormente esto incluye la actualización del controlador, cambiar de estado el led externo si hay señal de DMX presente, verificar que el fin de carrera no haya sido presionado incorrectamente, y que la relación de cuentas se mantenga dentro de una tolerancia. En caso que se pierda la relación entre los encoders se pasa al Modo error.
-		\item Comprueba continuamente el fin de carrera para verificar que haya habido una activación indebida del mismo. En caso de que esto suceda se parará el sistema por 6 segundos y se volverá al estado de calibración. Esto suprime las oscilaciones en la carga, que es la causa más probable de la activación indebida del fin de carrera. En caso de que el FDC se mantenga más de 1 minuto activado se pasa al Modo error.
-		\item Verifica que el DMX esté activado. En caso de estarlo se lee la información de posición y velocidad del módulo DMX y se la pasa al módulo controlador haciendo uso de las funciones en C \textit{ Controlador\_write(posicionDMX, velocidadDMX)}, siendo estos 2 parámetros \textit{DMX\_read(DMX\_CANAL\_POSICION)} y \textit{DMX\_read(DMX\_CANAL\_VELOCIDAD))}, respectivamente. Si no está activo se sube la carga lentamente hasta el 0 de posición y se mantiene allí hasta recuperar la señal.
-	\end{itemize}
-	\item Ante cualquier falla el equipo entra a un modo de error, en donde se acciona el freno y se deshabilita el motor. No hay forma de volver de este modo, por lo que el equipo debe ser por lo menos reiniciado para que pueda seguir. Según el error causante de que este estado haya sido accedido se hace parpadear al led interno a una determinada frecuencia: por error en la calibración el led interno parpadea a una frecuencia de 10 veces por segundo, si es por error de encoders 2 veces por segundo, y si es por fin de carrera 1 vez cada 2 segundos.
+	\item Ejecuta el despachador de tareas. Como se mencionó anteriormente esto incluye la actualización del controlador, cambiar de estado el led externo si hay señal de DMX presente, verificar que el fin de carrera no haya sido presionado incorrectamente, y que la relación de cuentas se mantenga dentro de una tolerancia. En caso que se pierda la relación entre los encoders se pasa al Modo error.
+	\item Comprueba continuamente el fin de carrera para verificar que haya habido una activación indebida del mismo. En caso de que esto suceda se parará el sistema por 6 segundos y se volverá al estado de calibración para volver al 0 lentamente. Esto suprime las oscilaciones en la carga, que es la causa más probable de la activación indebida del fin de carrera. En caso de que el FDC se mantenga más de 15 segundos activado se pasa al Modo error.
+	\item Verifica que el DMX esté activado. En caso de estarlo se lee la información de posición y velocidad del módulo DMX y se la pasa al módulo controlador haciendo uso de las funciones en C \textit{ Controlador\_write(posicionDMX, velocidadDMX)}, siendo estos 2 parámetros \textit{DMX\_read(DMX\_CANAL\_POSICION)} y \\ \textit{DMX\_read(DMX\_CANAL\_VELOCIDAD))}, respectivamente. Si no está activo se sube la carga lentamente hasta el 0 de posición y se mantiene allí hasta recuperar la señal.
 \end{itemize}
+
+Ante cualquier falla el equipo entra a un\textbf{Modo de error}, en donde se acciona (se evita que la carga baje) el freno y se deshabilita el motor. No hay forma de volver de este modo, por lo que el equipo debe ser por lo menos reiniciado para que pueda seguir. Según el error causante de que este estado haya sido accedido se hace parpadear al led interno a una determinada frecuencia: por error en la calibración el led interno parpadea a una frecuencia de 10 veces por segundo, si es por error de encoders 2 veces por segundo, y si es por fin de carrera 1 vez cada 2 segundos.
 
 
 
