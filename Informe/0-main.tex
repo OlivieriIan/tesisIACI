@@ -149,7 +149,7 @@
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
-    citecolor=green,
+    citecolor=colorUNQ,
     filecolor=black,
     linkcolor=colorUNQ,
     urlcolor=colorUNQ
@@ -213,9 +213,13 @@
 
 \renewcommand{\listfigurename}{Índice de figuras}
 
+\renewcommand{\listtablename}{Índice de tablas}
+
+\renewcommand\bibname{Referencia bibliográfica}
+
 % ------------------- Contadores de subsecciones ---------------------------------------------------------------- %
-\setcounter{secnumdepth}{4} % seting level of numbering (default for "report" is 3). With ''-1'' you have non number also for chapters
-\setcounter{tocdepth}{4} % if you want all the levels in your table of contents
+\setcounter{secnumdepth}{2} % seting level of numbering (default for "report" is 3). With ''-1'' you have non number also for chapters
+\setcounter{tocdepth}{2} % if you want all the levels in your table of contents
 
 
 % ------------------- Document ------------------------------------------------------------------------- %
@@ -234,5 +238,6 @@
 \input{6-Desarrollo.tex}
 \input{7-Validacion.tex}
 \input{8-Conclusiones.tex}
+\input{9-Bibliografia.tex}
 
 \end{document}
