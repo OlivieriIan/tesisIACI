@@ -794,7 +794,7 @@ En conclusión, el sistema de control consta de:
 \text{\textbf{Controlador de posición:} } rv\_Cp[k] = (ep[k] >> 4) - (ep[k] >> 5)
 \end{equation}
 
-
+\newpage
 \section{Dipswitch} \label{sec:\thesection}
 Como se mencionó en la sección \ref{sec:2.5}, la obtención de los valores del dipswitch se hace mediante una simulación en Matlab.\\
 El procedimiento para determinar una posible combinación de R1, R2, R3, R4 y R (ver figura \ref{fig:2.3}) es el siguiente: se propone un valor para cada resistencia y se calcula la caída de tensión en la resistencia R, que llamaremos Vo, para cada combinación de R1, R2, R3 y R4. Como son 4 resistencias hay 16 posibles combinaciones, por lo que se obtendrán 16 valores de Vo. 
@@ -830,6 +830,7 @@ Con el objetivo de verificar que los valores analógicos obtenidos son lógicos 
 	\label{table:\thetable}
 \end{table}
 
+\newpage
 \section{Firmware del updown - Bibliotecas de alto nivel} \label{sec:\thesection}
 
 \subsection{Encoder}
@@ -938,6 +939,7 @@ El acceso al módulo se realiza a través 6 funciones, como se muestra en la fig
 	\label{fig:\thefigure}
 \end{figure}
 
+\newpage
 \subsection{Controlador}
 \subsubsection{Objetivo}
 El módulo de controlador tiene que encargarse de convertir comandos de DMX en referencias para los controladores y calcular los mismos para mover al motor.

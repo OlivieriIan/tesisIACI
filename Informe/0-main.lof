@@ -1,16 +1,16 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Ejemplo de escultura cin\IeC {\'e}tica movida por aire, por Anthony Howe. Fuente: \cite {fig1_1} }}{9}{figure.1.1}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Escultura cin\IeC {\'e}tica en el museo BMW. Fuente: \cite {fig1_2} }}{10}{figure.1.2}
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Escultura cin\IeC {\'e}tica por parte de Build Up. Fuente: \cite {fig1_3} }}{11}{figure.1.3}
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Shapeshifter, de High End Systems. Fuente: \cite {fig1_4} }}{11}{figure.1.4}
-\contentsline {figure}{\numberline {1.5}{\ignorespaces Consola Hog4, de High End Systems. Fuente: \cite {fig1_5}}}{12}{figure.1.5}
-\contentsline {figure}{\numberline {1.6}{\ignorespaces Cable DMX con conector XLR5. Fuente: \cite {fig1_6}}}{14}{figure.1.6}
-\contentsline {figure}{\numberline {1.7}{\ignorespaces Conexionado en una red DMX. Fuente: \cite {fig1_7}}}{14}{figure.1.7}
-\contentsline {figure}{\numberline {1.8}{\ignorespaces Formato de la trama DMX. Fuente: \cite {fig1_8}}}{16}{figure.1.8}
-\contentsline {figure}{\numberline {1.9}{\ignorespaces Im\IeC {\'a}gen del Updown, desarrollado por la empresa Blackout}}{17}{figure.1.9}
-\contentsline {figure}{\numberline {1.10}{\ignorespaces Diagrama en bloques del equipo Updown}}{17}{figure.1.10}
-\contentsline {figure}{\numberline {1.11}{\ignorespaces Diagrama del sistema motor}}{19}{figure.1.11}
-\contentsline {figure}{\numberline {1.12}{\ignorespaces Diagrama de la placa de control y su interacci\IeC {\'o}n con el hardware externo}}{19}{figure.1.12}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Ejemplo de escultura cin\IeC {\'e}tica movida por aire, por Anthony Howe. Fuente: \cite {fig1_1} }}{10}{figure.1.1}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Escultura cin\IeC {\'e}tica en el museo BMW. Fuente: \cite {fig1_2} }}{11}{figure.1.2}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Escultura cin\IeC {\'e}tica por parte de Build Up. Fuente: \cite {fig1_3} }}{12}{figure.1.3}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Shapeshifter, de High End Systems. Fuente: \cite {fig1_4} }}{12}{figure.1.4}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Consola Hog4, de High End Systems. Fuente: \cite {fig1_5}}}{13}{figure.1.5}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Cable DMX con conector XLR5. Fuente: \cite {fig1_6}}}{15}{figure.1.6}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Conexionado en una red DMX. Fuente: \cite {fig1_7}}}{15}{figure.1.7}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Formato de la trama DMX. Fuente: \cite {fig1_8}}}{17}{figure.1.8}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Im\IeC {\'a}gen del Updown, desarrollado por la empresa Blackout}}{18}{figure.1.9}
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Diagrama en bloques del equipo Updown}}{18}{figure.1.10}
+\contentsline {figure}{\numberline {1.11}{\ignorespaces Diagrama del sistema motor}}{20}{figure.1.11}
+\contentsline {figure}{\numberline {1.12}{\ignorespaces Diagrama de la placa de control y su interacci\IeC {\'o}n con el hardware externo}}{20}{figure.1.12}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Esquema de control a implementar}}{25}{figure.2.1}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Modelo mec\IeC {\'a}nico de la planta}}{26}{figure.2.2}
@@ -42,17 +42,17 @@
 \contentsline {figure}{\numberline {3.23}{\ignorespaces Resultados para el controlador de posici\IeC {\'o}n final}}{64}{figure.3.23}
 \contentsline {figure}{\numberline {3.24}{\ignorespaces Ejemplo estado de los canales AB del encoder de disco}}{66}{figure.3.24}
 \contentsline {figure}{\numberline {3.25}{\ignorespaces Diagrama del m\IeC {\'o}dulo Encoder}}{67}{figure.3.25}
-\contentsline {figure}{\numberline {3.26}{\ignorespaces Diagrama del m\IeC {\'o}dulo Gr\IeC {\'u}a}}{68}{figure.3.26}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces Diagrama del m\IeC {\'o}dulo Gr\IeC {\'u}a}}{69}{figure.3.26}
 \contentsline {figure}{\numberline {3.27}{\ignorespaces Diagrama del m\IeC {\'o}dulo Controlador}}{72}{figure.3.27}
-\contentsline {figure}{\numberline {3.28}{\ignorespaces Diagrama del m\IeC {\'o}dulo Dipswitch}}{73}{figure.3.28}
-\contentsline {figure}{\numberline {3.29}{\ignorespaces Maquina de estados ejecutada en cada interrupci\IeC {\'o}n de la UART}}{74}{figure.3.29}
-\contentsline {figure}{\numberline {3.30}{\ignorespaces Diagrama del m\IeC {\'o}dulo DMX}}{75}{figure.3.30}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces Diagrama del m\IeC {\'o}dulo Dipswitch}}{74}{figure.3.28}
+\contentsline {figure}{\numberline {3.29}{\ignorespaces Maquina de estados ejecutada en cada interrupci\IeC {\'o}n de la UART}}{75}{figure.3.29}
+\contentsline {figure}{\numberline {3.30}{\ignorespaces Diagrama del m\IeC {\'o}dulo DMX}}{76}{figure.3.30}
 \contentsline {figure}{\numberline {3.31}{\ignorespaces M\IeC {\'a}quina de estados ejecutada en el bucle principal de la aplicaci\IeC {\'o}n}}{79}{figure.3.31}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Disposici\IeC {\'o}n de los equipos Updown, vista frontal}}{84}{figure.4.1}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Canales DMX asociados a los updown y las cargas}}{85}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Rutina 1, programada en la consola}}{85}{figure.4.3}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Muestra de posiciones para la rutina 1}}{86}{figure.4.4}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Valores de los canales para la instrucci\IeC {\'o}n "Pos 3m, Vel 100\%"}}{87}{figure.4.5}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Muestra de posiciones para la rutina 2}}{88}{figure.4.6}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Rutina 1, programada en la consola}}{86}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Muestra de posiciones para la rutina 1}}{87}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Valores de los canales para la instrucci\IeC {\'o}n "Pos 3m, Vel 100\%"}}{88}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Muestra de posiciones para la rutina 2}}{89}{figure.4.6}
 \addvspace {10\p@ }
