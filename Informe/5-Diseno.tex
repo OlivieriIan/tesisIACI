@@ -2,19 +2,19 @@
 \thispagestyle{empty}
 
 \section{Descripción del capítulo} \label{sec:\thesection}
-En este capítulo se analizarán los requerimientos presentados en la sección \ref{sec:1.5} del capítulo 1 con el objetivo de determinar qué se planea hacer para cumplirlos.
+En este capítulo se analizan los requerimientos presentados en la sección \ref{sec:1.5} del capítulo 1 con el objetivo de describir la planificación para llevarlos a cabo.
 
 \section{REQ-01} \label{sec:\thesection}
 Para cumplir este requerimiento se debe contar con herramientas de software que permita el manejo de: freno, leds indicadores, fin de carrera, dipswitch, encoders AB de disco y motor, motor y DMX. Además, como la placa de control no cuenta con un puerto de debug es necesario tener algún canal de comunicación alternativo, como un puerto serie por software. También será necesario temporizar ciertas partes del programa, por lo que se deberá poder manejar un timer.\\
 El microcontrolador utilizado en la placa de control es el Atmega328p, y cuenta con periféricos para manejar todas las entradas y salidas del sistema por lo que es una buena elección para el proyecto. El único inconveniente que presenta es que es un microcontrolador de 8 bits con relativamente baja memoria y sin optimizaciones para operaciones de punto flotante. 
 
-En sistemas embebidos, la manera de manejar el hardware del microcontrolador, entre otras cosas, es a través de librerías. Estas son un conjunto de funciones o procedimientos externos a la aplicación a desarrollar que le permiten al usuario manejar ciertos aspectos del sistema de forma más fácil.\\
-Una opción sería utilizar librerías ya desarrolladas, entre las cuales se destacan las de Arduino. Arduino, una plataforma de programación de sistemas embebidos muy popular, utiliza en sus placas microcontroladores de marca Atmel. En particular, el \textit{Arduino UNO} utiliza el Atmega328p, por lo que existen funciones provistas por Arduino para el manejo de los periféricos del microcontrolador que se utiliza en el proyecto. \\
-La otra opción sería hacer librerías a medida para el proyecto, desarrollando las funciones necesarias para el manejo de los periféricos que se necesiten para que se comporten exactamente como uno desea.\\
+Para controlar el hardware del microcontrolador y sus periféricos internos y externos se necesitan bibliotecas, las cuales son un conjunto de funciones o procedimientos externos a la aplicación a desarrollar que le permiten al usuario manejar ciertos aspectos del sistema de forma más fácil.\\
+Una opción es utilizar bibliotecas ya desarrolladas, entre las cuales se destacan las de Arduino. Arduino, una plataforma de programación de sistemas embebidos muy popular, utiliza en sus placas microcontroladores de marca Atmel. En particular, el \textit{Arduino UNO} utiliza el Atmega328p, por lo que existen funciones provistas por Arduino para el manejo de los periféricos del microcontrolador que se utiliza en el proyecto. \\
+Otra opción es el desarrollo de bibliotecas a medida para el proyecto, desarrollando las funciones necesarias para el manejo de los periféricos que se necesiten para que se comporten exactamente como uno desea.\\
 En la tabla \ref{table:2.1} se presenta una comparación entre ambas opciones.
 
-El mayor problema con las librerías de Arduino es que para que cuadren en proyectos grandes como estos requieren modificaciones, y las funciones provistas deben ser analizadas para verificar que no se usen elementos como delays bloqueantes ni operaciones de punto flotante indiscriminadamente, ya que deterioran el rendimiento. \\
-Como el objetivo es hacer que el sistema sea lo más confiable posible, y teniendo en cuenta que el tiempo de desarrollo no es un factor crítico, \textbf{se desarrollarán librerías propias para manejar los periféricos}.\\
+El mayor problema con las bibliotecas de Arduino es que para que cuadren en proyectos grandes como estos requieren modificaciones, y las funciones provistas deben ser analizadas para verificar que no se usen elementos como delays bloqueantes ni operaciones de punto flotante indiscriminadamente, ya que deterioran el rendimiento. Además no está claro el uso de periféricos de hardware por parte de las mismas en su documentación factor que obliga a revisarla completamnete para descubrir las interdependencias entrepartes de las mismas y que sucede si se desea controlar directamente un cierto periférico.. \\
+Como el objetivo es hacer que el sistema sea lo más confiable posible, y teniendo en cuenta que el tiempo de desarrollo no es un factor crítico, \textbf{se desarrollarán bibliotecas propias en detalle para manejar los periféricos}.\\
 
 \begin{table}[!ht]
 	\begin{center}
@@ -33,13 +33,13 @@ Como el objetivo es hacer que el sistema sea lo más confiable posible, y tenien
 			\hline
 		\end{tabular}
 	\end{center}
-	\caption{Comparación entre el uso de librerías de Arduino vs el desarrollo de unas propias}
+	\caption{Comparación entre el uso de bibliotecas de Arduino vs el desarrollo de unas propias}
 	\label{table:\thetable}
 \end{table}
 
 \section{REQ-02} \label{sec:\thesection}
 \subsection{Esquema de control}
-Para cumplir con este requerimiento la carga se debe mover en respuesta a una referencia de posición y otra de velocidad indicadas por una consola DMX. Para esto se utilizará el esquema de control mostrado en la figura \ref{fig:2.1}, siendo: p la posición, v la velocidad,  Cp el controlador de posición, Cv el de velocidad, \(\varepsilon\)p y \(\varepsilon\)v los errores de posición y velocidad, u la acción de control, G la planta, y rp\_dmx y rv\_dmx las referencias de posición y velocidad dadas por la consola DMX.
+Para cumplir con este requerimiento la carga se debe mover en respuesta a una referencia de posición y a otra de velocidad indicadas por una consola DMX. Para esto se utilizará el esquema de control mostrado en la figura \ref{fig:2.1}, siendo: p la posición, v la velocidad,  Cp el controlador de posición, Cv el de velocidad, \(\varepsilon\)p y \(\varepsilon\)v los errores de posición y velocidad, u la acción de control, G la planta, y rp\_dmx y rv\_dmx las referencias de posición y velocidad dadas por la consola DMX.
 
 \begin{figure}[!ht]
 	\centering
@@ -53,7 +53,7 @@ La elección de este esquema fue debido a su simpleza: un controlador de velocid
 La simpleza en el controlador y su modelo son un factor muy importante en este proyecto, ya que el objetivo es controlar el equipo mediante una consola DMX, y los efectos enviados por consola tienen una dinámica que el equipo debe seguir lo más fielmente posible. Introducir mucha dinámica por parte del controlador, por más que haga al sistema más estable, es indeseado en este caso. 
 
 \subsection{Modelo de la planta}
-Para este proyecto la planta será considerada como el conjunto motor-transmisión-carga. Un esquema mecánico de la planta se muestra en la figura \ref{fig:2.2}. Su funcionamiento es el siguiente: parte de la potencia eléctrica que ingresa al motor se transforma a mecánica y se utiliza para mover el piñon que se encuentra conectado al eje del motor. El piñon, a través de una cadena ANSI 25, transfiere su energía a la corona, que hace girar un disco adosado a ella. Este disco, o carrete, contiene en su interior el cable que sostiene a la carga, enrrollandolo o desenrrollandolo para subirla o bajarla. Como la carga del updown puede necesitar ser alimentada y recibir señal de DMX, el cable utilizado contiene en su interior contiene 2 cables con ambas señales.
+Para este proyecto la planta será considerada como el conjunto motor-transmisión-carga. Un esquema mecánico de la planta se muestra en la figura \ref{fig:2.2}. Su funcionamiento es el siguiente: parte de la potencia eléctrica que ingresa al motor se transforma a mecánica y se utiliza para mover el piñon que se encuentra conectado al eje del motor. El piñon, a través de una cadena ANSI 25, transfiere su energía a la corona, que hace girar un disco adosado a ella. Este disco, o carrete, contiene en su interior el cable que sostiene a la carga, enrrollandolo o desenrrollandolo para subirla o bajarla. Como la carga del updown puede necesitar ser alimentada y recibir señal de DMX, el cable utilizado contiene en su interior 2 cables con ambas señales.
 
 Ahora, para diseñar el controlador se debe encontrar un modelo matemático de la planta. Una opción es determinar las ecuaciones diferenciales que gobiernan el sistema aplicando la segunda ley de newton, y determinando el modelo matemático de un motor de continua mediante identificación. El problema es que por motivos constructivos del equipo existen muchas piezas que generan roces en diferentes partes del recorrido de la carga, lo que quiere decir que hay una perturbación cuya dinámica es totalmente desconocida y que depende de varios factores, como la distancia y el peso de la carga.\\
 Por lo tanto, se abordará el problema con un método más simple: determinar el modelo de todo el conjunto mediante identificación, midiendo la respuesta del sistema ante ciertas entradas. Como el objetivo es que varios updown se comporten lo más parecido posible, se realizarán las pruebas para por lo menos 2 updown. 
@@ -69,37 +69,37 @@ Por lo tanto, se abordará el problema con un método más simple: determinar el
 \subsection{Procedimiento para el diseño de control}
 Primero se determinará el período de muestreo y actuación inyectándole un escalón unitario a planta.\\
 Luego, se obtendrá el modelo de la planta mediante identificación paramétrica, haciendo uso de un método de estimación de tipo offline (no recursivo).\\
-Luego se diseñarán los controladores de posición y velocidad en base al modelo de la planta obtenido\\
-Finlamente se validarán los controladores hayados haciendo pruebas directamente sobre el updown.
+Paso seguido se diseñarán los controladores de posición y velocidad en base al modelo de la planta obtenido\\
+Finlamente se validarán los controladores diseñados haciendo pruebas directamente sobre el equipo updown.
 
 \subsection{Relación entre cuentas de encoder y distancia}
-A medida que el motor gira desenrrolla el cable para subir o bajar la carga. El problema es que dependiendo cuán enrrollada está el cable en el disco un mismo número de cuentas de encoder se puede traducir en distintas distancias recorridas por la carga. Por ejemplo, si el cable está completamente enrollada cuando se gira 360 grados el carrete el largo desenrrollado será uno, mientras que si el cable se encuentra parcialmente desenrrollada la distancia descendida en un giro de 360 grados del carrete será menor que la anterior.\\
+A medida que el motor gira desenrolla o enrrolla el cable para bajar o subir la carga respectivamente. Un problema de esto es que dependiendo cuán enrrollado está el cable en el disco un mismo número de cuentas de encoder se puede traducir en distintas distancias recorridas por la carga. Por ejemplo, si el cable está completamente enrollado cuando se gira 360 grados el carrete el largo desenrrollado será uno, mientras que si el cable se encuentra parcialmente desenrrollado la distancia descendida en un giro de 360 grados del carrete será menor que la anterior. Esto se debe a la variación del díametro debido a la acumulación del cable al estar enrrollado.\\
 Para determinar esta relación se harán marcas sobre en el cable y para cada una se anotará el valor de cuentas del encoder del motor, que es el que más resolución tiene. Con estos datos se construirá una tabla, se encontrarán varios polinomios que ajusten los datos y se determinará cuál de ellos es el que se implementará en software.
 
 \subsection{Velocidad máxima}
-Una tarea a resolver es determinar cuál es la velocidad máxima posible para una carga determinada.\\
+Una tarea a resolver es determinar cuál es la velocidad máxima posible para una carga determinada.
 
 Para determinar este valor se medirá la velocidad para una carga de 3Kg en subida aplicando sobre el motor un PWM con ciclo de trabajo de 100\%.
 
-La posición máxima posible queda dada por condiciones de diseño: 4 metros
+La posición máxima posible queda dada por condiciones de diseño, siendo de 4 metros.
 
 \section{REQ-03} \label{sec:\thesection}
-Los posibles errores detectables que se pueden tener en el equipo son:
+En las siguientes secciones se detallan los errores que puede detectar el controlador del equipo.
 
 \subsection{Corte de correa}
 La transmisión de potencia entre el piñon en el eje del motor y la corona en el disco se hace a través de una correa. El problema es que durante las pruebas, la empresa observó que la correa podría cortarse. \\
-La manera que tiene el equipo de detectar este error es mediante un segundo encoder AB que mide el giro del disco. Como la relación de vueltas entre el disco y el motor es proporcional, cualquier desviación grande de esta proporcionalidad indica que uno se está moviendo más rápidamente que el otro. Esto podría interpretarse como que la correa fue cortada o que alguno de los encoders dejó de funcionar, 2 errores válidos de hardware.
+La manera que tiene el equipo de detectar este error es mediante un segundo encoder AB que mide el giro del disco. Como la relación de vueltas entre el disco y el motor es proporcional, cualquier desviación grande de esta proporcionalidad indica que uno se está moviendo más rápido que el otro. Esto podría interpretarse como que la correa fue cortada o que alguno de los encoders dejó de funcionar, 2 errores válidos de hardware.
 
 Para poder detectar estos errores lo primero que se hará es determinar la relación entre las cuentas del encoder del disco y las del motor. Luego verificará en el firmware que esta se cumpla en todo momento, bajo un cierto nivel de error aceptable. En caso de no cumplirse se accionará el freno, se detendrá el equipo completamente y se indicará sobre la existencia del error mediante el led de la placa de control (led interno).
 
 \subsection{Fin de carrera}
-La función principal del fin de carrera, un par de pulsadores en la base del equipo, es indicar cuándo el cable que sostiene la carga está completamente enrrollada para determinar la posición 0 o "home" del equipo, dado que este puede estar en cualquier posición al ser encendido.\\
+La función principal del fin de carrera (un par de pulsadores en la base del equipo) es indicar cuándo el cable que sostiene la carga está completamente enrrollado para determinar la posición 0 o "home" del equipo, dado que este puede estar en cualquier posición al ser encendido.\\
 La función secundaria del fin de carrera es detectar posibles eventos indeseados. Por ejemplo, en su punto más bajo la carga se encontrará a 4 metros por debajo del 0 del updown, por lo que podría comenzar a oscilar debido a fuertes vientos o personas que muevan la carga. Por cómo está construido el fin de carrera si la carga oscila más alla de un ángulo de aproximadamente 15 grados el fin de carrera se accionará dando aviso de esto.
 
 Para poder detectar estos errores se verificará que el fin de carrera no sea presionado fuera de la rutina de calibración. En caso de que sea presionado en estas condiciones se detendrá el equipo, se esperará un tiempo a que la oscilación baje, y intentarán reanudar las operaciones normales. En caso de que el fin de carrera siga presionado se accionará el freno, se detendrá el equipo completamente y se indicará sobre la existencia del error mediante el led de la placa de control (led interno).
 
 
-\subsection{Pérdida de DMX}
+\subsection{Pérdida de señal de DMX}
 El estándar DMX establece que el tiempo máximo entre un paquete de datos y otro, tiempo de IDLE o MTBP (ver tabla \ref{table:1.1}), es de 1 segundo. Esto quiere decir que si por 1 segundo no me llegaron nuevos datos se considera que se perdió la comunicación con el dispositivo DMX.
 
 Para detectar la pérdida de señal de DMX se verificará constantemente que el último paquete haya llegado hace menos de 1 segundo. En caso de no cumplirse se asumirá que las referencias de posición y velocidad son 0 (equipo parado). Además, por una convención en equipos DMX, se indicará mediante el led en el dipswitch (led externo) cuándo el equipo recibe correctamente la señal de DMX y cuándo no, encendiendolo y apagándolo rápidamente en el primer caso y lentamente en el segundo.
@@ -118,27 +118,25 @@ Para hallar estos 5 valores se simulará el divisor de tensión en Matlab, proba
 	\label{fig:\thefigure}
 \end{figure}
 
+\newpage
 \section{Firmware del updown} \label{sec:\thesection}
-\subsection{Aviso de confidencialidad}
-Debido a políticas de confidencialidad de la empresa Blackout, el código fuente del firmware desarrollado para este proyecto no puede ser distribuido libremente. Es por este motivo que únicamente se describirá cómo se solucionaron los problemas, sin analizar el código puntualmente.
-
 \subsection{Convenciones}
-Con el objetivo de maximizar el encapsulamiento, las funciones dentro de los módulos se dividirán en internas y externas. Las internas podrán ser accedidas únicamente por otras funciones dentro del módulo, mientras que las externas también podrán ser accedidas por funciones de otros módulos. Para implementar esto se hará uso del sistema de separación de información en archivos .c (código) y .h (headers). Los .h tendrán las declaraciones de funciones externas y definiciones para que, al ser incluido por otros módulos, tengan acceso a las mismas.\\
+Con el objetivo de maximizar el encapsulamiento, las funciones dentro de los módulos se dividirán en privadas y públicas. Las privadas podrán ser accedidas únicamente por otras funciones dentro del módulo, mientras que las públicas también podrán ser accedidas por funciones de otros módulos. Para implementar esto se hará uso del conceto de "modularización por clases" \cite{sec2_6_2-1} en el cual se realiza la separación de información en archivos .c (código) y .h (headers). Los .h tendrán las declaraciones de funciones externas y definiciones para que, al ser incluido por otros módulos, tengan acceso a las mismas.\\
 En cuanto a variables, solo se utilizarán variables internas al módulo. En caso de que tengan que poder ser accedidas externamente se implementarán setters (para escribir un valor en la variable) y getters (para escribir el valor de la variable) según corresponda.\\
 Las funciones tendrán su nombre en formato \textit{camelCase} (priméra letra minúscula y el resto de las primeras letras de las palabras utilizadas en el nombre en mayúscula), los Define en \textit{MAYUSCULA}, y los módulos en formato PascalCase (como el camel case pero con la primera letra en mayúsucula).
 Finalmente, todas las funciones y definiciones que pueden ser accedidas desde afuera de un módulo llevarán como prefijo el nombre del módulo seguido de un guión bajo. 
 
-Además, debido a políticas de Blackout, todo el software desarrollado debe ser entendible por todo el equipo de trabajo. Esto quiere decir que una de las metas para las funciones de las librerías a crear es que permitan un flujo entendible, y que los nombres de las funciones sean parecidas a las de Arduino ya que lo que se acostumbraba a utilizar en la empresa para la programación de sistemas embebidos.\\
+Además, debido a políticas de Blackout, todo el software desarrollado debe ser entendible por todo el equipo de trabajo. Esto quiere decir que una de las metas para las funciones de las bibliotecas a crear es que permitan un flujo entendible, y que los nombres de las funciones sean similares a las de Arduino ya que lo que se acostumbraba a utilizar en la empresa para la programación de sistemas embebidos.\\
 Para lograr este objetivo todas los módulos desarrollados tendrán una función de inicialización llamada "init", y de lectura y escritura, según corresponda, llamadas "read" y "write", respectivamente. 
 
 A contunuación se presentan algunos ejemplos de las convenciones que se usarán. Función de inicialización del módulo 1: Modulo1\_init(); Define del largo de un buffer genérico del modulo 3: Modulo3\_BUFFERGENERICO.
 
 
-\subsection{Librerías de bajo nivel}
-Como se mencionó en la sección \ref{sec:2.2}, se desarrollarán librerías para manejar los periféricos del Atmega328p y asi poder controlar el hardware del sistema. Esto implica analizar la \href{http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf}{hoja de datos del Atmega328p} e interactuar con los registros, un lugar de memoria utilizado para guardar información, que correspondan.\\ 
-Asociadas a las librerías viene de la mano el concepto de módulo, que tiene que ver con agrupar funciones similares en un mismo paquete para desacoplar dependencias y separar al sistema en varios subsistemas que sean lo más independientes que se pueda. Esto ayuda a que el programa sea escalable y mantenible, por lo que todo el software desarrollado se hará de manera modular.
+\subsection{Bibliotecas de bajo nivel}
+Como se mencionó en la sección \ref{sec:2.2}, se desarrollarán bibliotecas para manejar los periféricos del Atmega328p y asi poder controlar el hardware del sistema. Esto implica analizar la hoja de datos del Atmega328p \cite{sec2_6_2-2} e interactuar con los registros, un lugar de memoria utilizado para guardar información, que correspondan.\\ 
+Asociadas a las bibliotecas viene de la mano el concepto de módulo, que tiene que ver con agrupar funciones similares en un mismo paquete para desacoplar dependencias y separar al sistema en varios subsistemas que sean lo más independientes que se pueda. Esto ayuda a que el programa sea escalable y mantenible, por lo que todo el software desarrollado se hará de manera modular.
 
-Entonces, para manejar los periféricos se creará una librería de bajo nivel que constará de los siguientes módulos:
+Entonces, para manejar los periféricos se creará una biblioteca de bajo nivel que constará de los siguientes módulos:
 \begin{itemize}
 	\item \textbf{Entradas y salidas digitales}, para leer el estado del fin de carrera y comandar el freno, los leds indicadores interno y externo, y el puente H. Este módulo se llamará \textit{DigitalIO}.
 	\item \textbf{Entradas analógicas}, para leer las 3 salidas analógicas del dipswitch y poder determinar la posición de los selectores. Este módulo se llamará \textit{ADC}, por \textit{Analog to Digital Converter}.
@@ -149,9 +147,9 @@ Entonces, para manejar los periféricos se creará una librería de bajo nivel q
 	\item \textbf{Base de tiempo}, un timer utilizado para la temporización tareas y eventos. Este módulo se llamará \textit{Tick}.
 \end{itemize}
 
-\subsection{Librerías de alto nivel}
-Si bien la librería de bajo nivel permite acceder a las entradas y salidas del equipo, se necesita otra librería, de alto nivel, que utilice sus módulos para manejar el hardware como se espera. Por ejemplo, no es lo mismo obtener un valor analógico leyendo un \textit{registro} (lugar para el almacenamiento de datos) del microcontrolador, que determinar qué conmutadores del dipswitch están activados leyendo 3 valores analógicos, aunque ambas acciones involucren leer una entrada analógica.\\
-Entonces, se creará una librería más acorde a la aplicación y no tan genérica como la de bajo nivel, que constará de los siguientes módulos:
+\subsection{Bibliotecas de alto nivel}
+Si bien la biblioteca de bajo nivel permite acceder a las entradas y salidas del equipo, se necesita otra biblioteca, de alto nivel, que utilice sus módulos para manejar el hardware como se espera. Por ejemplo, no es lo mismo obtener un valor analógico leyendo un \textit{registro} (lugar para el almacenamiento de datos) del microcontrolador, que determinar qué conmutadores del dipswitch están activados leyendo 3 valores analógicos, aunque ambas acciones involucren leer una entrada analógica.\\
+Entonces, se creará una biblioteca más acorde a la aplicación y no tan genérica como la de bajo nivel, que constará de los siguientes módulos:
 \begin{itemize}
 	\item \textbf{Dipswitch}, que incluye la lectura de las llaves del dipswitch, y la escritura del led indicador externo.
 	\item \textbf{Grua}, que incluye el manejo del motor, del led interno, del freno y del fin de carrera.
@@ -160,8 +158,8 @@ Entonces, se creará una librería más acorde a la aplicación y no tan genéri
 	\item \textbf{Controlador}, para la implementación del sistema de control
 \end{itemize}
 
-\subsection{Diagrama de módulos}
-De estas 2 librerías se obtiene el diagrama de módulos presentado en la figura \ref{fig:2.4}, el cual muestra su relación, dependencia y alcance. Por encima de ellas se encuentra la capa de aplicación, que hará uso de estas librerías, relacionandolas con el objetivo de que el Updown funcione como debe.
+\subsection{Arquitectura en capas de los módulos de firmware}
+De estas 2 bibliotecas se obtiene el diagrama en capas presentado en la figura \ref{fig:2.4}, el cual muestra su relación, dependencia y alcance. Por encima de ellas se encuentra la capa de aplicación, que hará uso de estas bibliotecas, relacionandolas con el objetivo de que el Updown funcione como debe.
 
 \begin{figure}[!ht]
 	\centering

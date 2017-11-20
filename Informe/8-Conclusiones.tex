@@ -2,9 +2,16 @@
 \thispagestyle{empty}
 
 \section{Conclusiones} \label{sec:\thesection}
-En este trabajo se ha logrado llevar a cabo el desarrollo del firmware del equipo updown, tal que con los objetivos presentados en la sección \ref{sec:1.5}. 
+En este trabajo se ha logrado  con los objetivos presentados en la sección \ref{sec:1.5}. Esto incluye el manejo de todos los periféricos del equipo, el diseño de un sistema de control de posición y velocidad cuyos setpoints son seteados mediante el protocolo DMX, el desarrollo del dipswitch, y el manejo de errores.
 
-Si bien a simple vista parecía un proyecto sencillo, demostró que entre la teoría y la práctica hay una brecha enorme que solo la experiencia en campo puede achicar. Las limitaciones de hardware que el equipo traía desde el momento inicial resultaron ser interesantes desafíos a superar del lado del software, y que requirieron el uso de conocimientos adquiridos en várias cátedras de la carrera de Ingeniería en Automatización y Control Industrial. Entre ellas se pueden destacar:
+%Ahora, si bien el Updown funciona, lo hace bajo ciertos márgentes.\\
+%Por ejemplo, de las pruebas realizadas en la sección \ref{sec:4.3} se ha observado que el error de posición en régimen permanente es de aproximadamente \( \pm 2.5cm \), y que la velocidad en régimen permanente tiene un error de \( \pm 1 cuenta/ms \) para altas velocidades. Todo esto para los 4 equipos con los que se realizó la prueba. \\
+%Además, al no trabajar con punto flotante la velocidad y rango de acción del controlador se ve muy reducido, ya que se tienen que usar divisiones por corrimiento, lo cual quita resolución y evita que números pequeños tengan peso en las ecuaciones.\\
+%Otro inconveniente fue que no se pudo determinar un modelo para la planta, lo cuál seguramente se debe a las altas alinealidades de la misma. Debido a esto se tuvo que recurrir a un método iterativo de ajuste de controlador por medio de pruebas empíricas, que está lejos de ser óptimo.
+
+Si bien a simple vista parecía un proyecto sencillo, demostró que entre la teoría y la práctica hay una brecha enorme que solo la experiencia en campo puede reducir. Las limitaciones de hardware que el equipo traía desde el momento inicial resultaron ser interesantes desafíos a superar del lado del software. Desde inconvenientes con la diferencia constructiva entre equipos, hasta las limitaciones del microcontrolador, todos las barreras que fueron apareciendo apelaban a un desarrollo de soft más específico.
+
+Para sobrepasar estas barreras fue  imprescindible utilizar una amplia cantidad de conocimiento adquiridos en várias cátedras de la carrera de Ingeniería en Automatización y Control Industrial. Entre ellas se pueden destacar:
 
 \begin{itemize}
 	\item \textbf{Diseño de controladores digitales}, materia fundamental para el desarrollo de firmware en embebidos, ya que da conocimientos teóricos y prácticos del uso de periféricos de microcontroladores. 
@@ -15,17 +22,13 @@ Si bien a simple vista parecía un proyecto sencillo, demostró que entre la teo
 	\item \textbf{Electrónica industrial}, en donde se estudiaron sistemas con motores de continua, manejo de potencia eléctrica y mecánica y el uso de fuentes de alimentación, todos conocimientos aplicables al Updown.
 \end{itemize}
 
-Ahora, si bien el Updown funciona, lo hace bajo ciertos márgentes.\\
-Por ejemplo, de las pruebas realizadas en la sección \ref{sec: 4.3} se vió que el error de posición en régimen permanente es de aproximadamente \( \pm 2.5cm \), y que la velocidad en régimen permanente tiene un error de \( \pm 1 cuenta/ms \) para altas velocidades. Todo esto para los 4 equipos con los que se realizó la prueba. \\
-Además, al no trabajar con punto flotante la velocida y rango de acción del controlador se ve muy reducido, ya que se tienen que usar divisiones por corrimiento, lo cual quita resolución y evita que números pequeños tengan peso en las ecuaciones.\\
-
-Otro inconveniente fue que no se pudo determinar un modelo para la planta, lo cuál seguramente se debe a las altas no-linealidades de la misma. Debido a esto se tuvo que recurrir a un método iterativo de ajuste de controlador por medio de pruebas empíricas, que está lejos de ser óptimo.
+Por lo tanto, el proyecto \textit{Control automático del equipo Updown} fue una importante experiencia dentro de la carrera de Ingeniería en Automatización y Control Industrial para continuar con la formación profesional del autor, además de abrirle las puertas al mundo laboral. 
  
 \section{Mejoras a futuro} \label{sec:\thesection}
 
-Si bien funciona, el equipo updown tiene muchísimo margen de mejora, dadas sus condiciones de hardware y software. 
+El equipo updown tiene muchísimo margen de mejora, dadas sus condiciones de hardware y software. 
 
-La mejora más importante para el equipo sería agregarle un sensor de peso, como una celda de carga. Esto ayudaría a detectar si la cadena se rompió, si alguien se cuelga de la carga, si la carga cambió, entre muchas otras cosas. Esto aumentaría exponencialmente la seguridad del equipo, evitaría que se queme en caso de que el peso sea excesivo (problema no contemplado actualmente), eliminaría la necesidad de utilizar un segundo grupo de sensores (el sensor de disco), y permitiría tener varios controladores según el peso de la carga, que conmuten acorde a esta cambia para obtener un mejor desempeño.
+La mejora más importante para el equipo sería agregarle un sensor de peso, como por ejemplo, una galga extensiométrica. Esto ayudaría a detectar si la cadena se rompió, si alguien se cuelga de la carga, si la carga cambió, entre otras cosas. Esto aumentaría exponencialmente la seguridad del equipo, evitaría que se queme en caso de que el peso sea excesivo (problema no contemplado actualmente), eliminaría la necesidad de utilizar un segundo grupo de sensores (el sensor de disco), y permitiría tener varios controladores según el peso de la carga, que conmuten en concordancia con esta variable para obtener un mejor desempeño.
 
 Otra mejora podría ser pasar a tener un microcontrolador optimizado para operaciones de punto flotante. Esto mejoraría el desempeño de cualquier controlador implementado, y abriría las puertas a ideas como la de un sistema de ajuste online de parámetros (autotunning).
 
@@ -34,11 +37,4 @@ Para un análisis estadístico del desempeño de los equipos se podrían guardar
 Finalmente, para aumentar la velocidad de producción de equipos, se podría diseñar un entorno gráfico que asista al usuario a realizar la prueba de hardware y calibración de los equipos (por ejemplo, la relación encoder distancia, que varía de equipo a equipo). Además, que una vez concluida esta fase se encargue de cargarles el firmware ajustado para ese equipo en particular.
 
 
-\section{Referencia bibliográfica} \label{sec:\thesection}
-
-\begin{enumerate}
-	\item Atmel (2016), \textit{ATmega328P Complete Datasheet, rev 11/2016}. Disponible en \href{http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf}{http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P\_Datasheet.pdf}
-	\item Atmel (2009), \textit{AVR200: Multiply and Divide Routines Application Note, Rev. 0936D-AVR-09/09}. Disponible en \href{http://www.atmel.com/Images/doc0936.pdf}{http://www.atmel.com/Images/doc0936.pdf}
-	\item Ujjal Kar (1998), DMX512 Packet format. On line, última consula 30-09-2017 en \href{http://www.dmx512-online.com/packt.html}{http://www.dmx512-online.com/packt.html}.
-\end{enumerate}
 

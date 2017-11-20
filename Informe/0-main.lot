@@ -1,0 +1,14 @@
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Duraci\IeC {\'o}n de las se\IeC {\~n}ales que componen la trama de DMX}}{16}{table.1.1}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Comparaci\IeC {\'o}n entre el uso de bibliotecas de Arduino vs el desarrollo de unas propias}}{24}{table.2.1}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Mapeo de bits de los puertos a n\IeC {\'u}mero}}{34}{table.3.1}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Relaci\IeC {\'o}n entre cuentas del encoder motor y distancia}}{48}{table.3.2}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Par\IeC {\'a}metros obtenidos para los 12 modelos propuestos}}{56}{table.3.3}
+\contentsline {table}{\numberline {3.4}{\ignorespaces Error RMSE para los 12 modelos propuestos}}{57}{table.3.4}
+\contentsline {table}{\numberline {3.5}{\ignorespaces Valores anal\IeC {\'o}gicos te\IeC {\'o}ricos y reales para cada combinaci\IeC {\'o}n de R4,R3,R2,R1}}{64}{table.3.5}
+\contentsline {table}{\numberline {3.6}{\ignorespaces Sentido seg\IeC {\'u}n el estado del canal B durante las transiciones del canal A}}{65}{table.3.6}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Rutina 2. Cada par posici\IeC {\'o}n,velocidad representa una instrucci\IeC {\'o}n}}{87}{table.4.1}
+\addvspace {10\p@ }

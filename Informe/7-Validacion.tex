@@ -33,16 +33,17 @@ Para verificar que esto se realizaron las siguientes pruebas:
 	\item Partiendo de una posición de 1 metro, se mantiene presionado el fin de carrera. Durante este tiempo la carga baja lenta y continuamente hasta que pasan 15 segundos. En ese momento la carga para, se activa el freno, y el led interno titila a una frecuencia de 0.25Hz.
 \end{enumerate}
 
-El comportamiento en la tercer prueba es el esperado ya que como se mantiene el fin de carrera presionado automáticamente "se llega al 0", y en consiguiente la carga baja 10 cm, como es de esperarse. Luego se pasa al modo normal, pero como el fin de carrera sigue presionado se vuelve a entrar al de calibración, y el ciclo vuelve a comenzar denuevo, repitiendose hasta que transcurren 15 segundos.
+El comportamiento en la tercer prueba es el esperado ya que como se mantiene el fin de carrera presionado automáticamente "se llega al 0", y en consiguiente la carga baja 10 cm, como es de esperarse. Luego se pasa al modo normal, pero como el fin de carrera sigue presionado se vuelve a entrar al de calibración, y el ciclo vuelve a comenzar de nuevo, repitiendose hasta que transcurren 15 segundos.
 
 Por lo tanto, con esto se verifica que el comportamiento es el deseado.
 	
+\newpage
 \subsection{Corte de cadena}
-Si la relación entre el encoder de disco y de motor se desvía mucho de la dada por la tabla \ref{table:3.2} el se debe detener el motor y accionar el freno para evitar que la carga baje. Además, el led interno debe cambiar de estado 2 veces por segundo.
+Si la relación entre el encoder de disco y de motor se desvía mucho de la dada por la tabla \ref{table:3.2} se debe detener el motor y accionar el freno para evitar que la carga baje. Además, el led interno debe cambiar de estado 2 veces por segundo.
 
 Para verificar que esto se realizaron las siguientes pruebas:
 \begin{enumerate}
-	\item Se desconecta el cable que asocia el encoder del motor y la placa de controlcausando que las cuentas del encoder de motor dejen de cambiar. Luego de un segundo el motor para y el freno se acciona, deteniendo completamente la carga. Adicionalmente, el led interno titila a una frecuencia de 1Hz.
+	\item Se desconecta el cable que asocia el encoder del motor y la placa de control causando que las cuentas del encoder de motor dejen de cambiar. Luego de un segundo el motor para y el freno se acciona, deteniendo completamente la carga. Adicionalmente, el led interno titila a una frecuencia de 1Hz.
 	\item Se desconecta el cable que asocia el encoder del disco y la placa de control  causando que las cuentas del encoder de disco dejen de cambiar. Luego de un segundo el motor para y el freno se acciona, deteniendo completamente la carga. Adicionalmente, el led interno titila a una frecuencia de 1Hz.
 \end{enumerate}
 Para verificar completamente que el comportamiento ante un error es el deseado se debería, además de probar la pérdida de cuenta de los encoders, probar cortando la cadena. Como no se logró hacer esto con el equipo en funcionamiento este punto no se pudo validar totalmente. Sin embargo, es muy poco probable que se corte la cadena debido a la dureza de la misma y a que la carga es de solamente 3 Kg.
@@ -59,7 +60,7 @@ La prueba se realiza con 4 equipos updown dispuestos en forma de matriz de 2x2, 
 	\label{fig:\thefigure}
 \end{figure}
 
-Para manejar los equipos se utiliza la consola \href{http://www.lighttrader.com/images/HI61020007_L.JPG}{HedgeHog 4}, de HighEnd Systems. En ella se programan 2 rutinas:
+Para manejar los equipos se utiliza la consola HedgeHog 4, de HighEnd Systems. En ella se programan 2 rutinas:
 \begin{itemize}
 	\item \textbf{Rutina 1}: los 4 equipos se mueven juntos, a velocidad máxima, a las posiciones 0, 1, 2, 3 y 4 metros, en subida y en bajada.
 	\item \textbf{Rutina 2}: los 4 equipos se mueven a posiciones distintas (apelando al direccionamiento por dip switch) y la velocidad varía con el tiempo.
@@ -102,7 +103,7 @@ Si bien estos son los resultados de error para los 4 equipos, se puede ver en la
 	\label{fig:\thefigure}
 \end{figure}
 
-En la figura \ref{fig:4.5} se muestra cómo quedan los canales para, por ejemplo, la instrucción "Pos 3m, Vel 100\%" (las instrucciones número 2 y 8 de la figura \ref{fig:4.3}). Los valores 192 en los canales DMX 1, 3, 5 y 7 corresponden a la posición de las cargas, que es 3 metros siendo 255 4 metros, mientras que los valores 255 en los canales 2, 4, 6 y 8 corresponden a la velocidad del 100\%. Por otro lado, los canales 10 y 11, los cuales contienen las intensidades R y G de las luminarias, tienen un valor de 255, por lo que la intensidad en esos 2 colores es máxima (notese que se distinguen los colores de la luminaria a pleno día).
+En la figura \ref{fig:4.5} se muestra cómo quedan los canales para, por ejemplo, la instrucción "Pos 3m, Vel 100\%" (las instrucciones número 2 y 8 de la figura \ref{fig:4.3}). Los valores 192 en los canales DMX 1, 3, 5 y 7 corresponden a la posición de las cargas, que es 3 metros siendo 255 4 metros, mientras que los valores 255 en los canales 2, 4, 6 y 8 corresponden a la velocidad del 100\%. Por otro lado, los canales 10 y 11, los cuales contienen las intensidades R y G de las luminarias, tienen un valor de 255, por lo que la intensidad en esos 2 colores es máxima (nótese que se distinguen los colores de la luminaria a pleno día).
 
 \begin{figure}[!ht]
 	\centering
@@ -111,7 +112,7 @@ En la figura \ref{fig:4.5} se muestra cómo quedan los canales para, por ejemplo
 	\label{fig:\thefigure}
 \end{figure}
 
-Para constatar que la velocidad de los equipos es la correcta se midió la de los 4 equipos durante la prueba. Tanto para el ascenso como para el descenso la velocidad en régimen permanente de los 4 equipos es de \(40 \pm 1\) cuentas cada 20 milisegundos, lo cual concuerda con lo encontrado en la sección \ref{sec:3.3}, subsección 2, en donde se halló que la velocidad máxima posible es de 2 cuentas por milisegundo.
+Para constatar que la velocidad de los equipos es la correcta se midió la de los 4 equipos durante la prueba. Tanto para el ascenso como para el descenso la velocidad en régimen permanente de los 4 equipos es de \(40 \pm 1\) cuentas cada 20 milisegundos, lo cual concuerda con lo encontrado en la sección 3.3.2, en donde se halló que la velocidad máxima posible es de 2 cuentas por milisegundo.
 
 \subsection{Rutina 2}
 En este caso se programa en la consola la secuencia mostrada en la tabla \ref{table:4.1}, en donde las cargas cambian de posicion y velocidad con cada nueva instrucción. En la figura \ref{fig:4.6} se muestran algunas de las posiciones alcanzadas durante esta prueba. \\

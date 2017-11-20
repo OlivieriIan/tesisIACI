@@ -5,8 +5,8 @@
 En este capitulo se desarrollarán las soluciones propuestas en el capítulo de diseño. Esto implica detallar el proceso realizado, describir los cambios que se debieron hacer en caso de que el planteo inicial no haya funcionado, análisis de resultados, etc.
 %Cada sección será redactada en el orden que se hicieron, debido a que unas partes dependen de otras para poder desarrollarse.
 
-\section{Firmware del updown - Librerías de bajo nivel} \label{sec:\thesection}
-El desarrollo de todas las librerías de bajo nivel está basado en el \href{http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf}{el datasheet del ATmega328}.
+\section{Firmware del updown - Bibliotecas de bajo nivel} \label{sec:\thesection}
+El desarrollo de todas las bibliotecas de bajo nivel está basado en la hoja de datos del ATmega328 \cite{sec2_6_2-2}.
 
 \subsection{DigitalIO}
 %El desarrollo del módulo de entradas y salidas digitales (DigitalIO) está basado en el capítulo 18 de la hoja de datos del Atmega328p. 
@@ -14,9 +14,9 @@ El desarrollo de todas las librerías de bajo nivel está basado en el \href{htt
 La función de este módulo es manejar el periférico de entradas y salidas del microcontrolador con el propósito de leer el estado del fin de carrera y seleccionar el estado del freno, los leds indicadores interno y externo, y el puente H.
 
 \subsubsection{Desarrollo}
-Las entradas y salidas digitales del Atmega328p se manejan mediante 3 registros: el DDRn (Data Direction Register n), PORTn (Port n Data Register) y PINn (Port n Input Pins Address). La "n" en los registros se refiere al registro específico a ser accedido, que en el caso de este microcontrolador puede ser B, C o D.
+Las entradas y salidas digitales del Atmega328p se manejan mediante 3 registros: el DDRn (Data Direction Register n), PORTn (Port n Data Register) y PINn (Port n Input Pins Address). \footnote{La "n" en los registros se refiere al registro específico a ser accedido, que en el caso de este microcontrolador puede ser B, C o D}
 
-Antes de poder leer o escribir el estado de un pin es necesario inicializarlo. Para inicializar un pin como entrada o salida digital primero se elige la dirección del mismo, o sea, si se utilizará como entrada O como salida. Para esto se utiliza el registro DDRn, en donde escribir un bit de este registro en 1 significa configurar el pin asociado a este bit como Output (salida) o , mientras que si se escribe en 0 significa configurar al pin como Input (entrada). Para el caso de las entradas se puede optar por habilitar una resistencia pull-up interna del microcontrolador. El pull-up se encuentra deshabilitado por defecto, pero puede ser habilitado escribiendo un 1 en el bit análogo del registro PORTn.
+Antes de poder leer o escribir el estado de un pin es necesario inicializarlo. Para inicializar un pin como entrada o salida digital primero se elige la dirección del mismo, o sea, si se utilizará como entrada o como salida. Para esto se utiliza el registro DDRn, en donde escribir un bit de este registro en 1 significa configurar el pin asociado a este bit como Output (salida) o , mientras que si se escribe en 0 significa configurar al pin como Input (entrada). Para el caso de las entradas se puede optar por habilitar una resistencia pull-up interna del microcontrolador. El pull-up se encuentra deshabilitado por defecto, pero puede ser habilitado escribiendo un 1 en el bit análogo del registro PORTn.
 Para escribir el valor de un pin configurado como salida se setea su valor mediante el registro PORTn. Un 1 en un bit de este registro significa poner en HIGH (5 Volts) la salida asociada a ese bit, mientras que un 0 es un estado LOW (0 Volts).\\
 La lectura del estado de un pin configurado como entrada se hace a través del registro PINn. Enmascarando un bit específico en el puerto se puede obtener ese valor en particular.
 
@@ -169,10 +169,10 @@ valorCanal2 = ADC_read(2);
 \subsection{PWM}
 %El desarrollo del módulo PWM está basado en el capítulo 20 de la hoja de datos del Atmega328p.
 \subsubsection{Objetivo}
-La función de este módulo es generar una señal de tipo tren de pulsos con ciclo de trabajo (tiempo encendido sobre período de la señal) variable con el objetivo de manejar la velocidad del motor de continua que mueve la carga en el updown.
+La función de este módulo es generar una señal de tipo tren de pulsos con frecuencia fija y ciclo de trabajo (tiempo encendido sobre período de la señal) variable con el objetivo de manejar la velocidad del motor de continua que mueve la carga en el updown.
 
 \subsubsection{Desarrollo}
-En el Atmega328p no existe un periférico exclusivo para generación de PWM. Por lo tanto, se generará con el periférico Timer del microcontrolador. De los Timers que tiene este microcontrolador, el más potente para generación de PWM es el Timer1, puesto que cuenta con un modo de generación de PWM de fase correcta. Este modo es preferible por sobre el modo de pwm soportado por los otros 2 timers (0 y 2) ya que no provoca corrimientos de fase durante la variación del ancho del pulso, efecto que hay que evitar en el control de motores.
+En el Atmega328p se genera la señal PWM mediante un modo de trabajo del periférico Timer del microcontrolador. De los Timers que tiene este microcontrolador, el más potente para generación de PWM es el Timer1, puesto que cuenta con un modo de generación de PWM de fase correcta. Este modo es preferible por sobre el modo de pwm soportado por los otros 2 timers (0 y 2) ya que no provoca corrimientos de fase durante la variación del ancho del pulso, efecto que hay que evitar en el control de motores.
 
 Para un Timer, la selección de la frecuencia es un factor fundamental. En esta aplicación la frecuencia elegida para la señal de PWM es de 25KHz, ya que:
 \begin{itemize}
@@ -261,10 +261,10 @@ Para inicializar las EXINT se selecciona el tipo de disparo en el registro EICRA
 Para las PCINT, por otro lado, solo se habilita la entrada digital correspondiente y se activa la interrupción en el registro PCICR.
 
 Para ayudar al encapsulamiento lo ideal es que este módulo no implemente las rutinas de cuenta de los encoders, sino que esa lógica debería estar en otro módulo de mayor nivel. Para lograr esto se hace uso de \textit{punteros a función}. Los punteros a función son variables que guardan la dirección de una función, haciendo que la función pueda ser llamada a través del puntero, sin necesidad de ejecutarla directamente.
-Esto permite que una función pueda ser pasada como parámetro, haciendo que la implementación de dicha función no tenga que estar en el módulo en donde se ejecuta, desasociando un módulo de otro. Por lo tanto, las funciones de inicialización de los periféricos EXINT y PCINT reciben como parámetro una función, que será la ejecutada durante la interrupción.
+Esto permite que una función pueda ser pasada como parámetro, haciendo que la implementación de dicha función no tenga que estar en el módulo en donde se ejecuta, desasociando un módulo de otro. Por lo tanto, las funciones de inicialización de los periféricos EXINT y PCINT reciben como parámetro una función, que será la ejecutada cuando ocurra la interrupción.
 
 \subsubsection{Acceso}
-El acceso al módulo se realiza a través 2 funcion, como se muestra en la figura \ref{fig:3.5}. Ambas funciones habilitan la interrupción y le asocian la función pFuncion para que se ejecuta cuando un cambio en el estado del pin ocurra.
+El acceso al módulo se realiza a través de dos funciones, como se muestra en la figura \ref{fig:3.5}. Ambas funciones habilitan la interrupción y le asocian la función pFuncion para que se ejecuta cuando un cambio en el estado del pin ocurra.
 
 \begin{figure}[!ht]
 	\centering
@@ -444,9 +444,10 @@ El acceso al módulo se realiza a través 2 funciones, como se muestra en la fig
 
 \subsection{Relación entre cuentas de encoder y distancia}
 \subsubsection{Pruebas y resultados}
-Como se mencionó en la sección \ref{sec:2.3}, subsección 3, la distancia lineal recorrida por la carga varía según cuán enrollado está el cable en el carrete. La forma que se tiene de detectar que el cable se desenrrolla es a través del encoder del motor, que mide la posición angular de su eje, y por consiguiente del disco, que contiene el cable que sostiene la carga. Lo que hay que hacer entonces es determinar la relación entre posición angular y lineal.
+Como se mencionó en la sección 2.3.3, la distancia lineal recorrida por la carga varía según cuán enrollado está el cable en el carrete. Mediante el encoder del motor se mide la posición angular del eje, pero como lo que se necesita controlar es la posición lineal, es indispensable determinar la relación entre ambas.
+%La forma que se tiene de detectar que el cable se desenrrolla es a través del encoder del motor, que mide la posición angular de su eje, y por consiguiente del disco, que contiene el cable que sostiene la carga. Lo que hay que hacer entonces es determinar la relación entre posición angular y lineal.
 
-Para determinar la relación entre estas 2 variables se marcó el cable que sostiene la carga cada 25cm, tomando como 0 el cable completamente enrollado. Luego, a medida que se desenrrollaba el cable se midió el valor de la cuenta de encoder del motor y de disco. Los resultados obtenidos se pueden encontrar en la tabla \ref{table:3.2}.
+Para determinar la relación entre la posición angular y lineal se marcó el cable que sostiene la carga cada 25cm, tomando como 0 el cable completamente enrollado. Luego, a medida que se desenrrollaba el cable se midió el valor de la cuenta de encoder del motor y de disco. Los resultados obtenidos se pueden encontrar en la tabla \ref{table:3.2}.
 
 \begin{table}[!ht]
 	\begin{center}
@@ -478,7 +479,7 @@ De estos resultados se puede ver que la relación entre las cuentas de motor y d
 
 \subsubsection{Selección de la función de ajuste}
 De la figura \ref{fig:3.10} se puede ver que la relación entre cuentas de encoder y distancia puede ser ajustada con un polinomio de grado 2 (función cuadrática). En dicha figura la función de ajuste cuadrática es \(cuentaEncoder = f(distancia) = 0.0356*dist^2 + 41.0180*dist + 101.2797\).\\     
-El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisones. En la \href{http://www.atmel.com/Images/doc0936.pdf}{nota de aplicación de ATMEL \textit{AVR200}} se puede ver que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
+El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisones. Según la nota de aplicación en \cite{sec3_3_1} se observa que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
 
 \begin{figure}[!ht]
 	\centering
@@ -541,14 +542,16 @@ Para esto se realizaron varias pruebas tomando como 0 de posición 2000 cuentas 
 	\label{fig:\thefigure}
 \end{figure}
 
-Los resultados de estas pruebas se pueden ver en las figuras \ref{fig:3.14} y \ref{fig:3.15}. Allí se ve que durante la bajada la salida se estabiliza a los 250ms, mientras que para la subida lo hace a los 50ms. Esto genera un problema, ya que el período de muestreo suele tomarse de 5 a 10 veces más rápido que el tiempo de establecimiento del sistema, y aquí tenemos 2 tiempos distintos. \\
+Los resultados de estas pruebas se pueden observar en las figuras \ref{fig:3.14} y \ref{fig:3.15}. Allí se ve que durante la bajada la salida se estabiliza a los 250ms, mientras que para la subida lo hace a los 50ms. 
 
-Como la solución no es directa se probarán distintos períodos de muestreo durante la caracterización de la planta y diseño del controlador para determinar cuál es el indicado.
+En base a esto, se elije un período de muestreo inicial 5 veces más rápido que el peor tiempo de establecimiento (250ms), dando un periódo de muestreo de 50ms.
+
+%Esto genera un problema, ya que el período de muestreo suele tomarse de 5 a 10 veces más rápido que el tiempo de establecimiento del sistema, y aquí tenemos 2 tiempos distintos. Como la solución no es directa se probarán distintos períodos de muestreo durante la caracterización de la planta y diseño del controlador para determinar cuál es el indicado.
 
 \subsection{Obtención del modelo de la planta}
 \subsubsection{Toma de muestras}
 El modelo de la planta a obtener tiene que ser tal que su salida sea de velocidad para poder diseñar el lazo de control interno de velocidad del modelo propuesto en la figura \ref{fig:2.1}.\\
-Para obtener este modelo se le inyecta al equipo la entrada mostrada en la figura \ref{fig:3.16}, en donde la fuerza es positiva cuando el motor hace bajar la carga y negativa cuando la hace subir. La carga del equipo es de 3Kg\\
+Para obtener este modelo se le inyecta al equipo la entrada mostrada en la figura \ref{fig:3.16}, en donde la fuerza es positiva cuando el motor hace bajar la carga (de masa 3Kg) y negativa cuando la hace subir.\\
 De esta entrada se midió la velocidad de salida en 2 pruebas separadas con el fin de obtener un set de datos para identificación y otro para validación. Estas respuestas se muestran en la figura \ref{fig:3.17}.
 
 \begin{figure}[!ht]
@@ -681,7 +684,7 @@ Para validar los modelos se utiliza el set de datos de validación (figura \ref{
 \end{table}
 
 \subsubsection{Análisis de resultados}
-De los resultados se puede ver que el error RMSE es muy grande, ya que la sñal real del sistema toma amplitudes de como mucho 20, y el error es de por lo menos 3, un 15\% de error (aprox). Esto que indica que la identificación no fue buena, por lo que no es recomendable diseñar los controladores basandose en los datos obtenidos. \\
+De los resultados se puede ver que el error RMSE es muy grande, ya que la señal real del sistema toma amplitudes de como mucho 20, y el error es de por lo menos 3, aproximadamente un 15\% de error. Esto indica que la identificación no fue buena, por lo que no es recomendable diseñar los controladores basándose en los datos obtenidos. \\
 Un ejemplo gráfico se puede ver en la figura \ref{fig:3.18} en donde se contrastan la salida predicha con los parámetros identificados para el modelo 2 (que es el que menor error RMSE tuvo), con los datos de validación.
 
 \begin{figure}[!ht]
@@ -698,13 +701,13 @@ Como la planta identificada no se ajusta al modelo diseñar los controladores ba
 
 También es importante recordar que el Atmega328p no tiene optimizadas las operaciones de punto flotante, por lo que cualquier multiplicación por números no enteros tendrá que ser aproximada. En el caso de las divisiones se hará mediante la operación corrimiento (bit shift). Esto tiene como ventaja que se reduce mucho el uso del CPU, pero se pierde resolución y cambiar el código se hace complicado.
 
-En cuanto al período de muestreo, se comenzará con un valor de 50ms y se ajustará dependiendo los resultados que se vayan obteniendo.
+Como se mencionó en la sección 3.3.3 el período de muestreo será de 50ms (5 veces menor que el peor tiempo de establecimiento).
 
 \subsubsection{Controlador de velocidad}
 Basándose en la figura \ref{fig:2.1}, el controlador de velocidad tiene como entrada el error de velocidad y como salida el ciclo de trabajo del pwm que irá al motor. Si bien el ciclo de trabajo no puede ser negativo, a terminos prácticos un valor negativo indicaría que el motor sube la carga y uno positivo que la baja.\\
-El rango de la variable de entrada es de \(\pm 20\), siendo +20 velocidad de descenso y -20 de ascenso, como se vió en la sección \ref{sec:3.3} subsección 2, en donde se determinó la velocidad máxima. Por otro lado, el valor de la salida puede ser cualquiera, no necesariamente \(\pm 100\% \) por ser un ciclo de trabajo, pero estará acotado por el limitador.
+El rango de la variable de entrada es de \(\pm 20\), siendo +20 velocidad de descenso y -20 de ascenso, como se vió en la sección sec:3.3.2 en donde se determinó la velocidad máxima. Por otro lado, el valor de la salida puede ser cualquiera, no necesariamente \(\pm 100\% \) por ser un ciclo de trabajo, pero estará acotado por el limitador.
 
-Basándose en esta información y en el esquema de control planteado en la sección \ref{sec:2.3} subsección 1, se propone como controlador de velocidad inicial la siguiente ecuación en diferencias:
+Basándose en esta información y en el esquema de control planteado en la sección 2.3.1, se propone como controlador de velocidad inicial la siguiente ecuación en diferencias:
 
 \[u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1) - (ev[k] >> 2)\]
 
@@ -728,7 +731,7 @@ Las condiciones iniciales para el sistema de control son un controlador de posic
 Como el objetivo es calibrar el controlador de velocidad, se mide su entrada (solamente la velocidad) y su salida (ciclo de trabajo del pwm después del limitador). \\
 Para obtener estos datos se setea manualmente la referencias de velocidad en 40\% = 40cuentas/50ms (100\% = 2cuentas/ms) y la de posición que alterne entre 0 y 1 metro, cambiando apenas se alcance una. La carga utilizada tiene un peso de 3Kg.
 
-Bajo estas condiciones se obtiene la respuesta de la figura \ref{fig:3.19}, en donde se ve que la velocidad de la carga nunca llega a estabilizarse. Esto sucede en parte porque el el período de muestreo no ayuda a estabilizar el sistema, por lo que .
+Bajo estas condiciones se obtiene la respuesta de la figura \ref{fig:3.19}, en donde se ve que la velocidad de la carga nunca llega a estabilizarse. Esto sucede en parte porque el período de muestreo no es lo suficientemente rápido, por lo que es indispensable reducirlo.
 
 \begin{figure}[!ht]
 	\centering
@@ -741,7 +744,7 @@ Bajo estas condiciones se obtiene la respuesta de la figura \ref{fig:3.19}, en d
 Luego de varios procesos de ajuste del período de muestreo y controlador de velocidad se alcanzó una combinación cuyo desempeño es aceptable: un período de muestreo de 20ms y un controlador de velocidad de la forma \(u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1)\).
 
 Para verificar esta nueva configuración se efectúa nuevamente la prueba con la referencia de velocidad al 40\% y la de posición que alterna entre 0 y 1 metro. En este caso, sin embargo, se realizó la prueba con 2 equipos distintos, ambos con una carga de 3Kg.\\
-La respuesta del equipo 1 y 2 se presentan en las figuras \ref{fig:3.20} y \ref{fig:3.21}, en donde se puede ver que ahora la referencia de velocidad se sigue exitosamente y de manera similar para ambos equipos, y que la salida del controlador no es tán errática.
+La respuesta del equipo 1 y 2 se presentan en las figuras \ref{fig:3.20} y \ref{fig:3.21}, en donde se puede observar que mediante este sistema de control la referencia de velocidad se sigue exitosamente y de manera similar para ambos equipos, y que la salida del controlador no es tán errática.
 
 \begin{figure}[!ht]
 	\centering
@@ -791,7 +794,7 @@ En conclusión, el sistema de control consta de:
 \text{\textbf{Controlador de posición:} } rv\_Cp[k] = (ep[k] >> 4) - (ep[k] >> 5)
 \end{equation}
 
-
+\newpage
 \section{Dipswitch} \label{sec:\thesection}
 Como se mencionó en la sección \ref{sec:2.5}, la obtención de los valores del dipswitch se hace mediante una simulación en Matlab.\\
 El procedimiento para determinar una posible combinación de R1, R2, R3, R4 y R (ver figura \ref{fig:2.3}) es el siguiente: se propone un valor para cada resistencia y se calcula la caída de tensión en la resistencia R, que llamaremos Vo, para cada combinación de R1, R2, R3 y R4. Como son 4 resistencias hay 16 posibles combinaciones, por lo que se obtendrán 16 valores de Vo. 
@@ -827,7 +830,8 @@ Con el objetivo de verificar que los valores analógicos obtenidos son lógicos 
 	\label{table:\thetable}
 \end{table}
 
-\section{Firmware del updown - Librerías de alto nivel} \label{sec:\thesection}
+\newpage
+\section{Firmware del updown - Bibliotecas de alto nivel} \label{sec:\thesection}
 
 \subsection{Encoder}
 \subsubsection{Objetivo}
@@ -836,7 +840,7 @@ La función de este módulo es implementar la lógica de cuenta de los encoders 
 \subsubsection{Desarrollo}
 Para leer los encoders se utilizan las interrupciones del módulo de bajo nivel EXINT. Por como están conectado los componentes electrónicos en la placa de control, el encoder del motor está asociado a las EXINT y el encoder del disco a las PCINT.
 
-Ambos 2 encoders, el de motor y el de disco, son incrementales de tipo AB. Estos cuentan con 2 canales (A y B) que son en esencia 2 entradas digitales que físicamente están separadas de tal manera que el tren de pulsos que generan se encuentran desfasadas en el tiempo. 
+Ambos encoders, el de motor y el de disco, son incrementales de tipo AB. Estos cuentan con 2 canales (A y B) que son en esencia 2 entradas digitales que físicamente están separadas de tal manera que el tren de pulsos que generan se encuentran desfasadas en el tiempo. 
 
 Para entender el funcionamiento de los encoders incrementales AB se describe como funciona el del disco en la figura \ref{fig:3.24}. Allí se ve que el disco tiene marcas que los sensores A y B, asociados a los canales A y B, van detectando a medida que este gira. Estas marcas son lo suficientemente grandes como para que algún momento ambos sensores estén activados (válido para ambos encoders). Cuando un sensor detecta una marca el canal se pone en HIGH y cuando no, en LOW.
 
@@ -910,8 +914,8 @@ El acceso al módulo se realiza a través 2 funciones, como se muestra en la fig
 \end{figure}
 
 
-\subsection{Grua}
-El módulo Grua es simplemente un paquete que agrupa el uso de elementos del equipo updown que no requieren mucha inteligencia. Entre estos se encuentran: 
+\subsection{Grúa}
+El módulo Grúa es simplemente un paquete que agrupa el uso de elementos del equipo updown que no requieren mucha inteligencia. Entre estos se encuentran: 
 \begin{itemize}
 	\item Los leds internos y externo, que al ser salidas digitales solo necesitan una función de escritura cada uno.
 	\item El motor, del cual se puede controlar la velocidad mediante el PWM, y el sentido de giro.
@@ -931,17 +935,18 @@ El acceso al módulo se realiza a través 6 funciones, como se muestra en la fig
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=8cm,scale=1]{resources/3_26-moduloGrua.png}
-	\caption{Diagrama del módulo Grua}
+	\caption{Diagrama del módulo Grúa}
 	\label{fig:\thefigure}
 \end{figure}
 
+\newpage
 \subsection{Controlador}
 \subsubsection{Objetivo}
 El módulo de controlador tiene que encargarse de convertir comandos de DMX en referencias para los controladores y calcular los mismos para mover al motor.
 
 \subsubsection{Seteo de referencias}
 Lo primero es convertir los comandos DMX en referencias. Se tienen 2 comandos, ambos de 8 bits, uno de posición y otro de velocidad.\\
-El comando DMX de posición indica la distancia lineal que tiene que recorrer la carga, de 0 a 4 metros, por lo que se debe hacer es convertir esta información a distancia angular, o sea, a cuentas de encoder. Para hacer esto se utilizarán 4 rectas que ajusten datos como los de la tabla \ref{table:3.2}. La implementación en psudocódigo de C sería:
+El comando DMX de posición indica la distancia lineal que tiene que recorrer la carga, de 0 a 4 metros, por lo que se debe hacer es convertir esta información a distancia angular, o sea, a cuentas de encoder. Para hacer esto se utilizarán 4 rectas que ajusten datos como los de la tabla \ref{table:3.2}. La implementación en pseudocódigo de C sería:
 \begin{lstlisting}[style=CStyle]
 uint16_t conversionPosicionDMXaPosicionEncoder(uint8_t posicion_dmx){
 	uint16_t posicion_cm = 0, posicion_referencia = 0;
@@ -969,7 +974,7 @@ uint16_t conversionPosicionDMXaPosicionEncoder(uint8_t posicion_dmx){
 }
 \end{lstlisting}
 
-Luego se tiene el comando DMX de velocidad, que tiene que ser mapeado de 0 a la velocidad máxima del equipo. Ahora, la velocidad puede ser positiva o negativa, en donde positiva quiere decir que el equipo debe bajar y negativa que debe subir. El signo se determina comparando la posición actual y la de la referencia de posición. Si la referencia de posición es menor a la posición actual la carga debe subir, por lo que la velocidad será negativa. La implementación en psudocódigo de C sería:
+Luego se tiene el comando DMX de velocidad, que tiene que ser mapeado de 0 a la velocidad máxima del equipo. Ahora, la velocidad puede ser positiva o negativa, en donde positiva quiere decir que el equipo debe bajar y negativa que debe subir. El signo se determina comparando la posición actual y la de la referencia de posición. Si la referencia de posición es menor a la posición actual la carga debe subir, por lo que la velocidad será negativa. La implementación en pseudocódigo de C sería:
 \begin{lstlisting}[style=CStyle]
 int16_t conversionVelocidadDMXaVelocidadEncoder(uint8_t velocidad_dmx){
 	int16_t velocidad_referencia = 0;
@@ -994,9 +999,9 @@ int16_t conversionVelocidadDMXaVelocidadEncoder(uint8_t velocidad_dmx){
 
 \subsubsection{Cálculo de los controladores}
 El siguiente paso es implementar los controladores, que tienen que actualizar su estado cada T = período de muestreo. \\
-La manera más simple y modular de hacer esto es crear una funcion que actualice los valores de los controladores. Luego, esta función será llamada por otro módulo, el de aplicación, que se encargará de temporizar todas las tareas, desasociando el manejo de tiempo del módulo Controlador.
+La manera más simple y modular de lograrlo es crear una función que actualice los valores de los controladores. Luego, esta función será llamada por otro módulo, el de aplicación, que se encargará de temporizar todas las tareas, desasociando el manejo de tiempo del módulo Controlador.
 
-La forma de los controladores de posición y velocidad se hallaron en la sección \ref{sec:3.1}, y se pueden ver en las ecuaciones \ref{eq:3.5} y \ref{eq:3.6}. La implementación en psudocódigo de C, siguiendo el esquema de la figura \ref{fig:2.1}, sería:
+La forma de los controladores de posición y velocidad se hallaron en la sección \ref{sec:3.1}, y se pueden ver en las ecuaciones \ref{eq:3.5} y \ref{eq:3.6}. La implementación en pseudocódigo de C, siguiendo el esquema de la figura \ref{fig:2.1}, sería:
 
 \begin{lstlisting}[style=CStyle]
 void actualizacionControladores(void){
@@ -1061,25 +1066,25 @@ El acceso al módulo se realiza a través 3 funciones, como se muestra en la fig
 La función de este módulo es inferir qué llaves del dip-switch están activados a partir de su salida de tensión, que se traduce a valores analógicos en la placa. 
 
 \subsubsection{Desarrollo}
-Para lograr esto simplemente se lee el valor analógico del dipswitch y utilizando la tabla \ref{table:3.5} se determina qué resistencias están activadas, equivalente a la posición de los switchs. \\
+Para realizarlo simplemente se lee el valor analógico del dipswitch y utilizando la tabla \ref{table:3.5} se determina qué resistencias están activadas, equivalente a la posición de los switchs. \\
 Como estos valores tienen, como cualquier señal, un nivel de ruido de \(\pm\)3 unidades (aproximadamente 15mV) se considera válida una combinación de valores de resistencias dentro de un rango de valores analógicos. Por ejemplo, se considerará que la combinación es 0001 si el valor analógico leído está dentro del rango \(round([(91-0)/2,(177-91)/2])\). Estos valores no son arbitrarios, si no que es el promedio entre el valor analógico asociado a una combinación dada y los valores superior e inferior a este. Para el caso de 0001, el valor analógico asociado es 91, y el inferior y superior son 0 y 177, asociados a las combinaciones 0000 y 0010, respectivamente.\\
-De esta manera se implementa una función de lectura simplemente mirando en qué rango cae el valor analógico leido. La implementación en psudocódigo de C sería:
+De esta manera se implementa una función de lectura simplemente determinando en qué rango cae el valor analógico leido. La implementación en pseudocódigo de C sería:
 \begin{lstlisting}[style=CStyle]
 if( 0 <= valor_analogico_dipswitch < (91-0)/2 ){
-	combinacion_dipswitch = 0000;
+	combinacion_dipswitch = 0b0000;
 }
 if( (91-0)/2 <= valor_analogico_dipswitch < (177-91)/2 ){
-	combinacion_dipswitch = 0001;
+	combinacion_dipswitch = 0b0001;
 }
 ...
 if( (91-0)/2 <= valor_analogico_dipswitch < (177-91)/2 ){
-combinacion_dipswitch = 0001;
+combinacion_dipswitch = 0b0001;
 }
 if( (640-623)/2 <= valor_analogico_dipswitch < (653-640)/2 ){
-	combinacion_dipswitch = 1110;
+	combinacion_dipswitch = 0b1110;
 }
 if( (653-640)/2 <= valor_analogico_dipswitch <= 1023 ){
-	combinacion_dipswitch = 1111;
+	combinacion_dipswitch = 0b1111;
 }
 \end{lstlisting}
 
@@ -1102,11 +1107,11 @@ El acceso al módulo se realiza a través 2 funciones, como se muestra en la fig
 \subsection{DMX}
 \subsubsection{Objetivo}
 La función de este módulo es leer los datos DMX que se reciben de un equipo DMX externo. \\
-Para lograr esto se implementa un decodificador del formato de la trama de DMX que se presentó en la figura\ref{fig:1.8} de la sección \ref{sec:1.3}, subsección 3 (capa de enlace de datos). Como en DMX se envían 512 canales con información y el Updown solo necesita 2, la referencia de posición y velocidad, también se filtran los datos sin importancia con el objetivo de optimizar el uso de memoria (se guardan 2 bytes en vez de 512).
+Para lograr esto se implementa un decodificador del formato de la trama de DMX que se presentó en la figura \ref{fig:1.8} de la sección 1.3.3 (capa de enlace de datos). Como en DMX se envían 512 canales con información y el Updown solo necesita 2, la referencia de posición y velocidad, también se filtran los datos sin importancia con el objetivo de optimizar el uso de memoria (se guardan 2 bytes en vez de 512).
 
 \subsubsection{Desarrollo}
-La solución que se aplicó para resolver esto fue ejecutar una función durante la interrupción por recepción de la UART. Cabe aclarar que, como se explicó en la sección \ref{sec:3.2}, subsección 5, el  módulo UART se inicializa con un baudrate de 250KHz y formato de trama 8N2, por lo que cumple con la especificación del estándar DMX. \\
-La función ejecutada actualiza la máquina de estados de la figura \ref{fig:3.29}.En esta MEF . .  
+La solución que se aplicó para resolver esto fue ejecutar una función durante la interrupción por recepción de la UART. Cabe aclarar que, como se explicó en la sección 3.2.5, el  módulo UART se inicializa con un baudrate de 250KHz y formato de trama 8N2, por lo que cumple con la especificación del estándar DMX. \\
+La función ejecutada actualiza la máquina de estados de la figura \ref{fig:3.29}.
 
 \begin{figure}[!ht]
 	\centering
@@ -1143,27 +1148,27 @@ En conclusión, el acceso al módulo se realiza a través 3 funciones, como se m
 \end{figure}
  
 
-%\subsection{Diagrama de módulos de la librería de alto nivel}
+%\subsection{Diagrama de módulos de la bibliotecas de alto nivel}
 
 \section{Firmware del updown - Capa de Aplicación} \label{sec:\thesection}
 
 \subsection{Objetivo}
-La función de la capa de aplicación, la capa más alta de la figura \ref{fig:2.4} es hacer uso de las librerías desarrolladas para hacer que el Updown se comporte como es deseado, o sea, que cumpla con los objetivos presentados en la sección \ref{sec:1.5}.
+La función de la capa de aplicación, la capa más alta de la figura \ref{fig:2.4} es hacer uso de las bibliotecas desarrolladas para hacer que el Updown se comporte como es deseado, o sea, que cumpla con los objetivos presentados en la sección \ref{sec:1.5}.
 
 \subsection{Desarrollo}
-La capa de aplicación es la que tiene la función principal del programa, la función \textit{main}. Dentro de ella, como en cualquier firmware para sistemas embebidos, hay 2 grandes secciones: la sección de inicialización o setup y la del bucle principal, o "super loop". Adicionalmente, como hay acciones que deben suceder cada un tiempo definido se hace uso de un esquema planificador-despachador, siguiendo la arquitectura \textit{time-triggered cooperativa}.
+La capa de aplicación es la que tiene la función principal del programa, la función \textit{main}. Dentro de ella, como en cualquier firmware para sistemas embebidos, hay 2 grandes secciones: la sección de inicialización o setup y la del bucle principal, o "super loop". Adicionalmente, como hay acciones que deben suceder cada un tiempo definido se hace uso de un esquema planificador-despachador, siguiendo la arquitectura \textit{time-triggered cooperativa}, según \cite{sec3_6_2}.
 
 \subsubsection{Inicialización del sistema}
 
-Dentro de la sección de inicialización simplemente se habilitan todos los módulos que el sistema necesite para funcionar con su configuración correspondiente. Esto incluye los módulos: Encoder, Grua, Tick, Dipswitch y DMX, que además se configura para tener el address indicado por el dipswitch. Adicionalmente, se asocia al módulo Tick el planificador de tareas, sobre la cual se desarrollará más adelante.
+Dentro de la sección de inicialización simplemente se habilitan todos los módulos que el sistema necesite para funcionar con su configuración correspondiente. Esto incluye los módulos: Encoder, Grúa, Tick, Dipswitch y DMX, que además se configura para tener el address indicado por el dipswitch. Adicionalmente, se asocia al módulo Tick el planificador de tareas, sobre la cual se desarrollará más adelante.
 
-El módulo SUART, por otro lado, solo se utilizó para la etapa de pruebas y debbug. En el firmware final del equipo no se inicializa ya que no hay nada que depurar y solo deterioraría el rendimiento del sistema a causa de los recursos que consume. 
+El módulo SUART, por otro lado, sólo se utilizó para la etapa de pruebas y debbug. En el firmware final del equipo no se inicializa ya que no hay nada que depurar y solo deterioraría el rendimiento del sistema a causa de los recursos que consume. 
 
 \subsubsection{Planificador y despachador de tareas}
 En este proyecto hay varias tareas que tienen que ser ejecutadas periódicamente, como por ejemplo la actualización del controlador, que se hace cada 20ms. Para resolver esto se implementa el esquema de planificador-despachador, en donde el planificador determina el momento en el que ciertas tareas están listas para ejecutarse y el despachador las ejecuta cuando ese momento.
 
 En esta aplicación al planificador se lo ejecuta durante cada interrupción del Tick. Como cada tick ocurre cada 1 milisegundo, sencillamente se cuentan los ticks y se habilita la ejecución de las tareas que correspondan cuando se alcance el tiempo de ejecución asociada a ellas. Por ejemplo, la actualización del controlador se activa una vez cada 20 ticks (que equivalen a 20ms).\\
-Para evitar el solapamiento de tareas se hace uso de un retardo que se activa únicamente en la primera ejecución de la tarea, desfasandolas de forma tal que nunca se pisen. \\
+Para evitar el solapamiento de tareas se hace uso de un retardo que se activa únicamente en la primera ejecución de la tarea, desfasandolas de forma tal que nunca se solapen en el mismo tick. \\
 Las tareas que el planificador habilita para que se ejecuten en este proyecto son:
 \begin{itemize}
 	\item Actualización del controlador, ejecutada cada 20 ticks (20ms) con un retardo inicial de 0 ticks.
@@ -1171,7 +1176,7 @@ Las tareas que el planificador habilita para que se ejecuten en este proyecto so
 	\item Comparación de los valores del encoder de motor y de disco, cada 100 ticks (100ms) con un retardo inicial de 2 ticks.
 	\item Cambiar el estado del led externo si hay señal de DMX presente, cada 250 ticks (250ms) con un retardo inicial de 3 ticks.
 \end{itemize}
-Un ejemplo de planificador en psuedocódico de C sería:
+Un ejemplo de planificador en pseuedocódico de C sería:
 \begin{lstlisting}[style=CStyle]
 void planificador(void){
 	// funcion ejecutada en cada interrupcion del Tick
@@ -1191,14 +1196,14 @@ void planificador(void){
 \end{lstlisting}
 
 El despachador en este proyecto simplemente ejecuta las tareas que el planificador habilita, sin utilizar un método de priorización complejo debido a que, como se mencionó antes, cada tarea tiene asociado un retardo de tiempo para evitar que se solapen.\\
-A continaación se detalla qué hacen las 4 despachar y el orden en que aparecen en la rutina despachador:
+A continuación se detalla qué hacen las 4 despachar y el orden en que aparecen en la rutina despachador:
 \begin{enumerate}
 	\item \textbf{Actualización del controlador}. Se llama a la función \textit{Controlador\_update()}.
 	\item \textbf{Actualización del canal inicial de DMX}. Se asocia el valor del dipswitch con el canal inicial de DMX haciendo uso de las funciones en C \textit{DMX\_write(Dipswitch\_read() + 1)}. El +1 es debido a que la salida de Dipswitch\_read va de 0 a 511, y los canales DMX van de 1 a 512.
-	\item \textbf{Comparación de los valores del encoder de motor y de disco}. Se verifica que la relación hallada en la sección \ref{sec:3.3}, subsección 1, a través de la tabla \ref{fig:3.2} (que 1 cuenta de encoder de disco equivale a aproximadamente 131 del de motor), se mantenga. Como no es una relación que se cumple estrictamente para todo el rango se permite una tolerancia de +-500 cuentas de encoder de motor, haciendo que la comparación sea: \( cuentas\_encoder\_motor = cuentas\_encoder\_disco*131 \pm 500 \).
+	\item \textbf{Comparación de los valores del encoder de motor y de disco}. Se verifica que la relación hallada en la sección 3.3.1, a través de la tabla \ref{fig:3.2} (que 1 cuenta de encoder de disco equivale a aproximadamente 131 del de motor), se mantenga. Como no es una relación que se cumple estrictamente para todo el rango se permite una tolerancia de +-500 cuentas de encoder de motor, haciendo que la comparación sea: \( cuentas\_encoder\_motor = cuentas\_encoder\_disco*131 \pm 500 \).
 	\item \textbf{Aviso de DMX activo}. Se alterna el estado del led externo, a razón de 10 veces por segundo, si hay señal de DMX presente. Si pasó más de un segundo desde la última vez que la señal fue recibida, el led externo mantiene su estado.
 \end{enumerate}
-Un ejemplo de despachador en psuedocódico de C sería:
+Un ejemplo de despachador en pseuedocódico de C sería:
 \begin{lstlisting}[style=CStyle]
 void despachador(void){
 	if(gTarea1_ejecutar){
