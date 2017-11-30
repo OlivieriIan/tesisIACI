@@ -21,7 +21,7 @@ Al ser obras que caen dentro del campo artístico suelen presentarse en museos y
 
 Las aplicaciones puntuales de estructuras cinéticas a las que se hará foco en este informe, debido a la naturaleza del proyecto final, son aquellas en donde el efecto espacial se logra a través del movimiento en el eje vertical de objetos esféricos mediante motores. 
 
-Un ejemplo de aplicación de estas características se puede ver en la figura \ref{fig:1.2}. Allí se muestra una escultura presentada en el Museo de BMW, en Munich, Alemania, en donde 714 esféras metálicas son coordinadas para formas figuras como olas, gotas, y hasta la silueta de un auto.
+Un ejemplo de aplicación de estas características se puede ver en la figura \ref{fig:1.2}. Allí se muestra una escultura presentada en el Museo de BMW, en Munich, Alemania, en donde 714 esferas metálicas son coordinadas para formas figuras como olas, gotas, y hasta la silueta de un auto.
 
 \begin{figure}[!ht]
 	\centering
@@ -63,7 +63,7 @@ Para controlar los sistemas de luces es necesario utilizar unas consolas especia
 La manera más común para generar un efecto es indicando la progresión de uno o más parámetros desde un tiempo inicial a uno final. Al cambio de los parámetros entre 2 instantes de tiempo se las llama \textit{cues}, o entradas, y cuya secuencia forma los efectos. \\
 Dentro de las consolas que hay en el mercado para este tipo de control de equipos se pueden destacar las consolas hog 4 de High End Systems, como la que se muestra en la figura \ref{fig:1.5}.
 
-Otra manera generarlos es a partir de equipos y softwares, como el Madrix, que tienen la capacidad de convertir videos a variaciones de parámetros, lo cual lo hace especialmente útil cuando se quieren crear efectos lumínicos complejos.
+Otra manera generar estos efectos es a partir de software dedicado, como el Madrix, que tienen la capacidad de convertir videos a variaciones de parámetros, lo cual lo hace especialmente útil cuando se quieren crear efectos lumínicos complejos.
 
 
 \begin{figure}[!ht]
@@ -93,7 +93,7 @@ DMX empléa el estándar EIA-485 como capa física, por lo que emplea por lo men
 \end{figure}
 
 \subsubsection{Topología}
-La red de DMX consiste en un maestro y varios esclavos, conectados con una topología de bus multidrop (MDB) con nodos conectados entre sí, lo que normalmente se denomina como topología \textit{daisy chain}. En otras palabras, todos los equipos a controlar tienen una entrada y una salida conectadas entre sí, de manera tal de que se puede conectar un equipo y apartir de este equipo conectar el siguiente, y así sucesivente, como se expone en la figura \ref{fig:1.7}. Esto permite que el conexionado sea simple y que la red pueda ser fácilmente extendida.
+La red de DMX consiste en un maestro y varios esclavos, conectados con una topología de bus multidrop (MDB) con nodos conectados entre sí, lo que normalmente se denomina como topología \textit{daisy chain}. En otras palabras, todos los equipos a controlar tienen una entrada y una salida conectadas entre sí, de manera tal de que se puede conectar un equipo y a partir de este equipo conectar el siguiente, y así sucesivente, como se expone en la figura \ref{fig:1.7}. Esto permite que el conexionado sea simple y que la red pueda ser fácilmente extendida.
 
 \begin{figure}[!ht]
 	\centering
@@ -112,7 +112,7 @@ La trama DMX, visible en la figura \ref{fig:1.8} consta de las siguientes partes
 %Fuentes: Fhttp://www.dmx512-online.com/packt.html 
 
 \begin{itemize}
-	\item \textbf{Idle} y \textbf{MTBP} (Mark Time Between Packets): estado de HIGH en la linea que indica la ausencia de señal de DMX. En caso de que se supere el tiempo máximo de 1 segundo sin datos, se considera que hubo una pérdida en la conexión.
+	\item \textbf{Idle} y \textbf{MTBP} (Mark Time Between Packets): estado de HIGH en la línea que indica la ausencia de señal de DMX. En caso de que se supere el tiempo máximo de 1 segundo sin datos, se considera que hubo una pérdida en la conexión.
 	\item \textbf{Break}: estado de LOW en la línea utilizado para separar las tramas entre sí.
 	\item \textbf{MAB} (Mark After Break): estado en HIGH enviado luego de un Break. Este estado suele traer problemas de compatibilidad ya que fue cambiado de una duración de 4\(\mu \)s a 8\(\mu \)s en la versión de DMX512 de 1990.
 	\item \textbf{Slots}: son datos con formato 8N2 (un bit de start (LOW), 8 bits de datos, 2 bits de stop (HIGH) y sin paridad), y pueden ser:
@@ -154,11 +154,11 @@ La trama DMX, visible en la figura \ref{fig:1.8} consta de las siguientes partes
 A cada trama con 512 canales se la llama "universo de DMX". Si se necesitan enviar más de 512 canales se utilizan más universos.
 
 \subsubsection{Subcapa de control de acceso al medio}
-DMX no implemente ningún mecanismo de control de acceso al medio debido a que el único transmisor es la red es el maestro y todos los esclavos reciben la misma información.
+DMX no implementa ningún mecanismo de control de acceso al medio debido a que el único transmisor en la red es el maestro y todos los esclavos reciben la misma información.
 
 \section{Updown} \label{sec:\thesection}
 \subsection{Definición}
-El equipo \textbf{Updown} (expuesto en la figura \ref{fig:1.9}) es básicamente una grúa que sube y baja una carga conforme a comandos recibidos por una equipo que utilice el protocolo DMX, como por ejemplo una consola de control de luminaria. La distancia máxima a la que la carga puede bajar es de 4 metros.
+El equipo \textbf{Updown} (expuesto en la figura \ref{fig:1.9}) es básicamente una grúa que sube y baja una carga conforme a comandos recibidos por un equipo que utilice el protocolo DMX, como por ejemplo una consola de control de luminaria. La distancia máxima a la que la carga puede bajar es de 4 metros.
 
 Este producto fue concebido en \textbf{Blackout}, una empresa nacional, ubicada en Quilmes, productora y proveedora de tecnología cuyo objetivo es generar contenido audiovisual para grandes eventos. Blackout tomó interés en esculturas cinéticas como la de la figura \ref{fig:1.3} pero se encontró con el problema que el costo de importación de los equipos utilizados para tales fines, sumado a su precio unitario, era muy elevado. Por este motivo, decidió comenzar el desarrollo de un producto propio para alcanzar su objetivo.\\
 
@@ -187,8 +187,8 @@ La fuente de alimentación es la encargada de proveer la potencia necesaria para
 La señal DMX proveniente del master de la red, otro Updown, o cualquier otro equipo esclavo dentro del mismo universo DMX ingresa al sistema para ser procesada por la placa de control. Su función es indicarle al equipo la referencia de posición, velocidad, y los parámetros que correspondan a la carga.\\
 Además, para cumplir con el estándar DMX, la señal de entrada se replica mediante un puente a una salida para que otro equipo pueda ser conectado a la red.
 
-\subsubsection{Dip-switch}
-El dipswitch consta con varios divisores resistivos, 10 switchs y un led indicador. Su función es seleccionar el canal inicial de DMX con el que el equipo trabajará.
+\subsubsection{DIP-switch}
+El DIP-switch consta con varios divisores resistivos, 10 switchs y un led indicador. Su función es seleccionar el canal inicial de DMX con el que el equipo trabajará.
 
 \subsubsection{Freno}
 El freno consta de una bobina, desactivada por defecto, que mueve una varilla metálica que traba el carrete que contiene la polea. Al activar la bobina la varilla libera al carrete, permitiendo el libre movimiento de la carga. Su función es detener la carga en caso de que el equipo pierda la alimentación, como medida de seguridad.
@@ -221,17 +221,17 @@ La placa de control contiene electrónica para el manejo de las entradas y salid
 \subsubsection{Entradas} 
 Señal de DMX, Fin de carrera, Dip-switch, Encoder AB de disco, Encoder AB de motor.
 \subsubsection{Salidas}
-Freno, Motor, Led interno (led indicador de la Placa de control), Led externo (led indicador del Dipswitch), Puente H.
+Freno, Motor, Led interno (led indicador de la Placa de control), Led externo (led indicador del DIP-switch), Puente H.
 
 \section{Justificación del proyecto} \label{sec:\thesection}
 Durante el desarrollo del updown la empresa se dió cuenta que con los recursos que contaban, tiempo en particular, no podían concretar los requerimientos que buscaban que el updown tuviera. 
 
-Por este motivo, Blackout se vió en la necesidad de buscar a alguien externo a la empresa para darle fin al proyecto, lo que presentó la oportunidad de realizar el trabajo de de programación y finalización del equipo. Este desarrollo dió origen entonces al presente trabajo final.
+Por este motivo, Blackout se vió en la necesidad de buscar a alguien externo a la empresa para darle fin al proyecto, lo que presentó la oportunidad de realizar el trabajo de programación y finalización del equipo. Este desarrollo dió origen entonces al presente trabajo final.
 
 \newpage
 \section{Objetivos} \label{sec:\thesection}
-El objetivo del proyecto es que el Updown suba y baje una carga de 3Kg, siguiendo las referencias de posición y velocidad dadas por un master DMX. Además, debe contar con ciertos mecanísmos de detección y manejo de errores para hacer que el producto sea seguro. También se tiene que terminar el desarrollo del dipswitch.\\
-Como la mayoría del hardware del equipo fue entregado resuelto las tareas a cumplir para terminar el producto, y dar por concluido el proyecto, se pueden resumur en los siguientes 4 requisitos:
+El objetivo del proyecto es que el Updown suba y baje una carga de 3Kg, siguiendo las referencias de posición y velocidad dadas por un master DMX. Además, debe contar con ciertos mecanismos de detección y manejo de errores para hacer que el producto sea seguro. También se tiene que terminar el desarrollo del DIP-switch.\\
+Como la mayoría del hardware del equipo fue entregado resuelto las tareas a cumplir para terminar el producto, y dar por concluido el proyecto, se pueden resumir en los siguientes 4 requisitos:
 
 \subsection{REQ-01}
 Contar con el software necesario para el manejo de todas las entradas y salidas del sistema.
@@ -239,9 +239,9 @@ Contar con el software necesario para el manejo de todas las entradas y salidas 
 Lograr que las cargas manejadas por los equipos se muevan a la velocidad y posición indicadas mediante una consola DMX. Adicionalmente, las rampas de aceleración y desaceleración no deben ser bruscas ya que si varios equipos frenan violentamente podría causar daños estructurales en el lugar donde estén colgados.
 \subsection{REQ-03}
 Manejar errores y excepciones de hardware para lograr que el producto sea seguro, siendo que será instalado en eventos con un alto nivel de concurrencia.\\
-Dentro de estos errores se eneucntran: corte de cadena, pérdida de señal DMX y accionamiento indebido del fin de carrera.
+Dentro de estos errores se encuentran: corte de cadena, pérdida de señal DMX y accionamiento indebido del fin de carrera.
 \subsection{REQ-04}
-Concluir el desarrollo del dipswitch.
+Concluir el desarrollo del DIP-switch.
 
 %\subsection{Productos que compiten en el mercado}
 %El equipos más conocido empleado para estas aplicaciones es el \href{http://www.eastsunlite.com/p31.html}{OrbisFly}, de \href{https://www.kinetic-lights.com/}{Kinetic Lights}. Estos dispositivos de orígen Chino trabajan con una esfera RGB de peso estándar de 1Kg, aunque soporta un peso máximo de 2Kg, que puede descender hasta 9 metros. Dispone de un display LCD y botoneras para el testeo y configuración el equipo\\

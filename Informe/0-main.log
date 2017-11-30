@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  13 NOV 2017 23:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.7.27)  30 NOV 2017 01:52
 entering extended mode
 **./0-main.tex
 (0-main.tex
@@ -991,13 +991,13 @@ Overfull \hbox (26.22046pt too wide) in paragraph at lines 21--35
  [] 
  []
 
-<resources/2_1-diagramaControlador.png, id=712, 770.88pt x 334.24875pt>
+<resources/2_1-diagramaControlador.png, id=712, 770.88pt x 332.74312pt>
 File: resources/2_1-diagramaControlador.png Graphic file (type png)
 
 <use resources/2_1-diagramaControlador.png>
 Package pdftex.def Info: resources/2_1-diagramaControlador.png used on input li
 ne 46.
-(pdftex.def)             Requested size: 770.87813pt x 334.24792pt.
+(pdftex.def)             Requested size: 770.87813pt x 332.7423pt.
 
 Overfull \hbox (5.23872pt too wide) in paragraph at lines 46--47
  [][] 
@@ -1072,12 +1072,12 @@ File: resources/3_4-moduloPWM.png Graphic file (type png)
 Package pdftex.def Info: resources/3_4-moduloPWM.png used on input line 231.
 (pdftex.def)             Requested size: 227.34882pt x 108.40472pt.
  [40 <./resources/3_4-moduloPWM.png>]
-<resources/3_5-moduloEXINT.png, id=918, 242.40562pt x 106.89937pt>
+<resources/3_5-moduloEXINT.png, id=918, 242.40562pt x 108.405pt>
 File: resources/3_5-moduloEXINT.png Graphic file (type png)
 
 <use resources/3_5-moduloEXINT.png>
 Package pdftex.def Info: resources/3_5-moduloEXINT.png used on input line 271.
-(pdftex.def)             Requested size: 242.40501pt x 106.8991pt.
+(pdftex.def)             Requested size: 242.40501pt x 108.40472pt.
  [41] [42 <./resources/3_5-moduloEXINT.png>] <resources/3_6-moduloUART.png, id=
 937, 289.83281pt x 107.65219pt>
 File: resources/3_6-moduloUART.png Graphic file (type png)
@@ -1346,9 +1346,9 @@ Package pdftex.def Info: resources/3_30-moduloDMX.png used on input line 1145.
 (pdftex.def)             Requested size: 207.77573pt x 141.5284pt.
  [76 <./resources/3_30-moduloDMX.png>]
 [77]
-Overfull \hbox (18.22742pt too wide) in paragraph at lines 1202--1203
-\T1/cmr/m/n/12 canal ini-cial de DMX ha-ciendo uso de las fun-ciones en C \T1/c
-mr/m/it/12 DMX_write(Dipswitch_read()
+Overfull \hbox (29.32195pt too wide) in paragraph at lines 1202--1203
+\T1/cmr/m/n/12 el canal ini-cial de DMX ha-ciendo uso de las fun-ciones en C \T
+1/cmr/m/it/12 DMX_write(Dipswitch_read()
  []
 
 [78]
@@ -1489,14 +1489,14 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 243.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 243.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 243.
 Package rerunfilecheck Info: File `0-main.out' has not changed.
-(rerunfilecheck)             Checksum: 678FE3B997D4F08353B615733D5BC7CC;5452.
+(rerunfilecheck)             Checksum: 283A0C524CA8B716F30C56EE3CF3F404;5454.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 243.
  ) 
 Here is how much of TeX's memory you used:
- 10720 strings out of 493323
- 154588 string characters out of 3130015
- 398445 words of memory out of 3000000
- 13430 multiletter control sequences out of 15000+200000
+ 10718 strings out of 493323
+ 154574 string characters out of 3130015
+ 398448 words of memory out of 3000000
+ 13428 multiletter control sequences out of 15000+200000
  19873 words of font info for 45 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,13n,58p,850b,1897s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1522,9 +1522,9 @@ C:/Users/ian_m/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /amsfonts/cm/cmr8.pfb><C:/Users/ian_m/AppData/Local/Programs/MiKTeX 2.9/fonts/t
 ype1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ian_m/AppData/Local/Programs/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on 0-main.pdf (93 pages, 9559620 bytes).
+Output written on 0-main.pdf (93 pages, 9560534 bytes).
 PDF statistics:
- 2286 PDF objects out of 2487 (max. 8388607)
+ 2289 PDF objects out of 2487 (max. 8388607)
  609 named destinations out of 1000 (max. 500000)
  887 words of extra memory for PDF output out of 10000 (max. 10000000)
 

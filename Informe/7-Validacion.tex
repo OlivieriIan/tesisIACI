@@ -7,7 +7,7 @@ En este capítulo se mostrarán los ensayos realizados para validar los requerim
 	\item \textbf{REQ-01:} validar que firmware desarrollado para el equipo maneja correctamente todas las entradas y salidas.
 	\item \textbf{REQ-02:} validar que la carga sigue la posición y velocidad indicada por DMX .
 	\item \textbf{REQ-03:} validar que el comportamiento del sistema ante el descubrimiento de uno de los 3 errores detectables es la esperada. 
-	\item \textbf{REQ-04:} verificar que el funcionamiento del dipswitch es correcto.
+	\item \textbf{REQ-04:} verificar que el funcionamiento del DIP-switch es correcto.
 \end{itemize}
 
 \section{Validación del requerimiento REQ-03} \label{sec:\thesection}
@@ -33,7 +33,7 @@ Para verificar que esto se realizaron las siguientes pruebas:
 	\item Partiendo de una posición de 1 metro, se mantiene presionado el fin de carrera. Durante este tiempo la carga baja lenta y continuamente hasta que pasan 15 segundos. En ese momento la carga para, se activa el freno, y el led interno titila a una frecuencia de 0.25Hz.
 \end{enumerate}
 
-El comportamiento en la tercer prueba es el esperado ya que como se mantiene el fin de carrera presionado automáticamente "se llega al 0", y en consiguiente la carga baja 10 cm, como es de esperarse. Luego se pasa al modo normal, pero como el fin de carrera sigue presionado se vuelve a entrar al de calibración, y el ciclo vuelve a comenzar de nuevo, repitiendose hasta que transcurren 15 segundos.
+El comportamiento en la tercera prueba es el esperado ya que como se mantiene el fin de carrera presionado automáticamente "se llega al 0", y en consiguiente la carga baja 10 cm, como es de esperarse. Luego se pasa al modo normal, pero como el fin de carrera sigue presionado se vuelve a entrar al de calibración, y el ciclo vuelve a comenzar de nuevo, repitiendose hasta que transcurren 15 segundos.
 
 Por lo tanto, con esto se verifica que el comportamiento es el deseado.
 	
@@ -49,7 +49,7 @@ Para verificar que esto se realizaron las siguientes pruebas:
 Para verificar completamente que el comportamiento ante un error es el deseado se debería, además de probar la pérdida de cuenta de los encoders, probar cortando la cadena. Como no se logró hacer esto con el equipo en funcionamiento este punto no se pudo validar totalmente. Sin embargo, es muy poco probable que se corte la cadena debido a la dureza de la misma y a que la carga es de solamente 3 Kg.
 
 \section{Validación de los requerimientos REQ-01, 02 y 04} \label{sec:\thesection}
-Los requerimientos REQ-01, REQ-02 y REQ-04 se validan simplemente controlando al updown mediante DMX. De esta manera se verifica funcionamiento de todos ellos ya que se utilizan todas las entradas y salidas (asociado a la validación del REQ-01), el sistema de control (asociado a la validación del REQ-02) y el dipswitch (asociado a la validación del REQ-04).
+Los requerimientos REQ-01, REQ-02 y REQ-04 se validan simplemente controlando al updown mediante DMX. De esta manera se verifica funcionamiento de todos ellos ya que se utilizan todas las entradas y salidas (asociado a la validación del REQ-01), el sistema de control (asociado a la validación del REQ-02) y el DIP-switch (asociado a la validación del REQ-04).
 
 La prueba se realiza con 4 equipos updown dispuestos en forma de matriz de 2x2, como se muestra en la figura \ref{fig:4.1}, colgados a 4 metros sobre el nivel del piso. Todos tienen en su extremo una carga de 3Kg, que es una luminaria cuyas intensidades R, G y B pueden ser controladas mediante 3 canales de DMX.
 
@@ -69,7 +69,7 @@ Para manejar los equipos se utiliza la consola HedgeHog 4, de HighEnd Systems. E
 \subsection{Direccionamiento de los equipos}
 Cada updown recibe 2 canales DMX, uno de posición y otro de velocidad, mientras que las cargas, que se configuran independientemente, reciben 3 canales (R, G y B). Además, en las instalaciones de equipos DMX por convención los equipos se direccionan de atras para adelante, de izquierda a derecha.
 
-Esto quiere decir que, refiriendose a la figura \ref{fig:4.1}, el updown A tendrá la dirección 1, el B la dirección 3, el C la 5 y el D la 7. Para lograr esto se configuran los dipswitch como corresponde. Por ejemplo, el dipswitch del equipo C tendrá la llave 2 y 3 activadas, lo cual se traduce a address 5 en el programa.\\
+Esto quiere decir que, refiriendose a la figura \ref{fig:4.1}, el updown A tendrá la dirección 1, el B la dirección 3, el C la 5 y el D la 7. Para lograr esto se configuran los DIP-switch como corresponde. Por ejemplo, el DIP-switch del equipo C tendrá la llave 2 y 3 activadas, lo cual se traduce a address 5 en el programa.\\
 Por otro lado, las cargas (L en la figura) se las configura en la dirección 10. Esto se hace manualmente desde un display digital que las luminarias traen. 
 
 En la figura \ref{fig:4.2} se muestra cómo se vizualizan los canales en la consola HOG, y a qué estará asociado cada uno. 
@@ -93,8 +93,8 @@ Para permitir que las posiciones sean alcanzadas antes de pasar a la siguiente s
 	\label{fig:\thefigure}
 \end{figure}
 
-Las posiciones obtenidas de la prueba se pueden ver en la figura \ref{fig:4.4}. Para cada una se midió el error de posición cuando las cargas llegan al objetivo para verificar la presición del equipo. De estas mediciones se obtuvo que los errores de los equipos se encuentran siempre dentro de las \( \pm 120 \) cuentas. De la tabla \ref{table:3.2} se ve que 25cm son 1130 cuentas del encoder del motor, por lo que 120 cuentas son aproximadamente 2.5cm.\\
-Si bien estos son los resultados de error para los 4 equipos, se puede ver en la figura \ref{fig:4.4} que el error del equipo D (el del frente a la derecha). Si bien no se nota claramente en la imágen, el cable del equipo se encuentra bastante torcido aproximadamente 2.5 metros por encima de la carga, lo cual puede, entre otras cosas, ser el causante de esta diferencia de posición, error que la placa de control no contempla.
+Las posiciones obtenidas de la prueba se pueden ver en la figura \ref{fig:4.4}. Para cada una se midió el error de posición cuando las cargas llegan al objetivo para verificar la precisión del equipo. De estas mediciones se obtuvo que los errores de los equipos se encuentran siempre dentro de las \( \pm 120 \) cuentas. De la tabla \ref{table:3.2} se ve que 25cm son 1130 cuentas del encoder del motor, por lo que 120 cuentas son aproximadamente 2.5cm.\\
+Si bien estos son los resultados de error para los 4 equipos, se puede ver en la figura \ref{fig:4.4} que el error del equipo D (el del frente a la derecha). Si bien no se nota claramente en la imagen, el cable del equipo se encuentra bastante torcido aproximadamente 2.5 metros por encima de la carga, lo cual puede, entre otras cosas, ser el causante de esta diferencia de posición, error que la placa de control no contempla.
 
 \begin{figure}[!ht]
 	\centering
@@ -115,7 +115,7 @@ En la figura \ref{fig:4.5} se muestra cómo quedan los canales para, por ejemplo
 Para constatar que la velocidad de los equipos es la correcta se midió la de los 4 equipos durante la prueba. Tanto para el ascenso como para el descenso la velocidad en régimen permanente de los 4 equipos es de \(40 \pm 1\) cuentas cada 20 milisegundos, lo cual concuerda con lo encontrado en la sección 3.3.2, en donde se halló que la velocidad máxima posible es de 2 cuentas por milisegundo.
 
 \subsection{Rutina 2}
-En este caso se programa en la consola la secuencia mostrada en la tabla \ref{table:4.1}, en donde las cargas cambian de posicion y velocidad con cada nueva instrucción. En la figura \ref{fig:4.6} se muestran algunas de las posiciones alcanzadas durante esta prueba. \\
+En este caso se programa en la consola la secuencia mostrada en la tabla \ref{table:4.1}, en donde las cargas cambian de posición y velocidad con cada nueva instrucción. En la figura \ref{fig:4.6} se muestran algunas de las posiciones alcanzadas durante esta prueba. \\
 Al igual que en la rutina 1 el tiempo que se tarda de pasar de una instrucción a otra es de 7 segundos, por lo que en este caso las posiciones finales no llegan a ser alcanzadas para velocidades distintas a 100\% (el caso de la instrucción 1).
 
 \begin{table}[!ht]

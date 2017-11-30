@@ -14,7 +14,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Esquema de control a implementar}}{25}{figure.2.1}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Modelo mec\IeC {\'a}nico de la planta}}{26}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Diagrama de uno de los 3 divisores de tensi\IeC {\'o}n del dipswitch}}{29}{figure.2.3}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Diagrama de uno de los 3 divisores de tensi\IeC {\'o}n del DIP-switch}}{29}{figure.2.3}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Diagrama de m\IeC {\'o}dulos del firmware}}{32}{figure.2.4}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama del m\IeC {\'o}dulo DigitalIO}}{35}{figure.3.1}
@@ -44,7 +44,7 @@
 \contentsline {figure}{\numberline {3.25}{\ignorespaces Diagrama del m\IeC {\'o}dulo Encoder}}{67}{figure.3.25}
 \contentsline {figure}{\numberline {3.26}{\ignorespaces Diagrama del m\IeC {\'o}dulo Gr\IeC {\'u}a}}{69}{figure.3.26}
 \contentsline {figure}{\numberline {3.27}{\ignorespaces Diagrama del m\IeC {\'o}dulo Controlador}}{72}{figure.3.27}
-\contentsline {figure}{\numberline {3.28}{\ignorespaces Diagrama del m\IeC {\'o}dulo Dipswitch}}{74}{figure.3.28}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces Diagrama del m\IeC {\'o}dulo DIP-switch}}{74}{figure.3.28}
 \contentsline {figure}{\numberline {3.29}{\ignorespaces Maquina de estados ejecutada en cada interrupci\IeC {\'o}n de la UART}}{75}{figure.3.29}
 \contentsline {figure}{\numberline {3.30}{\ignorespaces Diagrama del m\IeC {\'o}dulo DMX}}{76}{figure.3.30}
 \contentsline {figure}{\numberline {3.31}{\ignorespaces M\IeC {\'a}quina de estados ejecutada en el bucle principal de la aplicaci\IeC {\'o}n}}{79}{figure.3.31}

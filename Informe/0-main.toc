@@ -20,7 +20,7 @@
 \contentsline {subsection}{\numberline {1.3.2}Descripci\IeC {\'o}n del sistema}{18}{subsection.1.3.2}
 \contentsline {subsubsection}{Fuente de alimentaci\IeC {\'o}n}{18}{subsubsection*.13}
 \contentsline {subsubsection}{Entrada y salida DMX}{19}{subsubsection*.14}
-\contentsline {subsubsection}{Dip-switch}{19}{subsubsection*.15}
+\contentsline {subsubsection}{DIP-switch}{19}{subsubsection*.15}
 \contentsline {subsubsection}{Freno}{19}{subsubsection*.16}
 \contentsline {subsubsection}{Fin de carrera}{19}{subsubsection*.17}
 \contentsline {subsubsection}{Sistema motor}{19}{subsubsection*.18}
@@ -41,7 +41,7 @@
 \contentsline {subsection}{\numberline {2.3.1}Esquema de control}{24}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Modelo de la planta}{25}{subsection.2.3.2}
 \contentsline {subsection}{\numberline {2.3.3}Procedimiento para el dise\IeC {\~n}o de control}{26}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{26}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.4}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{27}{subsection.2.3.4}
 \contentsline {subsection}{\numberline {2.3.5}Velocidad m\IeC {\'a}xima}{27}{subsection.2.3.5}
 \contentsline {section}{\numberline {2.4}REQ-03}{27}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}Corte de correa}{27}{subsection.2.4.1}
@@ -105,7 +105,7 @@
 \contentsline {subsubsection}{Ajuste del controlador de velocidad}{59}{subsubsection*.54}
 \contentsline {subsubsection}{Ajuste del controlador de posici\IeC {\'o}n}{60}{subsubsection*.55}
 \contentsline {subsubsection}{Sistema de control final}{61}{subsubsection*.56}
-\contentsline {section}{\numberline {3.4}Dipswitch}{62}{section.3.4}
+\contentsline {section}{\numberline {3.4}DIP-switch}{62}{section.3.4}
 \contentsline {section}{\numberline {3.5}Firmware del updown - Bibliotecas de alto nivel}{64}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Encoder}{64}{subsection.3.5.1}
 \contentsline {subsubsection}{Objetivo}{64}{subsubsection*.57}
@@ -117,7 +117,7 @@
 \contentsline {subsubsection}{Seteo de referencias}{69}{subsubsection*.61}
 \contentsline {subsubsection}{C\IeC {\'a}lculo de los controladores}{70}{subsubsection*.62}
 \contentsline {subsubsection}{Acceso}{72}{subsubsection*.63}
-\contentsline {subsection}{\numberline {3.5.4}Dipswitch}{72}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.4}DIP-switch}{72}{subsection.3.5.4}
 \contentsline {subsubsection}{Objetivo}{72}{subsubsection*.64}
 \contentsline {subsubsection}{Desarrollo}{72}{subsubsection*.65}
 \contentsline {subsubsection}{Acceso}{73}{subsubsection*.66}

@@ -52,12 +52,12 @@
 \BOOKMARK [2][-]{subsection.3.3.4}{Obtenci\363n del modelo de la planta}{section.3.3}% 52
 \BOOKMARK [2][-]{subsection.3.3.5}{Obtenci\363n del controlador}{section.3.3}% 53
 \BOOKMARK [2][-]{subsection.3.3.6}{Ajuste de los controladores}{section.3.3}% 54
-\BOOKMARK [1][-]{section.3.4}{Dipswitch}{chapter.3}% 55
+\BOOKMARK [1][-]{section.3.4}{DIP-switch}{chapter.3}% 55
 \BOOKMARK [1][-]{section.3.5}{Firmware del updown - Bibliotecas de alto nivel}{chapter.3}% 56
 \BOOKMARK [2][-]{subsection.3.5.1}{Encoder}{section.3.5}% 57
 \BOOKMARK [2][-]{subsection.3.5.2}{Gr\372a}{section.3.5}% 58
 \BOOKMARK [2][-]{subsection.3.5.3}{Controlador}{section.3.5}% 59
-\BOOKMARK [2][-]{subsection.3.5.4}{Dipswitch}{section.3.5}% 60
+\BOOKMARK [2][-]{subsection.3.5.4}{DIP-switch}{section.3.5}% 60
 \BOOKMARK [2][-]{subsection.3.5.5}{DMX}{section.3.5}% 61
 \BOOKMARK [1][-]{section.3.6}{Firmware del updown - Capa de Aplicaci\363n}{chapter.3}% 62
 \BOOKMARK [2][-]{subsection.3.6.1}{Objetivo}{section.3.6}% 63

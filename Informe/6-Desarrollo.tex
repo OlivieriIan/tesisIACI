@@ -64,7 +64,7 @@ Ahora, conocer el bit, puerto y nombres de los registros para cada pin a configu
 \subsubsection{Acceso}
 El acceso al módulo se realiza a través 3 funciones, como se muestra en la figura \ref{fig:3.1}. A continuación se presenta la descripción de cada una:
 \begin{itemize}
-	\item \textbf{DigitalIO\_init(pin,modo)}, que inicializa el pin deseado en el modo salida o entrada, que a su vez se divide en con pull up y sin pullup. Estas 3 posibles configuraciones se puede seleccionar haciendo uso de los macros DigitalIO\_OUTPUT, DigitalIO\_INPUT\_PULLUP y DigitalIO\_INPUT, respectivamente.
+	\item \textbf{DigitalIO\_init(pin,modo)}, que inicializa el pin deseado en el modo salida o entrada, que a su vez se divide en con pull-up y sin pull-up. Estas 3 posibles configuraciones se puede seleccionar haciendo uso de los macros DigitalIO\_OUTPUT, DigitalIO\_INPUT\_PULLUP y DigitalIO\_INPUT, respectivamente.
 	\item \textbf{DigitalIO\_read(pin)}, para leer el estado de un pin configurado como salida.
 	\item \textbf{DMX\_write(pin, estado)}, para escribir en un pin el estado deseado (HIGH = 1 o LOW = 0).
 \end{itemize}
@@ -98,12 +98,12 @@ DigitalIO_write(6, 1);
 \subsection{ADC}
 %El desarrollo del módulo ADC está basado en el capítulo 28 de la hoja de datos del Atmega328p.
 \subsubsection{Objetivo}
-La función de este módulo es manejar el periférico lectura de canales analógicos del microcontrolador con el objetivo de poder leer las 3 salidas del dipswitch.
+La función de este módulo es manejar el periférico lectura de canales analógicos del microcontrolador con el objetivo de poder leer las 3 salidas del DIP-switch.
 
 \subsubsection{Desarrollo}
 El periférico de lectura de entrada analógica del Atmega328p es un ADC por \textit{aproximaciones sucesivas} de 10bits de resolución. Esto quiere decir que la conversión se realiza a una frecuencia determinada, y con una tensión de referencia dada. Además, este microcontrolador cuenta con 1 solo módulo de ADC y 8 canales analógicos, por lo que el usuario debe elegir a qué canal irá el resultado de la conversión mediante un multiplexor de entradas. El diagrama completo del sistema de conversión se encuentra en la figura 28.1 del datasheet del atmega328p.
 
-La incialización del periférico se logra mediante los registros ADMUX (ADC Multiplexer Selection Register) y ADCSRA (ADC Control and Status Register). Con el primero se selecciona la tensión de referencia, mientras que con el segundo se habilita el periférico y se selecciona la frecuencia de la conversión mediante la selección de un preescalador. Por ejemplo, si se desea utilizar como referencia de tensión la Vcc del micro (5V) y se quiere una frecuencia de 125KHz el código, en lenguaje C, sería:
+La inicialización del periférico se logra mediante los registros ADMUX (ADC Multiplexer Selection Register) y ADCSRA (ADC Control and Status Register). Con el primero se selecciona la tensión de referencia, mientras que con el segundo se habilita el periférico y se selecciona la frecuencia de la conversión mediante la selección de un preescalador. Por ejemplo, si se desea utilizar como referencia de tensión la Vcc del micro (5V) y se quiere una frecuencia de 125KHz el código, en lenguaje C, sería:
 \begin{lstlisting}[style=CStyle]
 /* --- Inicializacion del periferico --- */
 // Seleccion de Vref = Vcc
@@ -141,7 +141,7 @@ El ejemplo de lectura del canal 2, en lenguaje C, sería:
 
 \subsubsection{Acceso}
 
-El acceso al módulo se realiza a través 2 funciones, como se muestra en la figura \ref{fig:3.2}. A continuación se presenta la descripción de cada una:
+El acceso al módulo se realiza a través dos funciones, como se muestra en la figura \ref{fig:3.2}. A continuación se presenta la descripción de cada una:
 \begin{itemize}
 	\item \textbf{ADC\_init()}, que inicializa el periférico ADC con una frecuencia de muestreo de 125KHz y una tensión de referencia de 5V.
 	\item \textbf{ADC\_read(canal)}, para leer el valor analógico del canal deseado.
@@ -196,7 +196,7 @@ La frecuencia de la señal se puede elegir mediante el registro ICR1. Su valor d
 	ICR1 = \frac{f_{cpu}}{2.N.f_{pwm}}
 \end{equation}
 
-A continuación se presenta un ejemplo de incialización del periférico y selección del ciclo de trabajo, en lenguaje C: 
+A continuación se presenta un ejemplo de inicialización del periférico y selección del ciclo de trabajo, en lenguaje C: 
 \begin{lstlisting}[style=CStyle]
 	/* --- Inicializacion del periferico --- */
 	// Inicializacion del pin asociado a OC1A como salida, que es el 9 (puerto B bit 1).
@@ -220,7 +220,7 @@ A continuación se presenta un ejemplo de incialización del periférico y selec
 \end{lstlisting}
 
 \subsubsection{Acceso}
-El acceso al módulo se realiza a través 2 funciones, como se muestra en la figura \ref{fig:3.4}. A continuación se presenta la descripción de cada una:
+El acceso al módulo se realiza a través dos funciones, como se muestra en la figura \ref{fig:3.4}. A continuación se presenta la descripción de cada una:
 \begin{itemize}
 	\item \textbf{PWM\_init()}, que activa la generación de la señal cuadrada de 25KHz por la salida OC1A.
 	\item \textbf{PWM\_write(cicloDeTrabajo)}, para seleccionar el ciclo de trabajo del PWM.
@@ -294,7 +294,7 @@ Finalmente, el registro UCSR0C permite configurar el modo (sincrónico o asincr�
 
 En cuanto a la recepción, los datos que llegan por el puerto serie se almacenan en el registro UDR0. Para leerlo se verifica si el bit RXC0 en el registro UCSR0A se encuentra en 1, ya que este bit indica si existen datos no leidos en el buffer de recepción.
 
-A continuación se presenta un ejemplo de incialización y lectura de datos del periférico, , en lenguaje C: 
+A continuación se presenta un ejemplo de inicialización y lectura de datos del periférico, en lenguaje C: 
 
 \begin{lstlisting}[style=CStyle]
 	/* --- Inicializacion del periferico --- */
@@ -400,7 +400,7 @@ La función de este módulo es generar un canal de comunicación serie bidirecci
 \subsubsection{Desarrollo}
 Este módulo implementa la SUART haciendo uso del timer 0, que es el único que queda disponible (el 1 genera PWM y el 2 la base de tiempo). La función del timer es generar interrupciones cada cierto tiempo y verificar el estado de los pines asociados a Rx (entrada) y Tx (salida). 
 
-Para saber cómo implementar la lógica de lectura y escritura de datos se analiza la forma de la señal en un bus serie. Un ejemplo puede ser la señal del caracter 'a' con formato 8N1, como se ve en la figura  \ref{fig:3.8} . \\
+Para saber cómo implementar la lógica de lectura y escritura de datos se analiza la forma de la señal en un bus serie. Un ejemplo puede ser la señal del caracter \lq a' con formato 8N1, como se ve en la figura  \ref{fig:3.8} . \\
 Durante una comunicación serie el canal se encuentra en estado High (1) por defecto, hasta que se envía el bit de stop, que siempre es un estado Low (0). Luego se envían los datos, que en el caso de la 'a' sería 01100001 en binario, empezando por el bit menos significativo (LSB) hasta el más significativo (MSB), y finalmente el bit de stop, que siempre es un estado High (1). \\
 
 \begin{figure}[!ht]
@@ -414,11 +414,11 @@ Durante una comunicación serie el canal se encuentra en estado High (1) por def
 En base a esto, para el envío de datos simplemente se cambia el estado del pin de Tx según el formato de la trama y del dato a enviar. Por ejemplo, si se quiere enviar una 'a', que equivale a 01100001, con una trama 8N1, se enviará 0 (bit de start), luego del bit menos al más significativo del dato (empiezo con 1, luego envío el 0.. etc) y finalmente 1 (bit de stop). Cada cambio de estado debe ocurrir a la tasa de símbolos (baudrate) deseada.
 
 En cuanto a la entrada de datos lo que se hace es muestrear el pin de Rx cada cierto tiempo e ir reconstruyendo el dato. Este muestreo es conveniente realizarlo a la mitad del tiempo de bit, debido a que se podrían llegar a detectar datos inválidos si la interrupción no se llega a ejecutar a tiempo.\\
-Por defecto el canal se encuentra en 1, por lo que lo muestreo hasta detectar el bit de start (0). Luego de detectado este bit se suele volver a verificar el canal para asegurarse que sea un bit de start y no un error en la línea, error comunmente conocido como \textit{line glitch}. Luego de verificar que no hubo un error se muestrea el canal a la tasa de símbolos, y una vez recopilados los 8 bits de datos, se verifica que el último bit sea el de stop (1).
+Por defecto el canal se encuentra en 1, por lo que lo muestreo hasta detectar el bit de start (0). Luego de detectado este bit se suele volver a verificar el canal para asegurarse que sea un bit de start y no un error en la línea, error comúnmente conocido como \textit{line glitch}. Luego de verificar que no hubo un error se muestrea el canal a la tasa de símbolos, y una vez recopilados los 8 bits de datos, se verifica que el último bit sea el de stop (1).
 
-La comunicación serie tendrá las siguientes características: formato de trama 8N1 (8 bit de datos, sin paridad, 1 bit de stop) y tasa de símbolos de 9600baudios. Se elije una tasa chica ya que las interrupciones del timer ocurrirán por lo menos 2 veces más rápido que esta tasa, y con interrupciones como la de DMX que tienen una frecuencia de 250Khz los recursos deben cuidarse.\\
+La comunicación serie tendrá las siguientes características: formato de trama 8N1 (8 bit de datos, sin paridad, 1 bit de stop) y tasa de símbolos de 9600 baudios. Se elije una tasa chica ya que las interrupciones del timer ocurrirán por lo menos 2 veces más rápido que esta tasa, y con interrupciones como la de DMX que tienen una frecuencia de 250Khz los recursos deben cuidarse.\\
 Para la transmisión la tasa podría ser simplemente 9600 baudios, pero para la recepción se necesita una tasa de por lo menos el doble ya que se debe muestrear entre bits para detectar y evitar errores. Por lo tanto, se probó duplicando, triplicando y cuadruplicando la velocidad de muestreo. \\
-Para decidir cuál es la tasa óptima se probó enviandole a la placa de control por puerto serie el caracter 'a' y replicando lo recibido hacia el transmisor. Para 10000 datos enviados los resultados fueron que con la tasa duplicada hubo una alta cantidad de información mal recibida, mientras que para la triplicada y cuadruplicada se recibieron 0 datos erroneos. \\
+Para decidir cuál es la tasa óptima se probó enviándole a la placa de control por puerto serie el caracter 'a' y replicando lo recibido hacia el transmisor. Para 10000 datos enviados los resultados fueron que con la tasa duplicada hubo una alta cantidad de información mal recibida, mientras que para la triplicada y cuadruplicada se recibieron 0 datos erroneos. \\
 Para decidir qué multiplicador utilizar se evaluó que el Atmega328p consumen 20 ciclos de clock solo para entrar en y salir de la interrupción, que equivale a 1.25\(\mu\)s para una frecuencia de cpu de 16MHz. 9600 triplicado y cuadruplicado es 28800 y 38400, que equivalen a una interrupción cada 34\(\mu\)s y 26\(\mu\)s, respectivamente. O sea que cuanto mayor es el multiplicador más pesan los 20 ciclos comparativamente. Por lo tanto, como para ambos multiplicadores la cantidad de datos incorrectos recibidos es 0 de 10000, se eligió el multiplicador más chico, quedando la tasa de símbolos en 28800 baudios.
 
 \subsubsection{Acceso}
@@ -479,7 +479,7 @@ De estos resultados se puede ver que la relación entre las cuentas de motor y d
 
 \subsubsection{Selección de la función de ajuste}
 De la figura \ref{fig:3.10} se puede ver que la relación entre cuentas de encoder y distancia puede ser ajustada con un polinomio de grado 2 (función cuadrática). En dicha figura la función de ajuste cuadrática es \(cuentaEncoder = f(distancia) = 0.0356*dist^2 + 41.0180*dist + 101.2797\).\\     
-El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisones. Según la nota de aplicación en \cite{sec3_3_1} se observa que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
+El problema de este método es que la conversión se implementa en un microcontrolador de 8 bits en donde la posición va de 0 a 500 (variable de 16 bits). Esto implica que para obtener las cuentas de encoder una variable de 16 bits, que eventualmente podría tener signo, debe ser potenciada al cuadrado, y luego multiplicada por un número racional, lo cual implica operaciones de punto flotante o al menos divisiones. Según la nota de aplicación en \cite{sec3_3_1} se observa que dichas operaciones no están optimizadas, lo cual implicaría un altísimo costo computacional cada vez que se tenga que calcular la referencia de posición, que como DMX trabaja a 250KHz será muy seguido, haciendo la implementación de una función cuadrática inviable. \\
 
 \begin{figure}[!ht]
 	\centering
@@ -488,10 +488,10 @@ El problema de este método es que la conversión se implementa en un microcontr
 	\label{fig:\thefigure}
 \end{figure}
 
-La siguiente opción más simple es realizar la conversión mediante polinomios de grado 1. En este caso el costo computacional es mucho más bajo ya que la conversión implica únicamente la multiplicación con un escalar \\
+La siguiente opción más simple es realizar la conversión mediante polinomios de grado 1. En este caso el costo computacional es mucho más bajo ya que la conversión implica únicamente la multiplicación con un escalar. \\
 Los casos extremos serían hacer el ajuste mediante una única recta, como se ve en la figura \ref{fig:3.11}, o una recta cada 25cm, como se ve en la figura \ref{fig:3.12}. En el primer caso el error es muy alto al ser la aproximación muy grosera, y en el segundo se tiene que se ajustan tanto los datos que también se está ajustando el ruido. \\
 
-Una solución intermedia es ajustar los datos con una recta por cada 100cm (1 metro), como se ve en la figura \ref{fig:3.13}. Esta trae como ventaja: error comparable con el del ajuste cuadrático, bajo costo computacional, solo se necesitan 4 mediciónes por equipo (una por metro). Por estos motivos, \textbf{el ajuste de distancia a cuentas de encoder se realizará con 4 rectas}, una por metro.
+Una solución intermedia es ajustar los datos con una recta por cada 100cm (1 metro), como se ve en la figura \ref{fig:3.13}. Esta trae como ventaja: error comparable con el del ajuste cuadrático, bajo costo computacional, solo se necesitan 4 mediciones por equipo (una por metro). Por estos motivos, \textbf{el ajuste de distancia a cuentas de encoder se realizará con 4 rectas}, una por metro.
 
 
 \begin{figure}[!ht]
@@ -518,9 +518,9 @@ Una solución intermedia es ajustar los datos con una recta por cada 100cm (1 me
 
 \subsection{Determinación de la velocidad máxima}
 El método utilizado para determinar la velocidad máxima a la que el equipo puede funcionar es hacer subir una carga de 3Kg inyectándole al driver del  motor un PWM de ciclo de trabajo de 100\%. Es necesario que la prueba sea en subida y no en bajada ya que la máxima velocidad posible debe ser igual en ambos casos, y en bajada seguro necesito menos fuerza para alcanzar la máxima velocidad en subida, por lo que la limitante es la segunda. \\
-Luego, se mide cada cierto tiempo, que en este caso será de 50ms, cuantas cuentas del encoder del motor se tienen, y se calcula la velocidad como \(velocidad = \Delta posicion/\Delta tiempo \).
+Luego, se mide cada cierto tiempo, que en este caso será de 50ms, cuántas cuentas del encoder del motor se tienen, y se calcula la velocidad como \(velocidad = \Delta posicion/\Delta tiempo \).
 
-Del experimento se obtuvo que cada 50ms se tienen 100cuentas, por lo que la velocidad máxima es \(vel = 2cuentas/ms\).
+Del experimento se obtuvo que cada 50ms se tienen 100 cuentas, por lo que la velocidad máxima es \(vel = 2cuentas/ms\).
 
 \subsection{Obtención del período de muestreo}
 Para poder diseñar los controladores de posición y velocidad el primer paso es determinar el período de muestreo. \\
@@ -542,9 +542,9 @@ Para esto se realizaron varias pruebas tomando como 0 de posición 2000 cuentas 
 	\label{fig:\thefigure}
 \end{figure}
 
-Los resultados de estas pruebas se pueden observar en las figuras \ref{fig:3.14} y \ref{fig:3.15}. Allí se ve que durante la bajada la salida se estabiliza a los 250ms, mientras que para la subida lo hace a los 50ms. 
+Los resultados de estas pruebas se pueden observar en las figuras \ref{fig:3.14} y \ref{fig:3.15}. Allí se ve que durante la bajada la velocidad se estabiliza a los 250ms, mientras que para la subida lo hace a los 50ms. 
 
-En base a esto, se elije un período de muestreo inicial 5 veces más rápido que el peor tiempo de establecimiento (250ms), dando un periódo de muestreo de 50ms.
+En base a esto, se elije un período de muestreo inicial 5 veces más rápido que el tiempo de establecimiento más grande (250ms), dando un período de muestreo de 50ms.
 
 %Esto genera un problema, ya que el período de muestreo suele tomarse de 5 a 10 veces más rápido que el tiempo de establecimiento del sistema, y aquí tenemos 2 tiempos distintos. Como la solución no es directa se probarán distintos períodos de muestreo durante la caracterización de la planta y diseño del controlador para determinar cuál es el indicado.
 
@@ -642,7 +642,7 @@ Con esta ecuación se obtuvieron los siguientes resultados de la tabla \ref{tabl
 
 
 \subsubsection{Validación de los modelos}
-Para validar los modelos se utiliza el set de datos de validación (figura \ref{fig:3.17}). Simplemente se calcula iterando la salida del sistema utilizando los parámetros encontrados y se contrastan los resultados con este set de datos. Para medir el grado de relación entre los datos obtenidos con los modelos propuestos y los de validación se calculor el error RMSE para cada caso, resultados que se pueden ver en la tabla \ref{table:3.4}.
+Para validar los modelos se utiliza el set de datos de validación (figura \ref{fig:3.17}). Simplemente se calcula iterando la salida del sistema utilizando los parámetros encontrados y se contrastan los resultados con este set de datos. Para medir el grado de relación entre los datos obtenidos con los modelos propuestos y los de validación se calculó el error RMSE para cada caso, resultados que se pueden ver en la tabla \ref{table:3.4}.
 
 \begin{table}[!ht]
 	\begin{center}
@@ -701,17 +701,17 @@ Como la planta identificada no se ajusta al modelo diseñar los controladores ba
 
 También es importante recordar que el Atmega328p no tiene optimizadas las operaciones de punto flotante, por lo que cualquier multiplicación por números no enteros tendrá que ser aproximada. En el caso de las divisiones se hará mediante la operación corrimiento (bit shift). Esto tiene como ventaja que se reduce mucho el uso del CPU, pero se pierde resolución y cambiar el código se hace complicado.
 
-Como se mencionó en la sección 3.3.3 el período de muestreo será de 50ms (5 veces menor que el peor tiempo de establecimiento).
+Como se mencionó en la sección 3.3.3 el período de muestreo será de 50ms (5 veces menor que el tiempo de establecimiento más grande).
 
 \subsubsection{Controlador de velocidad}
 Basándose en la figura \ref{fig:2.1}, el controlador de velocidad tiene como entrada el error de velocidad y como salida el ciclo de trabajo del pwm que irá al motor. Si bien el ciclo de trabajo no puede ser negativo, a terminos prácticos un valor negativo indicaría que el motor sube la carga y uno positivo que la baja.\\
-El rango de la variable de entrada es de \(\pm 20\), siendo +20 velocidad de descenso y -20 de ascenso, como se vió en la sección sec:3.3.2 en donde se determinó la velocidad máxima. Por otro lado, el valor de la salida puede ser cualquiera, no necesariamente \(\pm 100\% \) por ser un ciclo de trabajo, pero estará acotado por el limitador.
+El rango de la variable de entrada es de \(\pm 2 cuentas/ms\), como se determinó en la sección 3.3.2. Por otro lado, el valor de la salida puede ser cualquiera, no necesariamente \(\pm 100\% \) por ser un ciclo de trabajo, pero estará acotado por el limitador.
 
 Basándose en esta información y en el esquema de control planteado en la sección 2.3.1, se propone como controlador de velocidad inicial la siguiente ecuación en diferencias:
 
 \[u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1) - (ev[k] >> 2)\]
 
-Donde u[k] es la salida del controlador, ev[k] el error de velocidad, y "x >> n" es el operador corrimiento, que equivale a \(floor(x/2^n)\).
+Donde \(u\_Cv[k]\) es la salida del controlador, ev[k] el error de velocidad, y "x >> n" es el operador corrimiento, que equivale a \(floor(x/2^n)\).
 
 \subsubsection{Controlador de posición}
 Basándose en la figura \ref{fig:2.1}, el controlador de posición tiene como entrada el error de posición y como salida la referencia de velocidad. \\
@@ -728,8 +728,8 @@ Donde \(rv\_Cp[k]\) es la salida del controlador, ep[k] el error de posición, y
 \subsubsection{Condiciones iniciales}
 Las condiciones iniciales para el sistema de control son un controlador de posición con la forma \(rv\_Cp[k] = ep[k] >> 4\), un controlador de velocidad con la forma \(u\_Cv[k] = u\_Cv[k-1] + (ev[k] >> 1) - (ev[k] >> 2)\), y un período de muestreo T = 50ms.\\
 
-Como el objetivo es calibrar el controlador de velocidad, se mide su entrada (solamente la velocidad) y su salida (ciclo de trabajo del pwm después del limitador). \\
-Para obtener estos datos se setea manualmente la referencias de velocidad en 40\% = 40cuentas/50ms (100\% = 2cuentas/ms) y la de posición que alterne entre 0 y 1 metro, cambiando apenas se alcance una. La carga utilizada tiene un peso de 3Kg.
+Como el objetivo es calibrar el controlador de velocidad, se mide su entrada (solamente la velocidad) y su salida (ciclo de trabajo después del limitador). \\
+Para obtener estos datos se configura manualmente la referencia de velocidad en 40\% = 40cuentas/50ms (100\% = 2cuentas/ms) y la de posición que alterne entre 0 y 1 metro, cambiando apenas se alcance una. La carga utilizada tiene un peso de 3Kg.
 
 Bajo estas condiciones se obtiene la respuesta de la figura \ref{fig:3.19}, en donde se ve que la velocidad de la carga nunca llega a estabilizarse. Esto sucede en parte porque el período de muestreo no es lo suficientemente rápido, por lo que es indispensable reducirlo.
 
@@ -795,16 +795,16 @@ En conclusión, el sistema de control consta de:
 \end{equation}
 
 \newpage
-\section{Dipswitch} \label{sec:\thesection}
-Como se mencionó en la sección \ref{sec:2.5}, la obtención de los valores del dipswitch se hace mediante una simulación en Matlab.\\
+\section{DIP-switch} \label{sec:\thesection}
+Como se mencionó en la sección \ref{sec:2.5}, la obtención de los valores del DIP-switch se hace mediante una simulación en Matlab.\\
 El procedimiento para determinar una posible combinación de R1, R2, R3, R4 y R (ver figura \ref{fig:2.3}) es el siguiente: se propone un valor para cada resistencia y se calcula la caída de tensión en la resistencia R, que llamaremos Vo, para cada combinación de R1, R2, R3 y R4. Como son 4 resistencias hay 16 posibles combinaciones, por lo que se obtendrán 16 valores de Vo. 
 
-Ahora, lo importante es encontrar R1, R2, R3, R4 y R tales que los 16 valores de Vo encontrados sean distintas y estén lo más separados posibles\\
+Ahora, lo importante es encontrar R1, R2, R3, R4 y R tales que los 16 valores de Vo encontrados sean distintas y estén lo más separados posibles.\\
 Como el método propuesto es de prueba y error se establece una diferencia mínima que todas las Vo deben tener entre sí. Como el canal analógico del microcontrolador tiene una resolución de 10 bits (1024) y el rango de tensión de entrada va de 0 a 5V el paso más chico que puede medir el ADC es de \(5V/1024 \approx 5mV\). Entonces, se elige como diferencia mínima 10 unidades del ADC, que equivalen a aproximadamente 50mV.
 
-Para determinar los valores se usó como tensión de alimentación Vcc (referirse a la figura \ref{fig:2.3}) 5V, ya que es la tensión de trabajo de la placa de control, y de varios intentos de prueba y error se encontró que para la combinación de resistencias R1=10K\(\Omega\), R2=4,7K\(\Omega\), R3=2,2K\(\Omega\), R4=1K\(\Omega\) y R=1K\(\Omega\) la mímima diferencia entre todas las Vo es de 67mV.\\
-En la tabla \ref{table:3.5} se presentan los valores analógicos resultantes de todas las combinaciones posibles de las resistencias encontradas. La primera fila de dicha tabla muestra los bits, ordenados de mas significativo (msb) a menos significativo (lsb), que equivalen al estado de R4 (msb),R3,R2 y R1 (lsb). Por ejemplo, si el switch de R4 está activado el bit msb estará en 1. En la segunda fila se muestra el valor analógico calculado teóricamente con el script de Matlab.\\
-Con el objetivo de verificar que los valores analógicos obtenidos son lógicos se armó un dipswitch con estos valores de resistencia y se midió su salida haciendo uso del módulo ADC, datos que se ven en la fila 3 de la tabla.
+Para determinar los valores se usó como tensión de alimentación Vcc (referirse a la figura \ref{fig:2.3}) 5V, ya que es la tensión de trabajo de la placa de control, y de varios intentos de prueba y error se encontró que para la combinación de resistencias R1=10K\(\Omega\), R2=4,7K\(\Omega\), R3=2,2K\(\Omega\), R4=1K\(\Omega\) y R=1K\(\Omega\) la mínima diferencia entre todas las Vo es de 67mV.\\
+En la tabla \ref{table:3.5} se presentan los valores analógicos resultantes de todas las combinaciones posibles de las resistencias encontradas. La primera fila de dicha tabla muestra los bits, ordenados de más significativo (msb) a menos significativo (lsb), que equivalen al estado de R4 (msb),R3,R2 y R1 (lsb). Por ejemplo, si el switch de R4 está activado el bit msb estará en 1. En la segunda fila se muestra el valor analógico calculado teóricamente con el script de Matlab.\\
+Con el objetivo de verificar que los valores analógicos obtenidos son lógicos se armó un DIP-switch con estos valores de resistencia y se midió su salida haciendo uso del módulo ADC, datos que se ven en la fila 3 de la tabla.
 
 \begin{table}[!ht]
 	\begin{center}
@@ -838,7 +838,7 @@ Con el objetivo de verificar que los valores analógicos obtenidos son lógicos 
 La función de este módulo es implementar la lógica de cuenta de los encoders para determinar cuál es la posición angular de los mismos.
 
 \subsubsection{Desarrollo}
-Para leer los encoders se utilizan las interrupciones del módulo de bajo nivel EXINT. Por como están conectado los componentes electrónicos en la placa de control, el encoder del motor está asociado a las EXINT y el encoder del disco a las PCINT.
+Para leer los encoders se utilizan las interrupciones del módulo de bajo nivel EXINT. Por como están conectados los componentes electrónicos en la placa de control, el encoder del motor está asociado a las EXINT y el encoder del disco a las PCINT.
 
 Ambos encoders, el de motor y el de disco, son incrementales de tipo AB. Estos cuentan con 2 canales (A y B) que son en esencia 2 entradas digitales que físicamente están separadas de tal manera que el tren de pulsos que generan se encuentran desfasadas en el tiempo. 
 
@@ -851,7 +851,7 @@ Para entender el funcionamiento de los encoders incrementales AB se describe com
 	\label{fig:\thefigure}
 \end{figure}
 
-Basandose en la imágen \ref{fig:3.24} se puede ver que el orden en que se activan los canales A y B depende del sentido de giro. Si el disco gira en sentido horario primero se activa el canal A y luego en B, mientras que lo contrario pasa en sentido antihorario.
+Basándose en la imágen \ref{fig:3.24} se puede ver que el orden en que se activan los canales A y B depende del sentido de giro. Si el disco gira en sentido horario primero se activa el canal A y luego en B, mientras que lo contrario pasa en sentido antihorario.
 
 Siguiendo este patrón se implementó la siguiente lógica de cuenta para ambos encoders:
 \begin{enumerate}
@@ -1014,9 +1014,9 @@ void actualizacionControladores(void){
 	
 	/* --- Aplico el limitador de la salida del controlador de posicion --- */
 	if(rv_Cp[k] > referencia_velocidad_dmx){
-		rv = referencia_velocidad_dmx;
+		velocidad_referencia = referencia_velocidad_dmx;
 	} else {
-		rv = rv_Cp[k];
+		velocidad_referencia = rv_Cp[k];
 	}
 	
 	/* --- Calculo el controlador de velocidad ---  */
@@ -1061,12 +1061,12 @@ El acceso al módulo se realiza a través 3 funciones, como se muestra en la fig
 	\label{fig:\thefigure}
 \end{figure}
 
-\subsection{Dipswitch}
+\subsection{DIP-switch}
 \subsubsection{Objetivo}
 La función de este módulo es inferir qué llaves del dip-switch están activados a partir de su salida de tensión, que se traduce a valores analógicos en la placa. 
 
 \subsubsection{Desarrollo}
-Para realizarlo simplemente se lee el valor analógico del dipswitch y utilizando la tabla \ref{table:3.5} se determina qué resistencias están activadas, equivalente a la posición de los switchs. \\
+Para realizarlo simplemente se lee el valor analógico del DIP-switch y utilizando la tabla \ref{table:3.5} se determina qué resistencias están activadas, equivalente a la posición de los switchs. \\
 Como estos valores tienen, como cualquier señal, un nivel de ruido de \(\pm\)3 unidades (aproximadamente 15mV) se considera válida una combinación de valores de resistencias dentro de un rango de valores analógicos. Por ejemplo, se considerará que la combinación es 0001 si el valor analógico leído está dentro del rango \(round([(91-0)/2,(177-91)/2])\). Estos valores no son arbitrarios, si no que es el promedio entre el valor analógico asociado a una combinación dada y los valores superior e inferior a este. Para el caso de 0001, el valor analógico asociado es 91, y el inferior y superior son 0 y 177, asociados a las combinaciones 0000 y 0010, respectivamente.\\
 De esta manera se implementa una función de lectura simplemente determinando en qué rango cae el valor analógico leido. La implementación en pseudocódigo de C sería:
 \begin{lstlisting}[style=CStyle]
@@ -1088,7 +1088,7 @@ if( (653-640)/2 <= valor_analogico_dipswitch <= 1023 ){
 }
 \end{lstlisting}
 
-Como el dipswitch tiene 10 llaves, no 4, que entregan un total de 3 salidas analógicas simplemente se replica esta función para cada una de ellas y se concatenan las combinaciones obtenidas. La única consideración a tomar es que 2 de las 3 salidas están asociadas a 2 llaves, no a 4, por lo que las combinaciones de ellas serán de 3 bits. Por ejemplo, si los valores analógicos de los 3 canales leidos son 559,91,444, la combinación de llaves asociada será 1010 001 111.
+Como el DIP-switch tiene 10 llaves, no 4, que entregan un total de 3 salidas analógicas simplemente se replica esta función para cada una de ellas y se concatenan las combinaciones obtenidas. La única consideración a tomar es que 2 de las 3 salidas están asociadas a 3 llaves, no a 4, por lo que las combinaciones de ellas serán de 3 bits. Por ejemplo, si los valores analógicos de los 3 canales leidos son 559,91,444, la combinación de llaves asociada será 1010 001 111.
 
 \subsubsection{Acceso}
 El acceso al módulo se realiza a través 2 funciones, como se muestra en la figura \ref{fig:3.28}. A continuación se presenta la descripción de cada una:
@@ -1100,7 +1100,7 @@ El acceso al módulo se realiza a través 2 funciones, como se muestra en la fig
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=8cm,scale=1]{resources/3_28-moduloDipswitch.png}
-	\caption{Diagrama del módulo Dipswitch}
+	\caption{Diagrama del módulo DIP-switch}
 	\label{fig:\thefigure}
 \end{figure}
 
@@ -1124,12 +1124,12 @@ A continuación se detalla el funcionamiento de la MEF:
 \begin{itemize}
 	\item El estado inicial es el Idle, igual que en la trama DMX, en donde simplemente se espera sin hacer nada a que llegue un break.
 	\item Cuando un break es detectado se verifica que el primer dato recibido sea el Start Code (0x00). Si no lo es, hubo un error y se vuelve al estado Idle, pero si lo es se comienzan a escuchar los canales DMX.
-	\item Como se explicó anteriormente, de los 512 canales solo importan 2, y a partír de cúal canal tomo los 2 es determinado mediante el dipswitch. Justamente, la función del dipswitch en el sistema es seleccionar el canal inicial a leer, a partir del cual se leerán las referencias de posición y velocidad. Entonces, se espera hasta llegar al canal seteado por dip-switch en el estado Espera Datos, dejando pasar todos los datos innecesarios.
+	\item Como se explicó anteriormente, de los 512 canales solo importan 2, y a partír de cuál canal tomo los 2 es determinado mediante el DIP-switch. Justamente, la función del DIP-switch en el sistema es seleccionar el canal inicial a leer, a partir del cual se leerán las referencias de posición y velocidad. Entonces, se espera hasta llegar al canal seteado por dip-switch en el estado Espera Datos, dejando pasar todos los datos innecesarios.
 	\item Una vez recibido el canal inicial se guardan ese canal y el próximo, que serán las referencias de posición y velocidad, respectivamente. Adicionalmente, en esta etapa se guarda el tiempo, obtenido del módulo Tick, en el que se recibieron los datos para poder determinar cuándo la señal de DMX fue perdida.
 	\item Luego se descartan el resto de los canales (hasta llegar al 512) y se vuelve al estado Idle, a la espera de una nueva trama.
 \end{itemize}
 
-De esta manera con la inicialización del módulo, que implica la innicialización del módulo UART, siempre que el master DMX envíe una trama de 512 bytes el módulo de DMX se encarga de guardar los datos que el sistema necesita. Para acceder a ellos se implementa una función de lectura en donde el usuario selecciona uno de 2 datos disponibles (posición o velocidad). Además se implementa una función para setear el canal inicial de lectura, para independizar este módulo del de Dipswitch.
+De esta manera con la inicialización del módulo, que implica la innicialización del módulo UART, siempre que el master DMX envíe una trama de 512 bytes el módulo de DMX se encarga de guardar los datos que el sistema necesita. Para acceder a ellos se implementa una función de lectura en donde el usuario selecciona uno de 2 datos disponibles (posición o velocidad). Además se implementa una función para setear el canal inicial de lectura, para independizar este módulo del de DIP-switch.
 
 \subsubsection{Acceso}
 En conclusión, el acceso al módulo se realiza a través 3 funciones, como se muestra en la figura \ref{fig:3.30}. A continuación se presenta la descripción de cada una:
@@ -1160,15 +1160,15 @@ La capa de aplicación es la que tiene la función principal del programa, la fu
 
 \subsubsection{Inicialización del sistema}
 
-Dentro de la sección de inicialización simplemente se habilitan todos los módulos que el sistema necesite para funcionar con su configuración correspondiente. Esto incluye los módulos: Encoder, Grúa, Tick, Dipswitch y DMX, que además se configura para tener el address indicado por el dipswitch. Adicionalmente, se asocia al módulo Tick el planificador de tareas, sobre la cual se desarrollará más adelante.
+Dentro de la sección de inicialización simplemente se habilitan todos los módulos que el sistema necesite para funcionar con su configuración correspondiente. Esto incluye los módulos: Encoder, Grúa, Tick, DIP-switch y DMX, que además se configura para tener el address indicado por el DIP-switch. Adicionalmente, se asocia al módulo Tick el planificador de tareas, sobre la cual se desarrollará más adelante.
 
-El módulo SUART, por otro lado, sólo se utilizó para la etapa de pruebas y debbug. En el firmware final del equipo no se inicializa ya que no hay nada que depurar y solo deterioraría el rendimiento del sistema a causa de los recursos que consume. 
+El módulo SUART, por otro lado, sólo se utilizó para la etapa de pruebas y debug. En el firmware final del equipo no se inicializa ya que no hay nada que depurar y solo deterioraría el rendimiento del sistema a causa de los recursos que consume. 
 
 \subsubsection{Planificador y despachador de tareas}
 En este proyecto hay varias tareas que tienen que ser ejecutadas periódicamente, como por ejemplo la actualización del controlador, que se hace cada 20ms. Para resolver esto se implementa el esquema de planificador-despachador, en donde el planificador determina el momento en el que ciertas tareas están listas para ejecutarse y el despachador las ejecuta cuando ese momento.
 
 En esta aplicación al planificador se lo ejecuta durante cada interrupción del Tick. Como cada tick ocurre cada 1 milisegundo, sencillamente se cuentan los ticks y se habilita la ejecución de las tareas que correspondan cuando se alcance el tiempo de ejecución asociada a ellas. Por ejemplo, la actualización del controlador se activa una vez cada 20 ticks (que equivalen a 20ms).\\
-Para evitar el solapamiento de tareas se hace uso de un retardo que se activa únicamente en la primera ejecución de la tarea, desfasandolas de forma tal que nunca se solapen en el mismo tick. \\
+Para evitar el solapamiento de tareas se hace uso de un retardo que se activa únicamente en la primera ejecución de la tarea, desfasándolas de forma tal que nunca se solapen en el mismo tick. \\
 Las tareas que el planificador habilita para que se ejecuten en este proyecto son:
 \begin{itemize}
 	\item Actualización del controlador, ejecutada cada 20 ticks (20ms) con un retardo inicial de 0 ticks.
@@ -1199,7 +1199,7 @@ El despachador en este proyecto simplemente ejecuta las tareas que el planificad
 A continuación se detalla qué hacen las 4 despachar y el orden en que aparecen en la rutina despachador:
 \begin{enumerate}
 	\item \textbf{Actualización del controlador}. Se llama a la función \textit{Controlador\_update()}.
-	\item \textbf{Actualización del canal inicial de DMX}. Se asocia el valor del dipswitch con el canal inicial de DMX haciendo uso de las funciones en C \textit{DMX\_write(Dipswitch\_read() + 1)}. El +1 es debido a que la salida de Dipswitch\_read va de 0 a 511, y los canales DMX van de 1 a 512.
+	\item \textbf{Actualización del canal inicial de DMX}. Se asocia el valor del DIP-switch con el canal inicial de DMX haciendo uso de las funciones en C \textit{DMX\_write(Dipswitch\_read() + 1)}. El +1 es debido a que la salida de Dipswitch\_read va de 0 a 511, y los canales DMX van de 1 a 512.
 	\item \textbf{Comparación de los valores del encoder de motor y de disco}. Se verifica que la relación hallada en la sección 3.3.1, a través de la tabla \ref{fig:3.2} (que 1 cuenta de encoder de disco equivale a aproximadamente 131 del de motor), se mantenga. Como no es una relación que se cumple estrictamente para todo el rango se permite una tolerancia de +-500 cuentas de encoder de motor, haciendo que la comparación sea: \( cuentas\_encoder\_motor = cuentas\_encoder\_disco*131 \pm 500 \).
 	\item \textbf{Aviso de DMX activo}. Se alterna el estado del led externo, a razón de 10 veces por segundo, si hay señal de DMX presente. Si pasó más de un segundo desde la última vez que la señal fue recibida, el led externo mantiene su estado.
 \end{enumerate}
