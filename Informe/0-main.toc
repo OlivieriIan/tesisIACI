@@ -41,7 +41,7 @@
 \contentsline {subsection}{\numberline {2.3.1}Esquema de control}{24}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Modelo de la planta}{25}{subsection.2.3.2}
 \contentsline {subsection}{\numberline {2.3.3}Procedimiento para el dise\IeC {\~n}o de control}{26}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{27}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.4}Relaci\IeC {\'o}n entre cuentas de encoder y distancia}{26}{subsection.2.3.4}
 \contentsline {subsection}{\numberline {2.3.5}Velocidad m\IeC {\'a}xima}{27}{subsection.2.3.5}
 \contentsline {section}{\numberline {2.4}REQ-03}{27}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}Corte de correa}{27}{subsection.2.4.1}

@@ -66,7 +66,7 @@ El acceso al módulo se realiza a través 3 funciones, como se muestra en la fig
 \begin{itemize}
 	\item \textbf{DigitalIO\_init(pin,modo)}, que inicializa el pin deseado en el modo salida o entrada, que a su vez se divide en con pull-up y sin pull-up. Estas 3 posibles configuraciones se puede seleccionar haciendo uso de los macros DigitalIO\_OUTPUT, DigitalIO\_INPUT\_PULLUP y DigitalIO\_INPUT, respectivamente.
 	\item \textbf{DigitalIO\_read(pin)}, para leer el estado de un pin configurado como salida.
-	\item \textbf{DMX\_write(pin, estado)}, para escribir en un pin el estado deseado (HIGH = 1 o LOW = 0).
+	\item \textbf{DigitalIO\_write(pin, estado)}, para escribir en un pin el estado deseado (HIGH = 1 o LOW = 0).
 \end{itemize}
 
 \begin{figure}[!ht]
@@ -524,7 +524,7 @@ Del experimento se obtuvo que cada 50ms se tienen 100 cuentas, por lo que la vel
 
 \subsection{Obtención del período de muestreo}
 Para poder diseñar los controladores de posición y velocidad el primer paso es determinar el período de muestreo. \\
-Para esto se realizaron varias pruebas tomando como 0 de posición 2000 cuentas de encoder (aproximadamente 50cm según la tabla \ref{table:3.2}): 2 pruebas en bajada, en donde las cuentas aumentan ya que el positivo se define para abajo, y 2 pruebas en subida. La fuerza aplicada al motor es de 15 y 33\% del máximo de fuerza posible en bajada, y de 66 y 100\% en subida.
+Para esto se realizaron varias pruebas tomando como 0 de posición 2000 cuentas de encoder (aproximadamente 50cm según la tabla \ref{table:3.2}): 2 pruebas en bajada, en donde las cuentas aumentan ya que el positivo se define para abajo, y 2 pruebas en subida. El porcentaje de actuación aplicada al motor es de 15 y 33\% del máximo de fuerza posible en bajada, y de 66 y 100\% en subida.
 
 
 
@@ -551,8 +551,8 @@ En base a esto, se elije un período de muestreo inicial 5 veces más rápido qu
 \subsection{Obtención del modelo de la planta}
 \subsubsection{Toma de muestras}
 El modelo de la planta a obtener tiene que ser tal que su salida sea de velocidad para poder diseñar el lazo de control interno de velocidad del modelo propuesto en la figura \ref{fig:2.1}.\\
-Para obtener este modelo se le inyecta al equipo la entrada mostrada en la figura \ref{fig:3.16}, en donde la fuerza es positiva cuando el motor hace bajar la carga (de masa 3Kg) y negativa cuando la hace subir.\\
-De esta entrada se midió la velocidad de salida en 2 pruebas separadas con el fin de obtener un set de datos para identificación y otro para validación. Estas respuestas se muestran en la figura \ref{fig:3.17}.
+Para obtener este modelo se le inyecta al equipo la entrada mostrada en la figura \ref{fig:3.16}, en donde la actuación es positiva cuando el motor hace bajar la carga (de masa 3Kg) y negativa cuando la hace subir.\\
+De esta entrada se midió la velocidad de salida en 2 pruebas separadas con el fin de obtener un set de datos para identificación y otro para validación \cite{sec3_3_4}. Estas respuestas se muestran en la figura \ref{fig:3.17}.
 
 \begin{figure}[!ht]
 	\centering
@@ -1196,7 +1196,7 @@ void planificador(void){
 \end{lstlisting}
 
 El despachador en este proyecto simplemente ejecuta las tareas que el planificador habilita, sin utilizar un método de priorización complejo debido a que, como se mencionó antes, cada tarea tiene asociado un retardo de tiempo para evitar que se solapen.\\
-A continuación se detalla qué hacen las 4 despachar y el orden en que aparecen en la rutina despachador:
+A continuación se detalla qué hacen las 4 tareas a despachar y el orden en que aparecen en la rutina despachador:
 \begin{enumerate}
 	\item \textbf{Actualización del controlador}. Se llama a la función \textit{Controlador\_update()}.
 	\item \textbf{Actualización del canal inicial de DMX}. Se asocia el valor del DIP-switch con el canal inicial de DMX haciendo uso de las funciones en C \textit{DMX\_write(Dipswitch\_read() + 1)}. El +1 es debido a que la salida de Dipswitch\_read va de 0 a 511, y los canales DMX van de 1 a 512.

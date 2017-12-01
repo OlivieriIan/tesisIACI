@@ -13,7 +13,7 @@ Una opción es utilizar bibliotecas ya desarrolladas, entre las cuales se destac
 Otra opción es el desarrollo de bibliotecas a medida para el proyecto, desarrollando las funciones necesarias para el manejo de los periféricos que se necesiten para que se comporten exactamente como uno desea.\\
 En la tabla \ref{table:2.1} se presenta una comparación entre ambas opciones.
 
-El mayor problema con las bibliotecas de Arduino es que para que cuadren en proyectos grandes como estos requieren modificaciones, y las funciones provistas deben ser analizadas para verificar que no se usen elementos como delays bloqueantes ni operaciones de punto flotante indiscriminadamente, ya que deterioran el rendimiento. Además no está claro el uso de periféricos de hardware por parte de las mismas en su documentación factor que obliga a revisarla completamnete para descubrir las interdependencias entre partes de las mismas y qué sucede si se desea controlar directamente un cierto periférico.. \\
+El mayor problema con las bibliotecas de Arduino es que para que cuadren en proyectos grandes como estos requieren modificaciones, y las funciones provistas deben ser \\analizadas para verificar que no se usen elementos como delays bloqueantes ni operaciones de punto flotante indiscriminadamente, ya que deterioran el rendimiento. Además no está claro el uso de periféricos de hardware por parte de las mismas en su documentación factor que obliga a revisarla completamnete para descubrir las interdependencias entre partes de las mismas y qué sucede si se desea controlar directamente un cierto periférico. \\
 Como el objetivo es hacer que el sistema sea lo más confiable posible, y teniendo en cuenta que el tiempo de desarrollo no es un factor crítico, \textbf{se desarrollarán bibliotecas propias en detalle para manejar los periféricos}.\\
 
 \begin{table}[!ht]
@@ -68,9 +68,9 @@ Por lo tanto, se abordará el problema con un método más simple: determinar el
 
 \subsection{Procedimiento para el diseño de control}
 Primero se determinará el período de muestreo y actuación inyectándole un escalón unitario a planta.\\
-Luego, se obtendrá el modelo de la planta mediante identificación paramétrica, haciendo uso de un método de estimación de tipo offline (no recursivo).\\
+Luego, se obtendrá el modelo de la planta mediante identificación paramétrica, haciendo uso de un método de estimación de tipo offline (no recursivo) \cite{sec2_3_3}.\\
 Paso seguido se diseñarán los controladores de posición y velocidad en base al modelo de la planta obtenido\\
-Finlamente se validarán los controladores diseñados haciendo pruebas directamente sobre el equipo updown.
+Finalmente se validarán los controladores diseñados haciendo pruebas directamente sobre el equipo updown.
 
 \subsection{Relación entre cuentas de encoder y distancia}
 A medida que el motor gira desenrolla o enrrolla el cable para bajar o subir la carga respectivamente. Un problema de esto es que dependiendo cuán enrrollado está el cable en el disco un mismo número de cuentas de encoder se puede traducir en distintas distancias recorridas por la carga. Por ejemplo, si el cable está completamente enrollado cuando se gira 360 grados el carrete el largo desenrrollado será uno, mientras que si el cable se encuentra parcialmente desenrrollado la distancia descendida en un giro de 360 grados del carrete será menor que la anterior. Esto se debe a la variación del díametro debido a la acumulación del cable al estar enrrollado.\\
@@ -96,13 +96,13 @@ Para poder detectar estos errores lo primero que se hará es determinar la relac
 La función principal del fin de carrera (un par de pulsadores en la base del equipo) es indicar cuándo el cable que sostiene la carga está completamente enrrollado para determinar la posición 0 o "home" del equipo, dado que este puede estar en cualquier posición al ser encendido.\\
 La función secundaria del fin de carrera es detectar posibles eventos indeseados. Por ejemplo, en su punto más bajo la carga se encontrará a 4 metros por debajo del 0 del updown, por lo que podría comenzar a oscilar debido a fuertes vientos o personas que muevan la carga. Por cómo está construido el fin de carrera si la carga oscila más allá de un ángulo de aproximadamente 15 grados el fin de carrera se accionará dando aviso de esto.
 
-Para poder detectar estos errores se verificará que el fin de carrera no sea presionado fuera de la rutina de calibración. En caso de que sea presionado en estas condiciones se detendrá el equipo, se esperará un tiempo a que la oscilación baje, y intentarán reanudar las operaciones normales. En caso de que el fin de carrera siga presionado se accionará el freno, se detendrá el equipo completamente y se indicará sobre la existencia del error mediante el led de la placa de control (led interno).
+Para poder detectar estos errores se verificará que el fin de carrera no sea presionado fuera de la rutina de calibración. En caso de que sea presionado en estas condiciones se detendrá el equipo, se esperará un tiempo a que la oscilación baje, e intentarán reanudar las operaciones normales. En caso de que el fin de carrera siga presionado se accionará el freno, se detendrá el equipo completamente y se indicará sobre la existencia del error mediante el led de la placa de control (led interno).
 
 
 \subsection{Pérdida de señal de DMX}
 El estándar DMX establece que el tiempo máximo entre un paquete de datos y otro, tiempo de IDLE o MTBP (ver tabla \ref{table:1.1}), es de 1 segundo. Esto quiere decir que si por 1 segundo no me llegaron nuevos datos se considera que se perdió la comunicación con el dispositivo DMX.
 
-Para detectar la pérdida de señal de DMX se verificará constantemente que el último paquete haya llegado hace menos de 1 segundo. En caso de no cumplirse se asumirá que las referencias de posición y velocidad son 0 (equipo parado). Además, por una convención en equipos DMX, se indicará mediante el led en el DIP-switch (led externo) cuándo el equipo recibe correctamente la señal de DMX y cuándo no, encendiéndolo y apagándolo rápidamente en el primer caso y lentamente en el segundo.
+Para detectar la pérdida de señal de DMX se verificará constantemente que el último paquete haya llegado hace menos de 1 segundo. En caso de no cumplirse se asumirá que las referencias de posición y velocidad son 0 (equipo detenido en una posición segura). Además, por una convención en equipos DMX, se indicará mediante el led en el DIP-switch (led externo) cuándo el equipo recibe correctamente la señal de DMX y cuándo no, encendiéndolo y apagándolo rápidamente en el primer caso y lentamente en el segundo.
 
 
 \section{REQ-04} \label{sec:\thesection}
@@ -121,9 +121,9 @@ Para hallar estos 5 valores se simulará el divisor de tensión en Matlab, proba
 \newpage
 \section{Firmware del updown} \label{sec:\thesection}
 \subsection{Convenciones}
-Con el objetivo de maximizar el encapsulamiento, las funciones dentro de los módulos se dividirán en privadas y públicas. Las privadas podrán ser accedidas únicamente por otras funciones dentro del módulo, mientras que las públicas también podrán ser accedidas por funciones de otros módulos. Para implementar esto se hará uso del concpeto de "modularización por clases" \cite{sec2_6_2-1} en el cual se realiza la separación de información en archivos .c (código) y .h (headers). Los .h tendrán las declaraciones de funciones externas y definiciones para que, al ser incluido por otros módulos, tengan acceso a las mismas.\\
+Con el objetivo de maximizar el encapsulamiento, las funciones dentro de los módulos se dividirán en privadas y públicas. Las privadas podrán ser accedidas únicamente por otras funciones dentro del módulo, mientras que las públicas también podrán ser accedidas por funciones de otros módulos. Para implementar esto se hará uso del concepto de "modularización por clases" \cite{sec2_6_2-1} en el cual se realiza la separación de información en archivos .c (código) y .h (headers). Los .h tendrán las declaraciones de funciones externas y definiciones para que, al ser incluido por otros módulos, tengan acceso a las mismas.\\
 En cuanto a variables, solo se utilizarán variables internas al módulo. En caso de que tengan que poder ser accedidas externamente se implementarán setters (para escribir un valor en la variable) y getters (para obtener el valor de la variable) según corresponda.\\
-Las funciones tendrán su nombre en formato \textit{camelCase} (primera letra minúscula y el resto de las primeras letras de las palabras utilizadas en el nombre en mayúscula), los Define en \textit{MAYUSCULA}, y los módulos en formato PascalCase (como el camel case pero con la primera letra en mayúsucula).
+Las funciones tendrán su nombre en formato \textit{camelCase} (primera letra minúscula y el resto de las primeras letras de las palabras utilizadas en el nombre en mayúscula), los macros (\#define) en \textit{MAYUSCULA}, y los módulos en formato PascalCase (como el camel case pero con la primera letra en mayúsucula).
 Finalmente, todas las funciones y definiciones que pueden ser accedidas desde afuera de un módulo llevarán como prefijo el nombre del módulo seguido de un guión bajo. 
 
 Además, debido a políticas de Blackout, todo el software desarrollado debe ser entendible por todo el equipo de trabajo. Esto quiere decir que una de las metas para las funciones de las bibliotecas a crear es que permitan un flujo entendible, y que los nombres de las funciones sean similares a las de Arduino ya que lo que se acostumbraba a utilizar en la empresa para la programación de sistemas embebidos.\\
@@ -143,7 +143,7 @@ Entonces, para manejar los periféricos se creará una biblioteca de bajo nivel 
 	\item \textbf{Interrupciones externas} por cambio de estado de un pin, para llevar cuenta de los cambios de estado de los encoders AB y así saber la posición relativa. Este módulo se llamará \textit{EXINT}, por \textit{EXternal INTerrupts}.
 	\item \textbf{PWM}, para el manejo del motor de continua. Este módulo se llamará \textit{PWM}, por \textit{Pulse Width Modulation}.
 	\item \textbf{UART}, para la lectura de la señal DMX. Este módulo se llamará \textit{UART}, por \textit{Universal Asynchronous Receiver/Transmitter}
-	\item \textbf{UART por software}, una UART implementada en pines genéricos que se utilizará para el debuggeo de la placa. Este módulo se llamará \textit{SUART}, por \textit{Software UART}.
+	\item \textbf{UART por software}, una UART implementada en pines genéricos que se utilizará para el depuración de la placa. Este módulo se llamará \textit{SUART}, por \textit{Software UART}.
 	\item \textbf{Base de tiempo}, un timer utilizado para la temporización tareas y eventos. Este módulo se llamará \textit{Tick}.
 \end{itemize}
 
